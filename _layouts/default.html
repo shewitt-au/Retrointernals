@@ -9,6 +9,7 @@
     <style type="text/css">
     #rockford {
       position: relative;
+      float: right;
     }
     #rockfordhead {
       position: absolute;
@@ -36,9 +37,9 @@
         for (i=0; i<=8; ++i)
         {
           image = new Image()
-          image.src = "rockford_head"+i+".png"
+          image.src = "assets/images/rockford_head"+i+".png"
           image = new Image()
-          image.src = "rockford_feet"+i+".png"
+          image.src = "assets/images/rockford_feet"+i+".png"
           image = new Image()
         }
       }
@@ -55,19 +56,20 @@
         if (frame==0)
         {
           r = Math.floor(Math.random()*256)
-          blink = ((r&0x3)==0) // One in for chance
+          blink = ((r&0x3)==0) // 1 in 4 chance
           if ((r&0xf)==0)
-            foottap = !foottap // One in sixteen chance of toggling
+            foottap = !foottap // 1 in 16 chance of toggling
+
+          if (!blink)
+            h.src = "assets/images/rockford_head0.png"
+          if (!foottap)
+            f.src = "assets/images/rockford_feet0.png"
         }
 
         if (blink)
           h.src = "assets/images/rockford_head"+(frame+1)+".png"
-        else
-          h.src = "assets/images/rockford_head0.png"
         if (foottap)
           f.src = "assets/images/rockford_feet"+(frame+1)+".png"
-        else
-          f.src = "assets/images/rockford_feet0.png"
 
         frame += 1
         if (frame>=8)
@@ -81,6 +83,11 @@
   <body>
     <header>
       <div class="inner">
+        <div id="rockford">
+          <image src="assets/images/rockfordbg.png">
+          <image id="rockfordhead" src="assets/images/rockford_head0.png">
+          <image id="rockfordfeet" src="assets/images/rockford_feet0.png">
+        </div>
         <a href="{{ '/' | absolute_url }}">
           <h1>{{ site.title | default: site.github.repository_name }}</h1>
         </a>
@@ -88,11 +95,6 @@
         {% if site.github.is_user_page %}
           <a href="{{ site.github.owner_url }}" class="button"><small>Follow me on</small> GitHub</a>
         {% endif %}
-        <div id="rockford" class="button">
-          <image src="assets/images/rockfordbg.png">
-          <image id="rockfordhead" src="assets/images/rockford_head0.png">
-          <image id="rockfordfeet" src="assets/images/rockford_feet0.png">
-        </div>
       </div>
     </header>
 
@@ -137,7 +139,7 @@
 
 <script>
   rockfordpreload()
-  setInterval(rockfordtick, 20)
+  setInterval(rockfordtick, 40)
 </script>
 
 </html>
