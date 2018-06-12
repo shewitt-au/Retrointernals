@@ -1,0 +1,11 @@
+<ul>
+{% for entry in include.nav %}
+    {% assign sublinks = entry.sublinks %}
+    {% if sublinks %}
+    <li><a href="{{ site.baseurl }}{{ entry.url }}">{{ entry.title }}</a>
+    {% include navitem.html nav=sublinks %}</li>
+    {% else %}
+    <li><a href="{{ site.baseurl }}{{ entry.url }}">{{ entry.title }}</a></li>
+    {% endif %}
+{% endfor %}
+</ul>
