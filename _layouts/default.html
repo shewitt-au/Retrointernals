@@ -32,21 +32,44 @@
     <![endif]-->
 
     <script>
+      rockford_head = [
+        "rockford_head0.png",
+        "rockford_head1.png",
+        "rockford_head2.png",
+        "rockford_head2.png",
+        "rockford_head1.png",
+        "rockford_head0.png",
+        "rockford_head0.png",
+        "rockford_head0.png",
+        "rockford_head0.png"
+      ]
+
+      rockford_feet = [
+        "rockford_feet0.png",
+        "rockford_feet1.png",
+        "rockford_feet1.png",
+        "rockford_feet1.png",
+        "rockford_feet1.png",
+        "rockford_feet5.png",
+        "rockford_feet5.png",
+        "rockford_feet5.png",
+        "rockford_feet5.png"
+        ]
       function rockfordpreload()
       {
         for (i=0; i<=8; ++i)
         {
-          image = new Image()
-          image.src = "assets/images/rockford_head"+i+".png"
-          image = new Image()
-          image.src = "assets/images/rockford_feet"+i+".png"
-          image = new Image()
+          image = new Image();
+          image.src = "assets/images/"+rockford_head[i];
+          image = new Image();
+          image.src = "assets/images/"+rockford_feet[i];
+          image = new Image();
         }
       }
 
-      var frame=0
-      var blink=false
-      var foottap=false
+      var frame=0;
+      var blink=false;
+      var foottap=false;
 
       function rockfordtick()
       {
@@ -55,25 +78,25 @@
 
         if (frame==0)
         {
-          r = Math.floor(Math.random()*256)
-          blink = ((r&0x3)==0) // 1 in 4 chance
+          r = Math.floor(Math.random()*256);
+          blink = ((r&0x3)==0); // 1 in 4 chance
           if ((r&0xf)==0)
-            foottap = !foottap // 1 in 16 chance of toggling
+            foottap = !foottap; // 1 in 16 chance of toggling
 
           if (!blink)
-            h.src = "assets/images/rockford_head0.png"
+            h.src = "assets/images/"+rockford_head[0];
           if (!foottap)
-            f.src = "assets/images/rockford_feet0.png"
+            f.src = "assets/images/"+rockford_feet[0];
         }
 
         if (blink)
-          h.src = "assets/images/rockford_head"+(frame+1)+".png"
+          h.src = "assets/images/"+rockford_head[frame+1];
         if (foottap)
-          f.src = "assets/images/rockford_feet"+(frame+1)+".png"
+          f.src = "assets/images/"+rockford_feet[frame+1];
 
-        frame += 1
+        frame += 1;
         if (frame>=8)
-          frame = 0
+          frame = 0;
       }
     </script>
 
@@ -136,8 +159,8 @@
   </body>
 
 <script>
-  rockfordpreload()
-  setInterval(rockfordtick, 40)
+  rockfordpreload();
+  setInterval(rockfordtick, 40);
 </script>
 
 </html>
