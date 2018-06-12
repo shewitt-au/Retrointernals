@@ -4,8 +4,10 @@
 - title: BASIC
   url: /basic/basic.html
   sublinks:
-    - title: The Secret of Bastow Manor
-      url: /basic/tsobm/tsobm.html
-    - title: The Secret of Bastow Manor (C64 font)
-      url: /basic/tsobm/tsomb_c64font.html
- 
+      - title: The Secret of Bastow Manor
+        url: /basic/tsobm/tsob.html
+        sublinks:
+          - title: Listing
+            url: /basic/tsobm/tsobm_listing.html
+          - title: Listing with C64 font
+            url: /basic/tsobm/tsomb_c64font_listing.html
