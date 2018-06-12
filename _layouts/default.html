@@ -63,9 +63,9 @@
         for (i=0; i<=8; ++i)
         {
           image = new Image();
-          image.src = "assets/images/"+rockford_head[i];
+          image.src = "/assets/images/"+rockford_head[i];
           image = new Image();
-          image.src = "assets/images/"+rockford_feet[i];
+          image.src = "/assets/images/"+rockford_feet[i];
           image = new Image();
         }
       }
@@ -87,15 +87,15 @@
             foottap = !foottap; // 1 in 16 chance of toggling
 
           if (!blink)
-            h.src = "assets/images/"+rockford_head[0];
+            h.src = "/assets/images/"+rockford_head[0];
           if (!foottap)
-            f.src = "assets/images/"+rockford_feet[0];
+            f.src = "/assets/images/"+rockford_feet[0];
         }
 
         if (blink)
-          h.src = "assets/images/"+rockford_head[frame+1];
+          h.src = "/assets/images/"+rockford_head[frame+1];
         if (foottap)
-          f.src = "assets/images/"+rockford_feet[frame+1];
+          f.src = "/assets/images/"+rockford_feet[frame+1];
 
         frame += 1;
         if (frame>=8)
@@ -110,9 +110,9 @@
     <header>
       <div class="inner">
         <div id="rockford">
-          <image src="assets/images/rockfordbg.png">
-          <image id="rockfordhead" src="assets/images/rockford_head0.png">
-          <image id="rockfordfeet" src="assets/images/rockford_feet0.png">
+          <image src="/assets/images/rockfordbg.png">
+          <image id="rockfordhead" src="/assets/images/rockford_head0.png">
+          <image id="rockfordfeet" src="/assets/images/rockford_feet0.png">
         </div>
         <a href="{{ '/' | absolute_url }}">
           <h1>{{ site.title | default: site.github.repository_name }}</h1>
