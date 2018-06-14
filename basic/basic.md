@@ -120,7 +120,7 @@ You can see the majority of the line is simply encoded in PETSCII, including the
 
 	10 PRINT"{clear}"
 
-Note that the '{clear}' denotes a control character, it would appear as a love heart in reverse video. Anyone that's used a C64 will know that when you type in quotes keys that would normally do something, like clear the screen in this example, make funny symbols. When ran this program would clear the screen but when listed a control character is printed. Let's have a look at it.
+Note that the '{clear}' denotes a control character, it would appear as a love heart in reverse video. Anyone that's used a C64 will know that when you type in quotes keys that would normally do something, like clear the screen in this example, make funny symbols. When ran this program would clear the screen but when listed the screen is cleared. Let's have a look at it.
 
 	0801:  0a 08 0a 00  99 22 93 22  00 00 00   ....."."...
 
