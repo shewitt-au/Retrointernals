@@ -8,7 +8,7 @@ I didn’t initially plan writing anything on BASIC at all. When I was working o
 
 ## Encoding
 
-The encoding of BASIC programs is relatively straightforward. On the C64 basic programs start at the hexadecimal address $0801, although location $0800 must be zero or attempting to run the program results in a syntax error. From $0801 onwards the lines follow in line-number order. Each line consists of a header followed by a series on PETSCII characters and tokens terminated by a zero. Immediately after the terminating zero the next line begins. The header of each line consists of two 16-bit (little-endian) unsigned integers. The first of these is the line link; this is a pointer to the start of the next line, an entry with a high byte of $00 marking the end of the program. Normally both bytes are zero, only checking the high byte is probably an optimization, but as we’ll see later you do come across machine language programs with BASIC bootstraps taking advantage of this to save one byte. These line-links form a linked list so every line of the program can be traversed and lines looked up: LIST, GOTO and GOSUB use this mechanism. The second 16-bit number is the line number. You’d think this would mean that line numbers can be in the range 0-65535, but for some reason only 0- 63999 can be used. When a GOTO or GOSUB are executed the lines are traversed using the line links and the target line number compared to the line number member of the of the header. The structure of the rest of a line is a series of PETSCII characters and tokens. If the byte has the MSB set it is interpreted as a token and if it’s clear it’s a character. The Tokens are listed below:
+The encoding of BASIC programs is relatively straightforward. On the C64 basic programs start at the hexadecimal address $0801, although location $0800 must be zero or attempting to run the program results in a syntax error. From $0801 onwards the lines follow in line-number order. Each line consists of a header followed by a series on PETSCII characters and tokens terminated by a zero. Immediately after the terminating zero the next line begins. The header of each line consists of two 16-bit (little-endian) unsigned integers. The first of these is the line-link; this is a pointer to the start of the next line, an entry with a high byte of $00 marking the end of the program. Normally both bytes are zero, only checking the high byte is probably an optimization, but as we’ll see later you do come across machine language programs with BASIC bootstraps taking advantage of this to save one byte. These line-links form a linked list so every line of the program can be traversed and lines looked up: LIST, GOTO and GOSUB use this mechanism. The second 16-bit number is the line number. You’d think this would mean that line numbers can be in the range 0-65535, but for some reason only 0- 63999 can be used. When a GOTO or GOSUB are executed the lines are traversed using the line-links and the target line number compared to the line number member of the of the header. The structure of the rest of a line is a series of PETSCII characters and tokens. If the byte has the MSB set it is interpreted as a token and if it’s clear it’s a character. The Tokens are listed below:
 
 Value | Command
 $80 | END	
@@ -88,7 +88,7 @@ $c9 | RIGHT$
 $ca | MID$
 $ff | π	
 
-Note how the TAB and SPC command come with an embedded opening bracket, the closing one is encoded as a PETSCII character. Other commands which require brackets encode both as PETSCII characters following the tokenised command.
+Note how the TAB and SPC command come with an embedded opening bracket, the closing one is encoded as a PETSCII character. Other commands which require brackets encode both as PETSCII characters following the tokenised command (naturally with the contents of the brackets between).
 
 ### Examples
 
@@ -104,13 +104,14 @@ Dumped using VICE's 'ii' command (reformatted slightly):
 
 	0801: whj@. "HELLO, WORLD!"@@@
 
-You can see the majority of the line is simply encoded in PETSCII, including the quotes and the space after the PRINT statement before the opening quote. Let's break down the rest:
+You can see the majority of the line is simply encoded in PETSCII, including the quotes and the space after the PRINT statement before the opening quote. Let's break it down:
 
 
-	0801:  17 08   ; Line link of $0817
+	0801:  17 08   ; Line-link of $0817
 	0803:  0a 00   ; Line number, 10
 	0805:  99      ; Here the MSB is set so it's a token, PRINT
-	0806:  "HELLO, WORLD!" ; PETSCII here
-	0815:  00      ; Terminated the line
-	0817:  00 00   ; Line link with high byte of zero terminated the program.
+	0806:  20      ; The space after the PRINT, PETSCII
+	0807:  "HELLO, WORLD!" ; PETSCII here
+	0816:  00      ; Terminated the line
+	0817:  00 00   ; Line-link with high byte of zero terminated the program.
 	               ; Note that this is linked to by the previous line link.
