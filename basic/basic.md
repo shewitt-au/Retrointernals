@@ -116,6 +116,25 @@ You can see the majority of the line is simply encoded in PETSCII, including the
 	0817:  00 00   ; Line-link with high byte of zero terminated the program.
 	               ; Note that this is linked to by the previous line-link.
 
+### Example - When is a token not a token?
+
+	10 PRINT"{clear}"
+
+Note that the '{clear}' denotes a control character, it would appear as a love heart in reverse video. Anyone that's used a C64 will know that when you type in quotes keys that would normally do something, like clear the screen in this example, make funny symbols. When ran this program would clear the screen but when listed a control character is printed. Let's have a look at it.
+
+	0801:  0a 08 0a 00  99 22 93 22  00 00 00   ....."."...
+
+We have the line-link, line number, the line terminating zero and a two-byte NULL line-link which ends the program. That leaves this:
+
+
+	0805:  99 22 93 22
+
+$99 is the token for PRINT; $22, PETSCII for a quote; $93, which looks like the token for LOAD (but isn't in this case); and $22, the closing quotes. The normal rule of a byte with its MSB set being a token doesn't apply within quotes, if if did this program would look like this:
+
+	10 PRINT"LOAD"
+
+This allows PETSCII characters greater than $7f in quotes.
+
 ### Example - Nothing
 
 OK, so how is an empty BASIC program encoded. I'll fill $0801-$9fff with $ff, do a NEW and take a look. The addresses $2b-$2c & $2d-$2e come in handy. The first two contain the start of the program and the second two the byte following the end.
