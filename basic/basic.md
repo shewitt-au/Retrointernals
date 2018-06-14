@@ -90,7 +90,7 @@ $ff | π
 
 Note how the TAB and SPC command come with an embedded opening bracket, the closing one is encoded as a PETSCII character. Other commands which require brackets encode both as PETSCII characters following the tokenised command (naturally with the contents of the brackets between).
 
-### Examples
+### Example - Hello, World!
 
 Ok, time for some examples. Let's follow tradition and start with "Hello, World!":
 
@@ -115,3 +115,16 @@ You can see the majority of the line is simply encoded in PETSCII, including the
 	0816:  00      ; Terminated the line
 	0817:  00 00   ; Line-link with high byte of zero terminated the program.
 	               ; Note that this is linked to by the previous line-link.
+
+### Example - Nothing
+
+OK, so how is an empty BASIC program encoded. I'll fill $0801-$9fff with $ff, do a NEW and take a look. The addresses $2b-$2c & $2d-$2e come in handy. The first two contain the start of the program and the second two the byte following the end.
+
+	002b:  01 08
+	002d:  03 08
+
+So an empty program starts at $0801 and the last byte is at $0802. We'll dump a bit more after the end.
+
+	0801:  00 00 ff ff
+
+Our $ff's are still there, the NEW did indeed only seem to touch $0801-$0802. An empty program is encoded with a line-link of zero (any number with a high byte of zero would do).
