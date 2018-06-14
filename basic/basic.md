@@ -112,7 +112,7 @@ You can see the majority of the line is simply encoded in PETSCII, including the
 	0805:  99      ; Here the MSB is set so it's a token, PRINT
 	0806:  20      ; The space after the PRINT, PETSCII
 	0807:  "HELLO, WORLD!" ; PETSCII here
-	0816:  00      ; Terminated the line
+	0816:  00      ; Terminates the line
 	0817:  00 00   ; Line-link with high byte of zero terminated the program.
 	               ; Note that this is linked to by the previous line-link.
 
