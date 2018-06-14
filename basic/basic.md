@@ -10,7 +10,7 @@ I didn’t initially plan writing anything on BASIC at all. When I was working o
 
 The encoding of BASIC programs is relatively straightforward. On the C64 basic programs start at the hexadecimal address $0801, although location $0800 must be zero or attempting to run the program results in a syntax error. From $0801 onwards the lines follow in line-number order. Each line consists of a header followed by a series on PETSCII characters and tokens terminated by a zero. Immediately after the terminating zero the next line begins. The header of each line consists of two 16-bit (little-endian) unsigned integers. The first of these is the line-link; this is a pointer to the start of the next line, an entry with a high byte of $00 marking the end of the program. Normally both bytes are zero, only checking the high byte is probably an optimization, but as we’ll see later you do come across machine language programs with BASIC bootstraps taking advantage of this to save one byte. These line-links form a linked list so every line of the program can be traversed and lines looked up: LIST, GOTO and GOSUB use this mechanism. The second 16-bit number is the line number. You’d think this would mean that line numbers can be in the range 0-65535, but for some reason only 0- 63999 can be used. When a GOTO or GOSUB are executed the lines are traversed using the line-links and the target line number compared to the line number member of the of the header. The structure of the rest of a line is a series of PETSCII characters and tokens. If the byte has the MSB set it is interpreted as a token and if it’s clear it’s a character. The Tokens are listed below:
 
-Value | Command
+**Value** | **Command**
 $80 | END	
 $81 | FOR	
 $82 | NEXT
