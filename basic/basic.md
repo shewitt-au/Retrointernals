@@ -246,4 +246,4 @@ Line 60:
 
 About the only thing of interest if the colon: it's simply PETSCII. Here it's interpreted as a separator but in a REM statement it's just a colon. It depends on the context and not explicit in the binary format.
 
-I'm going to skip over the last line, the GOTO. You may not be shocked to learn to line number is encoded as PETSCII, although I was.
+I'm going to skip over the last line, the GOTO. You may not be shocked to learn the line number is encoded as PETSCII, although I was.
