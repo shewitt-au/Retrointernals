@@ -116,7 +116,7 @@ You can see the majority of the line is simply encoded in PETSCII, including the
 	0817:  00 00   ; Line-link with high byte of zero terminated the program.
 	               ; Note that this is linked to by the previous line-link.
 
-### Example - When is a token not a token?
+### Example - Sometimes a Cigar Is Just a Cigar
 
 	10 PRINT"{clear}"
 
