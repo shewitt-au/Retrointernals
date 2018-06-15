@@ -258,7 +258,7 @@ The first program I tested my BASIC lister on was Monopole by JOHN O'HARE (colou
 
 	4 PRINT"{clear}{white}":POKE53280,0:POKE53281,0:GOSUB700:GOSUB162:TN=832:TT=886:PRINT"{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}
 
-The {del} represents a control character, it's generated on the keyboard by pressing the DEL key. If you list the program on a C64 what you get isn't quite as interesting:
+The {del} represents a control character, it's generated on the keyboard by pressing the DEL key. {clear} and {white} are also control characters. If you list the program on a C64 what you get isn't quite as interesting:
 
 	4 PRINT"{clear}{white}":POKE53280,0:POKE53281,0:GOSUB700:GOSUB162
 
