@@ -4,11 +4,11 @@ title: BASIC
 
 # BASIC
 
-I didn’t initially plan writing anything on BASIC at all. When I was working on my disassembler one day it struck me it would be kind of cool to have it handle the SYS in the BASIC bootstrap so many C64 games had (mostly after they’d been cracked except for some early games from what I’ve seen). The encoding is pretty simple so I just kept on going after I’d got the SYSes to work and got it the run on entire programs, after which I tested it on some. After you see a program on the “big screen” you wonder how the hell anyone ever got these things to work with only 40 columns. Anyway, I'll document what I discovered along the way.
+I didn’t initially plan writing anything on BASIC at all. When I was working on my disassembler one day it struck me it would be kind of cool to have it handle the SYS in the BASIC bootstrap so many C64 games had (mostly after they’d been cracked, except for some early games from what I’ve seen). The encoding is pretty simple so I just kept on going after I’d got the SYSes to work and got it the run on entire programs, after which I tested it on some. After you see a program on the “big screen” you wonder how the hell anyone ever got these things to work with only 40 columns. Anyway, I'll document what I discovered along the way.
 
 ## Encoding
 
-The encoding of BASIC programs is relatively straightforward. On the C64 basic programs start at the hexadecimal address $0801, although location $0800 must be zero or attempting to run the program results in a syntax error. From $0801 onwards the lines follow in line-number order. Each line consists of a header followed by a series on PETSCII characters and tokens terminated by a zero. Immediately after the terminating zero the next line begins. The header of each line consists of two 16-bit (little-endian) unsigned integers. The first of these is the line-link; this is a pointer to the start of the next line, an entry with a high byte of $00 marking the end of the program. Normally both bytes are zero, only checking the high byte is probably an optimization, but as we’ll see later you do come across machine language programs with BASIC bootstraps taking advantage of this to save one byte. These line-links form a linked list so every line of the program can be traversed and lines looked up: LIST, GOTO and GOSUB use this mechanism. The second 16-bit number is the line number. You’d think this would mean that line numbers can be in the range 0-65535, but for some reason only 0- 63999 can be used. When a GOTO or GOSUB are executed the lines are traversed using the line-links and the target line number compared to the line number member of the of the header. The structure of the rest of a line is a series of PETSCII characters and tokens. If the byte has the MSB set it is interpreted as a token and if it’s clear it’s a character. The Tokens are listed below:
+The encoding of BASIC programs is relatively straightforward. On the C64 basic programs start at the hexadecimal address $0801, although location $0800 must be zero or attempting to run the program results in a syntax error. From $0801 onwards the lines follow in line-number order. Each line consists of a header followed by a series on PETSCII characters and tokens terminated by a zero. Immediately after the terminating zero the next line begins. The header of each line consists of two 16-bit (little-endian) unsigned integers. The first of these is the line-link; this is a pointer to the start of the next line, an entry with a high byte of $00 marking the end of the program. Normally both bytes are zero, only checking the high byte is probably an optimization, but as we’ll see later you do come across machine language programs with BASIC bootstraps taking advantage of this to save one byte. These line-links form a linked list so every line of the program can be traversed and lines looked up: RUN, LIST, GOTO, GOSUB and line additions/deletions use this mechanism to find the target line. Note that sequential execution doesn't use the line links. The second 16-bit number is the line number. You’d think this would mean that line numbers can be in the range 0-65535, but for some reason only 0- 63999 can be used (I'll try to find out why one day). When a GOTO or GOSUB (or the other constructs that use the links) are executed the lines are traversed using the line-links and the target line number compared to the line number member of the of the header. The structure of the rest of a line is a series of PETSCII characters and tokens. If the byte has the MSB set it is interpreted as a token and if it’s clear it’s a character (not quite true, see the second example below). The Tokens are listed below:
 
 **Value** | **Command**
 $80 | END	
@@ -88,7 +88,7 @@ $c9 | RIGHT$
 $ca | MID$
 $ff | π	
 
-Note how the TAB and SPC command come with an embedded opening bracket, the closing one is encoded as a PETSCII character. Other commands which require brackets encode both as PETSCII characters following the tokenised command (naturally with the contents of the brackets between).
+Note how the TAB and SPC command come with an embedded opening bracket, the closing one is encoded as a PETSCII character. Other commands which require brackets encode both as PETSCII characters following the tokenised command.
 
 ### Example - Hello, World!
 
@@ -113,7 +113,7 @@ You can see the majority of the line is simply encoded in PETSCII, including the
 	0806:  20      ; The space after the PRINT, PETSCII
 	0807:  "HELLO, WORLD!" ; PETSCII here
 	0816:  00      ; Terminates the line
-	0817:  00 00   ; Line-link with high byte of zero terminated the program.
+	0817:  00 00   ; A line-link with high byte of zero terminates the program.
 	               ; Note that this is linked to by the previous line-link.
 
 ### Example - Sometimes a Cigar Is Just a Cigar
@@ -198,7 +198,7 @@ The third line should be more interesting.
 
 	30 PRINT A, B,
 
-Again following the line-link from the previous line to find its bounds:
+Again, following the line-link from the previous line to find its bounds:
 
 	0811:  1d 08
 
@@ -210,7 +210,7 @@ We have all the usual suspects here, the line-link is $081d, the line number is 
 
 	0815:  99 20 41 2c  20 42 2c
 
-And in using 'ii':
+Using 'ii':
 
 	0815: . A, B,
 
