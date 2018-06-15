@@ -280,3 +280,77 @@ I came across this trick when I was having a look at a game that had been cracke
 	0819   4c 4e 01   JMP $014e
 
 The BASIC bootstrap occupies $0801-$080c, its BASIC listing is shown on the line below it. The machine code starts at $080b (2059 in decimal) which is where the machine code execution starts. The careful reader will notice that the BASIC and machine code sections overlap by two bytes (they share 'a2 00'). 'a2 00' serves as a legal terminating line-link as its high byte is zero and this also happens to encode the instruction 'LDX #$00'. I thought the instruction ordering was strange until I realised what was going on.
+
+### Line Skipping
+
+I came up with this one myself, although it's pretty obvious so I have no doubt it's been discovered many times by many different people. The motivating thought is that since a BASIC program forms a linked list of lines, what would happen if we edited a link to skip over some. Here's a BASIC program we'll test this on:
+
+	10 PRINT 10
+	20 PRINT 20
+	30 PRINT 30
+
+Let's crack it open:
+
+	0801:   0a 08 0a 00  99 20 31 30  00 13 08 14  00 99 20 32
+	0811:   30 00 1c 08  1e 00 99 20  33 30 00 00  00
+
+We'll take it line by line:
+
+	0801:   0a 08   ; Line-link of $080a
+	0803:	0a 00   ; Line number 10
+	0805:   99      ; PRINT token
+	0806:   20      ; PETSCII for a space
+	0807:   31 30   ; PETSCII: 10
+	0809:   0       ; Line terminator
+	080a:   13 08   ; Line-link of $0813
+	080c:   14  00  ; Line number 20
+	 .
+	 .
+	 .
+	0813:   1c 08   ; Line-link of $081c
+	0815:   1e 00	; Line number 30
+	 .
+	 .
+	 .
+	081c:   00  00  ; NULL line-link terminateS program
+
+Lest see what happens if we edit out line 20. To do this we'll point the line-link from line 10 to line 30 (instead of line 20). Writing '13 08' to $0801 should do the trick. He's a listing from a C64 after this edit:
+
+	10 PRINT 10
+	30 PRINT 30
+
+Now here's it's output
+
+	 10
+	 20
+	 30
+
+So linear execution still works, but constructs like GOTO and GOBUB use the line-links (and LIST clearly does). Let's test this:
+
+	10 GOTO 30
+	20 END
+	30 PRINT 30
+
+	0801:   0a 08 0a 00  89 20 33 30  00 10 08 14  00 80 00 19
+	0811:   08 1e 00 99  20 33 30 00  00 00
+
+I'll just dump the chain of line-links:
+
+	0801:   0a 08 ; Line 10
+	 .
+	080a:   10 08 ; Line 20
+	 .
+	0810:   19 08 ; Line 30
+	 .
+	0819:   00 00 ; The end
+
+So we'll edit out line 30 by writing '19 08' to $080a. He's the listing after that:
+
+	10 GOTO 30
+	20 END
+
+And now we'll run it:
+
+	?UNDEF'D STATEMENT  ERROR IN 10
+
+Not unexpected. Execution must "fall" into a skipped line, GOTO and GOSUB fail to find it.
