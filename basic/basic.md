@@ -8,7 +8,7 @@ I didn’t initially plan writing anything on BASIC at all. When I was working o
 
 ## Encoding
 
-The encoding of BASIC programs is relatively straightforward. On the C64 basic programs start at the hexadecimal address $0801, although location $0800 must be zero or attempting to run the program results in a syntax error. From $0801 onwards the lines follow in line-number order. Each line consists of a header followed by a series on PETSCII characters and tokens terminated by a zero. Immediately after the terminating zero the next line begins. The header of each line consists of two 16-bit (little-endian) unsigned integers. The first of these is the line-link; this is a pointer to the start of the next line, an entry with a high byte of $00 marking the end of the program. Normally both bytes are zero, only checking the high byte is probably an optimization, but as we’ll see later you do come across machine language programs with BASIC bootstraps taking advantage of this to save one byte. These line-links form a linked list so every line of the program can be traversed and lines looked up: RUN, LIST, GOTO, GOSUB and line additions/deletions use this mechanism to find the target line. Note that sequential execution doesn't use the line links. The second 16-bit number is the line number. You’d think this would mean that line numbers can be in the range 0-65535, but for some reason only 0- 63999 can be used (I'll try to find out why one day). When a GOTO or GOSUB (or the other constructs that use the links) are executed the lines are traversed using the line-links and the target line number compared to the line number member of the of the header. The structure of the rest of a line is a series of PETSCII characters and tokens. If the byte has the MSB set it is interpreted as a token and if it’s clear it’s a character (not quite true, see the second example below). The Tokens are listed below:
+The encoding of BASIC programs is relatively straightforward. On the C64 basic programs start at the hexadecimal address $0801, although location $0800 must be zero or attempting to run the program results in a syntax error. From $0801 onwards the lines follow in line-number order. Each line consists of a header followed by a series on PETSCII characters and tokens terminated by a zero. Immediately after the terminating zero the next line begins. The header of each line consists of two 16-bit (little-endian) unsigned integers. The first of these is the line-link; this is a pointer to the start of the next line, an entry with a high byte of $00 marking the end of the program. Normally both bytes are zero, only checking the high byte is probably an optimization, but as we’ll see later you do come across machine language programs with BASIC bootstraps taking advantage of this to save two bytes. These line-links form a linked list so every line of the program can be traversed and lines looked up: RUN, LIST, GOTO, GOSUB and line additions/deletions use this mechanism to find the target line. Note that sequential execution doesn't use the line links. The second 16-bit number is the line number. You’d think this would mean that line numbers can be in the range 0-65535, but for some reason only 0- 63999 can be used (I'll try to find out why one day). When a GOTO or GOSUB (or the other constructs that use the links) are executed the lines are traversed using the line-links and the target line number compared to the line number member of the of the header. The structure of the rest of a line is a series of PETSCII characters and tokens. If the byte has the MSB set it is interpreted as a token and if it’s clear it’s a character (not quite true, see the second example below). The Tokens are listed below:
 
 **Value** | **Command**
 $80 | END	
@@ -252,7 +252,7 @@ I'm going to skip over the last line, the GOTO. You may not be shocked to learn 
 
 So, apart from the writing tools, can any of this knowledge of how BASIC programs are encoded be put to any use? It didn't take long before I discovered some sneaky shenanigans out there in the wild and thought of one myself. I'll describe some below and add more as I come across them.
 
-### Line scrubbing
+### Line Scrubbing
 
 The first program I tested my BASIC lister on was Monopole by JOHN O'HARE (colour and sound added by Tim Borion and Sal Oeper). I have added two listings, [one](/basic/monopole/monopole_listing.html) with a modern looking font and [another](/basic/monopole/monopole_c64font_listing.html) using the C64's font. Here's a line (taken from the first listing) that occurs early in the program:
 
@@ -263,3 +263,20 @@ The {del} represents a control character, it's generated on the keyboard by pres
 	4 PRINT"{clear}{white}":POKE53280,0:POKE53281,0:GOSUB700:GOSUB162
 
 When typing in quotes on a C64 most control character don't perform their usual function. Instead you get some symbol in reverse video that represents it. These stand-ins are shown when the program is listed but when printed they perform their usual function (the stand-ins are expanded to a mnemonic describing their function in the first listing, the second listing is more authentic). This allows changing colours, moving the cursor around and various other things including incomprehensible programs. The DEL key is an exception, it deletes in and out of quotes and doesn't generate a stand-in. I'd guess that whatever code path is responsible for this mercy (it's bad enough not being able to move the cursor around in quotes without losing the power of deletion) also applies when listing a program because the {del} characters in the PRINT at end of the line actually start deleting the line, scrubbing out the apparently top-secret variables TN & TT as well as any visual evidence of the mechanism via which this is achieved. Notice that there's no closing quote, that would leave a tell-tale quotation mark at the end of the line. I'm not sure how the hell this was entered, I suspect a hex editor was used. The same trick is used in line 697.
+
+### Byte Miser
+
+I came across this trick when I was having a look at a game that had been cracked & packed. Here's a piece of it:
+
+	0801   0b 08 ca 07  9e 32 30 35  39 00 a2 00
+	1994 SYS2059
+	080b   a2 00      LDX #$00
+	080d   78         SEI 
+	080e   e6 01      INC $01
+	0810   bd 4e 6c   LDA $6c4e,X
+	0813   9d f0 00   STA $00f0,X
+	0816   e8         INX 
+	0817   d0 f7      BNE $0810
+	0819   4c 4e 01   JMP $014e
+
+The BASIC bootstrap occupies $0801-$080c, its BASIC listing is shown on the line below it. The machine code starts at $080b (2059 in decimal) which is where the machine code execution starts. The careful reader will notice that the BASIC and machine code sections overlap by two bytes (they share 'a2 00'). 'a2 00' serves as a legal terminating line-link as its high byte is zero and this also happens to encode the instruction 'LDX #$00'. I thought the instruction ordering was strange until I realised what was going on.
