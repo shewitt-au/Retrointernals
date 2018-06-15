@@ -247,3 +247,19 @@ Line 60:
 About the only thing of interest if the colon: it's simply PETSCII. Here it's interpreted as a separator but in a REM statement it's just a colon. It depends on the context and not explicit in the binary format.
 
 I'm going to skip over the last line, the GOTO. You may not be shocked to learn the line number is encoded as PETSCII, although I was.
+
+## Tricks
+
+So, apart from the writing tools, can any of this knowledge of how BASIC programs are encoded be put to any use? It didn't take long before I discovered some sneaky shenanigans out there in the wild and thought of one myself. I'll describe some below and add more as I come across them.
+
+### Line scrubbing
+
+The first program I tested my BASIC lister on was Monopole by JOHN O'HARE (colour and sound added by Tim Borion and Sal Oeper). I have added two listings, [one](/basic/monopole/monopole_listing.html) with a modern looking font and [another](/basic/monopole/monopole_c64font_listing.html) using the C64's font. Here's a line (taken from the first listing) that occurs early in the program:
+
+	4 PRINT"{clear}{white}":POKE53280,0:POKE53281,0:GOSUB700:GOSUB162:TN=832:TT=886:PRINT"{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}
+
+The {del} represents a control character, it's generated on the keyboard by pressing the DEL key. If you list the program on a C64 what you get isn't quite as interesting:
+
+	4 PRINT"{clear}{white}":POKE53280,0:POKE53281,0:GOSUB700:GOSUB162
+
+When typing in quotes on a C64 most control character don't perform their usual function. Instead you get some symbol in reverse video that represents it. These stand-ins are shown when the program is listed but when printed they perform their usual function (the stand-ins are expanded to a mnemonic describing their function in the first listing, the second listing is more authentic). This allows changing colours, moving the cursor around and various other things including incomprehensible programs. The DEL key is an exception, it deletes in and out of quotes and doesn't generate a stand-in. I'd guess that whatever code path is responsible for this mercy (it's bad enough not being able to move the cursor around in quotes without losing the power of deletion) also applies when listing a program because the {del} characters in the PRINT at end of the line actually start deleting the line, scrubbing out the apparently top-secret variables TN & TT as well as any visual evidence of the mechanism via which this is achieved. Notice that there's no closing quote, that would leave a tell-tale quotation mark at the end of the line. I'm not sure how the hell this was entered, I suspect a hex editor was used. The same trick is used in line 697.

@@ -4,13 +4,13 @@
 - title: BASIC
   url: /basic/basic.html
   sublinks:
-      - title: Monopoly
-        url: /basic/monopoly/monopoly.html
+      - title: Monopole
+        url: /basic/monopole/monopole.html
         sublinks:
           - title: Listing
-            url: /basic/monopoly/monopoly_listing.html
+            url: /basic/monopole/monopole_listing.html
           - title: Listing with C64 font
-            url: /basic/monopoly/monopoly_c64font_listing.html
+            url: /basic/monopole/monopole_c64font_listing.html
       - title: The Secret of Bastow Manor
         url: /basic/tsobm/tsob.html
         sublinks:

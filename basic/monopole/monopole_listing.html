@@ -1,0 +1,754 @@
+<!doctype html>
+
+<html>
+<head>
+<meta charset="utf-8"/>
+<style>.container {
+	font-family: monospace;
+}
+.comment {
+	font-family: inherit;
+	white-space: pre;
+	color : blue;
+}
+.code {
+	font-family: inherit;
+	white-space: pre;
+}
+.hole {
+	border: 2px solid red;
+}
+.basic {white-space: pre;
+}
+.notinterested {
+	background-color: orange;
+}
+.intro {
+	background-color: lightgreen;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+
+
+<div class="basic">0 REM MONOLPOLE BY JOHN O'HARE
+1 REM   ALL RIGHTS RESERVED
+2 REM PERMISSION TO USE, NOT SELL.
+3 REM COLOR AND SOUND ADDED BY:               TIM BORION AND SAL OEPER
+4 PRINT"{clear}{white}":POKE53280,0:POKE53281,0:GOSUB<a href="#674b">700</a>:GOSUB<a href="#25cc">162</a>:TN=832:TT=886:PRINT"{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}
+5 PG$="  PURPLE, LT. BLUE, MAROON, ORANGE,       RED, YELLOW, GREEN, DK. BLUE"
+6 DIMPN$(42),D(42,1),CH$(16),CC$(16),P(42,9),PT$(42),C$(42),PS(42),H(42),MG(42)
+7 DIM P$(2),PL(2),O(2),JT(2),M(2),CJ(2)
+8 GOSUB<a href="#0c87">23</a>:INPUT"DO YOU WANT AUCTION RULE (Y OR N)";Q$:IFLEFT$(Q$,1)="Y"THENAF=1
+9 INPUT"WANT FREE PARKING JACKPOT OPTION ";Q$:IFLEFT$(Q$,1)="Y"THENPF=1:FP=500
+10 M(1)=1500:M(2)=1500:PL(1)=1:PL(2)=1:DV=2
+11 CD$="{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}":CR$="{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}"
+12 ZQ=RND(-TI):X1=8:Y1=10:X2=23:Y2=10:RX=6:RY=18
+13 E$="{rvs on}                  {rvs off}":RM$="{rvs on}HIT  'R' OR 'T'{rvs off}"
+14 PRINT"{clear}{crsr down}{crsr down}{cyan}     PLEASE WAIT WHILE I SET UP.{white}"
+15 FORI=1TO4:P(6+((I-1)*10),8)=100:NEXT:P(13,8)=75:P(29,8)=75
+16 CH=INT(RND(1)*16)+1:CC=INT(RND(1)*16)+1
+17 FORI=1TO41:FORJ=0TO1:READD(I,J):NEXT:NEXT
+18 P$(1)="{rvs on}   PLAYER 1{rvs off}":P$(2)="{rvs on}   PLAYER 2{rvs off}"
+19 FORI=1TO41:READPN$(I):NEXT:FORI=1TO41:READPT$(I):IFPT$(I)<>"P"THEN<a href="#0c54">21</a>
+20 READC$(I):FORJ=1TO9:READP(I,J):NEXTJ
+<a name="0c54"></a>21 NEXTI
+22 FORI=1TO16:READCH$(I):NEXT:FORI=1TO16:READCC$(I):NEXT:GOTO<a href="#0e31">32</a>
+<a name="0c87"></a>23 PRINT"{lightblue} ▚  {rvs on}▚{rvs off}▎▎▚   ▎▎▎    "
+24 PRINT"  ▚{rvs on}▚{rvs off} ▎   ▎ ▚  ▎   ▎▂▂   ▎    "
+25 PRINT"     ▎   ▎  ▚ ▎   ▎      ▎    "
+26 PRINT"     ▎▂▂▂▎   ▚▎▂▂▂▎   ▂▂▂▎▂▂▂ ▂{white}"
+27 PRINTTAB(19);"{crsr down}{crsr down}BY"
+28 PRINT"{crsr down}{crsr down}               JOHN O'HARE{crsr down}{crsr down}{crsr down}"
+29 PRINT"HIT 'R' TO ROLL DICE AND 'T' FOR        TRANSACTION MENU."
+30 PRINT" '0' CAN BE USED TO RETURN FROM MOST     SUBROUTINES"
+31 PRINT:PRINT"DEVELOPED PROPERTIES MAY NOT BE TRADED.":PRINT:RETURN
+<a name="0e31"></a>32 POKE54277,79:POKE54284,79:POKE54291,79
+33 POKE54278,248:POKE54286,248:POKE54292,248
+34 POKE54276,33:POKE54288,33:POKE54290,33
+35 G(1)=54272:G(2)=54273:G(3)=54279:G(4)=54280:G(5)=54286:G(6)=54287
+36 FORI=1TO6:POKEG(I),0:NEXT
+37 POKE54296,15:IFPEEK(832)<>160THENGOSUB652
+38 GOSUB<a href="#20d6">135</a>:FORPK=1TO2:POKED(1,PK-1),48+PK:O(PK)=D(1,PK-1):PT=PK:NEXT:GOSUB<a href="#61e7">661</a>
+<a name="0f54"></a>39 GOSUB<a href="#2688">165</a>:IFR1=R2THEN<a href="#0f54">39</a>
+40 PT=(R1>R2)+2
+41 POKED(PL(1),0),49:POKED(PL(2),1),50
+42 PT$=STR$(PT)
+43 MS$="{rvs on}{green}PLAYER"+PT$+" STARTS{rvs off}{white}"
+44 X=RX:Y=RY:Z$=MS$:GOSUB<a href="#25a3">160</a>:FORDE=1TO1500:NEXT:Z$=E$:GOSUB<a href="#25a3">160</a>:GOTO<a href="#1289">65</a>
+<a name="1001"></a>45 DV=2:MF=0:JB=0
+46 IFPL(PT)=41THEN<a href="#1124">56</a>
+47 JT(PT)=0
+48 GOSUB<a href="#2688">165</a>:DF=1
+49 IFDB=3THENSYSTN:GOSUB<a href="#391f">325</a>:SYSTT:GOSUB<a href="#61e7">661</a>:GOTO<a href="#119c">59</a>
+<a name="1061"></a>50 FORM=1TODR:PL(PT)=PL(PT)+1
+51 POKEO(PT),160:IFPL(PT)>40THENPL(PT)=PL(PT)-40:SYSTN:GOSUB<a href="#2780">175</a>:SYSTT
+52 POKED(PL(PT),PT-1),48+PT
+53 O(PT)=D(PL(PT),PT-1)
+54 FORT=1TO50STEP6+PT:FORI=1TO6:POKEG(I),T:NEXT:NEXT
+55 FORI=1TO6:POKEG(I),0:NEXT:NEXTM
+<a name="1124"></a>56 POKED(PL(PT),PT-1),48+PT:GOSUB<a href="#61e7">661</a>
+57 SYSTN:GOSUB<a href="#2832">182</a>:SYSTT:GOSUB<a href="#61e7">661</a>:IFM(PT)<0THENGOSUB<a href="#5e24">635</a>:SYSTT
+58 IFPL(PT)=11THENPOKED(41,PT-1),160:POKED(11,PT-1),48+PT
+<a name="119c"></a>59 IFJBTHENJB=0:POKEO(PT),160:O(PT)=D(PL(PT),PT-1):GOTO<a href="#1061">50</a>
+60 IFMFTHENMF=0:POKEO(PT),160:O(PT)=D(PL(PT),PT-1):GOTO<a href="#1124">56</a>
+61 IFJETHENJE=0:POKEO(PT),160:O(PT)=D(PL(PT),PT-1):GOTO<a href="#1289">65</a>
+62 IFJFTHENJF=0:POKED(PL(PT),PT-1),48+PT:POKEO(PT),160:O(PT)=D(PL(PT),PT-1)
+63 IFDBTHEN<a href="#1289">65</a>
+64 PT=3-PT
+<a name="1289"></a>65 Z$=P$(PT):X=RX:Y=RY-1:GOSUB<a href="#25a3">160</a>
+66 Z$=RM$:X=RX:Y=RY:GOSUB<a href="#25a3">160</a>
+<a name="12c2"></a>67 GETBC$:IFBC$<>""THEN<a href="#12c2">67</a>
+<a name="12d7"></a>68 GETA$:IFA$=""THEN<a href="#12d7">68</a>
+69 IFA$="T"THENSYSTN:GOSUB<a href="#4483">423</a>:SYSTT:GOSUB<a href="#61e7">661</a>:GOTO<a href="#1289">65</a>
+70 Z$=E$:X=RX:Y=RY:GOSUB<a href="#25a3">160</a>
+71 GOTO<a href="#1001">45</a>
+72 DATA1978,1938,1974,1973,1931,1930,1968,1967,1925,1924,1922,1921
+73 DATA1959,1958,1956,1955,1953,1952,1950,1949,1944,1904
+74 DATA1824,1825,1744,1745,1664,1665,1584,1585,1505,1506,1424,1425
+75 DATA1346,1347,1264,1265,1184,1185,1104,1105
+76 DATA1029,1030,1032,1033,1035,1036,1038,1039,1081,1082,1044,1045
+77 DATA1047,1048,1130,1131,1053,1054,1096,1097
+78 DATA1217,1218,1297,1298,1377,1378,1457,1458,1536,1537,1617,1618
+79 DATA1697,1698,1777,1778,1857,1858,1906,1907
+80 DATA"{green}>GO<{lightgrey}","{lightgrey}MEDITERRANEAN AVE.{lightgrey}","{yellow}COMMUNITY CHEST{lightgrey}","{lightgrey}BALTIC AVE.{lightgrey}"
+81 DATA"{lightblue}INCOME TAX{lightgrey}"
+82 DATA"{grey}READING R.R.{lightgrey}","{cyan}ORIENTAL AVE.{lightgrey}","{light-red}CHANCE{lightgrey}","{cyan}VERMONT AVE.{lightgrey}"
+83 DATA"{cyan}CONNECTICUT AVE.{lightgrey}"
+84 DATA"{light-red}JUST VISITING{lightgrey}","{purple}ST.CHARLES PLACE{lightgrey}","{lightgreen}ELECTRIC COMPANY{lightgrey}","{purple}STATES AVE.{lightgrey}"
+85 DATA"{purple}VIRGINIA AVE.{lightgrey}","{grey}PENNSYLVANIA R.R.{lightgrey}","{orange}ST. JAMES PLACE{lightgrey}"
+86 DATA"{yellow}COMMUNITY CHEST{lightgrey}"
+87 DATA"{orange}TENNESSEE AVE.{lightgrey}","{orange}NEW YORK AVE.{lightgrey}","{brown}FREE PARKING{lightgrey}","{red}KENTUCKY AVE.{lightgrey}"
+88 DATA"{light-red}CHANCE{lightgrey}","{red}INDIANA AVE.{lightgrey}","{red}ILLINOIS AVE.{lightgrey}","{grey}B & O  R.R.{lightgrey}"
+89 DATA"{yellow}ATLANTIC AVE.{lightgrey}"
+90 DATA"{yellow}VENTNOR AVE.{lightgrey}","{lightgreen}WATER WORKS{lightgrey}","{yellow}MARVIN GARDENS{lightgrey}","{light-red}GO{lightgrey} {lightblue}TO{lightgrey} {white}JAIL{lightgrey}"
+91 DATA"{green}PACIFIC AVE.{lightgrey}"
+92 DATA"{green}N. CAROLINA AVE.{lightgrey}","{yellow}COMMUNITY CHEST{lightgrey}","{green}PENNSYLVANIA AVE.{lightgrey}"
+93 DATA"{grey}SHORT LINE{lightgrey}"
+94 DATA"{light-red}CHANCE{lightgrey}","{blue}PARK PLACE{lightgrey}","{lightblue}LUXURY TAX{lightgrey}","{blue}BOARDWALK{lightgrey}","{light-red}IN JAIL{lightgrey}"
+95 DATAGO,P,PURPLE,60,2,10,30,90,160,250,30,50,CC,P,PURPLE,60,4,20,60,180,320
+96 DATA450,30,50,IT,RR,P,LT. BLUE,100,6,30,90,270,400,550,50,50,CH,P,LT. BLUE
+97 DATA 100,6,30,90,270,400,550,50,50,P,LT. BLUE,120,8,40,100,300,450,600,60,50
+98 DATAJV,P,MAROON,140,10,50,150,450,625,750,70,100,U,P,MAROON,140,10,50,150,450
+99 DATA625,750,70,100,P,MAROON,160,12,60,180,500,700,900,80,100,RR
+100 DATAP,ORANGE,180,14,70,200,550,750,950,90,100,CC,P,ORANGE
+101 DATA 180,14,70,200,550,750,950,90,100
+102 DATAP,ORANGE,200,16,80,220,600,800,1000,100,100,FP,P,RED
+103 DATA 220,18,90,250,700,875
+104 DATA1050,110,150,CH,P,RED,220,18,90,250,700,875,1050,110,150,P,RED,240
+105 DATA 20,100,300
+106 DATA750,925,1100,120,150,RR,P,YELLOW,260,22,110,330,800,975,1150,130,150
+107 DATA P,YELLOW,260
+108 DATA22,110,330,800,975,1150,130,150,U,P,YELLOW,280,24,120,360,850,1025,1200
+109 DATA 140
+110 DATA150,GTJ,P,GREEN,300,26,130,390,900,1100,1275,150,200,P,GREEN
+111 DATA 300,26,130,390,900
+112 DATA1100,1275,150,200,CC,P,GREEN,320,28,150,450,1000,1200,1400
+113 DATA 160,200,RR,CH
+114 DATAP,DK. BLUE,350,35,175,500,1100,1300,1500,175,200,LT,P,DK. BLUE
+115 DATA 400,50,200,600,1400
+116 DATA1700,2000,200,200,IJ
+117 DATA PAY POOR TAX  $15,GO DIRECTLY TO JAIL,ADVANCE TO GO(COLLECT $200)
+118 DATA YOUR BUILDING AND LOAN MATURES            COLLECT $150
+119 DATA ADVANCE TOKEN TO NEAREST R.R.           $ PAY OWNER TWICE RENT
+120 DATAADVANCE TO ILLINOIS AVE.,BANK PAYS YOU DIVIDEND OF $50
+121 DATAGET OUT OF JAIL FREE,PAY EACH PLAYER $50,ADVANCE TO ST. CHARLES PLACE
+122 DATATAKE A RIDE ON THE READING,GO BACK THREE SPACES,ADVANCE TO BOARDWALK
+123 DATAMAKE GENERAL REPAIRS  $25 FOR EACH HOUSE$100 FOR EACH HOTEL
+124 DATA ADVANCE TOKEN TO NEAREST R.R.           $ PAY OWNER TWICE RENT
+125 DATA ADVANCE TOKEN TO NEAREST UTILITY        ROLL DICE & PAY 10*# SHOWN
+126 DATA GET OUT OF JAIL FREE,GO TO JAIL,ADVANCE TO GO(COLLECT $200)
+127 DATA FROM SALE OF STOCK YOU GET $45,COLLECT $50 FROM EVERY PLAYER
+128 DATA RECEIVE FOR SERVICES $25,PAY SCHOOL TAX OF $150,TAX REFUND COLLECT $20
+129 DATA ASSESSED FOR REPAIRS  $40 PER HOUSE     $115 PER HOTEL
+130 DATA YOU HAVE WON SECOND PRIZE IN A BEAUTY   CONTEST COLLECT $10
+131 DATA YOU INHERIT $100,XMAS FUND MATURES COLLECT $100,PAY HOSPITAL $100
+132 DATA BANK ERROR  IN YOUR FAVOR COLLECT $200,DOCTORS FEE PAY $50
+133 DATA LIFE INSURANCE MATURES COLLECT $100
+134 GOTO<a href="#6028">651</a>
+<a name="20d6"></a>135 PRINT"{clear}{rvs on}{brown}    {lightgrey}▏  ▏  ▏  ▏  {grey}▚▚▚{lightgrey}▏  ▏  ▏{lightgreen}WW{lightgrey}▏  {light-red}▏GTJ{rvs off}"
+136 PRINT"{rvs on}{brown} FP {lightgrey}▏  ▏{light-red}?{lightgrey} ▏  ▏  {grey}▏  {lightgrey}▏  ▏  ▏{lightgreen}┌┴{lightgrey}▏  {lightblue}▏   {rvs off}"
+137 PRINT"{rvs on}{brown}    {red}   {lightgrey}▏  {red}   ▏  {grey}B&O{yellow}▏  ▏  {lightgrey}▏  {yellow}   {white}▏○ {lightgrey}{rvs off}"
+138 PRINT"{rvs on}▔▔▔{orange} {lightgrey}▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔{green} {lightgrey}▔▔▔{rvs off}"
+139 PRINT"{rvs on}   {orange} {lightgrey}▏  ╱╲                      {green} {lightgrey}   {rvs off}"
+140 PRINT"{rvs on}▔▔▔{orange}▔{lightgrey}▏ {yellow}╱  {lightgrey}╲ 1-                  {green}▔{lightgrey}▔▔▔{rvs off}"
+141 PRINT"{rvs on}   {orange} {lightgrey}▏╱{yellow}C C{lightgrey}╱                     {green} {lightgrey}   {rvs off}"
+142 PRINT"{rvs on}▔▔▔▔▏╲{yellow}  ╱{lightgrey}  2-                  ▔▔▔{rvs off}"
+143 PRINT"{rvs on}{yellow}CC{lightgrey}  ▏ ╲╱                       {yellow}CC{lightgrey}  {rvs off}"
+144 PRINT"{rvs on}▔▔▔{orange} {lightgrey}▏   ▁▁▁            ▁▁▁     {green} {lightgrey}▔▔▔{rvs off}"
+145 PRINT"{rvs on}   {orange} {lightgrey}▏  ▕{white}   {lightgrey}▏          ▕{white}   {lightgrey}▏    {green} {lightgrey}   {rvs off}"
+146 PRINT"{rvs on}{grey}▚PR▚{lightgrey}▏  ▕{white}   {lightgrey}▏ {white}MONOPOLE{lightgrey} ▕{white}   {lightgrey}▏   ▕{grey}▚SL▚{rvs off}"
+147 PRINT"{rvs on}▚  ▚{lightgrey}▏  ▕{white}   {lightgrey}▏  {white}CBM-64{lightgrey}  ▕{white}   {lightgrey}▏   ▕{grey}▚  ▚{lightgrey}{rvs off}"
+148 PRINT"{rvs on}▔▔▔{purple} {lightgrey}▏   ▔▔▔            ▔▔▔     ▔▔▔{rvs off}"
+149 PRINT"{rvs on}   {purple} {lightgrey}▏                          ▏{light-red}?{lightgrey}  {rvs off}"
+150 PRINT"{rvs on}▔▔▔{purple}▔{lightgrey}▏                      ╱╲  {blue} {lightgrey}▔▔▔{rvs off}"
+151 PRINT"{rvs on}   {purple} {lightgrey}▏                     {light-red}╱  {lightgrey}╲ {blue} {lightgrey}   {rvs off}"
+152 PRINT"{rvs on}▔{lightgreen}EC{lightgrey}▔▏                    ╱{light-red}???{lightgrey}╱ {lightblue}TAX{lightgrey}▔{rvs off}"
+153 PRINT"{rvs on}    ▏                    ╲{light-red}  ╱{lightgrey}  ▏   {rvs off}"
+154 PRINT"{rvs on}▔▔▔{purple} {lightgrey}▏                     ╲╱   {blue} {lightgrey}▔▔▔{rvs off}"
+155 PRINT"{rvs on}   {purple} {lightgrey}▏                          {blue} {lightgrey}   {rvs off}"
+156 PRINT"{rvs on}{light-red}▔{lightgrey}▔▔{cyan}   ▏  {lightgrey}▔▔{cyan}   {grey}RR{lightgrey}▔▔{rvs off}   {rvs on}▔▔{rvs off}   {rvs on}{green}▔▔▔{rvs off}"
+157 PRINT"{rvs on}{light-red} {lightgrey}▏  ▏  ▏  ▏{light-red}?{lightgrey} ▏  {grey}▏  {lightgrey}▏  ▏  ▏  ▏  {green}▏GO {rvs off}"
+158 PRINT"{rvs on}{light-red} ▔▔▔{lightgrey}▏  ▏  ▏  ▏  {grey}▚▚▚{lightblue}TAX{lightgrey}▏  ▏{yellow}CC{lightgrey}▏  {green}▏←─ {rvs off}{white}"
+159 RETURN
+<a name="25a3"></a>160 PRINT"{home}{lightgrey}";LEFT$(CR$,X);LEFT$(CD$,Y);Z$;"{white}"
+161 RETURN
+<a name="25cc"></a>162 DC$(1)="{rvs on}   {crsr down}{crsr left}{crsr left}{crsr left} ● {crsr down}{crsr left}{crsr left}{crsr left}   {rvs off}":DC$(2)="{rvs on}  ●{crsr down}{crsr left}{crsr left}{crsr left}   {crsr down}{crsr left}{crsr left}{crsr left}●  {rvs off}"
+163 DC$(3)="{rvs on}●  {crsr down}{crsr left}{crsr left}{crsr left} ● {crsr down}{crsr left}{crsr left}{crsr left}  ●{rvs off}":DC$(4)="{rvs on}● ●{crsr down}{crsr left}{crsr left}{crsr left}   {crsr down}{crsr left}{crsr left}{crsr left}● ●{rvs off}"
+164 DC$(5)="{rvs on}● ●{crsr down}{crsr left}{crsr left}{crsr left} ● {crsr down}{crsr left}{crsr left}{crsr left}● ●{rvs off}":DC$(6)="{rvs on}● ●{crsr down}{crsr left}{crsr left}{crsr left}● ●{crsr down}{crsr left}{crsr left}{crsr left}● ●{rvs off}":RETURN
+<a name="2688"></a>165 CT=0
+<a name="2691"></a>166 R1=INT(RND(1)*6)+1:R2=INT(RND(1)*6)+1:DR=R1+R2
+167 FORI=1TO6:POKEG(I),DR*10:NEXT
+168 PRINT"{home}";LEFT$(CR$,X1);LEFT$(CD$,Y1);DC$(R1)
+169 PRINT"{home}";LEFT$(CR$,X2);LEFT$(CD$,Y2);DC$(R2)
+170 FORI=1TO6:POKEG(I),0:NEXT
+171 CT=CT+1:IFCT<7THENFORDELAY=1TO75:NEXT:GOTO<a href="#2691">166</a>
+172 IFR1=R2THENDB=DB+1:GOTO<a href="#277a">174</a>
+173 DB=0
+<a name="277a"></a>174 RETURN
+<a name="2780"></a>175 PRINT"{clear}":PRINT
+176 PRINT" COLLECT $200 AS YOU PASS  {rvs on}{green}▗▄{crsr right}▗▖{crsr down}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}▝▘{crsr right}▝▘{white}{rvs off}"
+177 M(PT)=M(PT)+200:PRINT:PRINT:PRINT
+<a name="27dc"></a>178 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs on}HIT ANY KEY TO CONTINUE{rvs off}"
+<a name="2805"></a>179 GETW$:IFW$<>""THEN<a href="#2805">179</a>
+<a name="2819"></a>180 GETK$:IFK$=""THEN<a href="#2819">180</a>
+181 RETURN
+<a name="2832"></a>182 POKE198,0:PT$=PT$(PL(PT))
+183 IFPT$="P"THEN<a href="#2920">195</a>
+184 IFPT$="RR"THEN<a href="#2f15">244</a>
+185 IFPT$="GO"THENRETURN
+186 IFPT$="U"THEN<a href="#3368">280</a>
+187 IFPT$="FP"THEN<a href="#3751">311</a>
+188 IFPT$="JV"THENRETURN
+189 IFPT$="GTJ"THEN<a href="#391f">325</a>
+190 IFPT$="IT"THEN<a href="#3aad">336</a>
+191 IFPT$="LT"THEN<a href="#3a57">334</a>
+192 IFPT$="CC"THEN<a href="#3b06">338</a>
+193 IFPT$="CH"THEN<a href="#3dcb">362</a>
+194 IFPT$="IJ"THEN<a href="#41b8">403</a>
+<a name="2920"></a>195 PRINT"{clear}";TAB(15);"TITLE DEED"
+196 IFGFTHEN<a href="#2978">200</a>
+197 PRINT" PLAYER"PT
+198 PO=3-PT
+199 PL=PL(PT):P7=PT
+<a name="2978"></a>200 PRINTTAB(20-(LEN(PN$(PL))-1)/2)"{rvs on}";PN$(PL)"{rvs off}"
+201 PRINTLEFT$(PN$(PL),1):QR=PEEK(646):POKE53280,QR:PRINT"{crsr up}{crsr up}{white}"
+202 PRINT
+203 PRINT"                 RENT $";P(PL,2)
+204 PRINT"           WITH 1 HOUSE  $";P(PL,3)
+205 PRINT"           WITH 2 HOUSES  ";P(PL,4)
+206 PRINT"           WITH 3 HOUSES  ";P(PL,5)
+207 PRINT"           WITH 4 HOUSES  ";P(PL,6)
+208 PRINT"           WITH HOTEL  $";P(PL,7)
+209 PRINT
+210 PRINT"           MORTAGE VALUE  $";P(PL,8)
+211 PRINT"          HOUSES COST $";P(PL,9);"EACH"
+212 PRINT"      HOTELS, $";P(PL,9);". PLUS 4 HOUSES"
+213 IFGFTHENPRINT:PRINT:GOSUB<a href="#27dc">178</a>:POKE53280,0:RETURN
+214 PRINT:FORI=1TO41:IFC$(PL)=C$(I)ANDI<>PLTHENGOSUB216
+215 NEXT:GOTO<a href="#2c01">218</a>
+216 IFPS(I)THENPRINT" "PN$(I)"{white}  OWNED BY {rvs on}PLAYER #"PS(I):RETURN
+217 PRINT" "PN$(I)"{white} STILL FOR SALE.":RETURN
+<a name="2c01"></a>218 PRINT
+219 IFMG(PL)=1THENPRINT" MORTAGED FOR $"P(PL,8)
+220 PRINT" COST   $";P(PL,1)
+221 IFPS(PL)=0THEN<a href="#2ccb">226</a>
+222 PRINT" {rvs on}OWNED{rvs off} BY PLAYER"PS(PL):IFH(PL)THENPRINT"{rvs on}WITH";
+223 IFH(PL)<5THENPRINTH(PL)"HOUSES."
+224 IFH(PL)=5THENPRINT" A {rvs on}HOTEL"
+225 GOTO<a href="#2d93">231</a>
+<a name="2ccb"></a>226 PRINT" YOU HAVE $";M(P7)
+<a name="2ce4"></a>227 PRINT" DO YOU WISH TO BUY THIS PROPERTY";:INPUT"  ▚{crsr left}{crsr left}{crsr left}";A$:A$=LEFT$(A$,1)
+228 IFA$="N"THEN<a href="#2e5f">237</a>
+229 IFA$<>"Y"THENPRINT"{crsr up}{crsr up}":GOTO<a href="#2ce4">227</a>
+230 PRINT" OK YOU BOUGHT ";PN$(PL)"{white}":M(P7)=M(P7)-P(PL,1):PS(PL)=PT:GOTO<a href="#2e4b">236</a>
+<a name="2d93"></a>231 OW=P(PL,H(PL)+2):IFPS(PL)=PTTHEN<a href="#2e4b">236</a>
+232 IFMG(PL)THEN<a href="#2e4b">236</a>
+233 P5=PO:P6=PS(PL):GOSUB<a href="#2e6d">238</a>:IFOATHENIFH(PL)=0THENOW=OW*2
+234 M(PT)=M(PT)-OW:M(PS(PL))=M(PS(PL))+OW:PRINT" YOU OWE $";OW
+235 M(PS(PL))=M(PS(PL))+OW
+<a name="2e4b"></a>236 GOSUB<a href="#27dc">178</a>:POKE53280,0:RETURN
+<a name="2e5f"></a>237 GOSUB<a href="#5c57">619</a>:GOTO<a href="#2e4b">236</a>
+<a name="2e6d"></a>238 MG=0:OA=0:PC=0:FORI=1TO41:IFC$(PL)=C$(I)ANDPS(I)=P5THENPC=PC+1:IFMG(I)THENMG=MG
+239 NEXT
+240 IFPC=2ANDC$(PL)="PURPLE"THENOA=1:RETURN
+241 IFPC=2ANDC$(PL)="DK. BLUE"THENOA=1:RETURN
+242 IFPC=3THENOA=1:RETURN
+243 RETURN
+<a name="2f15"></a>244 PRINT"{clear}":PL=PL(PT)
+245 PRINT"PLAYER"PT
+246 PRINT"                   {light-red}♣{grey} {rvs on}▗{rvs off}"
+247 PRINT"                   {rvs on}   {rvs off}"
+248 PRINT"                  ╱{brown}○ ○{white}"
+249 PRINT
+250 PRINTTAB(20-LEN(PN$(PL))/2)"{rvs on}";PN$(PL)"{white}{rvs off}"
+251 POKE54276,129:POKE54288,17:POKE54290,17
+252 KO=129:FORT=1TO2:FORI=1TO6:POKEG(I),KO:NEXT:FORDL=1TO400:NEXT
+253 FORI=1TO6:POKEG(I),0:NEXT:FORDL=1TO60:NEXT:NEXT
+254 POKE54276,33:POKE54288,33:POKE54290,33     
+255 PRINT:PRINT"RENT                     $25"
+256 PRINT"IF 2 R.R.'S ARE OWNED     50"
+257 PRINT"IF 3 R.R.'S ARE OWNED    100"
+258 PRINT"IF 4 R.R.'S ARE OWNED    200"
+259 PRINT
+260 PRINT"MORTAGE VALUE            $100"
+261 PRINT:IFMG(PL)=1THENPRINT"MORTAGED FOR $100":GOTO<a href="#335d">279</a>
+262 PRINT"COST   $200"
+263 PRINT:FORI=1TO41:IFPT$(I)="RR"THENGOSUB265
+264 NEXT:GOTO<a href="#31d8">267</a>
+265 IFPS(I)THENPRINTPN$(I)"{white} OWNED BY PLAYER #";PS(I):RETURN
+266 PRINTPN$(I)"{white} STILL FOR SALE.":RETURN
+<a name="31d8"></a>267 IFPS(PL)THENPRINT"{rvs on}OWNED{rvs off} BY PLAYER#";PS(PL):GOTO<a href="#32c0">275</a>
+268 PRINT"YOU HAVE $"M(PT)
+<a name="321d"></a>269 PRINT"DO YOU WISH TO BUY IT";:INPUT"  ▚{crsr left}{crsr left}{crsr left}";B$:B$=LEFT$(B$,1)
+270 IFB$="N"THENGOSUB<a href="#5c57">619</a>:GOTO<a href="#335d">279</a>
+271 IFB$<>"Y"THENPRINT"{crsr up}{crsr up}":GOTO<a href="#321d">269</a>
+272 M(PT)=M(PT)-200:PS(PL)=PT
+273 PRINT"OK YOU BOUGHT IT"
+274 GOTO<a href="#335d">279</a>
+<a name="32c0"></a>275 OW=0:O7=0
+276 IFPS(PL)=PTTHEN<a href="#335d">279</a>
+277 OW=25:FORI=6TO36STEP10:IFPT$(I)="RR"ANDPS(I)=PS(PL)THENOW=OW*2
+278 NEXT:OW=OW/DV:PRINT"YOU OWE $";OW:M(PT)=M(PT)-OW:M(PS(PL))=M(PS(PL))+OW
+<a name="335d"></a>279 GOSUB<a href="#27dc">178</a>:RETURN
+<a name="3368"></a>280 PRINT"{clear}"
+281 PRINT"PLAYER"PT
+282 PRINT"            {yellow}╱▔╲     {grey}○●○    "
+283 PRINT"            {yellow}╲{light-red}↑{yellow}╱    {grey}├─┴───╮ "
+284 PRINT"             {yellow}▏▏    {grey}├────╮ "
+285 PRINT"             ▒          └┘{white} ":PRINT
+286 PL=PL(PT)
+287 PRINTTAB(20-LEN(PN$(PL))/2)"{rvs on}";PN$(PL)"{white}{rvs off}"
+288 PRINT:PRINT"IF ONE 'UTILITY IS OWNED PAY 4 TIMES THEAMOUNT SHOWN ON DICE"
+289 PRINT
+290 PRINT"IF BOTH OWNED PAY 10 ╳ AMOUNT ON DICE"
+291 D1=INT(RND(1)*6)+1:D2=INT(RND(1)*6)+1
+292 IFDFTHEND1=R1:D2=R2
+293 PRINT:PRINT"MORTAGE VALUE  $75":PRINT
+294 IFMG(PL)=1THENPRINT"MORTAGED FOR $75":GOTO<a href="#3741">310</a>
+295 IFPS(42-PL)THENPRINTPN$(42-PL)"{white} OWNED BY PLAYER"PS(42-PL):GOTO<a href="#359f">297</a>
+296 PRINTPN$(42-PL)"{white} STILL FOR SALE."
+<a name="359f"></a>297 PRINT:IFPS(PL)THENPRINT"{rvs on}OWNED{rvs off} BY PLAYER#";PS(PL):GOTO<a href="#368d">305</a>
+298 PRINT"YOU HAVE $"M(PT)
+<a name="35e6"></a>299 INPUT"DO YOU WISH TO BUY IT  ▚{crsr left}{crsr left}{crsr left}";B$:B$=LEFT$(B$,1)
+300 IFB$="N"THENGOSUB<a href="#5c57">619</a>:GOTO<a href="#3741">310</a>
+301 IFB$<>"Y"THENPRINT"{crsr up}{crsr up}":GOTO<a href="#35e6">299</a>
+302 PRINT"OK YOU BOUGHT ";PN$(PL)"{white}"
+303 M(PT)=M(PT)-150
+304 PS(PL)=PT:GOTO<a href="#3741">310</a>
+<a name="368d"></a>305 IFPS(PL)=PTTHEN<a href="#3741">310</a>
+306 PRINT"DICE SHOW"D1"AND"D2"."
+307 MT=4:IFPS(13)=PS(PL)ANDPS(29)=PS(PL)THENMT=10
+308 IFDF=0THENMT=10
+309 OW=MT*(D1+D2):PRINT"YOU OWE $";OW:M(PT)=M(PT)-OW:M(PS(PL))=M(PS(PL))+OW
+<a name="3741"></a>310 MT=0:GOSUB<a href="#27dc">178</a>:RETURN
+<a name="3751"></a>311 PRINT"{clear}"
+312 PRINT"                 {orange}FREE
+313 PRINT"                {green}╭─────╮"
+314 PRINT"                │ {cyan}┌─┐{green} 
+315 PRINT"                │ {cyan}└─┘{green} │
+316 PRINT"                 {brown}╭─╮{green} │
+317 PRINT"              ╭─┘ {brown}│{grey}●{brown}{green} └─╮
+318 PRINT"              │   {brown}╰╯{green}   │
+319 PRINT"              └─{grey}{green}─────{grey}{green}─┘
+320 PRINT"                {grey}▒     ▒
+321 PRINT:PRINT"                {orange}PARKING{white}":PRINT
+322 IFPF=0THENGOSUB<a href="#27dc">178</a>:RETURN
+323 PRINT:PRINT"       YOU GET THE FREE PARKING"
+324 PRINT"          JACKPOT OF $"FP"!":M(PT)=M(PT)+FP:FP=0:PRINT:GOSUB<a href="#27dc">178</a>:RETURN
+<a name="391f"></a>325 PRINT"{clear}";TAB(15);"GO TO JAIL"
+326 IFDB=3THENPRINT:PRINT" FOR ROLLING DOUBLES 3 TIMES IN A ROW!":PRINT
+327 PRINTTAB(16);"{darkgrey}┌┬┬┬┬┬┬┐":FORI=1TO5:PRINTTAB(16);"││││││││":NEXT
+328 PRINTTAB(16);"└┴┴┴┴┴┴┘":PRINT:PL(PT)=41:JF=1:DB=0
+329 FORKO=1TO3:FORT=60TO110STEP1.7:FORI=1TO6:POKEG(I),T:NEXT:NEXT
+330 FORDL=1TO10:NEXT
+331 FORT=110TO60STEP-1.7:FORI=1TO6:POKEG(I),T:NEXT:NEXT:NEXT
+332 FORI=1TO6:POKEG(I),0:NEXT
+333 PRINT"{white}";:GOSUB<a href="#27dc">178</a>:RETURN
+<a name="3a57"></a>334 PRINT"{clear}";TAB(15);"LUXURY TAX":PRINT:PRINTTAB(16);"PAY $75"
+335 PRINT:PRINT:PRINT:M(PT)=M(PT)-75:FP=FP+75:GOSUB<a href="#27dc">178</a>:RETURN
+<a name="3aad"></a>336 PRINT"{clear}";TAB(15);"INCOME TAX":PRINT:PRINTTAB(16);"PAY $200"
+337 PRINT:PRINT:PRINT:M(PT)=M(PT)-200:FP=FP+200:GOSUB<a href="#27dc">178</a>:RETURN
+<a name="3b06"></a>338 CC=CC+1:IFCC>16THENCC=CC-16
+339 PO=3-PT:CC$=CC$(CC):IFCC=1ANDCJ(1)THENCC=CC+1:CC$=CC$(CC)
+340 PRINT"{clear}{crsr down}           {yellow}COMMUNITY CHEST{white}{crsr down}{crsr down}":PRINTCC$"{crsr down}{crsr down}"
+341 IFCC=1THENCJ(1)=PT
+342 IFCC=2THENGOSUB<a href="#27dc">178</a>:GOTO<a href="#391f">325</a>
+343 IFCC=3THENPL(PT)=1:MF=1:GOSUB<a href="#27dc">178</a>:GOSUB<a href="#2780">175</a>:RETURN
+344 IFCC=4THENM(PT)=M(PT)+45
+345 IFCC=5THENM(PT)=M(PT)+50:M(PO)=M(PO)-50
+346 IFCC=6THENM(PT)=M(PT)+25
+347 IFCC=7THENM(PT)=M(PT)-150:FP=FP+150
+348 IFCC=8THENM(PT)=M(PT)+20
+349 IFCC=9THENGOSUB358
+350 IFCC=10THENM(PT)=M(PT)+10
+351 IFCC=11THENM(PT)=M(PT)+100
+352 IFCC=12THENM(PT)=M(PT)+100
+353 IFCC=13THENM(PT)=M(PT)-100
+354 IFCC=14THENM(PT)=M(PT)+200
+355 IFCC=15THENM(PT)=M(PT)-50
+356 IFCC=16THENM(PT)=M(PT)+100
+357 GOSUB<a href="#27dc">178</a>:RETURN
+358 YP=0:FORI=1TO40
+359 IFPS(I)=(PT)ANDH(I)<5THENYP=YP+(40*H(I))
+360 IFPS(I)=(PT)ANDH(I)=5THENYP=YP+115
+361 NEXT:PRINT"{crsr down}YOU PAY $"YP:M(PT)=M(PT)-YP:FP=FP+YP:RETURN
+<a name="3dcb"></a>362 CH=CH+1:IFCH>16THENCH=CH-16
+363 PO=3-PT:CH$=CH$(CH):IFCH=8ANDCJ(2)THENCH=CH+1:CH$=CH$(CH)
+364 PRINT"{clear}{crsr down}          {light-red}? ? CHANCE ? ?{white}{crsr down}{crsr down}":PRINTCH$"{crsr down}{crsr down}"
+365 IFCH=1THENM(PT)=M(PT)-15:FP=FP+15
+366 IFCH=2THENGOSUB<a href="#27dc">178</a>:GOTO<a href="#391f">325</a>
+367 IFCH=3THENPL(PT)=1:MF=1:GOSUB<a href="#27dc">178</a>:GOSUB<a href="#2780">175</a>:RETURN
+368 IFCH=4THENM(PT)=M(PT)+150
+369 IFCH=5THENGOSUB<a href="#3fe2">382</a>:MF=1
+370 IFCH=6THENGOSUB386:MF=1
+371 IFCH=7THENM(PT)=M(PT)+50
+372 IFCH=8THENCJ(2)=PT
+373 IFCH=9THENM(PT)=M(PT)-50:M(PO)=M(PO)+50
+374 IFCH=10THENGOSUB388:MF=1
+375 IFCH=11THENGOSUB390:MF=1
+376 IFCH=12THENPL(PT)=PL(PT)-3:MF=1
+377 IFCH=13THENGOSUB392:MF=1
+378 IFCH=14THENGOSUB394
+379 IFCH=15THENGOSUB<a href="#3fe2">382</a>:MF=1
+380 IFCH=16THENGOSUB<a href="#4152">398</a>:MF=1
+381 GOSUB<a href="#27dc">178</a>:RETURN
+<a name="3fe2"></a>382 PL(PT)=PL(PT)+1:IFPL(PT)>40THENGOSUB668:PL(PT)=PL(PT)-40
+383 IFPT$(PL(PT))="RR"THEN<a href="#403a">385</a>
+384 GOTO<a href="#3fe2">382</a>
+<a name="403a"></a>385 DV=1:RETURN
+386 IFPL(PT)>25THENGOSUB668
+387 PL(PT)=25:RETURN
+388 IFPL(PT)>12THENGOSUB668
+389 PL(PT)=12:RETURN
+390 IFPL(PT)>6THENGOSUB668
+391 PL(PT)=6:RETURN
+392 PL(PT)=40:RETURN
+393 RETURN
+394 DF=0:YP=0:FORI=1TO40
+395 IFPS(I)=(PT)ANDH(I)<5THENYP=YP+(25*H(I))
+396 IFPS(I)=(PT)ANDH(I)=5THENYP=YP+100
+397 NEXT:PRINT"YOU PAY $"YP:M(PT)=M(PT)-YP:FP=FP=YP:RETURN
+<a name="4152"></a>398 PL(PT)=PL(PT)+1
+399 IFPL(PT)>40THENGOSUB668:PL(PT)=PL(PT)-40
+400 IFPT$(PL(PT))="U"THEN<a href="#41ad">402</a>
+401 GOTO<a href="#4152">398</a>
+<a name="41ad"></a>402 MF=1:RETURN
+<a name="41b8"></a>403 PRINT"{clear}{crsr down}"
+404 JT(PT)=JT(PT)+1
+405 PRINT"PLAYER #"PT"IS IN JAIL"
+406 PRINT:PRINT"YOU HAVE BEEN IN"JT(PT)"TURNS"
+407 PRINT"YOU MAY:  1.  PAY $50"
+408 PRINT"          2.  USE  A 'GET OUT OF JAIL                 FREE CARD."
+409 PRINT"          3.  TRY TO ROLL DOUBLES."
+<a name="42aa"></a>410 PRINT:INPUT"CHOICE";I:IFI<1ORI>3THEN<a href="#42aa">410</a>
+411 IFI=1THENM(PT)=M(PT)-50:FP=FP+50:PL(PT)=11:GOSUB<a href="#27dc">178</a>:JE=1:RETURN
+412 IFI=2ANDCJ(1)=PTTHENCJ(1)=0:PL(PT)=11:GOSUB<a href="#27dc">178</a>:JE=1:RETURN
+413 IFI=2ANDCJ(2)=PTTHENCJ(2)=0:PL(PT)=11:GOSUB<a href="#27dc">178</a>:JE=1:RETURN
+414 IFI=2THENPRINT"YOU DON'T HAVE A CARD":GOTO<a href="#42aa">410</a>
+415 IFI=3THENGOSUB<a href="#2688">165</a>:IFDBTHEN<a href="#4445">421</a>
+416 PRINT"YOU DIDN'T ROLL DOUBLES."
+417 IFJT(PT)>2THENPRINT"YOU MUST PAY THE $50":M(PT)=M(PT)-50:PL(PT)=11:JB=1
+418 IFJT(PT)>2THENGOSUB<a href="#27dc">178</a>:FP=FP+50:RETURN
+419 GOSUB<a href="#27dc">178</a>:RETURN
+420 IFPL(PT)=11THENGOSUB<a href="#27dc">178</a>:JE=1:RETURN
+<a name="4445"></a>421 PRINT"YOU MADE IT OUT!!!":PL(PT)=11:GOSUB<a href="#27dc">178</a>:JB=1:DB=0:RETURN
+422 GOTO<a href="#5e24">635</a>
+<a name="4483"></a>423 PRINT"{clear}":IFPFTHENPRINT"MONEY IN FREE PARKING JACKPOT $";FP
+424 PRINT"PLAYER 1 HAS $";M(1):PRINT"PLAYER 2 HAS $";M(2)
+425 PRINT:PRINT"PLAYER";PT"UP."
+426 PRINT:PRINT:PRINTTAB(15);"OPTIONS"
+427 PRINT
+428 PRINT"   R=REVIEW PROPERTIES"
+429 PRINT"   L=LIST ALL PROPERTIES"
+430 PRINT"   B=BUILD HOUSES/HOTELS"
+431 PRINT"   S=SELL PROPERTIES TO OTHER PLAYER"
+432 PRINT"   M=MORTAGE PROPERTIES(SELL HOUSES)"
+433 PRINT"   D=DISPLAY TITLE DEEDS"
+434 PRINT"   Q=RETURN TO GAME"
+435 PRINT"  XX=END GAME":PRINT
+<a name="4626"></a>436 INPUT"CHOICE  ▚{crsr left}{crsr left}{crsr left}";C$
+437 IFC$="▚"THEN<a href="#4626">436</a>
+438 IFC$="R"THENGOSUB<a href="#46db">447</a>
+439 IFC$="L"THENGOSUB464
+440 IFC$="B"THENGOSUB479
+441 IFC$="S"THENGOSUB<a href="#4f46">523</a>
+442 IFC$="M"THENGOSUB<a href="#541a">559</a>
+443 IFC$="D"THENGOSUB665
+444 IFC$="Q"THENRETURN
+445 IFC$="XX"THEN<a href="#5f4f">643</a>
+446 GOTO<a href="#4483">423</a>
+<a name="46db"></a>447 INPUT"FOR WHICH PLAYER (1 OR 2)";PN
+448 IFPN<1ORPN>2THEN<a href="#46db">447</a>
+449 PRINT"{clear}{crsr down}"
+450 PRINTTAB(6)"PROPERTIES FOR PLAYER ";PN
+451 PRINT
+452 FORI=1TO40:PO$="":IFPS(I)=PNTHENPRINTPN$(I);
+453 IFPS(I)<>PNTHEN<a href="#4834">460</a>
+454 IFPT$(I)<>"P"THEN<a href="#480d">458</a>
+455 PRINTSPC(20-(LEN(PN$(I))-2));"{white} -";:IFH(I)<5THENPO$=STR$(H(I))+" HS"
+456 IFH(I)=5THENPO$=" {rvs on}HOTEL{rvs off}"
+457 PO$=PO$+"/$"+MID$(STR$(P(I,H(I)+2)),2)
+<a name="480d"></a>458 IFMG(I)=1THENPO$="- MORTAGED"
+459 PRINTPO$
+<a name="4834"></a>460 NEXT
+461 PRINT:IFCJ(1)=PNORCJ(2)=PNTHENPRINT"{white}GET OUT OF JAIL FREE CARD."
+462 PRINT"{white}PLAYER"PN"HAS $";M(PN)
+463 PRINT:GOSUB<a href="#27dc">178</a>:RETURN
+464 PRINT"{clear}"
+465 TT$="NAME                            OWNER/{crsr down}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}#HOUSES":PRINTTT$
+466 FORK=1TO40:IFPT$(K)<>"P"ANDPT$(K)<>"RR"ANDPT$(K)<>"U"THEN<a href="#49d2">475</a>
+467 PRINTPN$(K)"{white}";TAB(21);
+468 PRINTTAB(33)
+469 P$=STR$(PS(K)):PP$=MID$(STR$(H(K)),2):IFH(K)>4THENPP$="H"
+470 IFPT$(K)<>"P"THENPP$="X"
+471 IFMG(K)THENPP$="{rvs on}MG{rvs off}"
+472 P$=P$+" -"+PP$
+473 IFPS(K)=0THENP$=" NONE"
+474 PRINTP$
+<a name="49d2"></a>475 IFK=20THENPRINT:GOSUB<a href="#27dc">178</a>:PRINT"{clear}":PRINTTT$
+476 NEXTK
+477 PRINT:GOSUB<a href="#27dc">178</a>
+478 RETURN
+479 PRINT"{clear}{crsr down}{crsr down}"
+480 HO=0
+481 PRINT" ON WHICH GROUP":PRINTPG$
+482 PRINT
+<a name="4a3b"></a>483 INPUT"WHICH COLOR";C$
+484 FORI8=1TO41:IFC$=LEFT$(C$(I8),LEN(C$))THENPL=I8:C$=C$(I8):GOTO<a href="#4aa9">487</a>
+485 NEXTI8
+486 PRINT"ILLEGAL GROUP":GOTO<a href="#4a3b">483</a>
+<a name="4aa9"></a>487 P7=PT
+488 P5=P7:GOSUB<a href="#2e6d">238</a>:IFMGTHENOA=0
+489 IFOATHEN<a href="#4b3e">492</a>
+490 PRINT"SORRY YOU EITHER DON'T OWN ALL THE PROP-ERTY IN THAT GROUP OR SOME";
+491 PRINT" IS MORTAGED.":GOSUB<a href="#27dc">178</a>:RETURN
+<a name="4b3e"></a>492 PRINT"   PROPERTY NAME    # OF HOUSES(5=HOTEL)"
+493 HS=0:FORI=PLTOPL+4:IFC$=C$(I)THENPRINTPN$(I)"{white}";TAB(30);H(I):HS=HS+H(I)
+494 NEXT
+495 PRINT:PRINT"HOUSES FOR THIS GROUP COST $"P(PL,9)"EACH"
+496 PRINT"HOTELS COST $"P(PL,9)"+ 4 HOUSES OR $";(P(PL,9)*5)
+497 PRINT
+498 PRINT"YOU HAVE $"M(PT)
+499 PRINT"HOTELS AUTOMATICALLY ADDED AFTER 4TH    HOUSE"
+<a name="4c70"></a>500 PRINT"HOW  MANY HOUSES DO YOU WANT TO BUY (MAX=";:MX=((5*PC)-HS):PRINTMX")"
+501 INPUTHN:IFHN>MXTHENGOTO<a href="#4c70">500</a>
+502 H7=INT(HN/PC):H8=HN-(H7*PC)
+503 IFM(P7)<(HN*P(PL,9))THENPRINT"YOU DON'T HAVE ENOUGH MONEY!":GOTO<a href="#4c70">500</a>
+504 IFHN=0THENPRINT"OK":GOSUB<a href="#27dc">178</a>:RETURN
+505 M(P7)=M(P7)-(HN*P(PL,9)):FORE=PLTOPL+4:IFC$=C$(E)THENH(E)=H(E)+H7
+506 NEXT
+507 IFH8THEN<a href="#4d98">509</a>
+508 GOTO<a href="#4f33">522</a>
+<a name="4d98"></a>509 PRINT"YOU HAVE"H8"HOUSES LEFT OVER"
+510 PRINT:F1=0:FORF=PLTOPL+4:IFC$=C$(F)THENF1=F1+1:PRINTF1,PN$(F);"  "H(F)
+511 NEXT:PRINT:FORG=1TOH8
+<a name="4e08"></a>512 PRINT"WHERE DO YOU WANT HOUSE #"G;:INPUTHL:IFHL=HOTHENPRINT"CAN'T":GOTO<a href="#4e08">512</a>
+513 F2=0:F1=0:F9=0
+514 FORF=PLTOPL+3:IFC$=C$(F)THENF1=F1+1:IFF1=HLTHENF9=F
+515 NEXTF
+516 IFF9=0THENPRINT"NO SUCH NUMBER":GOTO<a href="#4e08">512</a>
+517 H2=0:FORF=PLTOPL+3:IFC$=C$(F)THENIFH(F9)>H(F)THENH2=H2+1
+518 NEXT
+519 IFH2THENPRINT"ILLEGAL DISTRIBUTION OF HOUSES!":GOTO<a href="#4e08">512</a>
+520 HO=HL:H(F9)=H(F9)+1
+521 NEXTG
+<a name="4f33"></a>522 PRINT"DONE":GOSUB<a href="#27dc">178</a>:RETURN
+<a name="4f46"></a>523 INPUT"WHAT PLAYER HAS A PROPERTY TO SELL";P1
+524 IFP1=0THENGOSUB<a href="#27dc">178</a>:RETURN
+525 P2=P1+1:IFP2>2THENP2=P2-2
+526 PRINT"IS IT A PROPERTY";:INPUTQ$:IFLEFT$(Q$,1)="N"THEN<a href="#527e">547</a>
+527 PRINT"IN WHAT COLOR GROUP":PRINTPG$
+<a name="4fec"></a>528 PRINT:INPUT"WHICH";C$
+529 FORI6=1TO41:IFC$=LEFT$(C$(I6),LEN(C$))THENPL=I6:C$=C$(I6):GOTO<a href="#5056">532</a>
+530 NEXTI6
+531 PRINT"ILLEGAL GROUP":GOTO<a href="#4fec">528</a>
+<a name="5056"></a>532 PRINT"#  PROPERTY";TAB(30);"OWNER"
+533 HO=0:CT=0:FORI=PLTOPL+4:IFC$=C$(I)THENCT=CT+1:PRINTCT"   "PN$(I)"{white}";TAB(35);PS(I)
+534 IFH(I)THENHO=1
+535 NEXT
+<a name="50d3"></a>536 PRINT:PRINT"WHAT NUMBER DOES PLAYER"P1"WANT          TO SELL"
+537 INPUTTP
+538 CT=0:FORI=PLTOPL+4:IFC$=C$(I)THENCT=CT+1:IFCT=TPTHENT4=I:FF=1
+539 NEXT
+540 IFFF=0THENPRINT"ILLEGAL NUMBER":GOTO<a href="#50d3">536</a>
+541 IFPS(T4)<>P1THENPRINT"PLAYER #"P1"DOES NOT OWN IT.":GOTO<a href="#4f46">523</a>
+542 IFHOTHENPRINT"YOU HAVE HOUSES ON THAT GROUP YOU CAN'T SELL IT.":GOTO<a href="#5271">546</a>
+543 INPUT "WHAT IS THE AGREED SELLING PRICE";SP
+544 M(P1)=M(P1)+SP:M(P2)=M(P2)-SP:PS(T4)=P2
+545 PRINT"PLAYER #"P2"BOUGHT "PN$(T4)"{white}":PRINT"FOR $"SP
+<a name="5271"></a>546 PRINT:GOSUB<a href="#27dc">178</a>:RETURN
+<a name="527e"></a>547 PRINT"PROPERTY";TAB(30);"OWNER"
+548 FORI=6TO36STEP10:N=N+1:PRINTN"  "PN$(I)"{white}";TAB(35);PS(I):NEXT:N=0
+549 PRINT" 5   "PN$(13)"{white}";TAB(35);PS(13):PRINT" 6   "PN$(29)"{white}";TAB(35);PS(29)
+<a name="5313"></a>550 INPUT"WHICH #";NM:IFNM=0THENRETURN
+551 IFNM<1ORNM>6THEN<a href="#5313">550</a>
+552 IFNM=5ANDPS(13)=P1THENSN=13:GOTO<a href="#53cc">556</a>
+553 IFNM=6ANDPS(29)=P1THENSN=29:GOTO<a href="#53cc">556</a>
+554 IFNM>0ANDNM<5THENSN=6+((NM-1)*10):IFPS(SN)=P1THENGOTO<a href="#53cc">556</a>
+555 PRINT"YOU DON'T OWN IT.":GOTO<a href="#527e">547</a>
+<a name="53cc"></a>556 INPUT"AGREED PRICE";SP
+557 M(P1)=M(P1)+SP:M(P2)=M(P2)-SP:PS(SN)=P2
+558 GOSUB<a href="#27dc">178</a>:RETURN
+<a name="541a"></a>559 PRINT"{clear}{crsr down}":PRINT"  OPTIONS{crsr down}":PRINT"0  RETURN TO MAIN MENU":PRINT"1  MORTAGE PROPERTY"
+560 PRINT"2  MORTAGE RAILROAD":PRINT"3  MORTAGE UTILITY"
+561 PRINT"4  LIFT MORTAGE(AT 10% INTEREST)":PRINT"5  SELL HOUSES":PRINT
+<a name="54d0"></a>562 INPUT"CHOICE";GG:IFGG<0ORGG>5THEN<a href="#54d0">562</a>
+563 IFGG=0THENGOSUB<a href="#27dc">178</a>:RETURN
+564 ONGGGOSUB<a href="#5526">566</a>,<a href="#5843">589</a>,<a href="#596d">598</a>,<a href="#5a6d">606</a>,<a href="#633a">669</a>
+565 GOTO<a href="#541a">559</a>
+<a name="5526"></a>566 PRINT:PRINT"ON WHICH GROUP IS THE PROPERTY TO BE":PRINT"MORTAGED LOCATED?":PRINTPG$
+<a name="556e"></a>567 PRINT:INPUT"COLOR GROUP";C$
+568 FORI6=1TO41:IFC$=LEFT$(C$(I6),LEN(C$))THENPL=I6:C$=C$(I6):GOTO<a href="#55de">571</a>
+569 NEXTI6
+570 PRINT"ILLEGAL GROUP":GOTO<a href="#556e">567</a>
+<a name="55de"></a>571 CM=0:FORI=PLTOPL+3:IFC$=C$(I)THENCM=CM+H(I)
+572 NEXT
+573 IFCMTHENPRINT"CAN'T MORTAGE PROPERTIES WITH HOUSES    STILL ON THAT GROUP.":GOTO<a href="#5838">588</a>
+574 PRINT"#  PROPERTY";TAB(25);"OWNER"
+575 CT=0:FORI=PLTOPL+4:IFC$<>C$(I)THEN<a href="#56ec">578</a>
+576 CT=CT+1:PRINTCT"   "PN$(I)"{white}";TAB(27)PS(I);:PP$="":IFMG(I)THENPP$="MORTAGED"
+577 PRINTPP$
+<a name="56ec"></a>578 NEXT
+<a name="56f2"></a>579 PRINT:PRINT"WHAT NUMBER IS TO BE MORTAGED.";:INPUTTP
+580 IFTP=0THENGOSUB<a href="#27dc">178</a>:RETURN
+581 CT=0:FORI=PLTOPL+4:IFC$=C$(I)THENCT=CT+1:IFCT=TPTHENT4=I:FF=1
+582 NEXT
+583 IFFF=0THENPRINT"ILLEGAL NUMBER":GOTO<a href="#56f2">579</a>
+584 IFPS(T4)<>PTTHENPRINT"YOU DON'T OWN IT.":GOSUB<a href="#27dc">178</a>:GOTO<a href="#541a">559</a>
+585 IFMG(T4)=1THENPRINT"ALREADY MORTAGED":GOTO<a href="#56f2">579</a>
+586 PRINT:PRINT"OK":MG(T4)=1
+587 PRINT"YOU GOT $"P(T4,8)"FOR YOUR MORTAGE.":M(PT)=M(PT)+P(T4,8)
+<a name="5838"></a>588 GOSUB<a href="#27dc">178</a>:RETURN
+<a name="5843"></a>589 RC=0:FORI=6TO36STEP10:IFPT$(I)="RR"THENRC=RC+1:PRINTRC"  "PN$(I)"{white}     PLR.#"PS(I)
+590 NEXT
+<a name="5892"></a>591 INPUT"WHICH #";RG
+592 IFRG<1ORRG>4THEN<a href="#5892">591</a>
+593 RG=6+((RG-1)*10)
+594 IFPS(RG)<>PTTHENPRINT"YOU DON'T OWN IT.":GOSUB<a href="#27dc">178</a>:GOTO<a href="#541a">559</a>
+595 IFMG(RG)=1THENPRINT"ALREADY MORTAGED.":GOSUB<a href="#27dc">178</a>:GOTO<a href="#541a">559</a>
+596 MG(RG)=1:PRINT"YOU GET $100 FOR MORTAGE.":M(PT)=M(PT)+100
+597 GOSUB<a href="#27dc">178</a>:RETURN
+<a name="596d"></a>598 U(1)=13:U(2)=29
+599 FORI=1TO2:PRINTI"  "PN$(U(I))"{white}":NEXT
+<a name="59a1"></a>600 INPUT"WHICH?";UM
+601 IFUM<1ORUM>2THEN<a href="#59a1">600</a>
+602 IFPS(U(UM))<>PTTHENPRINT"YOU DON'T OWN IT.":GOSUB<a href="#27dc">178</a>:GOTO<a href="#541a">559</a>
+603 IFMG(U(UM))=1THENPRINT"ALREADY MORTAGED.":GOSUB<a href="#27dc">178</a>:GOTO<a href="#541a">559</a>
+604 MG(U(UM))=1:PRINT"YOU GET $75 FOR MORTAGE.":M(PT)=M(PT)+75
+605 GOSUB<a href="#27dc">178</a>:RETURN
+<a name="5a6d"></a>606 PRINT:PRINT"THESE ARE THE PROPERTIES THAT ARE UNDER A MORTAGE."
+607 ML=0:FORI=1TO41:IFPS(I)=(PT)ANDMG(I)=1THENML=ML+1:PRINTML"  "PN$(I)"{white}"
+608 NEXT
+609 IFML=0THENPRINT"YOU HAVE NO MORTAGED PROPERTIES.":GOSUB<a href="#27dc">178</a>:RETURN
+<a name="5b22"></a>610 PRINT:INPUT"WHICH MORTAGE DO YOU WAN'T TO LIFT";LF
+611 IFLF<1ORLF>MLTHENPRINT"ILLEGAL":GOTO<a href="#5b22">610</a>
+612 ML=0:FORI=1TO41:IFPS(I)=(PT)ANDMG(I)=1THENML=ML+1:IFML=LFTHENFT=I
+613 NEXT
+614 PRINT"THE MORTAGE IS FOR $"P(FT,8)
+615 PRINT"YOU MUST PAY $";:PY=P(FT,8)*1.10:PRINTPY
+616 IFPY>M(PT)THENPRINT"YOU DON'T HAVE THE MONEY.":GOSUB<a href="#27dc">178</a>:RETURN
+617 M(PT)=M(PT)-PY:MG(FT)=0
+618 GOSUB<a href="#27dc">178</a>:RETURN
+<a name="5c57"></a>619 IFAFTHEN<a href="#5c69">621</a>
+620 RETURN
+<a name="5c69"></a>621 PL=PL(PT):PRINTPN$(PL)"{white} WILL NOW BE AUCTIONED"
+622 PRINT"TO THE HIGHEST BIDDER"
+623 PO=3-PT:PRINT:HB=0:PA=PT:AC=0:PRINT:HB=0:PA=PT:AC=0
+<a name="5ce6"></a>624 PA=3-PA
+<a name="5cf2"></a>625 PRINT"PLAYER"PA"WHAT'S YOUR BID";:INPUTBD:BD=INT(BD):AC=AC+1
+626 IFBD=0THENON(AC>1)+2GOTO<a href="#5d95">629</a>,<a href="#5ce6">624</a>
+627 IFBD<=HBTHENPRINT"YOU MUST BID HIGHER THAN"HB"OR BID '0'":GOTO<a href="#5cf2">625</a>
+628 HB=BD:HR=PA:GOTO<a href="#5ce6">624</a>
+<a name="5d95"></a>629 IFHB=0THEN<a href="#5df8">634</a>
+630 PRINTPN$(PL)"{white} GOES TO"
+631 PRINT"PLAYER"HR" FOR $"HB
+632 M(HR)=M(HR)-HB:PS(PL)=HR
+633 RETURN
+<a name="5df8"></a>634 PRINT:PRINTPN$(PL)"{white} HAS NOT BEEN PURCHASED.":RETURN
+<a name="5e24"></a>635 PRINT"{clear}":PRINT"PLAYER #"PT"IS BROKE!!"
+636 PRINT"{crsr down}IF YOU CAN'T RAISE $"ABS(M(PT))"THEN YOU ARE OUT OF THE GAME."
+637 PRINT"DO NOT HIT 'Q' (RETURN TO GAME) UNTIL   YOU FINISH TRYING TO";
+638 PRINT" RAISE MONEY"
+639 GOSUB<a href="#27dc">178</a>:GOSUB<a href="#4483">423</a>
+640 IFM(PT)>=0THENRETURN
+641 IFM(PT)<0THENPRINT"YOU ARE BANKRUPT!!!":PT=3-PT
+642 PRINT" --PLAYER #"PT"WINS!-- ":END
+<a name="5f4f"></a>643 PRINT"GAME OVER"
+644 PRINT"THE WINNER IS ";
+645 IFM(1)>M(2)THENPRINT"PLAYER #1 WITH $"M(1)
+646 IFM(2)>M(1)THENPRINT"PLAYER #2 WITH $"M(2)
+647 IF M(2)=M(1)THENPRINT"NEITHER,  IT'S A TIE!"
+648 PRINT"PLAYER 1 =  $";M(1)
+649 PRINT"PLAYER 2 =  $";M(2)
+650 PRINT
+<a name="6028"></a>651 POKE54296,0:FORI=1TO6:POKEG(I),0:END
+652 FORJ=832TO939
+653 READI:POKEJ,I:NEXT
+654 DATA 160,0,185,0,4,153,0,192,185,0,5,153,0,193,185,0,6,153,0
+655 DATA 194,185,0,7,153,0,195,185,0,216,153,0,196,185,0,217,153,0
+656 DATA 197,185,0,218,153,0,198,185
+657 DATA 0,219,153,0,199,200,208,205,96,160,0,185,0,192,153,0,4,185,0,193,153
+658 DATA 0,5,185,0,194,153,0,6,185,0,195,153,0,7,185,0,196,153,0,216,185,0,197
+659 DATA 153,0,217,185,0,198,153,0,218,185,0,199,153,0,219,200,208,205,96
+660 RETURN
+<a name="61e7"></a>661 FORP4=1TO2
+662 Y$="{rvs on}"+PN$(PL(P4))+LEFT$("                ",18-(LEN(PN$(PL(P4)))-2))+"{rvs off}"
+663 MN$="{rvs on}$"+MID$(STR$(M(P4)),2)+"    {rvs off}":X=13:Y=2*P4+3:Z$=Y$:GOSUB<a href="#25a3">160</a>
+664 Y=Y+1:Z$=MN$:GOSUB<a href="#25a3">160</a>:NEXT:RETURN
+665 PRINT"{crsr down}DISPLAY DEEDS FOR WHICH COLOR GROUP:{crsr down}":PRINTPG$:INPUTC$:PRINT
+666 P3=PL:FORI=1TO41:IFC$=LEFT$(C$(I),LEN(C$))THENGF=1:PL=I:GOSUB<a href="#2920">195</a>:GF=0
+667 NEXT:PL=P3:RETURN
+668 M(PT)=M(PT)+200:PRINT"{crsr down}COLLECTED $200{crsr down}":RETURN
+<a name="633a"></a>669 PRINT"ON WHICH COLOR GROUP:":PRINTPG$:INPUTC$
+670 PL=0:FORI=41TO1STEP-1:IFC$=LEFT$(C$(I),LEN(C$))THENPL=I:C$=C$(I)
+671 NEXTI:IFPLTHEN<a href="#63be">673</a>
+672 PRINT"ILLEGAL GROUP":GOTO<a href="#633a">669</a>
+<a name="63be"></a>673 DO=0:HN=0:FORI=PLTOPL+3:IFPS(I)<>(PT)ANDC$=C$(I)THENDO=1
+674 IFC$=C$(I)THENHN=HN+H(I)
+675 NEXT
+676 IFDO=1ORHN=0THENPRINT"YOU DON'T OWN HOUSES ON THESE PROPERTIES":GOSUB<a href="#27dc">178</a>:RETURN
+677 PRINT"#  PROPERTY";TAB(25);"HOUSES(5=HOTEL)"
+678 CT=0:FORI=PLTOPL+3:IFC$=C$(I)THENCT=CT+1:PRINTCT"   "PN$(I)"{white}";TAB(27)H(I)
+679 NEXT
+680 INPUT"WANT TO REMOVE ALL THESE HOUSES";A$:IFLEFT$(A$,1)="Y"THEN<a href="#6685">694</a>
+<a name="64ff"></a>681 PRINT:INPUT"WHAT # TO REMOVE A HOUSE FROM.";TP
+682 IFTP=0THEN RETURN
+683 CT=0:FORI=PLTOPL+3:IFC$=C$(I)THENCT=CT+1:IFCT=TPTHENT4=I:FF=1
+684 NEXT
+685 IFFF=0THENPRINT"ILLEGAL NUMBER":GOTO<a href="#64ff">681</a>
+686 IFH(T4)=0THENPRINT"NO HOUSES THERE.":GOTO<a href="#64ff">681</a>
+687 NN=0:NH=H(T4):FORI=PLTOPL+3:IFH(I)>NHTHENNN=1
+688 NEXT
+689 IFNNTHENPRINT"YOU CAN'T REMOVE THAT HOUSE.":GOTO<a href="#64ff">681</a>
+690 PRINT:PRINT"OK.":H(T4)=H(T4)-1
+691 HM=P(PL,9)/2
+692 PRINT"YOU GOT $"HM"FOR YOUR HOUSE":M(PT)=M(PT)+HM
+<a name="6677"></a>693 GOSUB<a href="#27dc">178</a>:GOTO<a href="#541a">559</a>
+<a name="6685"></a>694 HM=0:FORI=PLTOPL+3:IFC$=C$(I)THENHM=HM+(P(PL,9)/2)*H(I):H(I)=0
+695 NEXT:PRINT"YOU GOT $"HM"FOR YOUR HOUSES":M(PT)=M(PT)+HM:GOTO<a href="#6677">693</a>
+697 ORIGNAL PROGRAM BY JOHN O'HARE:PRINT"{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{crsr down}{del}
+<a name="674b"></a>700 PRINT"{clear}{crsr down}{crsr down}THIS PROGRAM, IN B&W, WAS ORIGANALY":GOSUB<a href="#69a4">999</a>
+701 PRINT"{crsr down}WRITTEN BY JOHN O'HARE IN 1978 FOR THE":GOSUB<a href="#69a4">999</a>
+702 PRINT"{crsr down}2001 SERIES PET COMPUTER. THE COMMODORE":GOSUB<a href="#69a4">999</a>
+703 PRINT"{crsr down}64 VERSION WITH COLOR AND SOUND CHANGES":GOSUB<a href="#69a4">999</a>
+704 PRINT"{crsr down}BY TIM BORION & SAL OEPER IN LATE 1981.":GOSUB<a href="#69a4">999</a>
+705 PRINT"{crsr down}THE PROGRAM LISTINGS ARE IDENTICAL. ONLY":GOSUB<a href="#69a4">999</a>
+706 PRINT"COLOR & SOUND WERE ADDED. JOHN'S PROGRAM":GOSUB<a href="#69a4">999</a>
+707 PRINT"IS KNOWN BY THOUSANDS OF PET USERS AND":GOSUB<a href="#69a4">999</a>
+708 PRINT"{crsr down}GROUPS. THE PROGRAM IS NOT TO BE SOLD":GOSUB<a href="#69a4">999</a>
+709 PRINT"{crsr down}AND REMAINS THE PROPERTY OF JOHN O'HARE.":GOSUB<a href="#69a4">999</a>
+710 PRINT"{crsr down}     {rvs on}PRESS SHIFT TO START PROGRAM."
+<a name="6984"></a>711 A=PEEK(653):IFATHENPRINT"{clear}":RETURN
+712 GOTO<a href="#6984">711</a>
+<a name="69a4"></a>999 A=PEEK(653):IFNOTATHENRETURN
+</div>
+</div>
+
+</body>
+
+</html>
