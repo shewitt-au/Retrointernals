@@ -4,17 +4,39 @@
 - title: BASIC
   url: /basic/basic.html
   sublinks:
-      - title: Monopole
-        url: /basic/monopole/monopole.html
+      - title: Encoding
+        url: /basic/basic.html#encoding
+      - title: Example - Hello, World!
+        url: /basic/basic.html#example---hello-world
+      - title: Example - Sometimes a Cigar Is Just a Cigar
+        url: /basic/basic.html#example---sometimes-a-cigar-is-just-a-cigar
+      - title: Example - Nothing
+        url: /basic/basic.html#example---nothing
+      - title: Example - Fibonacci numbers
+        url: /basic/basic.html#example---fibonacci-numbers
+      - title: Tricks
+        url: /basic/basic.html#tricks
         sublinks:
-          - title: Listing
-            url: /basic/monopole/monopole_listing.html
-          - title: Listing with C64 font
-            url: /basic/monopole/monopole_c64font_listing.html
-      - title: The Secret of Bastow Manor
-        url: /basic/tsobm/tsob.html
+          - title: Line Scrubbing
+            url: /basic/basic.html#line-scrubbing
+          - title: Byte Miser
+            url: /basic/basic.html#byte-miser
+          - title: Line Skipping
+            url: /basic/basic.html#line-skipping
+      - title: Games
+        url: /basic/basic.html#games
         sublinks:
-          - title: Listing
-            url: /basic/tsobm/tsobm_listing.html
-          - title: Listing with C64 font
-            url: /basic/tsobm/tsomb_c64font_listing.html
+          - title: Monopole
+            url: /basic/monopole/monopole.html
+            sublinks:
+              - title: Listing
+                url: /basic/monopole/monopole_listing.html
+              - title: Listing with C64 font
+                url: /basic/monopole/monopole_c64font_listing.html
+          - title: The Secret of Bastow Manor
+            url: /basic/tsobm/tsob.html
+            sublinks:
+              - title: Listing
+                url: /basic/tsobm/tsobm_listing.html
+              - title: Listing with C64 font
+                url: /basic/tsobm/tsomb_c64font_listing.html
