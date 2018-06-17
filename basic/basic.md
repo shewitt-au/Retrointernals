@@ -354,3 +354,23 @@ And now we'll run it:
 	?UNDEF'D STATEMENT  ERROR IN 10
 
 Not unexpected. Execution must "fall" into a skipped line, GOTO and GOSUB fail to find it.
+
+## Games
+
+I'll had listings of BAISC games here. So far I've got two.
+
+### Monopole
+
+Monopoly? The first real program I tested my BASIC lister on. We've all played the board game so there's not much to say really.
+
+[Listing](/basic/monopole/monopole_listing.html)
+
+[Listing with C64 font](/basic/monopole/monopole_c64font_listing.html)
+
+### The Secret of Bastow Manor
+
+An old adventure game from 1983. I swapping games with a kid at school and feeling like I'd got the bad side of the trade when I loaded it up. It's pretty hard, I had to look up a walkthrough. Looking at the spaghetti isn't as much help as one might hope.
+
+[Listing](/basic/tsobm/tsobm_listing.html)
+
+[Listing with C64 font](/basic/tsobm/tsobm_c64font_listing.html)

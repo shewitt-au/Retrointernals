@@ -27,14 +27,14 @@
         url: /basic/basic.html#games
         sublinks:
           - title: Monopole
-            url: /basic/monopole/monopole.html
+            url: /basic/basic.html#monopole
             sublinks:
               - title: Listing
                 url: /basic/monopole/monopole_listing.html
               - title: Listing with C64 font
                 url: /basic/monopole/monopole_c64font_listing.html
           - title: The Secret of Bastow Manor
-            url: /basic/tsobm/tsob.html
+            url: /basic/basic.html#the-secret-of-bastow-manor
             sublinks:
               - title: Listing
                 url: /basic/tsobm/tsobm_listing.html
