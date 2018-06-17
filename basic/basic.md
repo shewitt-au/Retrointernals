@@ -369,7 +369,7 @@ Monopoly? The first real program I tested my BASIC lister on. We've all played t
 
 ### The Secret of Bastow Manor
 
-An old adventure game from 1983. I swapping games with a kid at school and feeling like I'd got the bad side of the trade when I loaded it up. It's pretty hard, I had to look up a walkthrough. Looking at the spaghetti isn't as much help as one might hope.
+An old adventure game from 1983. I remember swapping games with a kid at school and feeling like I'd got the bad side of the trade when I loaded it up. It's pretty hard, I had to look up a walkthrough. Looking at the spaghetti isn't as much help as one might hope.
 
 [Listing](/basic/tsobm/tsobm_listing.html)
 
