@@ -357,7 +357,7 @@ Not unexpected. Execution must "fall" into a skipped line, GOTO and GOSUB fail t
 
 ## Games
 
-I'll had listings of BAISC games here. So far I've got two.
+I'll add listings of BAISC games here. So far I've got two.
 
 ### Monopole
 
