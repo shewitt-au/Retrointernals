@@ -312,7 +312,7 @@ We'll take it line by line:
 	 .
 	 .
 	 .
-	081c:   00  00  ; NULL line-link terminateS program
+	081c:   00  00  ; NULL line-link terminates program
 
 Lest see what happens if we edit out line 20. To do this we'll point the line-link from line 10 to line 30 (instead of line 20). Writing '13 08' to $0801 should do the trick. He's a listing from a C64 after this edit:
 
