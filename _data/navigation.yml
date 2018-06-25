@@ -1,6 +1,8 @@
 - title: Home
   url: /
 
+- title: Boulder Dash
+  url: /machine-code/boulder-dash/boulder-dash.html
 - title: BASIC
   url: /basic/basic.html
   sublinks:
