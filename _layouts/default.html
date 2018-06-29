@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}" media="screen" type="text/css">
     <link rel="stylesheet" href="{{ '/assets/css/print.css' | relative_url }}" media="print" type="text/css">
     <style type="text/css">
+    {% if page.nosidebar %}
+    #main-content {
+      width: 100%;
+      line-height: 1;
+    }
+    {% endif %}
     #rockford {
       position: relative;
       float: right;
@@ -127,6 +133,8 @@
           {{ content }}
         </section>
 
+        {% if page.nosidebar %}
+        {% else %}
         <aside id="sidebar">
           {% include navigation.html %}
 
@@ -148,6 +156,7 @@
           {% endif %}
           You can reach me by email <a href="mailto:retrointernals@gmail.com">here</a>.
         </aside>
+        {% endif %}
       </div>
     </div>
 
