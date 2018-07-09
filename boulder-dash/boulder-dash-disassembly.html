@@ -2838,6 +2838,20 @@ nosidebar: true
 
 <b>DiamondQuotaReachedSoundSIDValues</b><br/>
 
+<div class="disass_comment">; $32, $2f:
+;         A frequency value of $2f32. On PAL machines this gives a
+;         frequency of 709.5212042331696 HZ
+;         Calculated using this formula (PAL): (reg*985250)/16777216
+; $00, $00:
+;         Pulse width. N/A
+; $81:
+;         Control register
+;         ADSR cycle, Noise waveform
+; $19:
+;         Attack 8 ms, Decay 750 ms
+; $01:
+;         Sustain volume of 0, Release 24 ms
+</div>
 <div class="disass_code"><b>7080</b>   32 2f 00 00  81 19 01
 </div>
 <a name="7087"></a>
@@ -2846,7 +2860,7 @@ nosidebar: true
 <b>InitiateDiamondQuotaReachedSound</b><br/>
 
 <div class="disass_code"><b>7087</b>   a9 01      LDA #$01
-<b>7089</b>   85 d8      STA DiamondQuotaReachedOrEntryBoxExplode_SFXDurationCounter
+<b>7089</b>   85 d8      STA SFXTrigger_DiamondQuotaReachedOrEntryBoxExplode
 <b>708b</b>   60         RTS 
 </div>
 <a name="708c"></a>
@@ -5425,7 +5439,7 @@ nosidebar: true
 
 <b>__SoundFX__NotPaused__</b><br/>
 
-<div class="disass_code"><b>797b</b>   a5 d8      LDA DiamondQuotaReachedOrEntryBoxExplode_SFXDurationCounter
+<div class="disass_code"><b>797b</b>   a5 d8      LDA SFXTrigger_DiamondQuotaReachedOrEntryBoxExplode
 <b>797d</b>   f0 21      BEQ <a href="#79a0">$79a0</a>
 <b>797f</b>   a5 d9      LDA $d9
 <b>7981</b>   d0 12      BNE <a href="#7995">__SoundFX__SoundOnVoice3InProgress</a>
@@ -5433,7 +5447,7 @@ nosidebar: true
 
 
 
-<b>__SoundFX__DiamondQuotaReachedOrEntryBoxExplode__</b><br/>
+<b>__SoundFX__InitiateDiamondQuotaReachedOrEntryBoxExplode__</b><br/>
 
 <div class="disass_code"><b>7983</b>   20 e7 7c   JSR <a href="#7ce7">ResetVoice3</a>
 <b>7986</b>   a2 06      LDX #$06
@@ -5451,14 +5465,22 @@ nosidebar: true
 
 <div class="disass_code"><b>7995</b>   c6 d9      DEC $d9
 <b>7997</b>   d0 07      BNE <a href="#79a0">$79a0</a>
-<b>7999</b>   a9 00      LDA #$00
-<b>799b</b>   85 d8      STA DiamondQuotaReachedOrEntryBoxExplode_SFXDurationCounter
+</div>
+
+
+
+<b>__SoundFX__StopVoice3SFX</b><br/>
+
+<div class="disass_comment">; In-game voice 3 is used only for the diamond-quota-reached and entry-box-explode sound
+</div>
+<div class="disass_code"><b>7999</b>   a9 00      LDA #$00
+<b>799b</b>   85 d8      STA SFXTrigger_DiamondQuotaReachedOrEntryBoxExplode
 <b>799d</b>   20 e7 7c   JSR <a href="#7ce7">ResetVoice3</a>
 <a name="79a0"></a><b>79a0</b>   a5 d9      LDA $d9
 <b>79a2</b>   d0 2e      BNE <a href="#79d2">$79d2</a>
 <b>79a4</b>   a5 94      LDA EnableIRQTriggeredSFXAndTopLineUpdates
 <b>79a6</b>   f0 21      BEQ <a href="#79c9">$79c9</a>
-<b>79a8</b>   a5 43      LDA AmoebaIsGrowingAndAmoebaSFX
+<b>79a8</b>   a5 43      LDA AmoebaIsGrowing
 <b>79aa</b>   f0 1d      BEQ <a href="#79c9">$79c9</a>
 <b>79ac</b>   a9 10      LDA #$10
 <b>79ae</b>   8d 12 d4   STA Sid_Voice3Ctrl
@@ -6304,30 +6326,30 @@ nosidebar: true
 
 <div class="disass_comment">; Remember that this runs before the tick so 'ThisTick' refers to the previous one.
 ; 
-; In C the function looks like this:
+; In C++ the function looks like this:
 ; 
-; if (!.AmeobaCouldGrowThisTick && .AmoebaIsGrowingAndAmoebaSFX)
+; if (!AmeobaCouldGrowThisTick && AmoebaIsGrowing)
 ; {
-; .AmeobaCouldGrowLastTick = false;
+;    AmeobaCouldGrowLastTick = false;
 ; }
 ; 
-; .AmoebaIsGrowingAndAmoebaSFX = AmeobaCouldGrowThisTick
+; AmoebaIsGrowing = AmeobaCouldGrowThisTick
 ; 
-; .AmeobaCouldGrowThisTick = false;
-; .AmoebaCellCountPreviousTick = AmoebaCellCountThisTick;
-; .AmoebaCellCountThisTick = 0;
+; AmeobaCouldGrowThisTick = false;
+; AmoebaCellCountPreviousTick = AmoebaCellCountThisTick;
+; AmoebaCellCountThisTick = 0;
 </div>
 
 <b>PreTickAmoebaProcessing</b><br/>
 
 <div class="disass_code"><b>7da3</b>   a5 42      LDA AmeobaCouldGrowThisTick
 <b>7da5</b>   d0 08      BNE <a href="#7daf">$7daf</a>
-<b>7da7</b>   a5 43      LDA AmoebaIsGrowingAndAmoebaSFX
+<b>7da7</b>   a5 43      LDA AmoebaIsGrowing
 <b>7da9</b>   f0 04      BEQ <a href="#7daf">$7daf</a>
 <b>7dab</b>   a9 00      LDA #$00
 <b>7dad</b>   85 8c      STA AmeobaCouldGrowLastTick
 <a name="7daf"></a><b>7daf</b>   a5 42      LDA AmeobaCouldGrowThisTick
-<b>7db1</b>   85 43      STA AmoebaIsGrowingAndAmoebaSFX
+<b>7db1</b>   85 43      STA AmoebaIsGrowing
 </div>
 
 
@@ -6651,7 +6673,7 @@ nosidebar: true
 
 <div class="disass_code"><b>7edc</b>   a9 00      LDA #$00
 <b>7ede</b>   85 42      STA AmeobaCouldGrowThisTick
-<b>7ee0</b>   85 43      STA AmoebaIsGrowingAndAmoebaSFX
+<b>7ee0</b>   85 43      STA AmoebaIsGrowing
 <b>7ee2</b>   85 96      STA RockfordDeadTicks
 <b>7ee4</b>   85 97      STA ExitCaveFlag
 <b>7ee6</b>   85 8d      STA MagicWallActiveState
@@ -9858,7 +9880,7 @@ nosidebar: true
 <b>8a3b</b>   86 e4      STX YCoarseScrollDirFlag
 <b>8a3d</b>   86 e1      STX XScrollTableIndex
 <b>8a3f</b>   86 e2      STX XCoarseScrollDirFlag
-<b>8a41</b>   86 d8      STX DiamondQuotaReachedOrEntryBoxExplode_SFXDurationCounter
+<b>8a41</b>   86 d8      STX SFXTrigger_DiamondQuotaReachedOrEntryBoxExplode
 <b>8a43</b>   86 d9      STX $d9
 <b>8a45</b>   e8         INX 
 </div>
