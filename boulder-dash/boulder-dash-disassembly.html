@@ -2975,7 +2975,7 @@ nosidebar: true
 <b>70fc</b>   85 fb      STA LastKeyInScanRow0_ScannedMoreThanOnce
 <b>70fe</b>   85 fc      STA LastKeyInScanRow7_ScannedMoreThanOnce
 <b>7100</b>   a9 01      LDA #$01
-<b>7102</b>   85 94      STA EnableIRQTriggeredSFXAndTopLineUpdates
+<b>7102</b>   85 94      STA EnableSomeSFXAndMarqueeUpdates
 </div>
 <a name="7104"></a>
 
@@ -5285,7 +5285,7 @@ nosidebar: true
 
 <div class="disass_code"><b>78c9</b>   a5 95      LDA FlashingEntryBoxCountDown
 <b>78cb</b>   d0 07      BNE <a href="#78d4">$78d4</a>
-<b>78cd</b>   a5 94      LDA EnableIRQTriggeredSFXAndTopLineUpdates
+<b>78cd</b>   a5 94      LDA EnableSomeSFXAndMarqueeUpdates
 <b>78cf</b>   f0 03      BEQ <a href="#78d4">$78d4</a>
 <b>78d1</b>   20 05 71   JSR <a href="#7105">SetTopLineToScore</a>
 <a name="78d4"></a><b>78d4</b>   a5 c0      LDA AnimationFrameTimes8
@@ -5417,37 +5417,35 @@ nosidebar: true
 </div>
 <a name="7971"></a>
 
-<div class="disass_comment">;  
-</div>
 
 <b>SoundFX</b><br/>
 
 <div class="disass_code"><b>7971</b>   a9 0f      LDA #$0f
 <b>7973</b>   8d 18 d4   STA Sid_FilterModeAndVolume
 <b>7976</b>   a5 9b      LDA SecondsDontPass
-<b>7978</b>   f0 01      BEQ <a href="#797b">__SoundFX__NotPaused__</a>
+<b>7978</b>   f0 01      BEQ <a href="#797b">SoundFX_NotPaused</a>
 </div>
 
 
 
-<b>__SoundFX__Paused__</b><br/>
+<b>SoundFX_Paused</b><br/>
 
 <div class="disass_code"><b>797a</b>   60         RTS 
 </div>
 <a name="797b"></a>
 
 
-<b>__SoundFX__NotPaused__</b><br/>
+<b>SoundFX_NotPaused</b><br/>
 
 <div class="disass_code"><b>797b</b>   a5 d8      LDA SFXTrigger_DiamondQuotaReachedOrEntryBoxExplode
 <b>797d</b>   f0 21      BEQ <a href="#79a0">$79a0</a>
-<b>797f</b>   a5 d9      LDA $d9
-<b>7981</b>   d0 12      BNE <a href="#7995">__SoundFX__SoundOnVoice3InProgress</a>
+<b>797f</b>   a5 d9      LDA SFXTimer_DiamondQuotaReachedOrEntryBoxExplode
+<b>7981</b>   d0 12      BNE <a href="#7995">SoundFX_DiamondQuotaReachedOrEntryBoxExplode_InProgress</a>
 </div>
 
 
 
-<b>__SoundFX__InitiateDiamondQuotaReachedOrEntryBoxExplode__</b><br/>
+<b>SoundFX_InitiateDiamondQuotaReachedOrEntryBoxExplode</b><br/>
 
 <div class="disass_code"><b>7983</b>   20 e7 7c   JSR <a href="#7ce7">ResetVoice3</a>
 <b>7986</b>   a2 06      LDX #$06
@@ -5456,27 +5454,38 @@ nosidebar: true
 <b>798e</b>   ca         DEX 
 <b>798f</b>   10 f7      BPL <a href="#7988">$7988</a>
 <b>7991</b>   a9 21      LDA #$21
-<b>7993</b>   85 d9      STA $d9
+<b>7993</b>   85 d9      STA SFXTimer_DiamondQuotaReachedOrEntryBoxExplode
 </div>
 <a name="7995"></a>
 
 
-<b>__SoundFX__SoundOnVoice3InProgress</b><br/>
+<b>SoundFX_DiamondQuotaReachedOrEntryBoxExplode_InProgress</b><br/>
 
-<div class="disass_code"><b>7995</b>   c6 d9      DEC $d9
-<b>7997</b>   d0 07      BNE <a href="#79a0">$79a0</a>
+<div class="disass_code"><b>7995</b>   c6 d9      DEC SFXTimer_DiamondQuotaReachedOrEntryBoxExplode
+<b>7997</b>   d0 07      BNE <a href="#79a0">$79a0</a><span class="disass_comment"> ; The target of this branch may as well be $79d2 (see comment below)</span>
 </div>
 
 
 
-<b>__SoundFX__StopVoice3SFX</b><br/>
+<b>SoundFX_DiamondQuotaReachedOrEntryBoxExplode_Stop</b><br/>
 
 <div class="disass_code"><b>7999</b>   a9 00      LDA #$00
 <b>799b</b>   85 d8      STA SFXTrigger_DiamondQuotaReachedOrEntryBoxExplode
 <b>799d</b>   20 e7 7c   JSR <a href="#7ce7">ResetVoice3</a>
-<a name="79a0"></a><b>79a0</b>   a5 d9      LDA $d9
+</div>
+<a name="79a0"></a>
+
+<div class="disass_comment">; This test is not really needed if the code was a little cleaner.
+; - If we fall through from $799d SFXTimer_DiamondQuotaReachedOrEntryBoxExplode is 0.
+; - If we branch from $797d it's also zero.
+; - If we branch from $7997 it's non-zero, but we could simply make the target
+;   of that branch $79d2.
+</div>
+
+
+<div class="disass_code"><b>79a0</b>   a5 d9      LDA SFXTimer_DiamondQuotaReachedOrEntryBoxExplode
 <b>79a2</b>   d0 2e      BNE <a href="#79d2">$79d2</a>
-<b>79a4</b>   a5 94      LDA EnableIRQTriggeredSFXAndTopLineUpdates
+<b>79a4</b>   a5 94      LDA EnableSomeSFXAndMarqueeUpdates<span class="disass_comment"> ; Note that not all SFX use this enable flag</span>
 <b>79a6</b>   f0 21      BEQ <a href="#79c9">$79c9</a>
 <b>79a8</b>   a5 43      LDA AmoebaIsGrowing
 <b>79aa</b>   f0 1d      BEQ <a href="#79c9">$79c9</a>
@@ -6280,13 +6289,13 @@ nosidebar: true
 <b>__HandleInGameKeys__SpacePressed</b><br/>
 
 <div class="disass_code"><b>7d71</b>   a2 00      LDX #$00
-<b>7d73</b>   86 94      STX EnableIRQTriggeredSFXAndTopLineUpdates
+<b>7d73</b>   86 94      STX EnableSomeSFXAndMarqueeUpdates
 <b>7d75</b>   20 f4 7c   JSR <a href="#7cf4">ResetSound</a>
 <b>7d78</b>   e6 9b      INC SecondsDontPass
 <b>7d7a</b>   20 2b 7d   JSR <a href="#7d2b">PauseLoop</a>
 <b>7d7d</b>   a9 00      LDA #$00
 <b>7d7f</b>   85 9b      STA SecondsDontPass
-<b>7d81</b>   e6 94      INC EnableIRQTriggeredSFXAndTopLineUpdates
+<b>7d81</b>   e6 94      INC EnableSomeSFXAndMarqueeUpdates
 <a name="7d83"></a><b>7d83</b>   a5 fc      LDA LastKeyInScanRow7_ScannedMoreThanOnce
 <b>7d85</b>   c9 7f      CMP #$7f
 <b>7d87</b>   d0 0c      BNE <a href="#7d95">$7d95</a>
@@ -6301,7 +6310,7 @@ nosidebar: true
 <div class="disass_code"><b>7d89</b>   a5 95      LDA FlashingEntryBoxCountDown
 <b>7d8b</b>   d0 08      BNE <a href="#7d95">$7d95</a>
 <b>7d8d</b>   a9 00      LDA #$00
-<b>7d8f</b>   85 94      STA EnableIRQTriggeredSFXAndTopLineUpdates
+<b>7d8f</b>   85 94      STA EnableSomeSFXAndMarqueeUpdates
 <b>7d91</b>   a9 02      LDA #$02
 <b>7d93</b>   85 97      STA ExitCaveFlag
 <a name="7d95"></a><b>7d95</b>   a9 00      LDA #$00
@@ -7033,7 +7042,7 @@ nosidebar: true
 <b>__PostRunCaveActions__TimeLimitReached</b><br/>
 
 <div class="disass_code"><b>8034</b>   a9 00      LDA #$00
-<b>8036</b>   85 94      STA EnableIRQTriggeredSFXAndTopLineUpdates
+<b>8036</b>   85 94      STA EnableSomeSFXAndMarqueeUpdates
 </div>
 
 
@@ -7062,7 +7071,7 @@ nosidebar: true
 <b>__PostRunCaveActions__GameOver</b><br/>
 
 <div class="disass_code"><b>8044</b>   a9 00      LDA #$00
-<b>8046</b>   85 94      STA EnableIRQTriggeredSFXAndTopLineUpdates
+<b>8046</b>   85 94      STA EnableSomeSFXAndMarqueeUpdates
 <b>8048</b>   20 9e 7f   JSR <a href="#7f9e">SetTopLineTextToGameOverAndDelay</a>
 <b>804b</b>   a9 02      LDA #$02
 <b>804d</b>   85 8d      STA MagicWallActiveState
@@ -8669,7 +8678,7 @@ nosidebar: true
 
 
 <div class="disass_code"><b>85f2</b>   a9 00      LDA #$00
-<b>85f4</b>   85 94      STA EnableIRQTriggeredSFXAndTopLineUpdates
+<b>85f4</b>   85 94      STA EnableSomeSFXAndMarqueeUpdates
 <b>85f6</b>   a9 4e      LDA #$4e
 <b>85f8</b>   85 46      STA LocalVar
 <b>85fa</b>   a9 98      LDA #$98
@@ -9582,7 +9591,7 @@ nosidebar: true
 <b>__PerformCaveExitAction__DemoMode</b><br/>
 
 <div class="disass_code"><b>88f6</b>   a9 00      LDA #$00
-<b>88f8</b>   85 94      STA EnableIRQTriggeredSFXAndTopLineUpdates
+<b>88f8</b>   85 94      STA EnableSomeSFXAndMarqueeUpdates
 <b>88fa</b>   60         RTS 
 </div>
 <a name="88fb"></a>
@@ -9879,7 +9888,7 @@ nosidebar: true
 <b>8a3d</b>   86 e1      STX XScrollTableIndex
 <b>8a3f</b>   86 e2      STX XCoarseScrollDirFlag
 <b>8a41</b>   86 d8      STX SFXTrigger_DiamondQuotaReachedOrEntryBoxExplode
-<b>8a43</b>   86 d9      STX $d9
+<b>8a43</b>   86 d9      STX SFXTimer_DiamondQuotaReachedOrEntryBoxExplode
 <b>8a45</b>   e8         INX 
 </div>
 
