@@ -870,7 +870,7 @@ nosidebar: true
 </div>
 <a name="5ee8"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>ObjCodeFromScannedThisTickCodeTable:</b><br/>
@@ -1141,20 +1141,26 @@ nosidebar: true
 </div>
 <a name="6ad0"></a>
 
+<div class="disass_comment">; 
+; Generate a "random" number based on CIA timers (and the state of the C flag).
+; The operation is pretty self explanatory. About the only point of interest is
+; the addition without regard to state of the carry flag. 
+</div>
 
 <b>TimeBasedRandomNumber:</b><br/>
 
 <div class="disass_code"><b>6ad0</b>   ad 04 dc   LDA Cia1_TimerALo
 <b>6ad3</b>   4d 05 dc   EOR Cia1_TimerAHi
 <b>6ad6</b>   4d 04 dd   EOR Cia2_TimerALo
-<b>6ad9</b>   6d 05 dd   ADC Cia2_TimerAHi
+<b>6ad9</b>   6d 05 dd   ADC Cia2_TimerAHi<span class="disass_comment"> ; The C flag has a say in things! A bit of extra entropy is sometimes a good thing.</span>
 <b>6adc</b>   4d 06 dd   EOR Cia2_TimerBLo
 <b>6adf</b>   4d 07 dd   EOR Cia2_TimerBHi
 <b>6ae2</b>   60         RTS 
 </div>
 <a name="6ae3"></a>
 
-<div class="disass_comment">; A: Colour to set
+<div class="disass_comment">; 
+; A: Colour to set
 ; Y: Start offset.
 ; The portion of the first line not covered by Y is set to MCM white (brown non-MCM).
 </div>
@@ -1194,7 +1200,7 @@ nosidebar: true
 </div>
 
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 
@@ -1216,7 +1222,7 @@ nosidebar: true
 </div>
 <a name="6b04"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>BackupTopLine:</b><br/>
@@ -1315,7 +1321,7 @@ nosidebar: true
 </div>
 <a name="6b69"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>ReadFireButtonCurrentPlayer:</b><br/>
@@ -1586,7 +1592,7 @@ nosidebar: true
 </div>
 <a name="6ced"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>PseudoRandom:</b><br/>
@@ -1607,7 +1613,7 @@ nosidebar: true
 </div>
 
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 
@@ -1648,7 +1654,7 @@ nosidebar: true
 </div>
 
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 
@@ -1906,7 +1912,7 @@ nosidebar: true
 </div>
 <a name="6dda"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>ProcessFirefly:</b><br/>
@@ -2003,7 +2009,7 @@ nosidebar: true
 </div>
 <a name="6e28"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>FallingDiamondSoundFX:</b><br/>
@@ -2044,7 +2050,7 @@ nosidebar: true
 </div>
 <a name="6e56"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>FallingBoulderSoundFX:</b><br/>
@@ -2109,7 +2115,7 @@ nosidebar: true
 </div>
 <a name="6e7c"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>CheckIfFallingObjectKillsAnimal:</b><br/>
@@ -2182,7 +2188,7 @@ nosidebar: true
 </div>
 <a name="6ead"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>ProcessButterfly:</b><br/>
@@ -2279,7 +2285,7 @@ nosidebar: true
 </div>
 <a name="6efb"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>__ProcessWorld__CreateScannedStationaryDiamond:</b><br/>
@@ -2291,7 +2297,7 @@ nosidebar: true
 </div>
 <a name="6f05"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>ProcessFallingDiamond:</b><br/>
@@ -2523,7 +2529,7 @@ nosidebar: true
 </div>
 <a name="6f87"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>ProcessStationaryDiamond:</b><br/>
@@ -2632,7 +2638,7 @@ nosidebar: true
 </div>
 <a name="6fcc"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>AmoebaUpLeftRightDownOffsetTable:</b><br/>
@@ -2641,7 +2647,7 @@ nosidebar: true
 </div>
 <a name="6fd0"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>ProcessAmoeba:</b><br/>
@@ -2775,7 +2781,7 @@ nosidebar: true
 </div>
 <a name="7039"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>ExtraLife:</b><br/>
@@ -2833,7 +2839,7 @@ nosidebar: true
 </div>
 <a name="7080"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>DiamondQuotaReachedSoundSIDValues:</b><br/>
@@ -2865,7 +2871,7 @@ nosidebar: true
 </div>
 <a name="708c"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>CheckIfLevelTimeIsUp:</b><br/>
@@ -2905,7 +2911,7 @@ nosidebar: true
 </div>
 <a name="70c5"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>GameSecondTick:</b><br/>
@@ -2927,7 +2933,7 @@ nosidebar: true
 </div>
 
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 
@@ -2936,7 +2942,7 @@ nosidebar: true
 </div>
 <a name="70e0"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>GameSecondTickWithAmoebaProcessing:</b><br/>
@@ -2986,7 +2992,7 @@ nosidebar: true
 </div>
 <a name="7105"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>SetTopLineToScore:</b><br/>
@@ -3000,7 +3006,7 @@ nosidebar: true
 </div>
 <a name="7111"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>SubSecondTick:</b><br/>
@@ -3040,7 +3046,7 @@ nosidebar: true
 </div>
 <a name="712d"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>IncrementDiamondCount:</b><br/>
@@ -3068,7 +3074,7 @@ nosidebar: true
 </div>
 <a name="7144"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>DiamondQuotaDigitsToString:</b><br/>
@@ -3096,7 +3102,7 @@ nosidebar: true
 </div>
 <a name="715e"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>CheckIfGotDiamondQuota:</b><br/>
@@ -3159,7 +3165,7 @@ nosidebar: true
 </div>
 <a name="718a"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>RockfordCollectingDiamondSIDValues:</b><br/>
@@ -3168,7 +3174,7 @@ nosidebar: true
 </div>
 <a name="7191"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>RockfordMovingToDiamond:</b><br/>
@@ -3193,7 +3199,7 @@ nosidebar: true
 </div>
 <a name="71ab"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>RockfordTriesToMoveBoulder:</b><br/>
@@ -3209,7 +3215,7 @@ nosidebar: true
 </div>
 <a name="71bd"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>TryToMoveRockford:</b><br/>
@@ -3477,7 +3483,7 @@ nosidebar: true
 </div>
 <a name="7294"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>ProcessRockford:</b><br/>
@@ -3541,7 +3547,7 @@ nosidebar: true
 </div>
 <a name="72cb"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>PreRockfordObjectSequenceTable:</b><br/>
@@ -3550,7 +3556,7 @@ nosidebar: true
 </div>
 <a name="72d3"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>ProcessExplosion:</b><br/>
@@ -3667,7 +3673,7 @@ nosidebar: true
 </div>
 <a name="7344"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>ProcessInAndOutBoxes:</b><br/>
@@ -3718,7 +3724,7 @@ nosidebar: true
 </div>
 <a name="7360"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>ProcessStationaryBoulder:</b><br/>
@@ -3948,7 +3954,7 @@ nosidebar: true
 </div>
 <a name="7454"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>ExtraLifeFX:</b><br/>
@@ -3962,7 +3968,7 @@ nosidebar: true
 </div>
 <a name="7460"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>__ExtraLifeFX__DoFX__:</b><br/>
@@ -3984,7 +3990,7 @@ nosidebar: true
 </div>
 <a name="7487"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>ScrollingBGTick:</b><br/>
@@ -4007,7 +4013,7 @@ nosidebar: true
 </div>
 <a name="749b"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>YScrollTable:</b><br/>
@@ -4023,7 +4029,7 @@ nosidebar: true
 </div>
 <a name="74b3"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>CalcScrollOffsets_XIfNeeded_YIfNeeded:</b><br/>
@@ -4035,7 +4041,7 @@ nosidebar: true
 </div>
 <a name="74bb"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>CalcXScrollOffsets_X_YIfNeeded:</b><br/>
@@ -4067,7 +4073,7 @@ nosidebar: true
 </div>
 <a name="74c5"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 
@@ -4078,7 +4084,7 @@ nosidebar: true
 </div>
 <a name="74cd"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>CalcYScrollOffsets_Y:</b><br/>
@@ -4093,7 +4099,7 @@ nosidebar: true
 </div>
 <a name="74d8"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>XScrollVicCtl2Table:</b><br/>
@@ -4111,7 +4117,7 @@ nosidebar: true
 </div>
 <a name="74e0"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>ScheduleYScroll:</b><br/>
@@ -4289,7 +4295,7 @@ nosidebar: true
 </div>
 <a name="7559"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>ScheduleXScroll:</b><br/>
@@ -4363,7 +4369,7 @@ nosidebar: true
 </div>
 <a name="75d5"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>StopScrollingAtEdges:</b><br/>
@@ -4428,7 +4434,7 @@ nosidebar: true
 </div>
 <a name="75f3"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>__StopScrollingAtEdges__ClipXDir:</b><br/>
@@ -4460,7 +4466,7 @@ nosidebar: true
 </div>
 <a name="7603"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 
@@ -4487,7 +4493,7 @@ nosidebar: true
 </div>
 <a name="760f"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>__StopScrollingAtEdges__Exit:</b><br/>
@@ -4496,7 +4502,7 @@ nosidebar: true
 </div>
 <a name="7610"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>ChooseYScrollDirection:</b><br/>
@@ -4651,7 +4657,7 @@ nosidebar: true
 </div>
 <a name="76ad"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>Scroller:</b><br/>
@@ -4676,7 +4682,7 @@ nosidebar: true
 </div>
 <a name="76c6"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>AdvanceWorldCurrentCellPtr:</b><br/>
@@ -4716,7 +4722,7 @@ nosidebar: true
 </div>
 <a name="76db"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>FillExpandedLatticeWithScrollingSteelWallChar:</b><br/>
@@ -4747,7 +4753,7 @@ nosidebar: true
 </div>
 <a name="76f9"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>CoverLevel:</b><br/>
@@ -4774,7 +4780,7 @@ nosidebar: true
 </div>
 
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 
@@ -4901,7 +4907,7 @@ nosidebar: true
 </div>
 <a name="7764"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 
@@ -4973,7 +4979,7 @@ nosidebar: true
 </div>
 
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 
@@ -4987,7 +4993,7 @@ nosidebar: true
 </div>
 <a name="77a9"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>PlayRevealLevelSoundAndRedefineChar:</b><br/>
@@ -5090,7 +5096,7 @@ nosidebar: true
 </div>
 <a name="77fe"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>UncoverCaveScreen:</b><br/>
@@ -5311,7 +5317,7 @@ nosidebar: true
 </div>
 
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 
@@ -5337,7 +5343,7 @@ nosidebar: true
 </div>
 <a name="7912"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 
@@ -5362,7 +5368,7 @@ nosidebar: true
 </div>
 <a name="7930"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 
@@ -5387,7 +5393,7 @@ nosidebar: true
 </div>
 <a name="794e"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 
@@ -5596,7 +5602,7 @@ nosidebar: true
 </div>
 <a name="7a86"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>RedefineMagicWallCharsToNormalWall:</b><br/>
@@ -5907,7 +5913,7 @@ nosidebar: true
 </div>
 
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 
@@ -6012,7 +6018,7 @@ nosidebar: true
 </div>
 <a name="7c91"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>InstallRandomCaveObjectForCell:</b><br/>
@@ -6052,7 +6058,7 @@ nosidebar: true
 </div>
 <a name="7cab"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>FillWithDirtAndRandomObjects:</b><br/>
@@ -6088,7 +6094,7 @@ nosidebar: true
 </div>
 <a name="7ccd"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>GameSpeedsForSublevelsArray:</b><br/>
@@ -6223,7 +6229,7 @@ nosidebar: true
 </div>
 <a name="7d19"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>DelaySpaceKeyAborts:</b><br/>
@@ -6285,7 +6291,7 @@ nosidebar: true
 </div>
 <a name="7d6b"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>HandleInGameKeys:</b><br/>
@@ -6406,7 +6412,7 @@ nosidebar: true
 </div>
 <a name="7dd9"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>ProcessWorld:</b><br/>
@@ -6609,7 +6615,7 @@ nosidebar: true
 </div>
 <a name="7e8e"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>BufferLevel:</b><br/>
@@ -6785,7 +6791,7 @@ nosidebar: true
 </div>
 
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 
@@ -6868,7 +6874,7 @@ nosidebar: true
 </div>
 <a name="7f9e"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>SetTopLineTextToGameOverAndDelay:</b><br/>
@@ -6885,7 +6891,7 @@ nosidebar: true
 </div>
 <a name="7fad"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>WaitForDelayOrNextPlayersButton:</b><br/>
@@ -6952,7 +6958,7 @@ nosidebar: true
 </div>
 <a name="7fce"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>OutOfTimeLoop:</b><br/>
@@ -6999,7 +7005,7 @@ nosidebar: true
 </div>
 <a name="8006"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>ProcessBonusLevelAndInterLevelInfoDisplay:</b><br/>
@@ -7040,7 +7046,7 @@ nosidebar: true
 </div>
 <a name="802e"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>PostCaveRunActions:</b><br/>
@@ -7187,7 +7193,7 @@ nosidebar: true
 </div>
 <a name="80bc"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>ExecuteLevelDrawCommands__DrawLine__StepTable:</b><br/>
@@ -7246,7 +7252,7 @@ nosidebar: true
 </div>
 <a name="80f3"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>ExecuteLevelDrawCommands__OutputLine:</b><br/>
@@ -7275,7 +7281,7 @@ nosidebar: true
 </div>
 <a name="8107"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>__ExecuteLevelDrawCommands__DrawFilledRect__NextLine:</b><br/>
@@ -7322,7 +7328,7 @@ nosidebar: true
 </div>
 <a name="8127"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>__ExecuteLevelDrawCommands__DrawFilledRect__Finished:</b><br/>
@@ -7417,7 +7423,7 @@ nosidebar: true
 </div>
 <a name="816f"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>ExecuteLevelDrawCommands__Advance3Bytes:</b><br/>
@@ -7449,7 +7455,7 @@ nosidebar: true
 </div>
 <a name="8180"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>ExecuteLevelDrawCommands:</b><br/>
@@ -7599,7 +7605,7 @@ nosidebar: true
 </div>
 <a name="81f0"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>TitleScreenFillInPlayerAndJoystick:</b><br/>
@@ -7628,7 +7634,7 @@ nosidebar: true
 </div>
 <a name="820f"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>FrameLevelWithSteelWall:</b><br/>
@@ -7648,7 +7654,7 @@ nosidebar: true
 </div>
 <a name="8227"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>SetupTitleScreenText:</b><br/>
@@ -7921,7 +7927,7 @@ nosidebar: true
 </div>
 <a name="838d"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>MakeF1ScreenControlsLightBlue:</b><br/>
@@ -7966,7 +7972,7 @@ nosidebar: true
 </div>
 <a name="83a1"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>MakeFirstTwoLinesYellow:</b><br/>
@@ -7980,7 +7986,7 @@ nosidebar: true
 </div>
 <a name="83ac"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>MusicTickRoutine:</b><br/>
@@ -8018,7 +8024,7 @@ nosidebar: true
 </div>
 
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 
@@ -8075,7 +8081,7 @@ nosidebar: true
 </div>
 <a name="842e"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>ScrollingBGUpdateFillChars:</b><br/>
@@ -8230,7 +8236,7 @@ nosidebar: true
 </div>
 <a name="84a2"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>HandleCaveAndLevelSecection:</b><br/>
@@ -8250,7 +8256,7 @@ nosidebar: true
 </div>
 
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 
@@ -8292,7 +8298,7 @@ nosidebar: true
 </div>
 <a name="84ce"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 
@@ -8390,7 +8396,7 @@ nosidebar: true
 </div>
 <a name="8518"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>TitleScreenLoop:</b><br/>
@@ -8402,7 +8408,7 @@ nosidebar: true
 </div>
 
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>__TitleScreenLoop__LicenseMode:</b><br/>
@@ -8545,7 +8551,7 @@ nosidebar: true
 </div>
 
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 
@@ -8571,7 +8577,7 @@ nosidebar: true
 </div>
 <a name="859b"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>RunTitleScreen:</b><br/>
@@ -8587,7 +8593,7 @@ nosidebar: true
 </div>
 
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 
@@ -8624,7 +8630,7 @@ nosidebar: true
 </div>
 
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 
@@ -8710,7 +8716,7 @@ nosidebar: true
 </div>
 <a name="8606"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>TitleModeVICColourRegs:</b><br/>
@@ -8801,7 +8807,7 @@ nosidebar: true
 </div>
 <a name="861b"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>SetupTitleScreen:</b><br/>
@@ -8833,7 +8839,7 @@ nosidebar: true
 </div>
 
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 
@@ -9092,7 +9098,7 @@ nosidebar: true
 </div>
 <a name="8746"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>InitPlayers:</b><br/>
@@ -9122,7 +9128,7 @@ nosidebar: true
 </div>
 <a name="876e"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>LoseLife:</b><br/>
@@ -9238,7 +9244,7 @@ nosidebar: true
 </div>
 <a name="87c8"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>ScoreTimeRemainingSound:</b><br/>
@@ -9248,7 +9254,7 @@ nosidebar: true
 </div>
 <a name="87cc"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>__ScoreTimeRemainingSound__Loop:</b><br/>
@@ -9260,7 +9266,7 @@ nosidebar: true
 </div>
 
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 
@@ -9286,7 +9292,7 @@ nosidebar: true
 </div>
 
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 
@@ -9307,7 +9313,7 @@ nosidebar: true
 </div>
 
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 
@@ -9315,7 +9321,7 @@ nosidebar: true
 </div>
 <a name="87fa"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>UpdateHighScoreIfNeeded:</b><br/>
@@ -9344,7 +9350,7 @@ nosidebar: true
 </div>
 <a name="8822"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>StashScores:</b><br/>
@@ -9367,7 +9373,7 @@ nosidebar: true
 </div>
 <a name="8841"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>NextCave:</b><br/>
@@ -9395,7 +9401,7 @@ nosidebar: true
 </div>
 <a name="8859"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>CaveComplete:</b><br/>
@@ -9453,7 +9459,7 @@ nosidebar: true
 </div>
 <a name="888a"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 
@@ -9465,7 +9471,7 @@ nosidebar: true
 </div>
 <a name="8897"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>KillPlayer:</b><br/>
@@ -9609,7 +9615,7 @@ nosidebar: true
 </div>
 <a name="88fb"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>RunCave:</b><br/>
@@ -9627,7 +9633,7 @@ nosidebar: true
 </div>
 <a name="8913"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>DemoModeRunCave:</b><br/>
@@ -9688,7 +9694,7 @@ nosidebar: true
 </div>
 <a name="895e"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>ResetLastAndHighScoresAndPlayerInfoText:</b><br/>
@@ -9729,7 +9735,7 @@ nosidebar: true
 </div>
 <a name="897a"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>InitAll:</b><br/>
@@ -9751,7 +9757,7 @@ nosidebar: true
 </div>
 
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 
@@ -9866,7 +9872,7 @@ nosidebar: true
 </div>
 <a name="8a15"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>InitGameState:</b><br/>
@@ -9964,7 +9970,7 @@ nosidebar: true
 </div>
 <a name="8a81"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>RasterSetTitleMode:</b><br/>
@@ -9998,7 +10004,7 @@ nosidebar: true
 </div>
 
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 
@@ -10040,7 +10046,7 @@ nosidebar: true
 </div>
 
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 
@@ -10083,7 +10089,7 @@ nosidebar: true
 </div>
 
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 
@@ -10114,7 +10120,7 @@ nosidebar: true
 </div>
 
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 
@@ -10137,7 +10143,7 @@ nosidebar: true
 </div>
 
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 
@@ -10149,7 +10155,7 @@ nosidebar: true
 </div>
 <a name="8b2f"></a>
 
-<div class="disass_comment">;  
+<div class="disass_comment">; 
 </div>
 
 <b>Main__BEGIN__Is_Level_Zero:</b><br/>
