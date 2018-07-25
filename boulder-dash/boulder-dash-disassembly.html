@@ -1181,11 +1181,11 @@ nosidebar: true
 <a name="6ae8"></a>
 
 
-<b>SetupColourRam__MarqueeLoop:</b><br/>
+<b>_MarqueeLoop:</b><br/>
 
 <div class="disass_code"><b>6ae8</b>   9d 00 d8   STA C64_ColourRam,X
 <b>6aeb</b>   ca         DEX 
-<b>6aec</b>   10 fa      BPL <a href="#6ae8">SetupColourRam__MarqueeLoop</a>
+<b>6aec</b>   10 fa      BPL <a href="#6ae8">_MarqueeLoop</a>
 </div>
 
 
@@ -1193,9 +1193,9 @@ nosidebar: true
 </div>
 
 
-<div class="disass_code"><b>6aee</b>   a2 00      LDX #$00
+<div class="disass_code"><b>6aee</b>   a2 00      LDX #&lt;C64_ColourRam
 <b>6af0</b>   86 46      STX LocalVar
-<b>6af2</b>   a2 d8      LDX #$d8
+<b>6af2</b>   a2 d8      LDX #&gt;C64_ColourRam
 <b>6af4</b>   86 47      STX LocalVar+1
 </div>
 
@@ -1210,14 +1210,14 @@ nosidebar: true
 <a name="6af9"></a>
 
 
-<b>SetupColourRam__BodyLoop:</b><br/>
+<b>_BodyLoop:</b><br/>
 
 <div class="disass_code"><b>6af9</b>   91 46      STA (LocalVar),Y
 <b>6afb</b>   c8         INY 
-<b>6afc</b>   d0 fb      BNE <a href="#6af9">SetupColourRam__BodyLoop</a>
+<b>6afc</b>   d0 fb      BNE <a href="#6af9">_BodyLoop</a>
 <b>6afe</b>   e6 47      INC LocalVar+1
 <b>6b00</b>   ca         DEX 
-<b>6b01</b>   10 f6      BPL <a href="#6af9">SetupColourRam__BodyLoop</a>
+<b>6b01</b>   10 f6      BPL <a href="#6af9">_BodyLoop</a>
 <b>6b03</b>   60         RTS 
 </div>
 <a name="6b04"></a>
