@@ -14,3 +14,8 @@ My weapon of choice. This is a disassembler for the C64 that I'm working on writ
 * Annotate the generated output with labels and comments provided in configuration files
 * Generate links
 * Generate images for character sets
+
+In addition to Python's standard library the following modules are used:
+* Jinja2 - used for templates. Currently only HTML is supported (there are other incomplete templates)
+* Pillow - for image generation
+* Lark - for parsing
