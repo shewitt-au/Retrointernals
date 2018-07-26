@@ -16,6 +16,6 @@ My weapon of choice. This is a disassembler for the C64 that I'm working on writ
 * Generate images for character sets
 
 In addition to Python's standard library the following modules are used:
-* Jinja2 - used for templates. Currently only HTML is supported (there are other incomplete templates)
-* Pillow - for image generation
-* Lark - for parsing
+* Jinja2 - used for templates. Currently only HTML is supported (there are other incomplete templates). Checkout its website [here](http://jinja.pocoo.org/)
+* Pillow - for image generation. Their [website](https://python-pillow.org/)
+* Lark - for parsing. It's LALR is bloody fast. It's [website](https://github.com/lark-parser/lark)
