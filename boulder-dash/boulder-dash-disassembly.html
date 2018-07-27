@@ -47,7 +47,7 @@ nosidebar: true
 <a name="53b0"></a>
 
 <div class="disass_comment">; 0  : Offset
-; 1&2: Adjust (L&H)
+; 1&2: Adjust 
 ; 
 ; Offset: 0($00)  Adjust: -162
 ; Offset: 1($01)  Adjust: -160
@@ -59,13 +59,13 @@ nosidebar: true
 ; Offset: 43($2b) Adjust: 4
 ; Offset: 80($50) Adjust: 158
 ; Offset: 81($51) Adjust: 160
-; Offset: 82($52)         Adjust: 162
-; Offset: 120($78)        Adjust: 318
-; Offset: 121($79)        Adjust: 320
-; Offset: 122($7a)        Adjust: 322
+; Offset: 82($52)     Adjust: 162
+; Offset: 120($78)    Adjust: 318
+; Offset: 121($79)    Adjust: 320
+; Offset: 122($7a)    Adjust: 322
 </div>
 
-<b>ExpandedLatticeOffsetAdjustTable:</b><br/>
+<b>InflatedWorldOffsetAdjustTable:</b><br/>
 
 <div class="disass_code"><b>53b0</b>   00 5e ff 01  60 ff 02 62  ff 28 fe ff  27 fc ff 29
 <b>53c0</b>   00 00 2a 02  00 2b 04 00  50 9e 00 51  a0 00 52 a2
@@ -74,9 +74,9 @@ nosidebar: true
 <a name="53da"></a>
 
 
-<b>ExpandedLatticeLineAddressTable:</b><br/>
+<b>InflatedWorldLineAddressTable:</b><br/>
 
-<div class="disass_comment">; Expanded lattice: $4003 - $4dc2
+<div class="disass_comment">; Inflated World: $4003 - $4dc2
 </div>
 <div class="disass_code"><b>53da</b>   03 40 a3 40  43 41 e3 41  83 42 23 43  c3 43 63 44
 <b>53ea</b>   03 45 a3 45  43 46 e3 46  83 47 23 48  c3 48 63 49
@@ -882,6 +882,12 @@ nosidebar: true
 </div>
 <a name="5f28"></a>
 
+<div class="disass_comment">; 
+; Cells contain values that represent a game object in a specific
+; state, like a falling/stationary boulder for example. A falling and
+; a stationary boulder still look like a boulder. This table translates
+; a cell's value to the base character for that object.
+</div>
 
 <b>BaseCharNoForObjectTable:</b><br/>
 
@@ -892,6 +898,8 @@ nosidebar: true
 </div>
 <a name="5f68"></a>
 
+<div class="disass_comment">; 
+</div>
 
 <b>ObjHandlerVectorTable:</b><br/>
 
@@ -1466,66 +1474,66 @@ nosidebar: true
 </div>
 <a name="6c80"></a>
 
-<div class="disass_comment">; ---------------------------------------------------------------
+<div class="disass_comment">; 
+; ---------------------------------------------------------------
 ; INPUTS:
-; .ObjectTypeForScreenUpdate $8A           = Object code
-; .ExpandedLatticeOutputOutputPtr(L&H) $36 & $37 = Position
+; ObjectTypeForScreenUpdate       $8A         = Object code
+; InflatedWorldOutputOutputPtr    $36 & $37   = Position
 ; 
 ; NOTES:
-; Call ".SetExpandedLatticeOutputPtr"
-; to set .ExpandedLatticeOutputPtr(L&H).
-; 
-; Expanded lattice: $4003 - $4dc2
+;  Call SetInflatedWorldOutputPtr to set InflatedWorldOutputPtr
+;  Inflated World: $4003 - $4dc2
 ; ---------------------------------------------------------------
 </div>
 
-<b>SetCellInExpandedLattice:</b><br/>
+<b>SetCellInInflatedWorld:</b><br/>
 
 <div class="disass_code"><b>6c80</b>   a6 8a      LDX ObjectTypeForScreenUpdate
 <b>6c82</b>   bd 28 5f   LDA <a href="#5f28">BaseCharNoForObjectTable</a>,X
 <b>6c85</b>   a0 00      LDY #$00
-<b>6c87</b>   91 36      STA (ExpandedLatticeOutputPtr),Y
+<b>6c87</b>   91 36      STA (InflatedWorldOutputPtr),Y
 <b>6c89</b>   18         CLC 
 <b>6c8a</b>   69 01      ADC #$01
 <b>6c8c</b>   c8         INY 
-<b>6c8d</b>   91 36      STA (ExpandedLatticeOutputPtr),Y
+<b>6c8d</b>   91 36      STA (InflatedWorldOutputPtr),Y
 <b>6c8f</b>   69 0f      ADC #$0f
 <b>6c91</b>   a0 50      LDY #$50
-<b>6c93</b>   91 36      STA (ExpandedLatticeOutputPtr),Y
+<b>6c93</b>   91 36      STA (InflatedWorldOutputPtr),Y
 <b>6c95</b>   69 01      ADC #$01
 <b>6c97</b>   c8         INY 
-<b>6c98</b>   91 36      STA (ExpandedLatticeOutputPtr),Y
+<b>6c98</b>   91 36      STA (InflatedWorldOutputPtr),Y
 <b>6c9a</b>   60         RTS 
 </div>
 <a name="6c9b"></a>
 
-<div class="disass_comment">; ---------------------------------------------
+<div class="disass_comment">; 
+; ---------------------------------------------
 ; INPUTS:
-; .ExpandedLatticeCurrentCellPtr(L&H) $34 & 35
+; .InflatedWorldCurrentCellPtr $34 & 35
 ; y = Offset
 ; OUTPUT:
-; .ExpandedLatticeOutputPtr(L&H) $36 & $37
+; .InflatedWorldOutputPtr $36 & $37
 ; 
-; Expanded lattice: $4003 - $4dc2
+; Inflated World: $4003 - $4dc2
 ; ---------------------------------------------
 </div>
 
-<b>SetExpandedLatticeOutputPtr:</b><br/>
+<b>SetInflatedWorldOutputPtr:</b><br/>
 
 <div class="disass_code"><b>6c9b</b>   a2 fd      LDX #$fd
 <b>6c9d</b>   98         TYA 
 <a name="6c9e"></a><b>6c9e</b>   e8         INX 
 <b>6c9f</b>   e8         INX 
 <b>6ca0</b>   e8         INX 
-<b>6ca1</b>   dd b0 53   CMP <a href="#53b0">ExpandedLatticeOffsetAdjustTable</a>,X
+<b>6ca1</b>   dd b0 53   CMP <a href="#53b0">InflatedWorldOffsetAdjustTable</a>,X
 <b>6ca4</b>   d0 f8      BNE <a href="#6c9e">$6c9e</a>
 <b>6ca6</b>   18         CLC 
-<b>6ca7</b>   a5 34      LDA ExpandedLatticeCurrentCellPtr
-<b>6ca9</b>   7d b1 53   ADC <a href="#53b0">ExpandedLatticeOffsetAdjustTable</a>+1,X
-<b>6cac</b>   85 36      STA ExpandedLatticeOutputPtr
-<b>6cae</b>   a5 35      LDA ExpandedLatticeCurrentCellPtr+1
-<b>6cb0</b>   7d b2 53   ADC <a href="#53b0">ExpandedLatticeOffsetAdjustTable</a>+2,X
-<b>6cb3</b>   85 37      STA ExpandedLatticeOutputPtr+1
+<b>6ca7</b>   a5 34      LDA InflatedWorldCurrentCellPtr
+<b>6ca9</b>   7d b1 53   ADC <a href="#53b0">InflatedWorldOffsetAdjustTable</a>+1,X
+<b>6cac</b>   85 36      STA InflatedWorldOutputPtr
+<b>6cae</b>   a5 35      LDA InflatedWorldCurrentCellPtr+1
+<b>6cb0</b>   7d b2 53   ADC <a href="#53b0">InflatedWorldOffsetAdjustTable</a>+2,X
+<b>6cb3</b>   85 37      STA InflatedWorldOutputPtr+1
 <b>6cb5</b>   60         RTS 
 </div>
 <a name="6cb6"></a>
@@ -1544,13 +1552,13 @@ nosidebar: true
 <b>6cbe</b>   a5 91      LDA CaveMatrixX
 <b>6cc0</b>   0a         ASL A
 <b>6cc1</b>   18         CLC 
-<b>6cc2</b>   7d da 53   ADC <a href="#53da">ExpandedLatticeLineAddressTable</a>,X
-<b>6cc5</b>   85 34      STA ExpandedLatticeCurrentCellPtr
+<b>6cc2</b>   7d da 53   ADC <a href="#53da">InflatedWorldLineAddressTable</a>,X
+<b>6cc5</b>   85 34      STA InflatedWorldCurrentCellPtr
 <b>6cc7</b>   a9 00      LDA #$00
-<b>6cc9</b>   7d db 53   ADC <a href="#53da">ExpandedLatticeLineAddressTable</a>+1,X
-<b>6ccc</b>   85 35      STA ExpandedLatticeCurrentCellPtr+1
-<b>6cce</b>   20 9b 6c   JSR <a href="#6c9b">SetExpandedLatticeOutputPtr</a>
-<b>6cd1</b>   20 80 6c   JSR <a href="#6c80">SetCellInExpandedLattice</a>
+<b>6cc9</b>   7d db 53   ADC <a href="#53da">InflatedWorldLineAddressTable</a>+1,X
+<b>6ccc</b>   85 35      STA InflatedWorldCurrentCellPtr+1
+<b>6cce</b>   20 9b 6c   JSR <a href="#6c9b">SetInflatedWorldOutputPtr</a>
+<b>6cd1</b>   20 80 6c   JSR <a href="#6c80">SetCellInInflatedWorld</a>
 <b>6cd4</b>   a5 8a      LDA ObjectTypeForScreenUpdate
 <b>6cd6</b>   60         RTS 
 </div>
@@ -1563,11 +1571,11 @@ nosidebar: true
 <b>6cd9</b>   85 8a      STA ObjectTypeForScreenUpdate
 <b>6cdb</b>   a0 29      LDY #$29
 <b>6cdd</b>   91 32      STA (WorldCurrentCellPtr),Y
-<b>6cdf</b>   a5 34      LDA ExpandedLatticeCurrentCellPtr
-<b>6ce1</b>   85 36      STA ExpandedLatticeOutputPtr
-<b>6ce3</b>   a5 35      LDA ExpandedLatticeCurrentCellPtr+1
-<b>6ce5</b>   85 37      STA ExpandedLatticeOutputPtr+1
-<b>6ce7</b>   20 80 6c   JSR <a href="#6c80">SetCellInExpandedLattice</a>
+<b>6cdf</b>   a5 34      LDA InflatedWorldCurrentCellPtr
+<b>6ce1</b>   85 36      STA InflatedWorldOutputPtr
+<b>6ce3</b>   a5 35      LDA InflatedWorldCurrentCellPtr+1
+<b>6ce5</b>   85 37      STA InflatedWorldOutputPtr+1
+<b>6ce7</b>   20 80 6c   JSR <a href="#6c80">SetCellInInflatedWorld</a>
 <b>6cea</b>   4c 15 7e   JMP <a href="#7e15">__ProcessWorld__NoObjectHandler</a>
 </div>
 <a name="6ced"></a>
@@ -2825,18 +2833,18 @@ nosidebar: true
 <b>DiamondQuotaReachedSoundSIDValues:</b><br/>
 
 <div class="disass_comment">; $32, $2f:
-;         A frequency value of $2f32. On PAL machines this gives a
-;         frequency of 709.5212042331696 HZ
-;         Calculated using this formula (PAL): (reg*985250)/16777216
+;     A frequency value of $2f32. On PAL machines this gives a
+;     frequency of 709.5212042331696 HZ
+;     Calculated using this formula (PAL): (reg*985250)/16777216
 ; $00, $00:
-;         Pulse width. N/A
+;     Pulse width. N/A
 ; $81:
-;         Control register
-;         Noise waveform, ADSR cycle
+;     Control register
+;     Noise waveform, ADSR cycle
 ; $19:
-;         Attack 8 ms, Decay 750 ms
+;     Attack 8 ms, Decay 750 ms
 ; $01:
-;         Sustain volume of 0, Release 24 ms
+;     Sustain volume of 0, Release 24 ms
 </div>
 <div class="disass_code"><b>7080</b>   32 2f 00 00  81 19 01
 </div>
@@ -3611,30 +3619,30 @@ nosidebar: true
 <a name="7311"></a>
 
 
-<b>RenderSteelWallInExpandedLatticeHelper:</b><br/>
+<b>RenderSteelWallInInflatedWorldHelper:</b><br/>
 
 <div class="disass_comment">; $2e is the base character of the first steel wall.
 ; There'a another at $4a.
 </div>
 <div class="disass_code"><b>7311</b>   a9 2e      LDA #$2e
 <b>7313</b>   a0 00      LDY #$00
-<b>7315</b>   91 36      STA (ExpandedLatticeOutputPtr),Y
+<b>7315</b>   91 36      STA (InflatedWorldOutputPtr),Y
 <b>7317</b>   18         CLC 
 <b>7318</b>   69 01      ADC #$01
 <b>731a</b>   c8         INY 
-<b>731b</b>   91 36      STA (ExpandedLatticeOutputPtr),Y
+<b>731b</b>   91 36      STA (InflatedWorldOutputPtr),Y
 <b>731d</b>   69 0f      ADC #$0f
 <b>731f</b>   a0 50      LDY #$50
-<b>7321</b>   91 36      STA (ExpandedLatticeOutputPtr),Y
+<b>7321</b>   91 36      STA (InflatedWorldOutputPtr),Y
 <b>7323</b>   69 01      ADC #$01
 <b>7325</b>   c8         INY 
-<b>7326</b>   91 36      STA (ExpandedLatticeOutputPtr),Y
+<b>7326</b>   91 36      STA (InflatedWorldOutputPtr),Y
 <b>7328</b>   60         RTS 
 </div>
 <a name="7329"></a>
 
 
-<b>RenderSteelWallInExpandedLattice:</b><br/>
+<b>RenderSteelWallInInflatedWorld:</b><br/>
 
 <div class="disass_code"><b>7329</b>   a5 92      LDA CaveMatrixY
 <b>732b</b>   0a         ASL A
@@ -3642,13 +3650,13 @@ nosidebar: true
 <b>732d</b>   a5 91      LDA CaveMatrixX
 <b>732f</b>   0a         ASL A
 <b>7330</b>   18         CLC 
-<b>7331</b>   7d da 53   ADC <a href="#53da">ExpandedLatticeLineAddressTable</a>,X
-<b>7334</b>   85 34      STA ExpandedLatticeCurrentCellPtr
+<b>7331</b>   7d da 53   ADC <a href="#53da">InflatedWorldLineAddressTable</a>,X
+<b>7334</b>   85 34      STA InflatedWorldCurrentCellPtr
 <b>7336</b>   a9 00      LDA #$00
-<b>7338</b>   7d db 53   ADC <a href="#53da">ExpandedLatticeLineAddressTable</a>+1,X
-<b>733b</b>   85 35      STA ExpandedLatticeCurrentCellPtr+1
-<b>733d</b>   20 9b 6c   JSR <a href="#6c9b">SetExpandedLatticeOutputPtr</a>
-<b>7340</b>   20 11 73   JSR <a href="#7311">RenderSteelWallInExpandedLatticeHelper</a>
+<b>7338</b>   7d db 53   ADC <a href="#53da">InflatedWorldLineAddressTable</a>+1,X
+<b>733b</b>   85 35      STA InflatedWorldCurrentCellPtr+1
+<b>733d</b>   20 9b 6c   JSR <a href="#6c9b">SetInflatedWorldOutputPtr</a>
+<b>7340</b>   20 11 73   JSR <a href="#7311">RenderSteelWallInInflatedWorldHelper</a>
 <b>7343</b>   60         RTS 
 </div>
 <a name="7344"></a>
@@ -3666,7 +3674,7 @@ nosidebar: true
 </div>
 
 
-<div class="disass_comment">; Render cell from lattice to expanded lattice.
+<div class="disass_comment">; Render cell from lattice to Inflated World.
 ; Is either cell $05[E] (outbox) or $25[%] (inbox),
 ; both of which map to (via .BaseCharNoForObjectTable)
 ; a hollow box.
@@ -3693,7 +3701,7 @@ nosidebar: true
 
 <b>__ProcessInAndOutBoxes__Steel:</b><br/>
 
-<div class="disass_code"><b>735a</b>   20 29 73   JSR <a href="#7329">RenderSteelWallInExpandedLattice</a>
+<div class="disass_code"><b>735a</b>   20 29 73   JSR <a href="#7329">RenderSteelWallInInflatedWorld</a>
 </div>
 <a name="735d"></a>
 
@@ -4118,8 +4126,8 @@ nosidebar: true
 
 <div class="disass_comment">; We only start a scroll if .AnotherFrameCounter is even.
 ; This is important to keep the scrolling logic in sync with the rest of the IRQ handler.
-; (IRQ handler flips buffers on even frames and copies the visible section of the expand
-; lattice the the back buffer on odd frames.)
+; (IRQ handler flips buffers on even frames and copies the visible section of the inflated
+; world the the back buffer on odd frames.)
 ; 
 ; .FineScrollDirY: $40 up, $c0 down.
 </div>
@@ -4183,8 +4191,8 @@ nosidebar: true
 ; This setting takes effect in the next frame.
 ; The previous setting was .YScrollVicCtl1Table[0] ($17), the resting state when not scrolling.
 ; 
-; 2) We change .ExpandedLatticeSubsetPtrH & ExpandedLatticeSubsetPtrL.
-; Since the expanded lattice is copied to the back buffer on odd frames and it then has to be
+; 2) We change .InflatedWorldSubsetPtrH & InflatedWorldSubsetPtrL.
+; Since the Inflated World is copied to the back buffer on odd frames and it then has to be
 ; flipped to the front, which happens in even frames, this change will not be seen for a bit.
 ; This is why we do it at what seems like a strange fine scroll value (not an extreme).
 ; 
@@ -4196,7 +4204,7 @@ nosidebar: true
 ; 
 ; 1) .RastInt_vic_control1 = .YScrollVicCtl1Table[2] ($13)
 ; 
-; 2) Our caller copies the expanded lattice to the back buffer.
+; 2) Our caller copies the Inflated World to the back buffer.
 ; The back buffer now reflects the changes made in frame n+0 step 2.
 ; It is not visible yet however as it has to be flipped to the front.
 ; 
@@ -4225,13 +4233,13 @@ nosidebar: true
 
 <div class="disass_comment">; Stuff on screen moves up, Rockford moving down.
 </div>
-<div class="disass_code"><b>751e</b>   a5 d6      LDA ExpandedLatticeSubset
+<div class="disass_code"><b>751e</b>   a5 d6      LDA InflatedWorldSubset
 <b>7520</b>   18         CLC 
 <b>7521</b>   69 50      ADC #$50
-<b>7523</b>   85 d6      STA ExpandedLatticeSubset
-<b>7525</b>   a5 d7      LDA ExpandedLatticeSubset+1
+<b>7523</b>   85 d6      STA InflatedWorldSubset
+<b>7525</b>   a5 d7      LDA InflatedWorldSubset+1
 <b>7527</b>   69 00      ADC #$00
-<b>7529</b>   85 d7      STA ExpandedLatticeSubset+1
+<b>7529</b>   85 d7      STA InflatedWorldSubset+1
 <a name="752b"></a><b>752b</b>   a5 e3      LDA YScrollTableIndex
 <b>752d</b>   d0 25      BNE <a href="#7554">$7554</a>
 <b>752f</b>   a5 e4      LDA YCoarseScrollDirFlag
@@ -4259,13 +4267,13 @@ nosidebar: true
 ; only one frame). This means it takes two frames to initiate an upward scroll whereas scrolling
 ; down takes one.
 </div>
-<div class="disass_code"><b>7542</b>   a5 d6      LDA ExpandedLatticeSubset
+<div class="disass_code"><b>7542</b>   a5 d6      LDA InflatedWorldSubset
 <b>7544</b>   38         SEC 
 <b>7545</b>   e9 50      SBC #$50
-<b>7547</b>   85 d6      STA ExpandedLatticeSubset
-<b>7549</b>   a5 d7      LDA ExpandedLatticeSubset+1
+<b>7547</b>   85 d6      STA InflatedWorldSubset
+<b>7549</b>   a5 d7      LDA InflatedWorldSubset+1
 <b>754b</b>   e9 00      SBC #$00
-<b>754d</b>   85 d7      STA ExpandedLatticeSubset+1
+<b>754d</b>   85 d7      STA InflatedWorldSubset+1
 <b>754f</b>   a9 03      LDA #$03
 <b>7551</b>   85 e4      STA YCoarseScrollDirFlag
 <b>7553</b>   60         RTS 
@@ -4319,9 +4327,9 @@ nosidebar: true
 <b>759b</b>   d0 0a      BNE <a href="#75a7">$75a7</a>
 <b>759d</b>   a5 e2      LDA XCoarseScrollDirFlag
 <b>759f</b>   d0 06      BNE <a href="#75a7">$75a7</a>
-<b>75a1</b>   e6 d6      INC ExpandedLatticeSubset
+<b>75a1</b>   e6 d6      INC InflatedWorldSubset
 <b>75a3</b>   d0 02      BNE <a href="#75a7">$75a7</a>
-<b>75a5</b>   e6 d7      INC ExpandedLatticeSubset+1
+<b>75a5</b>   e6 d7      INC InflatedWorldSubset+1
 <a name="75a7"></a><b>75a7</b>   a5 e1      LDA XScrollTableIndex
 <b>75a9</b>   d0 25      BNE <a href="#75d0">$75d0</a>
 <b>75ab</b>   a5 e2      LDA XCoarseScrollDirFlag
@@ -4333,13 +4341,13 @@ nosidebar: true
 <b>75b8</b>   a5 e6      LDA RockfordCellsFromLeftOfScreen
 <b>75ba</b>   c9 09      CMP #$09
 <b>75bc</b>   f0 12      BEQ <a href="#75d0">$75d0</a>
-<a name="75be"></a><b>75be</b>   a5 d6      LDA ExpandedLatticeSubset
+<a name="75be"></a><b>75be</b>   a5 d6      LDA InflatedWorldSubset
 <b>75c0</b>   38         SEC 
 <b>75c1</b>   e9 01      SBC #$01
-<b>75c3</b>   85 d6      STA ExpandedLatticeSubset
-<b>75c5</b>   a5 d7      LDA ExpandedLatticeSubset+1
+<b>75c3</b>   85 d6      STA InflatedWorldSubset
+<b>75c5</b>   a5 d7      LDA InflatedWorldSubset+1
 <b>75c7</b>   e9 00      SBC #$00
-<b>75c9</b>   85 d7      STA ExpandedLatticeSubset+1
+<b>75c9</b>   85 d7      STA InflatedWorldSubset+1
 <b>75cb</b>   a9 03      LDA #$03
 <b>75cd</b>   85 e2      STA XCoarseScrollDirFlag
 <b>75cf</b>   60         RTS 
@@ -4705,16 +4713,16 @@ nosidebar: true
 <div class="disass_comment">; 
 </div>
 
-<b>FillExpandedLatticeWithScrollingSteelWallChar:</b><br/>
+<b>FillInflatedWorldWithScrollingSteelWallChar:</b><br/>
 
 <div class="disass_code"><b>76db</b>   a2 00      LDX #$00
-<a name="76dd"></a><b>76dd</b>   bd da 53   LDA <a href="#53da">ExpandedLatticeLineAddressTable</a>,X
-<b>76e0</b>   85 34      STA ExpandedLatticeCurrentCellPtr
-<b>76e2</b>   bd db 53   LDA <a href="#53da">ExpandedLatticeLineAddressTable</a>+1,X
-<b>76e5</b>   85 35      STA ExpandedLatticeCurrentCellPtr+1
+<a name="76dd"></a><b>76dd</b>   bd da 53   LDA <a href="#53da">InflatedWorldLineAddressTable</a>,X
+<b>76e0</b>   85 34      STA InflatedWorldCurrentCellPtr
+<b>76e2</b>   bd db 53   LDA <a href="#53da">InflatedWorldLineAddressTable</a>+1,X
+<b>76e5</b>   85 35      STA InflatedWorldCurrentCellPtr+1
 <b>76e7</b>   a0 00      LDY #$00
 <b>76e9</b>   a9 7c      LDA #$7c
-<a name="76eb"></a><b>76eb</b>   91 34      STA (ExpandedLatticeCurrentCellPtr),Y
+<a name="76eb"></a><b>76eb</b>   91 34      STA (InflatedWorldCurrentCellPtr),Y
 <b>76ed</b>   c8         INY 
 </div>
 
@@ -4741,9 +4749,9 @@ nosidebar: true
 <div class="disass_comment">; Build a line address table for currently visible
 ; portion of empanded lattice.
 </div>
-<div class="disass_code"><b>76f9</b>   a5 d6      LDA ExpandedLatticeSubset
+<div class="disass_code"><b>76f9</b>   a5 d6      LDA InflatedWorldSubset
 <b>76fb</b>   85 02      STA __CoverLevel__LineAddressTable
-<b>76fd</b>   a5 d7      LDA ExpandedLatticeSubset+1
+<b>76fd</b>   a5 d7      LDA InflatedWorldSubset+1
 <b>76ff</b>   85 03      STA __CoverLevel__LineAddressTable+1
 <b>7701</b>   a2 00      LDX #$00
 <a name="7703"></a><b>7703</b>   b5 02      LDA __CoverLevel__LineAddressTable,X
@@ -4802,9 +4810,9 @@ nosidebar: true
 
 <div class="disass_code"><b>771e</b>   85 ba      STA CoverLevel__POINTLESS__
 <b>7720</b>   b5 02      LDA __CoverLevel__LineAddressTable,X
-<b>7722</b>   85 36      STA ExpandedLatticeOutputPtr
+<b>7722</b>   85 36      STA InflatedWorldOutputPtr
 <b>7724</b>   b5 03      LDA __CoverLevel__LineAddressTable+1,X
-<b>7726</b>   85 37      STA ExpandedLatticeOutputPtr+1
+<b>7726</b>   85 37      STA InflatedWorldOutputPtr+1
 </div>
 <a name="7728"></a>
 
@@ -4833,7 +4841,7 @@ nosidebar: true
 <b>7732</b>   e6 ba      INC CoverLevel__POINTLESS__
 <b>7734</b>   d0 04      BNE <a href="#773a">__CoverLevel__PointlessBranchTarget</a>
 <b>7736</b>   a9 00      LDA #$00
-<b>7738</b>   91 36      STA (ExpandedLatticeOutputPtr),Y
+<b>7738</b>   91 36      STA (InflatedWorldOutputPtr),Y
 </div>
 <a name="773a"></a>
 
@@ -4843,7 +4851,7 @@ nosidebar: true
 <div class="disass_comment">; $7c is scrolling steel wall.
 </div>
 <div class="disass_code"><b>773a</b>   a9 7c      LDA #$7c
-<b>773c</b>   91 36      STA (ExpandedLatticeOutputPtr),Y
+<b>773c</b>   91 36      STA (InflatedWorldOutputPtr),Y
 <b>773e</b>   e8         INX 
 <b>773f</b>   e8         INX 
 <b>7740</b>   e0 30      CPX #$30
@@ -4856,15 +4864,15 @@ nosidebar: true
 </div>
 <a name="774d"></a>
 
-<div class="disass_comment">; Pads the expanded lattice ($4003 - $4DC2) with 1st steel wall char ($4a).
+<div class="disass_comment">; Pads the Inflated World ($4003 - $4DC2) with 1st steel wall char ($4a).
 ; Padded bytes: $4000-4002 (3 bytes) and $4dc3-4ec2 (256 bytes).
 </div>
 
-<b>PadExpandedLattice:</b><br/>
+<b>PadInflatedWorld:</b><br/>
 
 <div class="disass_code"><b>774d</b>   a2 00      LDX #$00
 <b>774f</b>   a9 4a      LDA #$4a
-<a name="7751"></a><b>7751</b>   9d c3 4d   STA ExpandedLattice__END_PLUS_ONE__,X
+<a name="7751"></a><b>7751</b>   9d c3 4d   STA InflatedWorld__END_PLUS_ONE__,X
 <b>7754</b>   ca         DEX 
 <b>7755</b>   d0 fa      BNE <a href="#7751">$7751</a>
 <b>7757</b>   a2 02      LDX #$02
@@ -5117,7 +5125,7 @@ nosidebar: true
 </div>
 
 
-<div class="disass_code"><b>7826</b>   20 4d 77   JSR <a href="#774d">PadExpandedLattice</a>
+<div class="disass_code"><b>7826</b>   20 4d 77   JSR <a href="#774d">PadInflatedWorld</a>
 <b>7829</b>   60         RTS 
 </div>
 <a name="782a"></a>
@@ -5755,7 +5763,7 @@ nosidebar: true
 <b>7b41</b>   20 ad 76   JSR <a href="#76ad">Scroller</a>
 <b>7b44</b>   a5 c2      LDA AnotherFrameCounter
 <b>7b46</b>   29 01      AND #$01
-<b>7b48</b>   d0 0b      BNE <a href="#7b55">__GameIRQActions__CopyExpandedLatticeToBackBuffer</a>
+<b>7b48</b>   d0 0b      BNE <a href="#7b55">__GameIRQActions__CopyInflatedWorldToBackBuffer</a>
 </div>
 
 
@@ -5771,9 +5779,9 @@ nosidebar: true
 <a name="7b55"></a>
 
 
-<b>__GameIRQActions__CopyExpandedLatticeToBackBuffer:</b><br/>
+<b>__GameIRQActions__CopyInflatedWorldToBackBuffer:</b><br/>
 
-<div class="disass_code"><b>7b55</b>   4c 00 9e   JMP <a href="#9e00">MOVEDCopyExpandedLatticeSubsetToBackBuffer</a>
+<div class="disass_code"><b>7b55</b>   4c 00 9e   JMP <a href="#9e00">MOVEDCopyInflatedWorldSubsetToBackBuffer</a>
 </div>
 
 
@@ -5782,9 +5790,9 @@ nosidebar: true
 ; The routine occupies $7b58-$7c90.
 </div>
 
-<b>CopyExpandedLatticeSubsetToBackBuffer:</b><br/>
+<b>CopyInflatedWorldSubsetToBackBuffer:</b><br/>
 
-<div class="disass_code"><b>7b58</b>   a5 d6      LDA ExpandedLatticeSubset
+<div class="disass_code"><b>7b58</b>   a5 d6      LDA InflatedWorldSubset
 <b>7b5a</b>   18         CLC 
 <b>7b5b</b>   69 20      ADC #$20
 <b>7b5d</b>   8d 51 9e   STA $9e51
@@ -5795,7 +5803,7 @@ nosidebar: true
 </div>
 
 
-<div class="disass_code"><b>7b60</b>   a5 d7      LDA ExpandedLatticeSubset+1
+<div class="disass_code"><b>7b60</b>   a5 d7      LDA InflatedWorldSubset+1
 <b>7b62</b>   69 03      ADC #$03
 <b>7b64</b>   8d 52 9e   STA $9e52
 </div>
@@ -5918,7 +5926,7 @@ nosidebar: true
 </div>
 
 
-<div class="disass_code"><b>7c0e</b>   a5 d6      LDA ExpandedLatticeSubset
+<div class="disass_code"><b>7c0e</b>   a5 d6      LDA InflatedWorldSubset
 <b>7c10</b>   8d f0 9e   STA $9ef0
 </div>
 
@@ -5927,7 +5935,7 @@ nosidebar: true
 </div>
 
 
-<div class="disass_code"><b>7c13</b>   a5 d7      LDA ExpandedLatticeSubset+1
+<div class="disass_code"><b>7c13</b>   a5 d7      LDA InflatedWorldSubset+1
 <b>7c15</b>   8d f1 9e   STA $9ef1
 </div>
 
@@ -7095,7 +7103,7 @@ nosidebar: true
 <b>805b</b>   85 bd      STA PlayRevealLevelSoundAndRedefineCharFlag
 <b>805d</b>   20 f4 7c   JSR <a href="#7cf4">ResetSound</a>
 <b>8060</b>   20 f9 76   JSR <a href="#76f9">CoverLevel</a>
-<b>8063</b>   20 db 76   JSR <a href="#76db">FillExpandedLatticeWithScrollingSteelWallChar</a>
+<b>8063</b>   20 db 76   JSR <a href="#76db">FillInflatedWorldWithScrollingSteelWallChar</a>
 <b>8066</b>   a5 a0      LDA GameOverFlag
 <b>8068</b>   f0 03      BEQ <a href="#806d">$806d</a>
 <b>806a</b>   20 0c 7d   JSR <a href="#7d0c">FourDelays</a>
@@ -9957,7 +9965,7 @@ nosidebar: true
 
 <div class="disass_code"><b>8a81</b>   a9 3c      LDA #$3c
 <b>8a83</b>   8d 07 98   STA BackBufferVICMemControl
-<b>8a86</b>   20 db 76   JSR <a href="#76db">FillExpandedLatticeWithScrollingSteelWallChar</a>
+<b>8a86</b>   20 db 76   JSR <a href="#76db">FillInflatedWorldWithScrollingSteelWallChar</a>
 <b>8a89</b>   78         SEI 
 <b>8a8a</b>   a2 07      LDX #$07
 <a name="8a8c"></a><b>8a8c</b>   bd 0b 86   LDA <a href="#860b">RastIntTitleModeVICRegs</a>,X
@@ -10092,7 +10100,7 @@ nosidebar: true
 <b>8b02</b>   e8         INX 
 <b>8b03</b>   86 05      STX __CoverLevel__LineAddressTable+3
 <a name="8b05"></a><b>8b05</b>   b1 02      LDA (__CoverLevel__LineAddressTable),Y
-<b>8b07</b>   99 00 9e   STA <a href="#9e00">MOVEDCopyExpandedLatticeSubsetToBackBuffer</a>,Y
+<b>8b07</b>   99 00 9e   STA <a href="#9e00">MOVEDCopyInflatedWorldSubsetToBackBuffer</a>,Y
 <b>8b0a</b>   b1 04      LDA (__CoverLevel__LineAddressTable+2),Y
 <b>8b0c</b>   99 00 9f   STA $9f00,Y
 <b>8b0f</b>   c8         INY 
@@ -10105,9 +10113,9 @@ nosidebar: true
 
 
 <div class="disass_code"><b>8b12</b>   a9 03      LDA #$03
-<b>8b14</b>   85 d6      STA ExpandedLatticeSubset
+<b>8b14</b>   85 d6      STA InflatedWorldSubset
 <b>8b16</b>   a9 40      LDA #$40
-<b>8b18</b>   85 d7      STA ExpandedLatticeSubset+1
+<b>8b18</b>   85 d7      STA InflatedWorldSubset+1
 </div>
 
 
@@ -10282,13 +10290,13 @@ nosidebar: true
 <a name="9e00"></a>
 
 
-<b>MOVEDCopyExpandedLatticeSubsetToBackBuffer:</b><br/>
+<b>MOVEDCopyInflatedWorldSubsetToBackBuffer:</b><br/>
 
-<div class="disass_code"><b>9e00</b>   a5 d6      LDA ExpandedLatticeSubset
+<div class="disass_code"><b>9e00</b>   a5 d6      LDA InflatedWorldSubset
 <b>9e02</b>   18         CLC 
 <b>9e03</b>   69 20      ADC #$20
 <b>9e05</b>   8d 51 9e   STA $9e51
-<b>9e08</b>   a5 d7      LDA ExpandedLatticeSubset+1
+<b>9e08</b>   a5 d7      LDA InflatedWorldSubset+1
 <b>9e0a</b>   69 03      ADC #$03
 <b>9e0c</b>   8d 52 9e   STA $9e52
 <b>9e0f</b>   ad 07 98   LDA BackBufferVICMemControl
@@ -10359,9 +10367,9 @@ nosidebar: true
 <b>9eae</b>   8d f4 9e   STA $9ef4
 <b>9eb1</b>   a9 28      LDA #$28
 <b>9eb3</b>   8d f3 9e   STA $9ef3
-<b>9eb6</b>   a5 d6      LDA ExpandedLatticeSubset
+<b>9eb6</b>   a5 d6      LDA InflatedWorldSubset
 <b>9eb8</b>   8d f0 9e   STA $9ef0
-<b>9ebb</b>   a5 d7      LDA ExpandedLatticeSubset+1
+<b>9ebb</b>   a5 d7      LDA InflatedWorldSubset+1
 <b>9ebd</b>   8d f1 9e   STA $9ef1
 <b>9ec0</b>   a2 00      LDX #$00
 <a name="9ec2"></a><b>9ec2</b>   bd f0 9e   LDA $9ef0,X
