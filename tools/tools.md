@@ -19,4 +19,4 @@ Negentropy is a disassembler for the C64 that I'm working on written in Python. 
 In addition to Python's standard library the following packages are used:
 * *Jinja2* - used for templates. Currently only HTML is supported (there are other incomplete templates). Checkout its website [here](http://jinja.pocoo.org/)
 * *Pillow* - for image generation. It's [website](https://python-pillow.org/)
-* *Lark* - for parsing. It's LALR parser is bloody fast. It's [website](https://github.com/lark-parser/lark)
+* *Lark* - for parsing. It's LALR parser is bloody fast (and its author tolerant of stupid questions😊). It's [website](https://github.com/lark-parser/lark)
