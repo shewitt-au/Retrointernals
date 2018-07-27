@@ -8,7 +8,7 @@ This is the tools page where you can find the software I use for my reverse engi
 
 ## Negentropy
 
-Negentropy is a disassembler for the C64 that I'm working on written in Python. This is my first real Python program and is still a work in progress, but nevertheless it's quite useful. The repo can be found [here](https://github.com/shewitt-au/negentropy). Here's a list of some of the features currently implemented:
+Negentropy is a disassembler for the C64 that I'm working on written in Python. It's the tool used in all of the disassemblies on this site, all of which are unedited output of the tool, images and all. It's is my first real Python program and is still a work in progress, but nevertheless it's quite useful. The repo can be found [here](https://github.com/shewitt-au/negentropy). Here's a list of some of the features currently implemented:
 * Generate HTML pages, complete with images and links.
 * Disassemble 6502 machine code.
 * List BASIC programs.
