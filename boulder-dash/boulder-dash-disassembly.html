@@ -46,8 +46,39 @@ nosidebar: true
 <img src="5000.png"/><br/>
 <a name="53b0"></a>
 
+
+<b>InflatedWorldOffsetAdjustTable:</b><br/>
+
 <div class="disass_comment">; 0  : Offset
 ; 1&2: Adjust 
+; 
+; WorldCurrentCellPtr points to the NW cell and the cell in consideration is at
+; 'C' (that's why you see a lot of offsets of $29 in the code). 
+; ---------------------
+; |NW:$00|N:$01|NE:$02|
+; |------+-----+------|
+; | W:$28|C:$29| E:$2a|
+; |------+-----+------|
+; |SW:$50|S:$51|SE:$52|
+; |======+=====+======|
+; |   $78|  $79|   $7a|
+; ---------------------
+; 
+; InflatedWorldCurrentCellPtr points to the cell in consideration ('C'), since
+; each cell in the world is 2x2 characters in the inflated world the offsets
+; are as follows (I'm not sure what the extra bits hanging off the sides are
+; for yet)
+;         ------------------------
+;         |NW:-162|N:-160|NE:-158|
+;  -------+-------+------|-------|-------
+; |   -4  | W:-2  |C: 0  | E:+2  |   +4  |
+;  -------+-------+------|-------|-------
+;         |SW:+158|S:+160|SE:+162|
+;         |=======+======+=======|
+;         |   +318|  +320|   +322|
+;         ------------------------
+; 
+; This table translates offsets as specified in the first scheme to ones in the second.
 ; 
 ; Offset: 0($00)  Adjust: -162
 ; Offset: 1($01)  Adjust: -160
@@ -64,9 +95,6 @@ nosidebar: true
 ; Offset: 121($79)    Adjust: 320
 ; Offset: 122($7a)    Adjust: 322
 </div>
-
-<b>InflatedWorldOffsetAdjustTable:</b><br/>
-
 <div class="disass_code"><b>53b0</b>   00 5e ff 01  60 ff 02 62  ff 28 fe ff  27 fc ff 29
 <b>53c0</b>   00 00 2a 02  00 2b 04 00  50 9e 00 51  a0 00 52 a2
 <b>53d0</b>   00 78 3e 01  79 40 01 7a  42 01
