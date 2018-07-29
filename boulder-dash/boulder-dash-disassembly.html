@@ -64,10 +64,10 @@ nosidebar: true
 ; |   $78|  $79|   $7a|
 ; ---------------------
 ; 
-; InflatedWorldCurrentCellPtr points to the cell in consideration ('C'), since
+; InflatedWorldCurrentCellPtr points to the cell in consideration ('C'). Since
 ; each cell in the world is 2x2 characters in the inflated world the offsets
 ; are as follows (I'm not sure what the extra bits hanging off the sides are
-; for yet)
+; for yet).
 ;         ------------------------
 ;         |NW:-162|N:-160|NE:-158|
 ;  -------+-------+------|-------|-------
@@ -1281,7 +1281,7 @@ nosidebar: true
 <b>6b20</b>   a2 07      LDX #$07<span class="disass_comment"> ; 7 = Yellow</span>
 <a name="6b22"></a><b>6b22</b>   8a         TXA 
 <b>6b23</b>   a2 03      LDX #$03
-<a name="6b25"></a><b>6b25</b>   9d 0e d8   STA $d80e,X
+<a name="6b25"></a><b>6b25</b>   9d 0e d8   STA C64_ColourRam+$e,X
 <b>6b28</b>   ca         DEX 
 <b>6b29</b>   10 fa      BPL <a href="#6b25">$6b25</a>
 <b>6b2b</b>   a2 01      LDX #$01
@@ -1292,7 +1292,7 @@ nosidebar: true
 <b>6b35</b>   a2 07      LDX #$07
 <a name="6b37"></a><b>6b37</b>   8a         TXA 
 <b>6b38</b>   a2 03      LDX #$03
-<a name="6b3a"></a><b>6b3a</b>   9d 02 d8   STA $d802,X
+<a name="6b3a"></a><b>6b3a</b>   9d 02 d8   STA C64_ColourRam+2,X
 <b>6b3d</b>   ca         DEX 
 <b>6b3e</b>   10 fa      BPL <a href="#6b3a">$6b3a</a>
 <b>6b40</b>   a2 00      LDX #$00
@@ -7957,7 +7957,7 @@ nosidebar: true
 </div>
 
 
-<div class="disass_code"><b>8391</b>   9d 70 db   STA $db70,X
+<div class="disass_code"><b>8391</b>   9d 70 db   STA C64_ColourRam+$370,X
 </div>
 
 
@@ -7965,7 +7965,7 @@ nosidebar: true
 </div>
 
 
-<div class="disass_code"><b>8394</b>   9d 84 db   STA $db84,X
+<div class="disass_code"><b>8394</b>   9d 84 db   STA C64_ColourRam+$384,X
 </div>
 
 
@@ -7973,7 +7973,7 @@ nosidebar: true
 </div>
 
 
-<div class="disass_code"><b>8397</b>   9d a6 db   STA $dba6,X
+<div class="disass_code"><b>8397</b>   9d a6 db   STA C64_ColourRam+$3a6,X
 </div>
 
 
@@ -7981,7 +7981,7 @@ nosidebar: true
 </div>
 
 
-<div class="disass_code"><b>839a</b>   9d ba db   STA $dbba,X
+<div class="disass_code"><b>839a</b>   9d ba db   STA C64_ColourRam+$3ba,X
 <b>839d</b>   ca         DEX 
 <b>839e</b>   10 f1      BPL <a href="#8391">$8391</a>
 <b>83a0</b>   60         RTS 
@@ -8440,7 +8440,7 @@ nosidebar: true
 </div>
 
 
-<div class="disass_code"><b>8526</b>   9d 98 db   STA $db98,X
+<div class="disass_code"><b>8526</b>   9d 98 db   STA C64_ColourRam+$398,X
 </div>
 
 
@@ -8497,7 +8497,7 @@ nosidebar: true
 </div>
 
 
-<div class="disass_code"><b>854d</b>   9d 98 db   STA $db98,X
+<div class="disass_code"><b>854d</b>   9d 98 db   STA C64_ColourRam+$398,X
 </div>
 
 
@@ -8505,7 +8505,7 @@ nosidebar: true
 </div>
 
 
-<div class="disass_code"><b>8550</b>   9d aa db   STA $dbaa,X
+<div class="disass_code"><b>8550</b>   9d aa db   STA C64_ColourRam+$3aa,X
 <b>8553</b>   ca         DEX 
 <b>8554</b>   10 f7      BPL <a href="#854d">$854d</a>
 </div>
