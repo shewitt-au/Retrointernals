@@ -41,7 +41,7 @@ nosidebar: true
 
 
 <div class="disass_container">
-<span class="disass_tiny">built on 2018-07-30 23:33:14+10:00</span><br/>
+<span class="disass_tiny">built on 2018-07-31 00:36:32+10:00</span><br/>
 <h1>Boulder Dash Disassembly</h1><a name="5000"></a>
 
 
@@ -52,12 +52,12 @@ nosidebar: true
 <a name="53b0"></a>
 
 
-<b>InflatedWorldOffsetAdjustTable:</b><br/>
+<b>InflatedCaveOffsetAdjustTable:</b><br/>
 
 <div class="disass_comment">; 0  : Offset
 ; 1&2: Adjust 
 ; 
-; WorldCurrentCellPtr points to the NW cell and the cell in consideration is at
+; CaveCurrentCellPtr points to the NW cell and the cell in consideration is at
 ; 'C' (that's why you see a lot of offsets of $29 in the code). 
 ; ---------------------
 ; |NW:$00|N:$01|NE:$02|
@@ -69,8 +69,8 @@ nosidebar: true
 ; |   $78|  $79|   $7a|
 ; ---------------------
 ; 
-; InflatedWorldCurrentCellPtr points to the cell in consideration ('C'). Since
-; each cell in the world is 2x2 characters in the inflated world the offsets
+; InflatedCaveCurrentCellPtr points to the cell in consideration ('C'). Since
+; each cell in the cave is 2x2 characters in the inflated cave the offsets
 ; are as follows (I'm not sure what the extra bits hanging off the sides are
 ; for yet).
 ;         ------------------------
@@ -107,9 +107,9 @@ nosidebar: true
 <a name="53da"></a>
 
 
-<b>InflatedWorldLineAddressTable:</b><br/>
+<b>InflatedCaveLineAddressTable:</b><br/>
 
-<div class="disass_comment">; Inflated World: $4003 - $4dc2
+<div class="disass_comment">; Inflated Cave: $4003 - $4dc2
 </div>
 <div class="disass_code"><b>53da</b>   03 40 a3 40  43 41 e3 41  83 42 23 43  c3 43 63 44
 <b>53ea</b>   03 45 a3 45  43 46 e3 46  83 47 23 48  c3 48 63 49
@@ -1511,30 +1511,30 @@ nosidebar: true
 ; ---------------------------------------------------------------
 ; INPUTS:
 ; ObjectTypeForScreenUpdate       $8A         = Object code
-; InflatedWorldOutputOutputPtr    $36 & $37   = Position
+; InflatedCaveOutputOutputPtr    $36 & $37   = Position
 ; 
 ; NOTES:
-;  Call SetInflatedWorldOutputPtr to set InflatedWorldOutputPtr
-;  Inflated World: $4003 - $4dc2
+;  Call SetInflatedCaveOutputPtr to set InflatedCaveOutputPtr
+;  Inflated Cave: $4003 - $4dc2
 ; ---------------------------------------------------------------
 </div>
 
-<b>SetCellInInflatedWorld:</b><br/>
+<b>SetCellInInflatedCave:</b><br/>
 
 <div class="disass_code"><b>6c80</b>   a6 8a      LDX ObjectTypeForScreenUpdate
 <b>6c82</b>   bd 28 5f   LDA <a href="#5f28">BaseCharNoForObjectTable</a>,X
 <b>6c85</b>   a0 00      LDY #$00
-<b>6c87</b>   91 36      STA (InflatedWorldOutputPtr),Y
+<b>6c87</b>   91 36      STA (InflatedCaveOutputPtr),Y
 <b>6c89</b>   18         CLC 
 <b>6c8a</b>   69 01      ADC #$01
 <b>6c8c</b>   c8         INY 
-<b>6c8d</b>   91 36      STA (InflatedWorldOutputPtr),Y
+<b>6c8d</b>   91 36      STA (InflatedCaveOutputPtr),Y
 <b>6c8f</b>   69 0f      ADC #$0f
 <b>6c91</b>   a0 50      LDY #$50
-<b>6c93</b>   91 36      STA (InflatedWorldOutputPtr),Y
+<b>6c93</b>   91 36      STA (InflatedCaveOutputPtr),Y
 <b>6c95</b>   69 01      ADC #$01
 <b>6c97</b>   c8         INY 
-<b>6c98</b>   91 36      STA (InflatedWorldOutputPtr),Y
+<b>6c98</b>   91 36      STA (InflatedCaveOutputPtr),Y
 <b>6c9a</b>   60         RTS 
 </div>
 <a name="6c9b"></a>
@@ -1542,74 +1542,80 @@ nosidebar: true
 <div class="disass_comment">; 
 ; ---------------------------------------------
 ; INPUTS:
-; .InflatedWorldCurrentCellPtr $34 & 35
+; .InflatedCaveCurrentCellPtr $34 & 35
 ; y = Offset
 ; OUTPUT:
-; .InflatedWorldOutputPtr $36 & $37
+; .InflatedCaveOutputPtr $36 & $37
 ; 
-; Inflated World: $4003 - $4dc2
+; Inflated Cave: $4003 - $4dc2
 ; ---------------------------------------------
 </div>
 
-<b>SetInflatedWorldOutputPtr:</b><br/>
+<b>SetInflatedCaveOutputPtr:</b><br/>
 
 <div class="disass_code"><b>6c9b</b>   a2 fd      LDX #$fd
 <b>6c9d</b>   98         TYA 
 <a name="6c9e"></a><b>6c9e</b>   e8         INX 
 <b>6c9f</b>   e8         INX 
 <b>6ca0</b>   e8         INX 
-<b>6ca1</b>   dd b0 53   CMP <a href="#53b0">InflatedWorldOffsetAdjustTable</a>,X
+<b>6ca1</b>   dd b0 53   CMP <a href="#53b0">InflatedCaveOffsetAdjustTable</a>,X
 <b>6ca4</b>   d0 f8      BNE <a href="#6c9e">$6c9e</a>
 <b>6ca6</b>   18         CLC 
-<b>6ca7</b>   a5 34      LDA InflatedWorldCurrentCellPtr
-<b>6ca9</b>   7d b1 53   ADC <a href="#53b0">InflatedWorldOffsetAdjustTable</a>+1,X
-<b>6cac</b>   85 36      STA InflatedWorldOutputPtr
-<b>6cae</b>   a5 35      LDA InflatedWorldCurrentCellPtr+1
-<b>6cb0</b>   7d b2 53   ADC <a href="#53b0">InflatedWorldOffsetAdjustTable</a>+2,X
-<b>6cb3</b>   85 37      STA InflatedWorldOutputPtr+1
+<b>6ca7</b>   a5 34      LDA InflatedCaveCurrentCellPtr
+<b>6ca9</b>   7d b1 53   ADC <a href="#53b0">InflatedCaveOffsetAdjustTable</a>+1,X
+<b>6cac</b>   85 36      STA InflatedCaveOutputPtr
+<b>6cae</b>   a5 35      LDA InflatedCaveCurrentCellPtr+1
+<b>6cb0</b>   7d b2 53   ADC <a href="#53b0">InflatedCaveOffsetAdjustTable</a>+2,X
+<b>6cb3</b>   85 37      STA InflatedCaveOutputPtr+1
 <b>6cb5</b>   60         RTS 
 </div>
 <a name="6cb6"></a>
 
-<div class="disass_comment">; A contains the object type and Y the offset from the current position.
-; A is preserved.
+<div class="disass_comment">; 
+; Set a cell in the cave (where the game logic occurs) and the inflated cave
+; (staging area for screen, each cell is presented as 2x2 characters).
+; 
+; A contains the object type and Y the offset from the current position.
+; A is preseCaverved.
 </div>
 
-<b>SetCaveCellAndScreenToObject:</b><br/>
+<b>SetCell:</b><br/>
 
 <div class="disass_code"><b>6cb6</b>   85 8a      STA ObjectTypeForScreenUpdate
-<b>6cb8</b>   91 32      STA (WorldCurrentCellPtr),Y
+<b>6cb8</b>   91 32      STA (CaveCurrentCellPtr),Y<span class="disass_comment"> ; the cave</span>
 <b>6cba</b>   a5 92      LDA CaveMatrixY
 <b>6cbc</b>   0a         ASL A
 <b>6cbd</b>   aa         TAX 
 <b>6cbe</b>   a5 91      LDA CaveMatrixX
 <b>6cc0</b>   0a         ASL A
 <b>6cc1</b>   18         CLC 
-<b>6cc2</b>   7d da 53   ADC <a href="#53da">InflatedWorldLineAddressTable</a>,X
-<b>6cc5</b>   85 34      STA InflatedWorldCurrentCellPtr
+<b>6cc2</b>   7d da 53   ADC <a href="#53da">InflatedCaveLineAddressTable</a>,X
+<b>6cc5</b>   85 34      STA InflatedCaveCurrentCellPtr
 <b>6cc7</b>   a9 00      LDA #$00
-<b>6cc9</b>   7d db 53   ADC <a href="#53da">InflatedWorldLineAddressTable</a>+1,X
-<b>6ccc</b>   85 35      STA InflatedWorldCurrentCellPtr+1
-<b>6cce</b>   20 9b 6c   JSR <a href="#6c9b">SetInflatedWorldOutputPtr</a>
-<b>6cd1</b>   20 80 6c   JSR <a href="#6c80">SetCellInInflatedWorld</a>
+<b>6cc9</b>   7d db 53   ADC <a href="#53da">InflatedCaveLineAddressTable</a>+1,X
+<b>6ccc</b>   85 35      STA InflatedCaveCurrentCellPtr+1
+<b>6cce</b>   20 9b 6c   JSR <a href="#6c9b">SetInflatedCaveOutputPtr</a>
+<b>6cd1</b>   20 80 6c   JSR <a href="#6c80">SetCellInInflatedCave</a><span class="disass_comment"> ; the inflated cave</span>
 <b>6cd4</b>   a5 8a      LDA ObjectTypeForScreenUpdate
 <b>6cd6</b>   60         RTS 
 </div>
 <a name="6cd7"></a>
 
+<div class="disass_comment">; 
+</div>
 
-<b>__ProcessWorld__ClearCurrentCell:</b><br/>
+<b>__ProcessCave__ClearCurrentCell:</b><br/>
 
 <div class="disass_code"><b>6cd7</b>   a9 00      LDA #$00
 <b>6cd9</b>   85 8a      STA ObjectTypeForScreenUpdate
 <b>6cdb</b>   a0 29      LDY #$29
-<b>6cdd</b>   91 32      STA (WorldCurrentCellPtr),Y
-<b>6cdf</b>   a5 34      LDA InflatedWorldCurrentCellPtr
-<b>6ce1</b>   85 36      STA InflatedWorldOutputPtr
-<b>6ce3</b>   a5 35      LDA InflatedWorldCurrentCellPtr+1
-<b>6ce5</b>   85 37      STA InflatedWorldOutputPtr+1
-<b>6ce7</b>   20 80 6c   JSR <a href="#6c80">SetCellInInflatedWorld</a>
-<b>6cea</b>   4c 15 7e   JMP <a href="#7e15">__ProcessWorld__NoObjectHandler</a>
+<b>6cdd</b>   91 32      STA (CaveCurrentCellPtr),Y
+<b>6cdf</b>   a5 34      LDA InflatedCaveCurrentCellPtr
+<b>6ce1</b>   85 36      STA InflatedCaveOutputPtr
+<b>6ce3</b>   a5 35      LDA InflatedCaveCurrentCellPtr+1
+<b>6ce5</b>   85 37      STA InflatedCaveOutputPtr+1
+<b>6ce7</b>   20 80 6c   JSR <a href="#6c80">SetCellInInflatedCave</a>
+<b>6cea</b>   4c 15 7e   JMP <a href="#7e15">__ProcessCave__NoObjectHandler</a>
 </div>
 <a name="6ced"></a>
 
@@ -1687,12 +1693,13 @@ nosidebar: true
 </div>
 <a name="6d16"></a>
 
-<div class="disass_comment">; Update one cave cell and on screen provided it isn't steel wall.
+<div class="disass_comment">; 
+; Update one cave cell and on screen provided it isn't steel wall.
 </div>
 
 <b>SetCellButPreserveSteelWall:</b><br/>
 
-<div class="disass_code"><b>6d16</b>   b1 32      LDA (WorldCurrentCellPtr),Y
+<div class="disass_code"><b>6d16</b>   b1 32      LDA (CaveCurrentCellPtr),Y
 </div>
 
 
@@ -1701,14 +1708,14 @@ nosidebar: true
 
 
 <div class="disass_code"><b>6d18</b>   c9 07      CMP #$07
-<b>6d1a</b>   f0 05      BEQ <a href="#6d21">SetCellButPreserveSteelWall__Finished</a>
+<b>6d1a</b>   f0 05      BEQ <a href="#6d21">_Finished</a>
 <b>6d1c</b>   a5 89      LDA ObjectTypeForUpdateCaveCell
-<b>6d1e</b>   20 b6 6c   JSR <a href="#6cb6">SetCaveCellAndScreenToObject</a>
+<b>6d1e</b>   20 b6 6c   JSR <a href="#6cb6">SetCell</a>
 </div>
 <a name="6d21"></a>
 
 
-<b>SetCellButPreserveSteelWall__Finished:</b><br/>
+<b>_Finished:</b><br/>
 
 <div class="disass_code"><b>6d21</b>   60         RTS 
 </div>
@@ -1776,14 +1783,14 @@ nosidebar: true
 
 
 <div class="disass_code"><b>6d5a</b>   a9 05      LDA #$05
-<b>6d5c</b>   20 b6 6c   JSR <a href="#6cb6">SetCaveCellAndScreenToObject</a>
+<b>6d5c</b>   20 b6 6c   JSR <a href="#6cb6">SetCell</a>
 </div>
 <a name="6d5f"></a>
 
 
 <b>ProcessHiddenOutbox__NotEnoughDiamonds:</b><br/>
 
-<div class="disass_code"><b>6d5f</b>   4c 15 7e   JMP <a href="#7e15">__ProcessWorld__NoObjectHandler</a>
+<div class="disass_code"><b>6d5f</b>   4c 15 7e   JMP <a href="#7e15">__ProcessCave__NoObjectHandler</a>
 </div>
 <a name="6d62"></a>
 
@@ -1884,7 +1891,7 @@ nosidebar: true
 
 <b>TestForRockfordOrAmoeba:</b><br/>
 
-<div class="disass_code"><b>6db4</b>   b1 32      LDA (WorldCurrentCellPtr),Y
+<div class="disass_code"><b>6db4</b>   b1 32      LDA (CaveCurrentCellPtr),Y
 </div>
 
 
@@ -1950,7 +1957,7 @@ nosidebar: true
 <div class="disass_code"><b>6ddf</b>   a9 1c      LDA #$1c
 <b>6de1</b>   85 89      STA ObjectTypeForUpdateCaveCell
 <b>6de3</b>   20 62 6d   JSR <a href="#6d62">Explode3x3Cells</a>
-<b>6de6</b>   4c 15 7e   JMP <a href="#7e15">__ProcessWorld__NoObjectHandler</a>
+<b>6de6</b>   4c 15 7e   JMP <a href="#7e15">__ProcessCave__NoObjectHandler</a>
 </div>
 <a name="6de9"></a>
 
@@ -1960,7 +1967,7 @@ nosidebar: true
 <b>ProcessFirefly__NoExplosion:</b><br/>
 
 <div class="disass_code"><b>6de9</b>   a0 29      LDY #$29
-<b>6deb</b>   b1 32      LDA (WorldCurrentCellPtr),Y
+<b>6deb</b>   b1 32      LDA (CaveCurrentCellPtr),Y
 <b>6ded</b>   29 03      AND #$03
 <b>6def</b>   aa         TAX 
 </div>
@@ -1971,7 +1978,7 @@ nosidebar: true
 
 
 <div class="disass_code"><b>6df0</b>   bc b0 6d   LDY <a href="#6db0">FromDownClockwiseOffsetTable</a>,X
-<b>6df3</b>   b1 32      LDA (WorldCurrentCellPtr),Y
+<b>6df3</b>   b1 32      LDA (CaveCurrentCellPtr),Y
 <b>6df5</b>   d0 0e      BNE <a href="#6e05">ProcessFirefly__CantTurnLeft</a>
 </div>
 
@@ -1985,8 +1992,8 @@ nosidebar: true
 <b>6df9</b>   69 03      ADC #$03
 <b>6dfb</b>   29 03      AND #$03
 <b>6dfd</b>   69 0c      ADC #$0c
-<b>6dff</b>   20 b6 6c   JSR <a href="#6cb6">SetCaveCellAndScreenToObject</a>
-<b>6e02</b>   4c d7 6c   JMP <a href="#6cd7">__ProcessWorld__ClearCurrentCell</a>
+<b>6dff</b>   20 b6 6c   JSR <a href="#6cb6">SetCell</a>
+<b>6e02</b>   4c d7 6c   JMP <a href="#6cd7">__ProcessCave__ClearCurrentCell</a>
 </div>
 <a name="6e05"></a>
 
@@ -1996,7 +2003,7 @@ nosidebar: true
 <b>ProcessFirefly__CantTurnLeft:</b><br/>
 
 <div class="disass_code"><b>6e05</b>   bc ac 6d   LDY <a href="#6dac">FromLeftClockwiseOffsetTable</a>,X
-<b>6e08</b>   b1 32      LDA (WorldCurrentCellPtr),Y
+<b>6e08</b>   b1 32      LDA (CaveCurrentCellPtr),Y
 <b>6e0a</b>   d0 0d      BNE <a href="#6e19">ProcessFirefly__CantMoveStraightAhead</a>
 </div>
 
@@ -2009,8 +2016,8 @@ nosidebar: true
 <b>6e0d</b>   8a         TXA 
 <b>6e0e</b>   69 0c      ADC #$0c
 <b>6e10</b>   bc ac 6d   LDY <a href="#6dac">FromLeftClockwiseOffsetTable</a>,X
-<b>6e13</b>   20 b6 6c   JSR <a href="#6cb6">SetCaveCellAndScreenToObject</a>
-<b>6e16</b>   4c d7 6c   JMP <a href="#6cd7">__ProcessWorld__ClearCurrentCell</a>
+<b>6e13</b>   20 b6 6c   JSR <a href="#6cb6">SetCell</a>
+<b>6e16</b>   4c d7 6c   JMP <a href="#6cd7">__ProcessCave__ClearCurrentCell</a>
 </div>
 <a name="6e19"></a>
 
@@ -2025,8 +2032,8 @@ nosidebar: true
 <b>6e1d</b>   69 01      ADC #$01
 <b>6e1f</b>   29 03      AND #$03
 <b>6e21</b>   69 0c      ADC #$0c
-<b>6e23</b>   91 32      STA (WorldCurrentCellPtr),Y
-<b>6e25</b>   4c 15 7e   JMP <a href="#7e15">__ProcessWorld__NoObjectHandler</a>
+<b>6e23</b>   91 32      STA (CaveCurrentCellPtr),Y
+<b>6e25</b>   4c 15 7e   JMP <a href="#7e15">__ProcessCave__NoObjectHandler</a>
 </div>
 <a name="6e28"></a>
 
@@ -2149,12 +2156,12 @@ nosidebar: true
 </div>
 
 
-<div class="disass_code"><b>6e7e</b>   b1 32      LDA (WorldCurrentCellPtr),Y
+<div class="disass_code"><b>6e7e</b>   b1 32      LDA (CaveCurrentCellPtr),Y
 <b>6e80</b>   29 33      AND #$33
-<b>6e82</b>   d1 32      CMP (WorldCurrentCellPtr),Y
+<b>6e82</b>   d1 32      CMP (CaveCurrentCellPtr),Y
 <b>6e84</b>   d0 0c      BNE <a href="#6e92">CheckIfFallingObjectKillsAnimal_NotButterfly</a>
 <b>6e86</b>   09 30      ORA #$30
-<b>6e88</b>   d1 32      CMP (WorldCurrentCellPtr),Y
+<b>6e88</b>   d1 32      CMP (CaveCurrentCellPtr),Y
 <b>6e8a</b>   d0 06      BNE <a href="#6e92">CheckIfFallingObjectKillsAnimal_NotButterfly</a>
 </div>
 
@@ -2182,9 +2189,9 @@ nosidebar: true
 </div>
 
 
-<div class="disass_code"><b>6e98</b>   b1 32      LDA (WorldCurrentCellPtr),Y
+<div class="disass_code"><b>6e98</b>   b1 32      LDA (CaveCurrentCellPtr),Y
 <b>6e9a</b>   29 0b      AND #$0b
-<b>6e9c</b>   d1 32      CMP (WorldCurrentCellPtr),Y
+<b>6e9c</b>   d1 32      CMP (CaveCurrentCellPtr),Y
 <b>6e9e</b>   d0 0a      BNE <a href="#6eaa">CheckIfFallingObjectKillsAnimal_Finished</a>
 <b>6ea0</b>   29 08      AND #$08
 <b>6ea2</b>   f0 06      BEQ <a href="#6eaa">CheckIfFallingObjectKillsAnimal_Finished</a>
@@ -2226,7 +2233,7 @@ nosidebar: true
 <div class="disass_code"><b>6eb2</b>   a9 21      LDA #$21
 <b>6eb4</b>   85 89      STA ObjectTypeForUpdateCaveCell
 <b>6eb6</b>   20 62 6d   JSR <a href="#6d62">Explode3x3Cells</a>
-<b>6eb9</b>   4c 15 7e   JMP <a href="#7e15">__ProcessWorld__NoObjectHandler</a>
+<b>6eb9</b>   4c 15 7e   JMP <a href="#7e15">__ProcessCave__NoObjectHandler</a>
 </div>
 <a name="6ebc"></a>
 
@@ -2236,7 +2243,7 @@ nosidebar: true
 <b>ProcessButterfly__NoExplosion:</b><br/>
 
 <div class="disass_code"><b>6ebc</b>   a0 29      LDY #$29
-<b>6ebe</b>   b1 32      LDA (WorldCurrentCellPtr),Y
+<b>6ebe</b>   b1 32      LDA (CaveCurrentCellPtr),Y
 <b>6ec0</b>   29 03      AND #$03
 <b>6ec2</b>   aa         TAX 
 </div>
@@ -2247,7 +2254,7 @@ nosidebar: true
 
 
 <div class="disass_code"><b>6ec3</b>   bc ac 6d   LDY <a href="#6dac">FromLeftClockwiseOffsetTable</a>,X
-<b>6ec6</b>   b1 32      LDA (WorldCurrentCellPtr),Y
+<b>6ec6</b>   b1 32      LDA (CaveCurrentCellPtr),Y
 <b>6ec8</b>   d0 0e      BNE <a href="#6ed8">ProcessButterfly__CantTurnRight</a>
 </div>
 
@@ -2261,8 +2268,8 @@ nosidebar: true
 <b>6ecc</b>   69 01      ADC #$01
 <b>6ece</b>   29 03      AND #$03
 <b>6ed0</b>   69 34      ADC #$34
-<b>6ed2</b>   20 b6 6c   JSR <a href="#6cb6">SetCaveCellAndScreenToObject</a>
-<b>6ed5</b>   4c d7 6c   JMP <a href="#6cd7">__ProcessWorld__ClearCurrentCell</a>
+<b>6ed2</b>   20 b6 6c   JSR <a href="#6cb6">SetCell</a>
+<b>6ed5</b>   4c d7 6c   JMP <a href="#6cd7">__ProcessCave__ClearCurrentCell</a>
 </div>
 <a name="6ed8"></a>
 
@@ -2272,7 +2279,7 @@ nosidebar: true
 <b>ProcessButterfly__CantTurnRight:</b><br/>
 
 <div class="disass_code"><b>6ed8</b>   bc b0 6d   LDY <a href="#6db0">FromDownClockwiseOffsetTable</a>,X
-<b>6edb</b>   b1 32      LDA (WorldCurrentCellPtr),Y
+<b>6edb</b>   b1 32      LDA (CaveCurrentCellPtr),Y
 <b>6edd</b>   d0 0d      BNE <a href="#6eec">ProcessButterfly__CantMoveStraightAhead</a>
 </div>
 
@@ -2285,8 +2292,8 @@ nosidebar: true
 <b>6ee0</b>   8a         TXA 
 <b>6ee1</b>   69 34      ADC #$34
 <b>6ee3</b>   bc b0 6d   LDY <a href="#6db0">FromDownClockwiseOffsetTable</a>,X
-<b>6ee6</b>   20 b6 6c   JSR <a href="#6cb6">SetCaveCellAndScreenToObject</a>
-<b>6ee9</b>   4c d7 6c   JMP <a href="#6cd7">__ProcessWorld__ClearCurrentCell</a>
+<b>6ee6</b>   20 b6 6c   JSR <a href="#6cb6">SetCell</a>
+<b>6ee9</b>   4c d7 6c   JMP <a href="#6cd7">__ProcessCave__ClearCurrentCell</a>
 </div>
 <a name="6eec"></a>
 
@@ -2301,20 +2308,20 @@ nosidebar: true
 <b>6ef0</b>   69 03      ADC #$03
 <b>6ef2</b>   29 03      AND #$03
 <b>6ef4</b>   69 34      ADC #$34
-<b>6ef6</b>   91 32      STA (WorldCurrentCellPtr),Y
-<b>6ef8</b>   4c 15 7e   JMP <a href="#7e15">__ProcessWorld__NoObjectHandler</a>
+<b>6ef6</b>   91 32      STA (CaveCurrentCellPtr),Y
+<b>6ef8</b>   4c 15 7e   JMP <a href="#7e15">__ProcessCave__NoObjectHandler</a>
 </div>
 <a name="6efb"></a>
 
 <div class="disass_comment">; 
 </div>
 
-<b>__ProcessWorld__CreateScannedStationaryDiamond:</b><br/>
+<b>__ProcessCave__CreateScannedStationaryDiamond:</b><br/>
 
 <div class="disass_code"><b>6efb</b>   a0 29      LDY #$29
 <b>6efd</b>   a9 15      LDA #$15
-<b>6eff</b>   20 b6 6c   JSR <a href="#6cb6">SetCaveCellAndScreenToObject</a>
-<b>6f02</b>   4c 15 7e   JMP <a href="#7e15">__ProcessWorld__NoObjectHandler</a>
+<b>6eff</b>   20 b6 6c   JSR <a href="#6cb6">SetCell</a>
+<b>6f02</b>   4c 15 7e   JMP <a href="#7e15">__ProcessCave__NoObjectHandler</a>
 </div>
 <a name="6f05"></a>
 
@@ -2331,7 +2338,7 @@ nosidebar: true
 </div>
 
 
-<div class="disass_code"><b>6f07</b>   b1 32      LDA (WorldCurrentCellPtr),Y
+<div class="disass_code"><b>6f07</b>   b1 32      LDA (CaveCurrentCellPtr),Y
 <b>6f09</b>   d0 08      BNE <a href="#6f13">ProcessFallingDiamond__NoSpaceBelow</a>
 </div>
 
@@ -2341,8 +2348,8 @@ nosidebar: true
 
 
 <div class="disass_code"><b>6f0b</b>   a9 17      LDA #$17
-<b>6f0d</b>   20 b6 6c   JSR <a href="#6cb6">SetCaveCellAndScreenToObject</a>
-<b>6f10</b>   4c d7 6c   JMP <a href="#6cd7">__ProcessWorld__ClearCurrentCell</a>
+<b>6f0d</b>   20 b6 6c   JSR <a href="#6cb6">SetCell</a>
+<b>6f10</b>   4c d7 6c   JMP <a href="#6cd7">__ProcessCave__ClearCurrentCell</a>
 </div>
 <a name="6f13"></a>
 
@@ -2389,7 +2396,7 @@ nosidebar: true
 
 
 <div class="disass_code"><b>6f23</b>   a0 79      LDY #$79
-<b>6f25</b>   b1 32      LDA (WorldCurrentCellPtr),Y
+<b>6f25</b>   b1 32      LDA (CaveCurrentCellPtr),Y
 <b>6f27</b>   d0 05      BNE <a href="#6f2e">ProcessFallingDiamond__ClearDiamondAboveMagicWall</a>
 </div>
 
@@ -2399,7 +2406,7 @@ nosidebar: true
 
 
 <div class="disass_code"><b>6f29</b>   a9 13      LDA #$13
-<b>6f2b</b>   20 b6 6c   JSR <a href="#6cb6">SetCaveCellAndScreenToObject</a>
+<b>6f2b</b>   20 b6 6c   JSR <a href="#6cb6">SetCell</a>
 </div>
 <a name="6f2e"></a>
 
@@ -2407,7 +2414,7 @@ nosidebar: true
 <b>ProcessFallingDiamond__ClearDiamondAboveMagicWall:</b><br/>
 
 <div class="disass_code"><b>6f2e</b>   20 56 6e   JSR <a href="#6e56">FallingBoulderSoundFX</a>
-<b>6f31</b>   4c d7 6c   JMP <a href="#6cd7">__ProcessWorld__ClearCurrentCell</a>
+<b>6f31</b>   4c d7 6c   JMP <a href="#6cd7">__ProcessCave__ClearCurrentCell</a>
 </div>
 <a name="6f34"></a>
 
@@ -2425,7 +2432,7 @@ nosidebar: true
 
 
 <div class="disass_code"><b>6f37</b>   a0 51      LDY #$51
-<b>6f39</b>   b1 32      LDA (WorldCurrentCellPtr),Y
+<b>6f39</b>   b1 32      LDA (CaveCurrentCellPtr),Y
 <b>6f3b</b>   20 65 6e   JSR <a href="#6e65">TestIfObjectSlippery</a>
 <b>6f3e</b>   d0 2b      BNE <a href="#6f6b">ProcessFallingDiamond__NotSlipperyHit</a>
 </div>
@@ -2436,7 +2443,7 @@ nosidebar: true
 
 
 <div class="disass_code"><b>6f40</b>   a0 50      LDY #$50
-<b>6f42</b>   b1 32      LDA (WorldCurrentCellPtr),Y
+<b>6f42</b>   b1 32      LDA (CaveCurrentCellPtr),Y
 <b>6f44</b>   d0 0e      BNE <a href="#6f54">ProcessFallingDiamond__CantFallLeft</a>
 </div>
 
@@ -2446,7 +2453,7 @@ nosidebar: true
 
 
 <div class="disass_code"><b>6f46</b>   a0 28      LDY #$28
-<b>6f48</b>   b1 32      LDA (WorldCurrentCellPtr),Y
+<b>6f48</b>   b1 32      LDA (CaveCurrentCellPtr),Y
 <b>6f4a</b>   d0 08      BNE <a href="#6f54">ProcessFallingDiamond__CantFallLeft</a>
 </div>
 
@@ -2456,8 +2463,8 @@ nosidebar: true
 
 
 <div class="disass_code"><b>6f4c</b>   a9 17      LDA #$17
-<b>6f4e</b>   20 b6 6c   JSR <a href="#6cb6">SetCaveCellAndScreenToObject</a>
-<b>6f51</b>   4c d7 6c   JMP <a href="#6cd7">__ProcessWorld__ClearCurrentCell</a>
+<b>6f4e</b>   20 b6 6c   JSR <a href="#6cb6">SetCell</a>
+<b>6f51</b>   4c d7 6c   JMP <a href="#6cd7">__ProcessCave__ClearCurrentCell</a>
 </div>
 <a name="6f54"></a>
 
@@ -2467,7 +2474,7 @@ nosidebar: true
 <b>ProcessFallingDiamond__CantFallLeft:</b><br/>
 
 <div class="disass_code"><b>6f54</b>   a0 52      LDY #$52
-<b>6f56</b>   b1 32      LDA (WorldCurrentCellPtr),Y
+<b>6f56</b>   b1 32      LDA (CaveCurrentCellPtr),Y
 <b>6f58</b>   d0 0e      BNE <a href="#6f68">ProcessFallingDiamond__CantFallRight</a>
 </div>
 
@@ -2477,7 +2484,7 @@ nosidebar: true
 
 
 <div class="disass_code"><b>6f5a</b>   a0 2a      LDY #$2a
-<b>6f5c</b>   b1 32      LDA (WorldCurrentCellPtr),Y
+<b>6f5c</b>   b1 32      LDA (CaveCurrentCellPtr),Y
 <b>6f5e</b>   d0 08      BNE <a href="#6f68">ProcessFallingDiamond__CantFallRight</a>
 </div>
 
@@ -2487,8 +2494,8 @@ nosidebar: true
 
 
 <div class="disass_code"><b>6f60</b>   a9 17      LDA #$17
-<b>6f62</b>   20 b6 6c   JSR <a href="#6cb6">SetCaveCellAndScreenToObject</a>
-<b>6f65</b>   4c d7 6c   JMP <a href="#6cd7">__ProcessWorld__ClearCurrentCell</a>
+<b>6f62</b>   20 b6 6c   JSR <a href="#6cb6">SetCell</a>
+<b>6f65</b>   4c d7 6c   JMP <a href="#6cd7">__ProcessCave__ClearCurrentCell</a>
 </div>
 <a name="6f68"></a>
 
@@ -2497,7 +2504,7 @@ nosidebar: true
 
 <b>ProcessFallingDiamond__CantFallRight:</b><br/>
 
-<div class="disass_code"><b>6f68</b>   4c fb 6e   JMP <a href="#6efb">__ProcessWorld__CreateScannedStationaryDiamond</a>
+<div class="disass_code"><b>6f68</b>   4c fb 6e   JMP <a href="#6efb">__ProcessCave__CreateScannedStationaryDiamond</a>
 </div>
 <a name="6f6b"></a>
 
@@ -2518,7 +2525,7 @@ nosidebar: true
 <div class="disass_code"><b>6f6f</b>   a9 1c      LDA #$1c
 <b>6f71</b>   85 89      STA ObjectTypeForUpdateCaveCell
 <b>6f73</b>   20 22 6d   JSR <a href="#6d22">Explode3x3CellsDownOneRow</a>
-<b>6f76</b>   4c 15 7e   JMP <a href="#7e15">__ProcessWorld__NoObjectHandler</a>
+<b>6f76</b>   4c 15 7e   JMP <a href="#7e15">__ProcessCave__NoObjectHandler</a>
 </div>
 <a name="6f79"></a>
 
@@ -2537,7 +2544,7 @@ nosidebar: true
 
 
 <div class="disass_code"><b>6f7e</b>   20 22 6d   JSR <a href="#6d22">Explode3x3CellsDownOneRow</a>
-<b>6f81</b>   4c 15 7e   JMP <a href="#7e15">__ProcessWorld__NoObjectHandler</a>
+<b>6f81</b>   4c 15 7e   JMP <a href="#7e15">__ProcessCave__NoObjectHandler</a>
 </div>
 <a name="6f84"></a>
 
@@ -2546,7 +2553,7 @@ nosidebar: true
 
 <b>ProcessFallingDiamond__DidntHitAnimal:</b><br/>
 
-<div class="disass_code"><b>6f84</b>   4c fb 6e   JMP <a href="#6efb">__ProcessWorld__CreateScannedStationaryDiamond</a>
+<div class="disass_code"><b>6f84</b>   4c fb 6e   JMP <a href="#6efb">__ProcessCave__CreateScannedStationaryDiamond</a>
 </div>
 <a name="6f87"></a>
 
@@ -2563,7 +2570,7 @@ nosidebar: true
 </div>
 
 
-<div class="disass_code"><b>6f89</b>   b1 32      LDA (WorldCurrentCellPtr),Y
+<div class="disass_code"><b>6f89</b>   b1 32      LDA (CaveCurrentCellPtr),Y
 <b>6f8b</b>   d0 0b      BNE <a href="#6f98">ProcessStationaryDiamond__NoSpaceBelow</a>
 </div>
 
@@ -2573,9 +2580,9 @@ nosidebar: true
 
 
 <div class="disass_code"><b>6f8d</b>   a9 17      LDA #$17
-<b>6f8f</b>   20 b6 6c   JSR <a href="#6cb6">SetCaveCellAndScreenToObject</a>
+<b>6f8f</b>   20 b6 6c   JSR <a href="#6cb6">SetCell</a>
 <b>6f92</b>   20 28 6e   JSR <a href="#6e28">FallingDiamondSoundFX</a>
-<b>6f95</b>   4c d7 6c   JMP <a href="#6cd7">__ProcessWorld__ClearCurrentCell</a>
+<b>6f95</b>   4c d7 6c   JMP <a href="#6cd7">__ProcessCave__ClearCurrentCell</a>
 </div>
 <a name="6f98"></a>
 
@@ -2585,7 +2592,7 @@ nosidebar: true
 <b>ProcessStationaryDiamond__NoSpaceBelow:</b><br/>
 
 <div class="disass_code"><b>6f98</b>   a0 51      LDY #$51
-<b>6f9a</b>   b1 32      LDA (WorldCurrentCellPtr),Y
+<b>6f9a</b>   b1 32      LDA (CaveCurrentCellPtr),Y
 <b>6f9c</b>   20 65 6e   JSR <a href="#6e65">TestIfObjectSlippery</a>
 <b>6f9f</b>   d0 28      BNE <a href="#6fc9">ProcessStationaryDiamond__Finished</a>
 </div>
@@ -2596,7 +2603,7 @@ nosidebar: true
 
 
 <div class="disass_code"><b>6fa1</b>   a0 50      LDY #$50
-<b>6fa3</b>   b1 32      LDA (WorldCurrentCellPtr),Y
+<b>6fa3</b>   b1 32      LDA (CaveCurrentCellPtr),Y
 <b>6fa5</b>   d0 0e      BNE <a href="#6fb5">ProcessStationaryDiamond__CantFallLeft</a>
 </div>
 
@@ -2606,7 +2613,7 @@ nosidebar: true
 
 
 <div class="disass_code"><b>6fa7</b>   a0 28      LDY #$28
-<b>6fa9</b>   b1 32      LDA (WorldCurrentCellPtr),Y
+<b>6fa9</b>   b1 32      LDA (CaveCurrentCellPtr),Y
 <b>6fab</b>   d0 08      BNE <a href="#6fb5">ProcessStationaryDiamond__CantFallLeft</a>
 </div>
 
@@ -2616,8 +2623,8 @@ nosidebar: true
 
 
 <div class="disass_code"><b>6fad</b>   a9 17      LDA #$17
-<b>6faf</b>   20 b6 6c   JSR <a href="#6cb6">SetCaveCellAndScreenToObject</a>
-<b>6fb2</b>   4c d7 6c   JMP <a href="#6cd7">__ProcessWorld__ClearCurrentCell</a>
+<b>6faf</b>   20 b6 6c   JSR <a href="#6cb6">SetCell</a>
+<b>6fb2</b>   4c d7 6c   JMP <a href="#6cd7">__ProcessCave__ClearCurrentCell</a>
 </div>
 <a name="6fb5"></a>
 
@@ -2627,7 +2634,7 @@ nosidebar: true
 <b>ProcessStationaryDiamond__CantFallLeft:</b><br/>
 
 <div class="disass_code"><b>6fb5</b>   a0 52      LDY #$52
-<b>6fb7</b>   b1 32      LDA (WorldCurrentCellPtr),Y
+<b>6fb7</b>   b1 32      LDA (CaveCurrentCellPtr),Y
 <b>6fb9</b>   d0 0e      BNE <a href="#6fc9">ProcessStationaryDiamond__Finished</a>
 </div>
 
@@ -2637,7 +2644,7 @@ nosidebar: true
 
 
 <div class="disass_code"><b>6fbb</b>   a0 2a      LDY #$2a
-<b>6fbd</b>   b1 32      LDA (WorldCurrentCellPtr),Y
+<b>6fbd</b>   b1 32      LDA (CaveCurrentCellPtr),Y
 <b>6fbf</b>   d0 08      BNE <a href="#6fc9">ProcessStationaryDiamond__Finished</a>
 </div>
 
@@ -2647,15 +2654,15 @@ nosidebar: true
 
 
 <div class="disass_code"><b>6fc1</b>   a9 17      LDA #$17
-<b>6fc3</b>   20 b6 6c   JSR <a href="#6cb6">SetCaveCellAndScreenToObject</a>
-<b>6fc6</b>   4c d7 6c   JMP <a href="#6cd7">__ProcessWorld__ClearCurrentCell</a>
+<b>6fc3</b>   20 b6 6c   JSR <a href="#6cb6">SetCell</a>
+<b>6fc6</b>   4c d7 6c   JMP <a href="#6cd7">__ProcessCave__ClearCurrentCell</a>
 </div>
 <a name="6fc9"></a>
 
 
 <b>ProcessStationaryDiamond__Finished:</b><br/>
 
-<div class="disass_code"><b>6fc9</b>   4c 15 7e   JMP <a href="#7e15">__ProcessWorld__NoObjectHandler</a>
+<div class="disass_code"><b>6fc9</b>   4c 15 7e   JMP <a href="#7e15">__ProcessCave__NoObjectHandler</a>
 </div>
 <a name="6fcc"></a>
 
@@ -2686,8 +2693,8 @@ nosidebar: true
 <div class="disass_comment">; $11 = Scanned stationary boulder.
 </div>
 <div class="disass_code"><b>6fda</b>   a9 11      LDA #$11
-<b>6fdc</b>   20 b6 6c   JSR <a href="#6cb6">SetCaveCellAndScreenToObject</a>
-<b>6fdf</b>   4c 15 7e   JMP <a href="#7e15">__ProcessWorld__NoObjectHandler</a>
+<b>6fdc</b>   20 b6 6c   JSR <a href="#6cb6">SetCell</a>
+<b>6fdf</b>   4c 15 7e   JMP <a href="#7e15">__ProcessCave__NoObjectHandler</a>
 </div>
 <a name="6fe2"></a>
 
@@ -2704,8 +2711,8 @@ nosidebar: true
 
 
 <div class="disass_code"><b>6fe6</b>   a9 14      LDA #$14
-<b>6fe8</b>   20 b6 6c   JSR <a href="#6cb6">SetCaveCellAndScreenToObject</a>
-<b>6feb</b>   4c 15 7e   JMP <a href="#7e15">__ProcessWorld__NoObjectHandler</a>
+<b>6fe8</b>   20 b6 6c   JSR <a href="#6cb6">SetCell</a>
+<b>6feb</b>   4c 15 7e   JMP <a href="#7e15">__ProcessCave__NoObjectHandler</a>
 </div>
 <a name="6fee"></a>
 
@@ -2726,7 +2733,7 @@ nosidebar: true
 <div class="disass_code"><b>6ff8</b>   a4 46      LDY LocalVar
 <b>6ffa</b>   b9 cc 6f   LDA <a href="#6fcc">AmoebaUpLeftRightDownOffsetTable</a>,Y
 <b>6ffd</b>   a8         TAY 
-<b>6ffe</b>   b1 32      LDA (WorldCurrentCellPtr),Y
+<b>6ffe</b>   b1 32      LDA (CaveCurrentCellPtr),Y
 </div>
 
 
@@ -2763,7 +2770,7 @@ nosidebar: true
 <b>701b</b>   aa         TAX 
 <b>701c</b>   bc cc 6f   LDY <a href="#6fcc">AmoebaUpLeftRightDownOffsetTable</a>,X
 <b>701f</b>   a2 01      LDX #$01
-<b>7021</b>   b1 32      LDA (WorldCurrentCellPtr),Y
+<b>7021</b>   b1 32      LDA (CaveCurrentCellPtr),Y
 <b>7023</b>   d0 02      BNE <a href="#7027">__ProcessAmoeba__NotSpace</a>
 <b>7025</b>   a2 00      LDX #$00
 </div>
@@ -2791,14 +2798,14 @@ nosidebar: true
 
 
 <div class="disass_code"><b>7031</b>   a9 3b      LDA #$3b
-<b>7033</b>   20 b6 6c   JSR <a href="#6cb6">SetCaveCellAndScreenToObject</a>
+<b>7033</b>   20 b6 6c   JSR <a href="#6cb6">SetCell</a>
 </div>
 <a name="7036"></a>
 
 
 <b>__ProcessAmoeba__DontGrowThisTick:</b><br/>
 
-<div class="disass_code"><b>7036</b>   4c 15 7e   JMP <a href="#7e15">__ProcessWorld__NoObjectHandler</a>
+<div class="disass_code"><b>7036</b>   4c 15 7e   JMP <a href="#7e15">__ProcessCave__NoObjectHandler</a>
 </div>
 <a name="7039"></a>
 
@@ -3231,7 +3238,7 @@ nosidebar: true
 <b>71b2</b>   e6 b7      INC RockfordMoveSucceededFlag
 <b>71b4</b>   20 56 6e   JSR <a href="#6e56">FallingBoulderSoundFX</a>
 <b>71b7</b>   a9 11      LDA #$11
-<b>71b9</b>   20 b6 6c   JSR <a href="#6cb6">SetCaveCellAndScreenToObject</a>
+<b>71b9</b>   20 b6 6c   JSR <a href="#6cb6">SetCell</a>
 <a name="71bc"></a><b>71bc</b>   60         RTS 
 </div>
 <a name="71bd"></a>
@@ -3243,7 +3250,7 @@ nosidebar: true
 
 <div class="disass_code"><b>71bd</b>   a9 00      LDA #$00
 <b>71bf</b>   85 b7      STA RockfordMoveSucceededFlag
-<b>71c1</b>   b1 32      LDA (WorldCurrentCellPtr),Y
+<b>71c1</b>   b1 32      LDA (CaveCurrentCellPtr),Y
 <b>71c3</b>   d0 08      BNE <a href="#71cd">TryToMoveRockford__NotSpace</a>
 <b>71c5</b>   e6 b7      INC RockfordMoveSucceededFlag
 <b>71c7</b>   a9 35      LDA #$35
@@ -3294,7 +3301,7 @@ nosidebar: true
 <b>71f2</b>   c0 28      CPY #$28
 <b>71f4</b>   d0 0b      BNE <a href="#7201">TryToMoveRockford__NotMovingBoulderLeft</a>
 <b>71f6</b>   a0 27      LDY #$27
-<b>71f8</b>   b1 32      LDA (WorldCurrentCellPtr),Y
+<b>71f8</b>   b1 32      LDA (CaveCurrentCellPtr),Y
 <b>71fa</b>   d0 03      BNE <a href="#71ff">TryToMoveRockford__CantMoveBoulderLeft</a>
 <b>71fc</b>   20 ab 71   JSR <a href="#71ab">RockfordTriesToMoveBoulder</a>
 </div>
@@ -3313,7 +3320,7 @@ nosidebar: true
 <div class="disass_code"><b>7201</b>   c0 2a      CPY #$2a
 <b>7203</b>   d0 0b      BNE <a href="#7210">TryToMoveRockford__Finished</a>
 <b>7205</b>   a0 2b      LDY #$2b
-<b>7207</b>   b1 32      LDA (WorldCurrentCellPtr),Y
+<b>7207</b>   b1 32      LDA (CaveCurrentCellPtr),Y
 <b>7209</b>   d0 03      BNE <a href="#720e">TryToMoveRockford__CantMoveBoulderRight</a>
 <b>720b</b>   20 ab 71   JSR <a href="#71ab">RockfordTriesToMoveBoulder</a>
 </div>
@@ -3342,7 +3349,7 @@ nosidebar: true
 <b>7218</b>   20 69 6b   JSR <a href="#6b69">ReadFireButtonCurrentPlayer</a>
 <b>721b</b>   d0 0a      BNE <a href="#7227">MoveRockfordIfPossible__FireNotPressed</a>
 <b>721d</b>   a9 00      LDA #$00
-<b>721f</b>   20 b6 6c   JSR <a href="#6cb6">SetCaveCellAndScreenToObject</a>
+<b>721f</b>   20 b6 6c   JSR <a href="#6cb6">SetCell</a>
 <b>7222</b>   a9 00      LDA #$00
 <b>7224</b>   85 b7      STA RockfordMoveSucceededFlag
 <b>7226</b>   60         RTS 
@@ -3353,10 +3360,10 @@ nosidebar: true
 <b>MoveRockfordIfPossible__FireNotPressed:</b><br/>
 
 <div class="disass_code"><b>7227</b>   a9 39      LDA #$39
-<b>7229</b>   20 b6 6c   JSR <a href="#6cb6">SetCaveCellAndScreenToObject</a>
+<b>7229</b>   20 b6 6c   JSR <a href="#6cb6">SetCell</a>
 <b>722c</b>   a0 29      LDY #$29
 <b>722e</b>   a9 00      LDA #$00
-<b>7230</b>   20 b6 6c   JSR <a href="#6cb6">SetCaveCellAndScreenToObject</a>
+<b>7230</b>   20 b6 6c   JSR <a href="#6cb6">SetCell</a>
 <b>7233</b>   e6 b7      INC RockfordMoveSucceededFlag
 </div>
 <a name="7235"></a>
@@ -3548,7 +3555,7 @@ nosidebar: true
 <div class="disass_code"><b>72ad</b>   20 36 72   JSR <a href="#7236">HandleJoystickForRockford</a>
 <b>72b0</b>   a9 00      LDA #$00
 <b>72b2</b>   85 96      STA RockfordDeadTicks
-<b>72b4</b>   4c 15 7e   JMP <a href="#7e15">__ProcessWorld__NoObjectHandler</a>
+<b>72b4</b>   4c 15 7e   JMP <a href="#7e15">__ProcessCave__NoObjectHandler</a>
 </div>
 <a name="72b7"></a>
 
@@ -3583,7 +3590,7 @@ nosidebar: true
 <b>ProcessExplosion:</b><br/>
 
 <div class="disass_code"><b>72d3</b>   a0 29      LDY #$29
-<b>72d5</b>   b1 32      LDA (WorldCurrentCellPtr),Y
+<b>72d5</b>   b1 32      LDA (CaveCurrentCellPtr),Y
 <b>72d7</b>   a0 00      LDY #$00
 </div>
 <a name="72d9"></a>
@@ -3606,8 +3613,8 @@ nosidebar: true
 <b>72e5</b>   d0 f2      BNE <a href="#72d9">ProcessExplosion__FindSequenceLoop</a>
 <b>72e7</b>   8a         TXA 
 <b>72e8</b>   a0 29      LDY #$29
-<b>72ea</b>   20 b6 6c   JSR <a href="#6cb6">SetCaveCellAndScreenToObject</a>
-<b>72ed</b>   4c 15 7e   JMP <a href="#7e15">__ProcessWorld__NoObjectHandler</a>
+<b>72ea</b>   20 b6 6c   JSR <a href="#6cb6">SetCell</a>
+<b>72ed</b>   4c 15 7e   JMP <a href="#7e15">__ProcessCave__NoObjectHandler</a>
 </div>
 <a name="72f0"></a>
 
@@ -3617,7 +3624,7 @@ nosidebar: true
 <div class="disass_code"><b>72f0</b>   a5 95      LDA FlashingEntryBoxCountDown
 <b>72f2</b>   d0 1a      BNE <a href="#730e">ProcessRockfordsAppearance__Exit</a>
 <b>72f4</b>   a0 29      LDY #$29
-<b>72f6</b>   b1 32      LDA (WorldCurrentCellPtr),Y
+<b>72f6</b>   b1 32      LDA (CaveCurrentCellPtr),Y
 <b>72f8</b>   a0 00      LDY #$00
 </div>
 <a name="72fa"></a>
@@ -3640,42 +3647,42 @@ nosidebar: true
 <b>7306</b>   d0 f2      BNE <a href="#72fa">ProcessRockfordsAppearance__FindSequenceLoop</a>
 <b>7308</b>   8a         TXA 
 <b>7309</b>   a0 29      LDY #$29
-<b>730b</b>   20 b6 6c   JSR <a href="#6cb6">SetCaveCellAndScreenToObject</a>
+<b>730b</b>   20 b6 6c   JSR <a href="#6cb6">SetCell</a>
 </div>
 <a name="730e"></a>
 
 
 <b>ProcessRockfordsAppearance__Exit:</b><br/>
 
-<div class="disass_code"><b>730e</b>   4c 15 7e   JMP <a href="#7e15">__ProcessWorld__NoObjectHandler</a>
+<div class="disass_code"><b>730e</b>   4c 15 7e   JMP <a href="#7e15">__ProcessCave__NoObjectHandler</a>
 </div>
 <a name="7311"></a>
 
 
-<b>RenderSteelWallInInflatedWorldHelper:</b><br/>
+<b>RenderSteelWallInInflatedCaveHelper:</b><br/>
 
 <div class="disass_comment">; $2e is the base character of the first steel wall.
 ; There'a another at $4a.
 </div>
 <div class="disass_code"><b>7311</b>   a9 2e      LDA #$2e
 <b>7313</b>   a0 00      LDY #$00
-<b>7315</b>   91 36      STA (InflatedWorldOutputPtr),Y
+<b>7315</b>   91 36      STA (InflatedCaveOutputPtr),Y
 <b>7317</b>   18         CLC 
 <b>7318</b>   69 01      ADC #$01
 <b>731a</b>   c8         INY 
-<b>731b</b>   91 36      STA (InflatedWorldOutputPtr),Y
+<b>731b</b>   91 36      STA (InflatedCaveOutputPtr),Y
 <b>731d</b>   69 0f      ADC #$0f
 <b>731f</b>   a0 50      LDY #$50
-<b>7321</b>   91 36      STA (InflatedWorldOutputPtr),Y
+<b>7321</b>   91 36      STA (InflatedCaveOutputPtr),Y
 <b>7323</b>   69 01      ADC #$01
 <b>7325</b>   c8         INY 
-<b>7326</b>   91 36      STA (InflatedWorldOutputPtr),Y
+<b>7326</b>   91 36      STA (InflatedCaveOutputPtr),Y
 <b>7328</b>   60         RTS 
 </div>
 <a name="7329"></a>
 
 
-<b>RenderSteelWallInInflatedWorld:</b><br/>
+<b>RenderSteelWallInInflatedCave:</b><br/>
 
 <div class="disass_code"><b>7329</b>   a5 92      LDA CaveMatrixY
 <b>732b</b>   0a         ASL A
@@ -3683,13 +3690,13 @@ nosidebar: true
 <b>732d</b>   a5 91      LDA CaveMatrixX
 <b>732f</b>   0a         ASL A
 <b>7330</b>   18         CLC 
-<b>7331</b>   7d da 53   ADC <a href="#53da">InflatedWorldLineAddressTable</a>,X
-<b>7334</b>   85 34      STA InflatedWorldCurrentCellPtr
+<b>7331</b>   7d da 53   ADC <a href="#53da">InflatedCaveLineAddressTable</a>,X
+<b>7334</b>   85 34      STA InflatedCaveCurrentCellPtr
 <b>7336</b>   a9 00      LDA #$00
-<b>7338</b>   7d db 53   ADC <a href="#53da">InflatedWorldLineAddressTable</a>+1,X
-<b>733b</b>   85 35      STA InflatedWorldCurrentCellPtr+1
-<b>733d</b>   20 9b 6c   JSR <a href="#6c9b">SetInflatedWorldOutputPtr</a>
-<b>7340</b>   20 11 73   JSR <a href="#7311">RenderSteelWallInInflatedWorldHelper</a>
+<b>7338</b>   7d db 53   ADC <a href="#53da">InflatedCaveLineAddressTable</a>+1,X
+<b>733b</b>   85 35      STA InflatedCaveCurrentCellPtr+1
+<b>733d</b>   20 9b 6c   JSR <a href="#6c9b">SetInflatedCaveOutputPtr</a>
+<b>7340</b>   20 11 73   JSR <a href="#7311">RenderSteelWallInInflatedCaveHelper</a>
 <b>7343</b>   60         RTS 
 </div>
 <a name="7344"></a>
@@ -3707,7 +3714,7 @@ nosidebar: true
 </div>
 
 
-<div class="disass_comment">; Render cell from lattice to Inflated World.
+<div class="disass_comment">; Render cell from lattice to Inflated cave.
 ; Is either cell $05[E] (outbox) or $25[%] (inbox),
 ; both of which map to (via .BaseCharNoForObjectTable)
 ; a hollow box.
@@ -3715,8 +3722,8 @@ nosidebar: true
 
 <b>__ProcessInAndOutBoxes__Door:</b><br/>
 
-<div class="disass_code"><b>734e</b>   b1 32      LDA (WorldCurrentCellPtr),Y
-<b>7350</b>   20 b6 6c   JSR <a href="#6cb6">SetCaveCellAndScreenToObject</a>
+<div class="disass_code"><b>734e</b>   b1 32      LDA (CaveCurrentCellPtr),Y
+<b>7350</b>   20 b6 6c   JSR <a href="#6cb6">SetCell</a>
 </div>
 
 
@@ -3734,14 +3741,14 @@ nosidebar: true
 
 <b>__ProcessInAndOutBoxes__Steel:</b><br/>
 
-<div class="disass_code"><b>735a</b>   20 29 73   JSR <a href="#7329">RenderSteelWallInInflatedWorld</a>
+<div class="disass_code"><b>735a</b>   20 29 73   JSR <a href="#7329">RenderSteelWallInInflatedCave</a>
 </div>
 <a name="735d"></a>
 
 
 <b>__ProcessInAndOutBoxes__Exit:</b><br/>
 
-<div class="disass_code"><b>735d</b>   4c 15 7e   JMP <a href="#7e15">__ProcessWorld__NoObjectHandler</a>
+<div class="disass_code"><b>735d</b>   4c 15 7e   JMP <a href="#7e15">__ProcessCave__NoObjectHandler</a>
 </div>
 <a name="7360"></a>
 
@@ -3751,7 +3758,7 @@ nosidebar: true
 <b>ProcessStationaryBoulder:</b><br/>
 
 <div class="disass_code"><b>7360</b>   a0 51      LDY #$51
-<b>7362</b>   b1 32      LDA (WorldCurrentCellPtr),Y
+<b>7362</b>   b1 32      LDA (CaveCurrentCellPtr),Y
 <b>7364</b>   d0 0b      BNE <a href="#7371">ProcessStationaryBoulder__NoSpaceBelow</a>
 </div>
 
@@ -3761,9 +3768,9 @@ nosidebar: true
 
 
 <div class="disass_code"><b>7366</b>   a9 13      LDA #$13
-<b>7368</b>   20 b6 6c   JSR <a href="#6cb6">SetCaveCellAndScreenToObject</a>
+<b>7368</b>   20 b6 6c   JSR <a href="#6cb6">SetCell</a>
 <b>736b</b>   20 56 6e   JSR <a href="#6e56">FallingBoulderSoundFX</a>
-<b>736e</b>   4c d7 6c   JMP <a href="#6cd7">__ProcessWorld__ClearCurrentCell</a>
+<b>736e</b>   4c d7 6c   JMP <a href="#6cd7">__ProcessCave__ClearCurrentCell</a>
 </div>
 <a name="7371"></a>
 
@@ -3771,18 +3778,18 @@ nosidebar: true
 <b>ProcessStationaryBoulder__NoSpaceBelow:</b><br/>
 
 <div class="disass_code"><b>7371</b>   a0 51      LDY #$51
-<b>7373</b>   b1 32      LDA (WorldCurrentCellPtr),Y
+<b>7373</b>   b1 32      LDA (CaveCurrentCellPtr),Y
 <b>7375</b>   20 65 6e   JSR <a href="#6e65">TestIfObjectSlippery</a>
 <b>7378</b>   d0 28      BNE <a href="#73a2">ProcessStationaryBoulder__Finished</a>
 <b>737a</b>   a0 50      LDY #$50
-<b>737c</b>   b1 32      LDA (WorldCurrentCellPtr),Y
+<b>737c</b>   b1 32      LDA (CaveCurrentCellPtr),Y
 <b>737e</b>   d0 0e      BNE <a href="#738e">ProcessStationaryBoulder__CantFallLeft</a>
 <b>7380</b>   a0 28      LDY #$28
-<b>7382</b>   b1 32      LDA (WorldCurrentCellPtr),Y
+<b>7382</b>   b1 32      LDA (CaveCurrentCellPtr),Y
 <b>7384</b>   d0 08      BNE <a href="#738e">ProcessStationaryBoulder__CantFallLeft</a>
 <b>7386</b>   a9 13      LDA #$13
-<b>7388</b>   20 b6 6c   JSR <a href="#6cb6">SetCaveCellAndScreenToObject</a>
-<b>738b</b>   4c d7 6c   JMP <a href="#6cd7">__ProcessWorld__ClearCurrentCell</a>
+<b>7388</b>   20 b6 6c   JSR <a href="#6cb6">SetCell</a>
+<b>738b</b>   4c d7 6c   JMP <a href="#6cd7">__ProcessCave__ClearCurrentCell</a>
 </div>
 <a name="738e"></a>
 
@@ -3790,21 +3797,21 @@ nosidebar: true
 <b>ProcessStationaryBoulder__CantFallLeft:</b><br/>
 
 <div class="disass_code"><b>738e</b>   a0 52      LDY #$52
-<b>7390</b>   b1 32      LDA (WorldCurrentCellPtr),Y
+<b>7390</b>   b1 32      LDA (CaveCurrentCellPtr),Y
 <b>7392</b>   d0 0e      BNE <a href="#73a2">ProcessStationaryBoulder__Finished</a>
 <b>7394</b>   a0 2a      LDY #$2a
-<b>7396</b>   b1 32      LDA (WorldCurrentCellPtr),Y
+<b>7396</b>   b1 32      LDA (CaveCurrentCellPtr),Y
 <b>7398</b>   d0 08      BNE <a href="#73a2">ProcessStationaryBoulder__Finished</a>
 <b>739a</b>   a9 13      LDA #$13
-<b>739c</b>   20 b6 6c   JSR <a href="#6cb6">SetCaveCellAndScreenToObject</a>
-<b>739f</b>   4c d7 6c   JMP <a href="#6cd7">__ProcessWorld__ClearCurrentCell</a>
+<b>739c</b>   20 b6 6c   JSR <a href="#6cb6">SetCell</a>
+<b>739f</b>   4c d7 6c   JMP <a href="#6cd7">__ProcessCave__ClearCurrentCell</a>
 </div>
 <a name="73a2"></a>
 
 
 <b>ProcessStationaryBoulder__Finished:</b><br/>
 
-<div class="disass_code"><b>73a2</b>   4c 15 7e   JMP <a href="#7e15">__ProcessWorld__NoObjectHandler</a>
+<div class="disass_code"><b>73a2</b>   4c 15 7e   JMP <a href="#7e15">__ProcessCave__NoObjectHandler</a>
 </div>
 <a name="73a5"></a>
 
@@ -3813,7 +3820,7 @@ nosidebar: true
 
 <div class="disass_code"><b>73a5</b>   a0 29      LDY #$29
 <b>73a7</b>   a9 11      LDA #$11
-<b>73a9</b>   20 b6 6c   JSR <a href="#6cb6">SetCaveCellAndScreenToObject</a>
+<b>73a9</b>   20 b6 6c   JSR <a href="#6cb6">SetCell</a>
 <b>73ac</b>   60         RTS 
 </div>
 <a name="73ad"></a>
@@ -3822,7 +3829,7 @@ nosidebar: true
 <b>ProcessFallingBoulder:</b><br/>
 
 <div class="disass_code"><b>73ad</b>   a0 51      LDY #$51
-<b>73af</b>   b1 32      LDA (WorldCurrentCellPtr),Y
+<b>73af</b>   b1 32      LDA (CaveCurrentCellPtr),Y
 <b>73b1</b>   d0 08      BNE <a href="#73bb">ProcessFallingBoulder__NoSpaceBelow</a>
 </div>
 
@@ -3832,8 +3839,8 @@ nosidebar: true
 
 
 <div class="disass_code"><b>73b3</b>   a9 13      LDA #$13
-<b>73b5</b>   20 b6 6c   JSR <a href="#6cb6">SetCaveCellAndScreenToObject</a>
-<b>73b8</b>   4c d7 6c   JMP <a href="#6cd7">__ProcessWorld__ClearCurrentCell</a>
+<b>73b5</b>   20 b6 6c   JSR <a href="#6cb6">SetCell</a>
+<b>73b8</b>   4c d7 6c   JMP <a href="#6cd7">__ProcessCave__ClearCurrentCell</a>
 </div>
 <a name="73bb"></a>
 
@@ -3855,7 +3862,7 @@ nosidebar: true
 <div class="disass_code"><b>73c7</b>   c9 01      CMP #$01
 <b>73c9</b>   d0 0b      BNE <a href="#73d6">ProcessFallingBoulder__ClearBoulderAboveMagicWall</a>
 <b>73cb</b>   a0 79      LDY #$79
-<b>73cd</b>   b1 32      LDA (WorldCurrentCellPtr),Y
+<b>73cd</b>   b1 32      LDA (CaveCurrentCellPtr),Y
 <b>73cf</b>   d0 05      BNE <a href="#73d6">ProcessFallingBoulder__ClearBoulderAboveMagicWall</a>
 </div>
 
@@ -3865,7 +3872,7 @@ nosidebar: true
 
 
 <div class="disass_code"><b>73d1</b>   a9 17      LDA #$17
-<b>73d3</b>   20 b6 6c   JSR <a href="#6cb6">SetCaveCellAndScreenToObject</a>
+<b>73d3</b>   20 b6 6c   JSR <a href="#6cb6">SetCell</a>
 </div>
 <a name="73d6"></a>
 
@@ -3874,7 +3881,7 @@ nosidebar: true
 
 <div class="disass_code"><b>73d6</b>   a9 00      LDA #$00
 <b>73d8</b>   a0 29      LDY #$29
-<b>73da</b>   20 b6 6c   JSR <a href="#6cb6">SetCaveCellAndScreenToObject</a>
+<b>73da</b>   20 b6 6c   JSR <a href="#6cb6">SetCell</a>
 </div>
 
 
@@ -3891,18 +3898,18 @@ nosidebar: true
 
 <div class="disass_code"><b>73e0</b>   20 56 6e   JSR <a href="#6e56">FallingBoulderSoundFX</a>
 <b>73e3</b>   a0 51      LDY #$51
-<b>73e5</b>   b1 32      LDA (WorldCurrentCellPtr),Y
+<b>73e5</b>   b1 32      LDA (CaveCurrentCellPtr),Y
 <b>73e7</b>   20 65 6e   JSR <a href="#6e65">TestIfObjectSlippery</a>
 <b>73ea</b>   d0 2e      BNE <a href="#741a">ProcessFallingBoulder__NotSlipperyHit</a>
 <b>73ec</b>   a0 50      LDY #$50
-<b>73ee</b>   b1 32      LDA (WorldCurrentCellPtr),Y
+<b>73ee</b>   b1 32      LDA (CaveCurrentCellPtr),Y
 <b>73f0</b>   d0 0e      BNE <a href="#7400">ProcessFallingBoulder__CantFallLeft</a>
 <b>73f2</b>   a0 28      LDY #$28
-<b>73f4</b>   b1 32      LDA (WorldCurrentCellPtr),Y
+<b>73f4</b>   b1 32      LDA (CaveCurrentCellPtr),Y
 <b>73f6</b>   d0 08      BNE <a href="#7400">ProcessFallingBoulder__CantFallLeft</a>
 <b>73f8</b>   a9 13      LDA #$13
-<b>73fa</b>   20 b6 6c   JSR <a href="#6cb6">SetCaveCellAndScreenToObject</a>
-<b>73fd</b>   4c d7 6c   JMP <a href="#6cd7">__ProcessWorld__ClearCurrentCell</a>
+<b>73fa</b>   20 b6 6c   JSR <a href="#6cb6">SetCell</a>
+<b>73fd</b>   4c d7 6c   JMP <a href="#6cd7">__ProcessCave__ClearCurrentCell</a>
 </div>
 <a name="7400"></a>
 
@@ -3910,14 +3917,14 @@ nosidebar: true
 <b>ProcessFallingBoulder__CantFallLeft:</b><br/>
 
 <div class="disass_code"><b>7400</b>   a0 52      LDY #$52
-<b>7402</b>   b1 32      LDA (WorldCurrentCellPtr),Y
+<b>7402</b>   b1 32      LDA (CaveCurrentCellPtr),Y
 <b>7404</b>   d0 0e      BNE <a href="#7414">ProcessFallingBoulder__CantFallRight</a>
 <b>7406</b>   a0 2a      LDY #$2a
-<b>7408</b>   b1 32      LDA (WorldCurrentCellPtr),Y
+<b>7408</b>   b1 32      LDA (CaveCurrentCellPtr),Y
 <b>740a</b>   d0 08      BNE <a href="#7414">ProcessFallingBoulder__CantFallRight</a>
 <b>740c</b>   a9 13      LDA #$13
-<b>740e</b>   20 b6 6c   JSR <a href="#6cb6">SetCaveCellAndScreenToObject</a>
-<b>7411</b>   4c d7 6c   JMP <a href="#6cd7">__ProcessWorld__ClearCurrentCell</a>
+<b>740e</b>   20 b6 6c   JSR <a href="#6cb6">SetCell</a>
+<b>7411</b>   4c d7 6c   JMP <a href="#6cd7">__ProcessCave__ClearCurrentCell</a>
 </div>
 <a name="7414"></a>
 
@@ -3925,7 +3932,7 @@ nosidebar: true
 <b>ProcessFallingBoulder__CantFallRight:</b><br/>
 
 <div class="disass_code"><b>7414</b>   20 a5 73   JSR <a href="#73a5">CreateScannedStationaryBoulder</a>
-<b>7417</b>   4c 15 7e   JMP <a href="#7e15">__ProcessWorld__NoObjectHandler</a>
+<b>7417</b>   4c 15 7e   JMP <a href="#7e15">__ProcessCave__NoObjectHandler</a>
 </div>
 <a name="741a"></a>
 
@@ -3937,7 +3944,7 @@ nosidebar: true
 <b>741e</b>   a9 1c      LDA #$1c
 <b>7420</b>   85 89      STA ObjectTypeForUpdateCaveCell
 <b>7422</b>   20 22 6d   JSR <a href="#6d22">Explode3x3CellsDownOneRow</a>
-<b>7425</b>   4c 15 7e   JMP <a href="#7e15">__ProcessWorld__NoObjectHandler</a>
+<b>7425</b>   4c 15 7e   JMP <a href="#7e15">__ProcessCave__NoObjectHandler</a>
 </div>
 <a name="7428"></a>
 
@@ -3947,7 +3954,7 @@ nosidebar: true
 <div class="disass_code"><b>7428</b>   20 7c 6e   JSR <a href="#6e7c">CheckIfFallingObjectKillsAnimal</a>
 <b>742b</b>   d0 06      BNE <a href="#7433">ProcessFallingBoulder__DidntHitAnimal</a>
 <b>742d</b>   20 22 6d   JSR <a href="#6d22">Explode3x3CellsDownOneRow</a>
-<b>7430</b>   4c 15 7e   JMP <a href="#7e15">__ProcessWorld__NoObjectHandler</a>
+<b>7430</b>   4c 15 7e   JMP <a href="#7e15">__ProcessCave__NoObjectHandler</a>
 </div>
 <a name="7433"></a>
 
@@ -3955,7 +3962,7 @@ nosidebar: true
 <b>ProcessFallingBoulder__DidntHitAnimal:</b><br/>
 
 <div class="disass_code"><b>7433</b>   20 a5 73   JSR <a href="#73a5">CreateScannedStationaryBoulder</a>
-<b>7436</b>   4c 15 7e   JMP <a href="#7e15">__ProcessWorld__NoObjectHandler</a>
+<b>7436</b>   4c 15 7e   JMP <a href="#7e15">__ProcessCave__NoObjectHandler</a>
 </div>
 <a name="7439"></a>
 
@@ -4160,7 +4167,7 @@ nosidebar: true
 <div class="disass_comment">; We only start a scroll if .AnotherFrameCounter is even.
 ; This is important to keep the scrolling logic in sync with the rest of the IRQ handler.
 ; (IRQ handler flips buffers on even frames and copies the visible section of the inflated
-; world the the back buffer on odd frames.)
+; cave the the back buffer on odd frames.)
 ; 
 ; .FineScrollDirY: $40 up, $c0 down.
 </div>
@@ -4224,8 +4231,8 @@ nosidebar: true
 ; This setting takes effect in the next frame.
 ; The previous setting was .YScrollVicCtl1Table[0] ($17), the resting state when not scrolling.
 ; 
-; 2) We change .InflatedWorldSubsetPtrH & InflatedWorldSubsetPtrL.
-; Since the Inflated World is copied to the back buffer on odd frames and it then has to be
+; 2) We change .InflatedCaveSubsetPtrH & InflatedCaveSubsetPtrL.
+; Since the Inflated Cave is copied to the back buffer on odd frames and it then has to be
 ; flipped to the front, which happens in even frames, this change will not be seen for a bit.
 ; This is why we do it at what seems like a strange fine scroll value (not an extreme).
 ; 
@@ -4237,7 +4244,7 @@ nosidebar: true
 ; 
 ; 1) .RastInt_vic_control1 = .YScrollVicCtl1Table[2] ($13)
 ; 
-; 2) Our caller copies the Inflated World to the back buffer.
+; 2) Our caller copies the Inflated Cave to the back buffer.
 ; The back buffer now reflects the changes made in frame n+0 step 2.
 ; It is not visible yet however as it has to be flipped to the front.
 ; 
@@ -4266,13 +4273,13 @@ nosidebar: true
 
 <div class="disass_comment">; Stuff on screen moves up, Rockford moving down.
 </div>
-<div class="disass_code"><b>751e</b>   a5 d6      LDA InflatedWorldSubset
+<div class="disass_code"><b>751e</b>   a5 d6      LDA InflatedCaveSubset
 <b>7520</b>   18         CLC 
 <b>7521</b>   69 50      ADC #$50
-<b>7523</b>   85 d6      STA InflatedWorldSubset
-<b>7525</b>   a5 d7      LDA InflatedWorldSubset+1
+<b>7523</b>   85 d6      STA InflatedCaveSubset
+<b>7525</b>   a5 d7      LDA InflatedCaveSubset+1
 <b>7527</b>   69 00      ADC #$00
-<b>7529</b>   85 d7      STA InflatedWorldSubset+1
+<b>7529</b>   85 d7      STA InflatedCaveSubset+1
 <a name="752b"></a><b>752b</b>   a5 e3      LDA YScrollTableIndex
 <b>752d</b>   d0 25      BNE <a href="#7554">$7554</a>
 <b>752f</b>   a5 e4      LDA YCoarseScrollDirFlag
@@ -4300,13 +4307,13 @@ nosidebar: true
 ; only one frame). This means it takes two frames to initiate an upward scroll whereas scrolling
 ; down takes one.
 </div>
-<div class="disass_code"><b>7542</b>   a5 d6      LDA InflatedWorldSubset
+<div class="disass_code"><b>7542</b>   a5 d6      LDA InflatedCaveSubset
 <b>7544</b>   38         SEC 
 <b>7545</b>   e9 50      SBC #$50
-<b>7547</b>   85 d6      STA InflatedWorldSubset
-<b>7549</b>   a5 d7      LDA InflatedWorldSubset+1
+<b>7547</b>   85 d6      STA InflatedCaveSubset
+<b>7549</b>   a5 d7      LDA InflatedCaveSubset+1
 <b>754b</b>   e9 00      SBC #$00
-<b>754d</b>   85 d7      STA InflatedWorldSubset+1
+<b>754d</b>   85 d7      STA InflatedCaveSubset+1
 <b>754f</b>   a9 03      LDA #$03
 <b>7551</b>   85 e4      STA YCoarseScrollDirFlag
 <b>7553</b>   60         RTS 
@@ -4360,9 +4367,9 @@ nosidebar: true
 <b>759b</b>   d0 0a      BNE <a href="#75a7">$75a7</a>
 <b>759d</b>   a5 e2      LDA XCoarseScrollDirFlag
 <b>759f</b>   d0 06      BNE <a href="#75a7">$75a7</a>
-<b>75a1</b>   e6 d6      INC InflatedWorldSubset
+<b>75a1</b>   e6 d6      INC InflatedCaveSubset
 <b>75a3</b>   d0 02      BNE <a href="#75a7">$75a7</a>
-<b>75a5</b>   e6 d7      INC InflatedWorldSubset+1
+<b>75a5</b>   e6 d7      INC InflatedCaveSubset+1
 <a name="75a7"></a><b>75a7</b>   a5 e1      LDA XScrollTableIndex
 <b>75a9</b>   d0 25      BNE <a href="#75d0">$75d0</a>
 <b>75ab</b>   a5 e2      LDA XCoarseScrollDirFlag
@@ -4374,13 +4381,13 @@ nosidebar: true
 <b>75b8</b>   a5 e6      LDA RockfordCellsFromLeftOfScreen
 <b>75ba</b>   c9 09      CMP #$09
 <b>75bc</b>   f0 12      BEQ <a href="#75d0">$75d0</a>
-<a name="75be"></a><b>75be</b>   a5 d6      LDA InflatedWorldSubset
+<a name="75be"></a><b>75be</b>   a5 d6      LDA InflatedCaveSubset
 <b>75c0</b>   38         SEC 
 <b>75c1</b>   e9 01      SBC #$01
-<b>75c3</b>   85 d6      STA InflatedWorldSubset
-<b>75c5</b>   a5 d7      LDA InflatedWorldSubset+1
+<b>75c3</b>   85 d6      STA InflatedCaveSubset
+<b>75c5</b>   a5 d7      LDA InflatedCaveSubset+1
 <b>75c7</b>   e9 00      SBC #$00
-<b>75c9</b>   85 d7      STA InflatedWorldSubset+1
+<b>75c9</b>   85 d7      STA InflatedCaveSubset+1
 <b>75cb</b>   a9 03      LDA #$03
 <b>75cd</b>   85 e2      STA XCoarseScrollDirFlag
 <b>75cf</b>   60         RTS 
@@ -4706,18 +4713,18 @@ nosidebar: true
 <div class="disass_comment">; 
 </div>
 
-<b>AdvanceWorldCurrentCellPtr:</b><br/>
+<b>AdvanceCaveCurrentCellPtr:</b><br/>
 
-<div class="disass_code"><b>76c6</b>   e6 32      INC WorldCurrentCellPtr
+<div class="disass_code"><b>76c6</b>   e6 32      INC CaveCurrentCellPtr
 <b>76c8</b>   d0 02      BNE <a href="#76cc">$76cc</a>
-<b>76ca</b>   e6 33      INC WorldCurrentCellPtr+1
+<b>76ca</b>   e6 33      INC CaveCurrentCellPtr+1
 <a name="76cc"></a><b>76cc</b>   60         RTS 
 </div>
 <a name="76cd"></a>
 
 <div class="disass_comment">; IN: ZF, A
 ; 
-; .WorldCurrentCellPtr(???) points to the NW cell ($00).
+; .CaveCurrentCellPtr(???) points to the NW cell ($00).
 ; The current cell C is at an offset of $29. See table below:
 ; ---------------------
 ; |NW:$00|N:$01|NE:$02|
@@ -4730,15 +4737,15 @@ nosidebar: true
 ; ---------------------
 </div>
 
-<b>ResetWorldCurrentCellPtr:</b><br/>
+<b>ResetCaveCurrentCellPtr:</b><br/>
 
 <div class="disass_code"><b>76cd</b>   f0 02      BEQ <a href="#76d1">$76d1</a>
 <b>76cf</b>   a9 28      LDA #$28
 <a name="76d1"></a><b>76d1</b>   18         CLC 
 <b>76d2</b>   69 27      ADC #$27
-<b>76d4</b>   85 32      STA WorldCurrentCellPtr
+<b>76d4</b>   85 32      STA CaveCurrentCellPtr
 <b>76d6</b>   a9 08      LDA #$08
-<b>76d8</b>   85 33      STA WorldCurrentCellPtr+1
+<b>76d8</b>   85 33      STA CaveCurrentCellPtr+1
 <b>76da</b>   60         RTS 
 </div>
 <a name="76db"></a>
@@ -4746,16 +4753,16 @@ nosidebar: true
 <div class="disass_comment">; 
 </div>
 
-<b>FillInflatedWorldWithScrollingSteelWallChar:</b><br/>
+<b>FillInflatedCaveWithScrollingSteelWallChar:</b><br/>
 
 <div class="disass_code"><b>76db</b>   a2 00      LDX #$00
-<a name="76dd"></a><b>76dd</b>   bd da 53   LDA <a href="#53da">InflatedWorldLineAddressTable</a>,X
-<b>76e0</b>   85 34      STA InflatedWorldCurrentCellPtr
-<b>76e2</b>   bd db 53   LDA <a href="#53da">InflatedWorldLineAddressTable</a>+1,X
-<b>76e5</b>   85 35      STA InflatedWorldCurrentCellPtr+1
+<a name="76dd"></a><b>76dd</b>   bd da 53   LDA <a href="#53da">InflatedCaveLineAddressTable</a>,X
+<b>76e0</b>   85 34      STA InflatedCaveCurrentCellPtr
+<b>76e2</b>   bd db 53   LDA <a href="#53da">InflatedCaveLineAddressTable</a>+1,X
+<b>76e5</b>   85 35      STA InflatedCaveCurrentCellPtr+1
 <b>76e7</b>   a0 00      LDY #$00
 <b>76e9</b>   a9 7c      LDA #$7c
-<a name="76eb"></a><b>76eb</b>   91 34      STA (InflatedWorldCurrentCellPtr),Y
+<a name="76eb"></a><b>76eb</b>   91 34      STA (InflatedCaveCurrentCellPtr),Y
 <b>76ed</b>   c8         INY 
 </div>
 
@@ -4782,9 +4789,9 @@ nosidebar: true
 <div class="disass_comment">; Build a line address table for currently visible
 ; portion of empanded lattice.
 </div>
-<div class="disass_code"><b>76f9</b>   a5 d6      LDA InflatedWorldSubset
+<div class="disass_code"><b>76f9</b>   a5 d6      LDA InflatedCaveSubset
 <b>76fb</b>   85 02      STA __CoverLevel__LineAddressTable
-<b>76fd</b>   a5 d7      LDA InflatedWorldSubset+1
+<b>76fd</b>   a5 d7      LDA InflatedCaveSubset+1
 <b>76ff</b>   85 03      STA __CoverLevel__LineAddressTable+1
 <b>7701</b>   a2 00      LDX #$00
 <a name="7703"></a><b>7703</b>   b5 02      LDA __CoverLevel__LineAddressTable,X
@@ -4843,9 +4850,9 @@ nosidebar: true
 
 <div class="disass_code"><b>771e</b>   85 ba      STA CoverLevel__POINTLESS__
 <b>7720</b>   b5 02      LDA __CoverLevel__LineAddressTable,X
-<b>7722</b>   85 36      STA InflatedWorldOutputPtr
+<b>7722</b>   85 36      STA InflatedCaveOutputPtr
 <b>7724</b>   b5 03      LDA __CoverLevel__LineAddressTable+1,X
-<b>7726</b>   85 37      STA InflatedWorldOutputPtr+1
+<b>7726</b>   85 37      STA InflatedCaveOutputPtr+1
 </div>
 <a name="7728"></a>
 
@@ -4874,7 +4881,7 @@ nosidebar: true
 <b>7732</b>   e6 ba      INC CoverLevel__POINTLESS__
 <b>7734</b>   d0 04      BNE <a href="#773a">__CoverLevel__PointlessBranchTarget</a>
 <b>7736</b>   a9 00      LDA #$00
-<b>7738</b>   91 36      STA (InflatedWorldOutputPtr),Y
+<b>7738</b>   91 36      STA (InflatedCaveOutputPtr),Y
 </div>
 <a name="773a"></a>
 
@@ -4884,7 +4891,7 @@ nosidebar: true
 <div class="disass_comment">; $7c is scrolling steel wall.
 </div>
 <div class="disass_code"><b>773a</b>   a9 7c      LDA #$7c
-<b>773c</b>   91 36      STA (InflatedWorldOutputPtr),Y
+<b>773c</b>   91 36      STA (InflatedCaveOutputPtr),Y
 <b>773e</b>   e8         INX 
 <b>773f</b>   e8         INX 
 <b>7740</b>   e0 30      CPX #$30
@@ -4897,15 +4904,15 @@ nosidebar: true
 </div>
 <a name="774d"></a>
 
-<div class="disass_comment">; Pads the Inflated World ($4003 - $4DC2) with 1st steel wall char ($4a).
+<div class="disass_comment">; Pads the Inflated Cave ($4003 - $4DC2) with 1st steel wall char ($4a).
 ; Padded bytes: $4000-4002 (3 bytes) and $4dc3-4ec2 (256 bytes).
 </div>
 
-<b>PadInflatedWorld:</b><br/>
+<b>PadInflatedCave:</b><br/>
 
 <div class="disass_code"><b>774d</b>   a2 00      LDX #$00
 <b>774f</b>   a9 4a      LDA #$4a
-<a name="7751"></a><b>7751</b>   9d c3 4d   STA InflatedWorld__END_PLUS_ONE__,X
+<a name="7751"></a><b>7751</b>   9d c3 4d   STA InflatedCave__END_PLUS_ONE__,X
 <b>7754</b>   ca         DEX 
 <b>7755</b>   d0 fa      BNE <a href="#7751">$7751</a>
 <b>7757</b>   a2 02      LDX #$02
@@ -4934,7 +4941,7 @@ nosidebar: true
 
 <div class="disass_code"><b>7764</b>   a9 00      LDA #$00
 <b>7766</b>   85 92      STA CaveMatrixY
-<b>7768</b>   20 cd 76   JSR <a href="#76cd">ResetWorldCurrentCellPtr</a>
+<b>7768</b>   20 cd 76   JSR <a href="#76cd">ResetCaveCurrentCellPtr</a>
 </div>
 <a name="776b"></a>
 
@@ -4950,8 +4957,8 @@ nosidebar: true
 </div>
 
 
-<div class="disass_comment">; .WorldCurrentCellX <= $27(39)
-; A = 39-.WorldCurrentCellX
+<div class="disass_comment">; .CaveCurrentCellX <= $27(39)
+; A = 39-.CaveCurrentCellX
 </div>
 
 
@@ -4960,19 +4967,19 @@ nosidebar: true
 </div>
 
 
-<div class="disass_comment">; .RandomlyUncoverScreen::OffsetToStartOfNextLine = 40-.WorldCurrentCellX
+<div class="disass_comment">; .RandomlyUncoverScreen::OffsetToStartOfNextLine = 40-.CaveCurrentCellX
 ; 
-; Adjust .WorldCurrentCellPtr(Low&High) to point to .WorldCurrentCellX on the line.
+; Adjust .CaveCurrentCellPtr(Low&High) to point to .CaveCurrentCellX on the line.
 </div>
 
 
-<div class="disass_code"><b>777b</b>   a5 32      LDA WorldCurrentCellPtr
+<div class="disass_code"><b>777b</b>   a5 32      LDA CaveCurrentCellPtr
 <b>777d</b>   18         CLC 
 <b>777e</b>   65 91      ADC CaveMatrixX
-<b>7780</b>   85 32      STA WorldCurrentCellPtr
-<b>7782</b>   a5 33      LDA WorldCurrentCellPtr+1
+<b>7780</b>   85 32      STA CaveCurrentCellPtr
+<b>7782</b>   a5 33      LDA CaveCurrentCellPtr+1
 <b>7784</b>   69 00      ADC #$00
-<b>7786</b>   85 33      STA WorldCurrentCellPtr+1
+<b>7786</b>   85 33      STA CaveCurrentCellPtr+1
 </div>
 
 
@@ -4981,8 +4988,8 @@ nosidebar: true
 
 
 <div class="disass_code"><b>7788</b>   a0 29      LDY #$29
-<b>778a</b>   b1 32      LDA (WorldCurrentCellPtr),Y
-<b>778c</b>   20 b6 6c   JSR <a href="#6cb6">SetCaveCellAndScreenToObject</a>
+<b>778a</b>   b1 32      LDA (CaveCurrentCellPtr),Y
+<b>778c</b>   20 b6 6c   JSR <a href="#6cb6">SetCell</a>
 </div>
 
 
@@ -4990,13 +4997,13 @@ nosidebar: true
 </div>
 
 
-<div class="disass_code"><b>778f</b>   a5 32      LDA WorldCurrentCellPtr
+<div class="disass_code"><b>778f</b>   a5 32      LDA CaveCurrentCellPtr
 <b>7791</b>   18         CLC 
 <b>7792</b>   65 bc      ADC RandomlyUncoverScreen__OffsetToStartOfNextLine
-<b>7794</b>   85 32      STA WorldCurrentCellPtr
-<b>7796</b>   a5 33      LDA WorldCurrentCellPtr+1
+<b>7794</b>   85 32      STA CaveCurrentCellPtr
+<b>7796</b>   a5 33      LDA CaveCurrentCellPtr+1
 <b>7798</b>   69 00      ADC #$00
-<b>779a</b>   85 33      STA WorldCurrentCellPtr+1
+<b>779a</b>   85 33      STA CaveCurrentCellPtr+1
 </div>
 
 
@@ -5136,13 +5143,13 @@ nosidebar: true
 
 <div class="disass_code"><b>7801</b>   a9 00      LDA #$00
 <b>7803</b>   85 92      STA CaveMatrixY
-<b>7805</b>   20 cd 76   JSR <a href="#76cd">ResetWorldCurrentCellPtr</a>
+<b>7805</b>   20 cd 76   JSR <a href="#76cd">ResetCaveCurrentCellPtr</a>
 <a name="7808"></a><b>7808</b>   a9 00      LDA #$00
 <b>780a</b>   85 91      STA CaveMatrixX
 <a name="780c"></a><b>780c</b>   a0 29      LDY #$29
-<b>780e</b>   b1 32      LDA (WorldCurrentCellPtr),Y
-<b>7810</b>   20 b6 6c   JSR <a href="#6cb6">SetCaveCellAndScreenToObject</a>
-<b>7813</b>   20 c6 76   JSR <a href="#76c6">AdvanceWorldCurrentCellPtr</a>
+<b>780e</b>   b1 32      LDA (CaveCurrentCellPtr),Y
+<b>7810</b>   20 b6 6c   JSR <a href="#6cb6">SetCell</a>
+<b>7813</b>   20 c6 76   JSR <a href="#76c6">AdvanceCaveCurrentCellPtr</a>
 <b>7816</b>   e6 91      INC CaveMatrixX
 <b>7818</b>   a5 91      LDA CaveMatrixX
 <b>781a</b>   c9 28      CMP #$28
@@ -5158,7 +5165,7 @@ nosidebar: true
 </div>
 
 
-<div class="disass_code"><b>7826</b>   20 4d 77   JSR <a href="#774d">PadInflatedWorld</a>
+<div class="disass_code"><b>7826</b>   20 4d 77   JSR <a href="#774d">PadInflatedCave</a>
 <b>7829</b>   60         RTS 
 </div>
 <a name="782a"></a>
@@ -5796,7 +5803,7 @@ nosidebar: true
 <b>7b41</b>   20 ad 76   JSR <a href="#76ad">Scroller</a>
 <b>7b44</b>   a5 c2      LDA AnotherFrameCounter
 <b>7b46</b>   29 01      AND #$01
-<b>7b48</b>   d0 0b      BNE <a href="#7b55">__GameIRQActions__CopyInflatedWorldToBackBuffer</a>
+<b>7b48</b>   d0 0b      BNE <a href="#7b55">__GameIRQActions__CopyInflatedCaveToBackBuffer</a>
 </div>
 
 
@@ -5812,9 +5819,9 @@ nosidebar: true
 <a name="7b55"></a>
 
 
-<b>__GameIRQActions__CopyInflatedWorldToBackBuffer:</b><br/>
+<b>__GameIRQActions__CopyInflatedCaveToBackBuffer:</b><br/>
 
-<div class="disass_code"><b>7b55</b>   4c 00 9e   JMP <a href="#9e00">MOVEDCopyInflatedWorldSubsetToBackBuffer</a>
+<div class="disass_code"><b>7b55</b>   4c 00 9e   JMP <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>
 </div>
 
 
@@ -5823,9 +5830,9 @@ nosidebar: true
 ; The routine occupies $7b58-$7c90.
 </div>
 
-<b>CopyInflatedWorldSubsetToBackBuffer:</b><br/>
+<b>CopyInflatedCaveSubsetToBackBuffer:</b><br/>
 
-<div class="disass_code"><b>7b58</b>   a5 d6      LDA InflatedWorldSubset
+<div class="disass_code"><b>7b58</b>   a5 d6      LDA InflatedCaveSubset
 <b>7b5a</b>   18         CLC 
 <b>7b5b</b>   69 20      ADC #$20
 <b>7b5d</b>   8d 51 9e   STA $9e51
@@ -5836,7 +5843,7 @@ nosidebar: true
 </div>
 
 
-<div class="disass_code"><b>7b60</b>   a5 d7      LDA InflatedWorldSubset+1
+<div class="disass_code"><b>7b60</b>   a5 d7      LDA InflatedCaveSubset+1
 <b>7b62</b>   69 03      ADC #$03
 <b>7b64</b>   8d 52 9e   STA $9e52
 </div>
@@ -5959,7 +5966,7 @@ nosidebar: true
 </div>
 
 
-<div class="disass_code"><b>7c0e</b>   a5 d6      LDA InflatedWorldSubset
+<div class="disass_code"><b>7c0e</b>   a5 d6      LDA InflatedCaveSubset
 <b>7c10</b>   8d f0 9e   STA $9ef0
 </div>
 
@@ -5968,7 +5975,7 @@ nosidebar: true
 </div>
 
 
-<div class="disass_code"><b>7c13</b>   a5 d7      LDA InflatedWorldSubset+1
+<div class="disass_code"><b>7c13</b>   a5 d7      LDA InflatedCaveSubset+1
 <b>7c15</b>   8d f1 9e   STA $9ef1
 </div>
 
@@ -6074,7 +6081,7 @@ nosidebar: true
 <b>7ca3</b>   d0 f3      BNE <a href="#7c98">_RandomObjTestLoop</a>
 <b>7ca5</b>   8a         TXA 
 <b>7ca6</b>   a0 29      LDY #$29
-<b>7ca8</b>   91 32      STA (WorldCurrentCellPtr),Y
+<b>7ca8</b>   91 32      STA (CaveCurrentCellPtr),Y
 <b>7caa</b>   60         RTS 
 </div>
 <a name="7cab"></a>
@@ -6086,7 +6093,7 @@ nosidebar: true
 
 <div class="disass_code"><b>7cab</b>   a9 01      LDA #$01
 <b>7cad</b>   85 92      STA CaveMatrixY
-<b>7caf</b>   20 cd 76   JSR <a href="#76cd">ResetWorldCurrentCellPtr</a>
+<b>7caf</b>   20 cd 76   JSR <a href="#76cd">ResetCaveCurrentCellPtr</a>
 </div>
 <a name="7cb2"></a>
 
@@ -6102,7 +6109,7 @@ nosidebar: true
 <b>FillWithDirtAndRandomObjects__NextColumn:</b><br/>
 
 <div class="disass_code"><b>7cb6</b>   20 91 7c   JSR <a href="#7c91">InstallRandomCaveObjectForCell</a>
-<b>7cb9</b>   20 c6 76   JSR <a href="#76c6">AdvanceWorldCurrentCellPtr</a>
+<b>7cb9</b>   20 c6 76   JSR <a href="#76c6">AdvanceCaveCurrentCellPtr</a>
 <b>7cbc</b>   e6 91      INC CaveMatrixX
 <b>7cbe</b>   a5 91      LDA CaveMatrixX
 <b>7cc0</b>   c9 28      CMP #$28
@@ -6125,7 +6132,7 @@ nosidebar: true
 <a name="7cd2"></a>
 
 
-<b>WorldRowTransitionDelay:</b><br/>
+<b>CaveRowTransitionDelay:</b><br/>
 
 <div class="disass_code"><b>7cd2</b>   a4 9c      LDY MatrixRowTransitionDelay
 <b>7cd4</b>   f0 08      BEQ <a href="#7cde">$7cde</a>
@@ -6436,18 +6443,18 @@ nosidebar: true
 <div class="disass_comment">; 
 </div>
 
-<b>ProcessWorld:</b><br/>
+<b>ProcessCave:</b><br/>
 
 <div class="disass_code"><b>7dd9</b>   a9 16      LDA #$16
 <b>7ddb</b>   85 02      STA __CoverLevel__LineAddressTable
 <b>7ddd</b>   a5 5d      LDA Cave
 <b>7ddf</b>   c9 11      CMP #$11
-<b>7de1</b>   90 04      BCC <a href="#7de7">__ProcessWorld__NotBonusCave</a>
+<b>7de1</b>   90 04      BCC <a href="#7de7">__ProcessCave__NotBonusCave</a>
 </div>
 
 
 
-<b>__ProcessWorld__BonusCave:</b><br/>
+<b>__ProcessCave__BonusCave:</b><br/>
 
 <div class="disass_code"><b>7de3</b>   a9 0f      LDA #$0f
 <b>7de5</b>   85 02      STA __CoverLevel__LineAddressTable
@@ -6455,11 +6462,11 @@ nosidebar: true
 <a name="7de7"></a>
 
 
-<b>__ProcessWorld__NotBonusCave:</b><br/>
+<b>__ProcessCave__NotBonusCave:</b><br/>
 
 <div class="disass_code"><b>7de7</b>   a9 01      LDA #$01
 <b>7de9</b>   85 92      STA CaveMatrixY
-<b>7deb</b>   20 cd 76   JSR <a href="#76cd">ResetWorldCurrentCellPtr</a>
+<b>7deb</b>   20 cd 76   JSR <a href="#76cd">ResetCaveCurrentCellPtr</a>
 <b>7dee</b>   a9 10      LDA #$10
 <b>7df0</b>   c5 96      CMP RockfordDeadTicks
 <b>7df2</b>   f0 02      BEQ <a href="#7df6">$7df6</a>
@@ -6470,7 +6477,7 @@ nosidebar: true
 <a name="7dfc"></a>
 
 
-<b>__ProcessWorld__NewRow:</b><br/>
+<b>__ProcessCave__NewRow:</b><br/>
 
 <div class="disass_code"><b>7dfc</b>   a9 00      LDA #$00
 <b>7dfe</b>   85 91      STA CaveMatrixX
@@ -6478,19 +6485,19 @@ nosidebar: true
 <a name="7e00"></a>
 
 
-<b>__ProcessWorld__ProcessCurrentCell:</b><br/>
+<b>__ProcessCave__ProcessCurrentCell:</b><br/>
 
 <div class="disass_code"><b>7e00</b>   a0 29      LDY #$29
-<b>7e02</b>   b1 32      LDA (WorldCurrentCellPtr),Y
+<b>7e02</b>   b1 32      LDA (CaveCurrentCellPtr),Y
 <b>7e04</b>   0a         ASL A
 <b>7e05</b>   aa         TAX 
 <b>7e06</b>   bd 69 5f   LDA <a href="#5f68">ObjHandlerVectorTable</a>+1,X
-<b>7e09</b>   f0 0a      BEQ <a href="#7e15">__ProcessWorld__NoObjectHandler</a>
+<b>7e09</b>   f0 0a      BEQ <a href="#7e15">__ProcessCave__NoObjectHandler</a>
 </div>
 
 
 
-<b>__ProcessWorld__ObjectHandler:</b><br/>
+<b>__ProcessCave__ObjectHandler:</b><br/>
 
 <div class="disass_code"><b>7e0b</b>   85 39      STA ObjHandlerVector+1
 <b>7e0d</b>   bd 68 5f   LDA <a href="#5f68">ObjHandlerVectorTable</a>,X
@@ -6500,56 +6507,56 @@ nosidebar: true
 <a name="7e15"></a>
 
 
-<b>__ProcessWorld__NoObjectHandler:</b><br/>
+<b>__ProcessCave__NoObjectHandler:</b><br/>
 
 <div class="disass_code"><b>7e15</b>   a0 00      LDY #$00
-<b>7e17</b>   b1 32      LDA (WorldCurrentCellPtr),Y
+<b>7e17</b>   b1 32      LDA (CaveCurrentCellPtr),Y
 <b>7e19</b>   aa         TAX 
 <b>7e1a</b>   bd e8 5e   LDA <a href="#5ee8">ObjCodeFromScannedThisTickCodeTable</a>,X
-<b>7e1d</b>   f0 02      BEQ <a href="#7e21">__ProcessWorld__NextCell</a>
+<b>7e1d</b>   f0 02      BEQ <a href="#7e21">__ProcessCave__NextCell</a>
 </div>
 
 
 
-<b>__ProcessWorld__TurnTrailerToBaseType:</b><br/>
+<b>__ProcessCave__TurnTrailerToBaseType:</b><br/>
 
-<div class="disass_code"><b>7e1f</b>   91 32      STA (WorldCurrentCellPtr),Y
+<div class="disass_code"><b>7e1f</b>   91 32      STA (CaveCurrentCellPtr),Y
 </div>
 <a name="7e21"></a>
 
 
-<b>__ProcessWorld__NextCell:</b><br/>
+<b>__ProcessCave__NextCell:</b><br/>
 
-<div class="disass_code"><b>7e21</b>   e6 32      INC WorldCurrentCellPtr
-<b>7e23</b>   d0 02      BNE <a href="#7e27">__ProcessWorld__IncX</a>
+<div class="disass_code"><b>7e21</b>   e6 32      INC CaveCurrentCellPtr
+<b>7e23</b>   d0 02      BNE <a href="#7e27">__ProcessCave__IncX</a>
 </div>
 
 
 
-<b>__ProcessWorld__BumpUpCellPtrHigh:</b><br/>
+<b>__ProcessCave__BumpUpCellPtrHigh:</b><br/>
 
-<div class="disass_code"><b>7e25</b>   e6 33      INC WorldCurrentCellPtr+1
+<div class="disass_code"><b>7e25</b>   e6 33      INC CaveCurrentCellPtr+1
 </div>
 <a name="7e27"></a>
 
 
-<b>__ProcessWorld__IncX:</b><br/>
+<b>__ProcessCave__IncX:</b><br/>
 
 <div class="disass_code"><b>7e27</b>   e6 91      INC CaveMatrixX
 <b>7e29</b>   a5 91      LDA CaveMatrixX
 <b>7e2b</b>   c9 28      CMP #$28
-<b>7e2d</b>   d0 d1      BNE <a href="#7e00">__ProcessWorld__ProcessCurrentCell</a>
+<b>7e2d</b>   d0 d1      BNE <a href="#7e00">__ProcessCave__ProcessCurrentCell</a>
 </div>
 
 
 
-<b>__ProcessWorld__NextRow:</b><br/>
+<b>__ProcessCave__NextRow:</b><br/>
 
-<div class="disass_code"><b>7e2f</b>   20 d2 7c   JSR <a href="#7cd2">WorldRowTransitionDelay</a>
+<div class="disass_code"><b>7e2f</b>   20 d2 7c   JSR <a href="#7cd2">CaveRowTransitionDelay</a>
 <b>7e32</b>   e6 92      INC CaveMatrixY
 <b>7e34</b>   a5 92      LDA CaveMatrixY
 <b>7e36</b>   c5 02      CMP __CoverLevel__LineAddressTable
-<b>7e38</b>   d0 c2      BNE <a href="#7dfc">__ProcessWorld__NewRow</a>
+<b>7e38</b>   d0 c2      BNE <a href="#7dfc">__ProcessCave__NewRow</a>
 <b>7e3a</b>   20 6b 7d   JSR <a href="#7d6b">HandleInGameKeys</a>
 <b>7e3d</b>   60         RTS 
 </div>
@@ -7136,7 +7143,7 @@ nosidebar: true
 <b>805b</b>   85 bd      STA PlayRevealLevelSoundAndRedefineCharFlag
 <b>805d</b>   20 f4 7c   JSR <a href="#7cf4">ResetSound</a>
 <b>8060</b>   20 f9 76   JSR <a href="#76f9">CoverLevel</a>
-<b>8063</b>   20 db 76   JSR <a href="#76db">FillInflatedWorldWithScrollingSteelWallChar</a>
+<b>8063</b>   20 db 76   JSR <a href="#76db">FillInflatedCaveWithScrollingSteelWallChar</a>
 <b>8066</b>   a5 a0      LDA GameOverFlag
 <b>8068</b>   f0 03      BEQ <a href="#806d">$806d</a>
 <b>806a</b>   20 0c 7d   JSR <a href="#7d0c">FourDelays</a>
@@ -9641,7 +9648,7 @@ nosidebar: true
 
 <b>RunCave:</b><br/>
 
-<div class="disass_code"><b>88fb</b>   20 d9 7d   JSR <a href="#7dd9">ProcessWorld</a>
+<div class="disass_code"><b>88fb</b>   20 d9 7d   JSR <a href="#7dd9">ProcessCave</a>
 <b>88fe</b>   a5 97      LDA ExitCaveFlag
 <b>8900</b>   f0 f9      BEQ <a href="#88fb">RunCave</a>
 <b>8902</b>   20 f4 7c   JSR <a href="#7cf4">ResetSound</a>
@@ -9696,7 +9703,7 @@ nosidebar: true
 <b>8941</b>   85 d4      STA ExitDemoModeFlag
 <a name="8943"></a><b>8943</b>   a5 d4      LDA ExitDemoModeFlag
 <b>8945</b>   d0 08      BNE <a href="#894f">__DemoModeRunCave__Exit</a>
-<b>8947</b>   20 d9 7d   JSR <a href="#7dd9">ProcessWorld</a>
+<b>8947</b>   20 d9 7d   JSR <a href="#7dd9">ProcessCave</a>
 <b>894a</b>   c6 d2      DEC DemoMoveRepeatCount
 <b>894c</b>   4c 1b 89   JMP <a href="#891b">__DemoModeRunCave__Loop</a>
 </div>
@@ -9998,7 +10005,7 @@ nosidebar: true
 
 <div class="disass_code"><b>8a81</b>   a9 3c      LDA #$3c
 <b>8a83</b>   8d 07 98   STA BackBufferVICMemControl
-<b>8a86</b>   20 db 76   JSR <a href="#76db">FillInflatedWorldWithScrollingSteelWallChar</a>
+<b>8a86</b>   20 db 76   JSR <a href="#76db">FillInflatedCaveWithScrollingSteelWallChar</a>
 <b>8a89</b>   78         SEI 
 <b>8a8a</b>   a2 07      LDX #$07
 <a name="8a8c"></a><b>8a8c</b>   bd 0b 86   LDA <a href="#860b">RastIntTitleModeVICRegs</a>,X
@@ -10133,7 +10140,7 @@ nosidebar: true
 <b>8b02</b>   e8         INX 
 <b>8b03</b>   86 05      STX __CoverLevel__LineAddressTable+3
 <a name="8b05"></a><b>8b05</b>   b1 02      LDA (__CoverLevel__LineAddressTable),Y
-<b>8b07</b>   99 00 9e   STA <a href="#9e00">MOVEDCopyInflatedWorldSubsetToBackBuffer</a>,Y
+<b>8b07</b>   99 00 9e   STA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>,Y
 <b>8b0a</b>   b1 04      LDA (__CoverLevel__LineAddressTable+2),Y
 <b>8b0c</b>   99 00 9f   STA $9f00,Y
 <b>8b0f</b>   c8         INY 
@@ -10146,9 +10153,9 @@ nosidebar: true
 
 
 <div class="disass_code"><b>8b12</b>   a9 03      LDA #$03
-<b>8b14</b>   85 d6      STA InflatedWorldSubset
+<b>8b14</b>   85 d6      STA InflatedCaveSubset
 <b>8b16</b>   a9 40      LDA #$40
-<b>8b18</b>   85 d7      STA InflatedWorldSubset+1
+<b>8b18</b>   85 d7      STA InflatedCaveSubset+1
 </div>
 
 
@@ -10323,13 +10330,13 @@ nosidebar: true
 <a name="9e00"></a>
 
 
-<b>MOVEDCopyInflatedWorldSubsetToBackBuffer:</b><br/>
+<b>MOVEDCopyInflatedCaveSubsetToBackBuffer:</b><br/>
 
-<div class="disass_code"><b>9e00</b>   a5 d6      LDA InflatedWorldSubset
+<div class="disass_code"><b>9e00</b>   a5 d6      LDA InflatedCaveSubset
 <b>9e02</b>   18         CLC 
 <b>9e03</b>   69 20      ADC #$20
 <b>9e05</b>   8d 51 9e   STA $9e51
-<b>9e08</b>   a5 d7      LDA InflatedWorldSubset+1
+<b>9e08</b>   a5 d7      LDA InflatedCaveSubset+1
 <b>9e0a</b>   69 03      ADC #$03
 <b>9e0c</b>   8d 52 9e   STA $9e52
 <b>9e0f</b>   ad 07 98   LDA BackBufferVICMemControl
@@ -10400,9 +10407,9 @@ nosidebar: true
 <b>9eae</b>   8d f4 9e   STA $9ef4
 <b>9eb1</b>   a9 28      LDA #$28
 <b>9eb3</b>   8d f3 9e   STA $9ef3
-<b>9eb6</b>   a5 d6      LDA InflatedWorldSubset
+<b>9eb6</b>   a5 d6      LDA InflatedCaveSubset
 <b>9eb8</b>   8d f0 9e   STA $9ef0
-<b>9ebb</b>   a5 d7      LDA InflatedWorldSubset+1
+<b>9ebb</b>   a5 d7      LDA InflatedCaveSubset+1
 <b>9ebd</b>   8d f1 9e   STA $9ef1
 <b>9ec0</b>   a2 00      LDX #$00
 <a name="9ec2"></a><b>9ec2</b>   bd f0 9e   LDA $9ef0,X
