@@ -41,7 +41,7 @@ nosidebar: true
 
 
 <div class="disass_container">
-<span class="disass_tiny">built on 2018-08-08 00:15:53+10:00</span><br/>
+<span class="disass_tiny">built on 2018-08-10 01:08:27+10:00</span><br/>
 <h1>Boulder Dash Disassembly</h1>
 <a name="5000"></a><b>TitleCharData:</b><br/>
 <b>5000</b><br/>
@@ -107,7 +107,7 @@ nosidebar: true
 <a name="5406"></a><b>AnimatedCharData:</b><br/>
 <b>5406</b><br/>
 <img src="5406.png"/><br/>
-<b>LevelOffsetArray:</b><br/>
+<a name="5806"></a><b>LevelOffsetArray:</b><br/>
 <div class="disass_code"><b>5806</b>   00 00 31 00  8a 00 b1 00  fc 00 83 01  14 02 5c 02
 <b>5816</b>   b3 02 f6 02  5b 03 c1 03  2b 04 69 04  c3 04 fe 04
 <b>5826</b>   5d 05 99 05  ef 05 2d 06
@@ -1295,10 +1295,10 @@ nosidebar: true
 <b>6ca4</b>   d0 f8      BNE <a href="#6c9e">$6c9e</a>
 <b>6ca6</b>   18         CLC 
 <b>6ca7</b>   a5 34      LDA InflatedCaveCurrentCellPtr
-<b>6ca9</b>   7d b1 53   ADC <a href="#53b0">InflatedCaveOffsetAdjustTable</a>+1,X
+<b>6ca9</b>   7d b1 53   ADC InflatedCaveOffsetAdjustTable+1,X
 <b>6cac</b>   85 36      STA InflatedCaveOutputPtr
 <b>6cae</b>   a5 35      LDA InflatedCaveCurrentCellPtr+1
-<b>6cb0</b>   7d b2 53   ADC <a href="#53b0">InflatedCaveOffsetAdjustTable</a>+2,X
+<b>6cb0</b>   7d b2 53   ADC InflatedCaveOffsetAdjustTable+2,X
 <b>6cb3</b>   85 37      STA InflatedCaveOutputPtr+1
 <b>6cb5</b>   60         RTS 
 </div>
@@ -1321,7 +1321,7 @@ nosidebar: true
 <b>6cc2</b>   7d da 53   ADC <a href="#53da">InflatedCaveLineAddressTable</a>,X
 <b>6cc5</b>   85 34      STA InflatedCaveCurrentCellPtr
 <b>6cc7</b>   a9 00      LDA #$00
-<b>6cc9</b>   7d db 53   ADC <a href="#53da">InflatedCaveLineAddressTable</a>+1,X
+<b>6cc9</b>   7d db 53   ADC InflatedCaveLineAddressTable+1,X
 <b>6ccc</b>   85 35      STA InflatedCaveCurrentCellPtr+1
 <b>6cce</b>   20 9b 6c   JSR <a href="#6c9b">SetInflatedCaveOutputPtr</a>
 <b>6cd1</b>   20 80 6c   JSR <a href="#6c80">SetCellInInflatedCave</a><span class="disass_comment"> ; the inflated cave</span>
@@ -2702,7 +2702,7 @@ nosidebar: true
 <b>7331</b>   7d da 53   ADC <a href="#53da">InflatedCaveLineAddressTable</a>,X
 <b>7334</b>   85 34      STA InflatedCaveCurrentCellPtr
 <b>7336</b>   a9 00      LDA #$00
-<b>7338</b>   7d db 53   ADC <a href="#53da">InflatedCaveLineAddressTable</a>+1,X
+<b>7338</b>   7d db 53   ADC InflatedCaveLineAddressTable+1,X
 <b>733b</b>   85 35      STA InflatedCaveCurrentCellPtr+1
 <b>733d</b>   20 9b 6c   JSR <a href="#6c9b">SetInflatedCaveOutputPtr</a>
 <b>7340</b>   20 11 73   JSR <a href="#7311">RenderSteelWallInInflatedCaveHelper</a>
@@ -3459,7 +3459,7 @@ nosidebar: true
 <div class="disass_code"><b>76db</b>   a2 00      LDX #$00
 <a name="76dd"></a><b>76dd</b>   bd da 53   LDA <a href="#53da">InflatedCaveLineAddressTable</a>,X
 <b>76e0</b>   85 34      STA InflatedCaveCurrentCellPtr
-<b>76e2</b>   bd db 53   LDA <a href="#53da">InflatedCaveLineAddressTable</a>+1,X
+<b>76e2</b>   bd db 53   LDA InflatedCaveLineAddressTable+1,X
 <b>76e5</b>   85 35      STA InflatedCaveCurrentCellPtr+1
 <b>76e7</b>   a0 00      LDY #$00
 <b>76e9</b>   a9 7c      LDA #$7c
@@ -3851,13 +3851,13 @@ nosidebar: true
 <a name="78da"></a><b>AnimateGameCharsAndHandleTopLineSwitch__Loop:</b><br/>
 <div class="disass_comment">; Diamonds
 </div>
-<div class="disass_code"><b>78da</b>   bd 06 56   LDA <a href="#5406">AnimatedCharData</a>+$200,X
+<div class="disass_code"><b>78da</b>   bd 06 56   LDA AnimatedCharData+$200,X
 <b>78dd</b>   99 40 32   STA CopiedGameCharData+$140,Y
-<b>78e0</b>   bd 0e 56   LDA <a href="#5406">AnimatedCharData</a>+$208,X
+<b>78e0</b>   bd 0e 56   LDA AnimatedCharData+$208,X
 <b>78e3</b>   99 48 32   STA CopiedGameCharData+$148,Y
-<b>78e6</b>   bd 86 56   LDA <a href="#5406">AnimatedCharData</a>+$280,X
+<b>78e6</b>   bd 86 56   LDA AnimatedCharData+$280,X
 <b>78e9</b>   99 c0 32   STA CopiedGameCharData+$1c0,Y
-<b>78ec</b>   bd 8e 56   LDA <a href="#5406">AnimatedCharData</a>+$288,X
+<b>78ec</b>   bd 8e 56   LDA AnimatedCharData+$288,X
 <b>78ef</b>   99 c8 32   STA CopiedGameCharData+$1c8,Y
 </div>
 <div class="disass_comment">; 
@@ -3871,11 +3871,11 @@ nosidebar: true
 </div>
 <div class="disass_code"><b>78fa</b>   bd 06 54   LDA <a href="#5406">AnimatedCharData</a>,X
 <b>78fd</b>   99 00 32   STA CopiedGameCharData+$100,Y
-<b>7900</b>   bd 0e 54   LDA <a href="#5406">AnimatedCharData</a>+8,X
+<b>7900</b>   bd 0e 54   LDA AnimatedCharData+8,X
 <b>7903</b>   99 08 32   STA CopiedGameCharData+$108,Y
-<b>7906</b>   bd 86 54   LDA <a href="#5406">AnimatedCharData</a>+$80,X
+<b>7906</b>   bd 86 54   LDA AnimatedCharData+$80,X
 <b>7909</b>   99 80 32   STA CopiedGameCharData+$180,Y
-<b>790c</b>   bd 8e 54   LDA <a href="#5406">AnimatedCharData</a>+$88,X
+<b>790c</b>   bd 8e 54   LDA AnimatedCharData+$88,X
 <b>790f</b>   99 88 32   STA CopiedGameCharData+$188,Y
 </div>
 <a name="7912"></a><div class="disass_comment">; 
@@ -3886,13 +3886,13 @@ nosidebar: true
 </div>
 <div class="disass_comment">; Butterfly
 </div>
-<div class="disass_code"><b>7918</b>   bd 06 57   LDA <a href="#5406">AnimatedCharData</a>+$300,X
+<div class="disass_code"><b>7918</b>   bd 06 57   LDA AnimatedCharData+$300,X
 <b>791b</b>   99 00 31   STA CopiedGameCharData,Y
-<b>791e</b>   bd 0e 57   LDA <a href="#5406">AnimatedCharData</a>+$308,X
+<b>791e</b>   bd 0e 57   LDA AnimatedCharData+$308,X
 <b>7921</b>   99 08 31   STA CopiedGameCharData+8,Y
-<b>7924</b>   bd 86 57   LDA <a href="#5406">AnimatedCharData</a>+$380,X
+<b>7924</b>   bd 86 57   LDA AnimatedCharData+$380,X
 <b>7927</b>   99 80 31   STA CopiedGameCharData+$80,Y
-<b>792a</b>   bd 8e 57   LDA <a href="#5406">AnimatedCharData</a>+$388,X
+<b>792a</b>   bd 8e 57   LDA AnimatedCharData+$388,X
 <b>792d</b>   99 88 31   STA CopiedGameCharData+$88,Y
 </div>
 <a name="7930"></a><div class="disass_comment">; 
@@ -3903,13 +3903,13 @@ nosidebar: true
 </div>
 <div class="disass_comment">; Firefly
 </div>
-<div class="disass_code"><b>7936</b>   bd 06 55   LDA <a href="#5406">AnimatedCharData</a>+$100,X
+<div class="disass_code"><b>7936</b>   bd 06 55   LDA AnimatedCharData+$100,X
 <b>7939</b>   99 20 33   STA CopiedGameCharData+$220,Y
-<b>793c</b>   bd 0e 55   LDA <a href="#5406">AnimatedCharData</a>+$108,X
+<b>793c</b>   bd 0e 55   LDA AnimatedCharData+$108,X
 <b>793f</b>   99 28 33   STA CopiedGameCharData+$228,Y
-<b>7942</b>   bd 86 55   LDA <a href="#5406">AnimatedCharData</a>+$180,X
+<b>7942</b>   bd 86 55   LDA AnimatedCharData+$180,X
 <b>7945</b>   99 a0 33   STA CopiedGameCharData+$2a0,Y
-<b>7948</b>   bd 8e 55   LDA <a href="#5406">AnimatedCharData</a>+$188,X
+<b>7948</b>   bd 8e 55   LDA AnimatedCharData+$188,X
 <b>794b</b>   99 a8 33   STA CopiedGameCharData+$2a8,Y
 </div>
 <a name="794e"></a><div class="disass_comment">; 
@@ -4212,7 +4212,7 @@ nosidebar: true
 <a name="7b55"></a><b>__GameIRQActions__CopyInflatedCaveToBackBuffer:</b><br/>
 <div class="disass_code"><b>7b55</b>   4c 00 9e   JMP <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>
 </div>
-<div class="disass_comment">; Code moved to $9e00 and executed there. Is self-modifying!
+<a name="7b58"></a><div class="disass_comment">; Code moved to $9e00 and executed there. Is self-modifying!
 ; $7b58-$7d57 is moved to $9e00-$9fff. More code than needed is moved. 
 ; The routine occupies $7b58-$7c90.
 </div>
@@ -4220,13 +4220,13 @@ nosidebar: true
 <div class="disass_code"><b>7b58</b>   a5 d6      LDA InflatedCaveSubset
 <b>7b5a</b>   18         CLC 
 <b>7b5b</b>   69 20      ADC #$20
-<b>7b5d</b>   8d 51 9e   STA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$51
+<b>7b5d</b>   8d 51 9e   STA MOVEDCopyInflatedCaveSubsetToBackBuffer+$51
 </div>
 <div class="disass_comment">; Patched byte corresponds to $7ba9.
 </div>
 <div class="disass_code"><b>7b60</b>   a5 d7      LDA InflatedCaveSubset+1
 <b>7b62</b>   69 03      ADC #$03
-<b>7b64</b>   8d 52 9e   STA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$52
+<b>7b64</b>   8d 52 9e   STA MOVEDCopyInflatedCaveSubsetToBackBuffer+$52
 </div>
 <div class="disass_comment">; Patched byte corresponds to $7baa.
 </div>
@@ -4236,32 +4236,32 @@ nosidebar: true
 <b>7b6c</b>   49 03      EOR #$03
 <b>7b6e</b>   18         CLC 
 <b>7b6f</b>   69 01      ADC #$01
-<b>7b71</b>   8d 55 9e   STA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$55
+<b>7b71</b>   8d 55 9e   STA MOVEDCopyInflatedCaveSubsetToBackBuffer+$55
 </div>
 <div class="disass_comment">; Patched byte corresponds to $7bad.
 </div>
 <div class="disass_code"><b>7b74</b>   a9 b8      LDA #$b8
-<b>7b76</b>   8d 54 9e   STA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$54
+<b>7b76</b>   8d 54 9e   STA MOVEDCopyInflatedCaveSubsetToBackBuffer+$54
 </div>
 <div class="disass_comment">; Patched byte corresponds to $7bac.
 ; 
 ; Now clone the patch (with adjustment) for the next 13 entries.
 </div>
 <div class="disass_code"><b>7b79</b>   a2 00      LDX #$00
-<a name="7b7b"></a><b>7b7b</b>   bd 51 9e   LDA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$51,X
+<a name="7b7b"></a><b>7b7b</b>   bd 51 9e   LDA MOVEDCopyInflatedCaveSubsetToBackBuffer+$51,X
 <b>7b7e</b>   18         CLC 
 <b>7b7f</b>   69 50      ADC #$50
-<b>7b81</b>   9d 57 9e   STA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$57,X
-<b>7b84</b>   bd 52 9e   LDA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$52,X
+<b>7b81</b>   9d 57 9e   STA MOVEDCopyInflatedCaveSubsetToBackBuffer+$57,X
+<b>7b84</b>   bd 52 9e   LDA MOVEDCopyInflatedCaveSubsetToBackBuffer+$52,X
 <b>7b87</b>   69 00      ADC #$00
-<b>7b89</b>   9d 58 9e   STA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$58,X
-<b>7b8c</b>   bd 54 9e   LDA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$54,X
+<b>7b89</b>   9d 58 9e   STA MOVEDCopyInflatedCaveSubsetToBackBuffer+$58,X
+<b>7b8c</b>   bd 54 9e   LDA MOVEDCopyInflatedCaveSubsetToBackBuffer+$54,X
 <b>7b8f</b>   18         CLC 
 <b>7b90</b>   69 28      ADC #$28
-<b>7b92</b>   9d 5a 9e   STA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$5a,X
-<b>7b95</b>   bd 55 9e   LDA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$55,X
+<b>7b92</b>   9d 5a 9e   STA MOVEDCopyInflatedCaveSubsetToBackBuffer+$5a,X
+<b>7b95</b>   bd 55 9e   LDA MOVEDCopyInflatedCaveSubsetToBackBuffer+$55,X
 <b>7b98</b>   69 00      ADC #$00
-<b>7b9a</b>   9d 5b 9e   STA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$5b,X
+<b>7b9a</b>   9d 5b 9e   STA MOVEDCopyInflatedCaveSubsetToBackBuffer+$5b,X
 <b>7b9d</b>   8a         TXA 
 <b>7b9e</b>   18         CLC 
 <b>7b9f</b>   69 06      ADC #$06
@@ -4310,42 +4310,42 @@ nosidebar: true
 <b>7c02</b>   4a         LSR A
 <b>7c03</b>   4a         LSR A
 <b>7c04</b>   49 03      EOR #$03
-<b>7c06</b>   8d f4 9e   STA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$f4
+<b>7c06</b>   8d f4 9e   STA MOVEDCopyInflatedCaveSubsetToBackBuffer+$f4
 </div>
 <div class="disass_comment">; Patched byte corresponds to $9ef4
 </div>
 <div class="disass_code"><b>7c09</b>   a9 28      LDA #$28
-<b>7c0b</b>   8d f3 9e   STA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$f3
+<b>7c0b</b>   8d f3 9e   STA MOVEDCopyInflatedCaveSubsetToBackBuffer+$f3
 </div>
 <div class="disass_comment">; Patched byte corresponds to $9ef3
 </div>
 <div class="disass_code"><b>7c0e</b>   a5 d6      LDA InflatedCaveSubset
-<b>7c10</b>   8d f0 9e   STA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$f0
+<b>7c10</b>   8d f0 9e   STA MOVEDCopyInflatedCaveSubsetToBackBuffer+$f0
 </div>
 <div class="disass_comment">; Patched byte corresponds to $9ef0
 </div>
 <div class="disass_code"><b>7c13</b>   a5 d7      LDA InflatedCaveSubset+1
-<b>7c15</b>   8d f1 9e   STA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$f1
+<b>7c15</b>   8d f1 9e   STA MOVEDCopyInflatedCaveSubsetToBackBuffer+$f1
 </div>
 <div class="disass_comment">; Patched byte corresponds to $9ef1
 ; 
 ; Now clone the patch (with adjustment) for the next 9 entries.
 </div>
 <div class="disass_code"><b>7c18</b>   a2 00      LDX #$00
-<a name="7c1a"></a><b>7c1a</b>   bd f0 9e   LDA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$f0,X
+<a name="7c1a"></a><b>7c1a</b>   bd f0 9e   LDA MOVEDCopyInflatedCaveSubsetToBackBuffer+$f0,X
 <b>7c1d</b>   18         CLC 
 <b>7c1e</b>   69 50      ADC #$50
-<b>7c20</b>   9d f6 9e   STA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$f6,X
-<b>7c23</b>   bd f1 9e   LDA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$f1,X
+<b>7c20</b>   9d f6 9e   STA MOVEDCopyInflatedCaveSubsetToBackBuffer+$f6,X
+<b>7c23</b>   bd f1 9e   LDA MOVEDCopyInflatedCaveSubsetToBackBuffer+$f1,X
 <b>7c26</b>   69 00      ADC #$00
-<b>7c28</b>   9d f7 9e   STA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$f7,X
-<b>7c2b</b>   bd f3 9e   LDA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$f3,X
+<b>7c28</b>   9d f7 9e   STA MOVEDCopyInflatedCaveSubsetToBackBuffer+$f7,X
+<b>7c2b</b>   bd f3 9e   LDA MOVEDCopyInflatedCaveSubsetToBackBuffer+$f3,X
 <b>7c2e</b>   18         CLC 
 <b>7c2f</b>   69 28      ADC #$28
-<b>7c31</b>   9d f9 9e   STA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$f9,X
-<b>7c34</b>   bd f4 9e   LDA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$f4,X
+<b>7c31</b>   9d f9 9e   STA MOVEDCopyInflatedCaveSubsetToBackBuffer+$f9,X
+<b>7c34</b>   bd f4 9e   LDA MOVEDCopyInflatedCaveSubsetToBackBuffer+$f4,X
 <b>7c37</b>   69 00      ADC #$00
-<b>7c39</b>   9d fa 9e   STA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$fa,X
+<b>7c39</b>   9d fa 9e   STA MOVEDCopyInflatedCaveSubsetToBackBuffer+$fa,X
 <b>7c3c</b>   8a         TXA 
 <b>7c3d</b>   18         CLC 
 <b>7c3e</b>   69 06      ADC #$06
@@ -4692,7 +4692,7 @@ nosidebar: true
 <b>7e02</b>   b1 32      LDA (CaveCurrentCellPtr),Y
 <b>7e04</b>   0a         ASL A
 <b>7e05</b>   aa         TAX 
-<b>7e06</b>   bd 69 5f   LDA <a href="#5f68">ObjHandlerVectorTable</a>+1,X
+<b>7e06</b>   bd 69 5f   LDA ObjHandlerVectorTable+1,X
 <b>7e09</b>   f0 0a      BEQ <a href="#7e15">__ProcessCave__NoObjectHandler</a>
 </div>
 <b>__ProcessCave__ObjectHandler:</b><br/>
@@ -4800,10 +4800,10 @@ nosidebar: true
 </div>
 <div class="disass_code"><b>7e9d</b>   18         CLC 
 <b>7e9e</b>   a9 2e      LDA #$2e
-<b>7ea0</b>   7d 04 58   ADC <a href="#5406">AnimatedCharData</a>+$3fe,X
+<b>7ea0</b>   7d 04 58   ADC AnimatedCharData+$3fe,X
 <b>7ea3</b>   85 3c      STA CurrentLevelDataPtr
 <b>7ea5</b>   a9 58      LDA #$58
-<b>7ea7</b>   7d 05 58   ADC <a href="#5406">AnimatedCharData</a>+$3ff,X
+<b>7ea7</b>   7d 05 58   ADC AnimatedCharData+$3ff,X
 <b>7eaa</b>   85 3d      STA CurrentLevelDataPtr+1
 <b>7eac</b>   a0 00      LDY #$00
 </div>
@@ -5164,7 +5164,7 @@ nosidebar: true
 <b>80a3</b>   b9 6e 80   LDA <a href="#806e">DecompressedLevelRowPointerArray</a>,Y
 <b>80a6</b>   65 db      ADC ObjParam1DuringUnpack
 <b>80a8</b>   85 3a      STA ExecuteLevelDrawCommands__OutPtr
-<b>80aa</b>   b9 6f 80   LDA $806f,Y
+<b>80aa</b>   b9 6f 80   LDA DecompressedLevelRowPointerArray+1,Y
 <b>80ad</b>   69 00      ADC #$00
 <b>80af</b>   85 3b      STA ExecuteLevelDrawCommands__OutPtr+1
 <b>80b1</b>   60         RTS 
@@ -5203,7 +5203,7 @@ nosidebar: true
 <b>80cf</b>   aa         TAX 
 <b>80d0</b>   bd bc 80   LDA <a href="#80bc">ExecuteLevelDrawCommands__DrawLine__StepTable</a>,X
 <b>80d3</b>   85 c9      STA CaveLineStepValue
-<b>80d5</b>   bd bd 80   LDA $80bd,X
+<b>80d5</b>   bd bd 80   LDA ExecuteLevelDrawCommands__DrawLine__StepTable+1,X
 <b>80d8</b>   85 ca      STA CaveLineStepValue+1
 </div>
 <a name="80da"></a><b>__ExecuteLevelDrawCommands__DrawLine__Next:</b><br/>
@@ -5502,9 +5502,9 @@ nosidebar: true
 <div class="disass_code"><b>8227</b>   a2 00      LDX #$00
 <a name="8229"></a><b>8229</b>   bd e8 66   LDA <a href="#66e8">Top2LinesAndBoulderDashLogo</a>,X
 <b>822c</b>   9d 00 08   STA CaveMatrix_or_TitleLogoTileMap,X
-<b>822f</b>   bd e8 67   LDA <a href="#66e8">Top2LinesAndBoulderDashLogo</a>+$100,X
+<b>822f</b>   bd e8 67   LDA <a href="#67e8">Top2LinesAndBoulderDashLogo</a>+$100,X
 <b>8232</b>   9d 00 09   STA CaveMatrix_or_TitleLogoTileMap+$100,X
-<b>8235</b>   bd e8 68   LDA <a href="#66e8">Top2LinesAndBoulderDashLogo</a>+$200,X
+<b>8235</b>   bd e8 68   LDA <a href="#68e8">Top2LinesAndBoulderDashLogo</a>+$200,X
 <b>8238</b>   9d 00 0a   STA CaveMatrix_or_TitleLogoTileMap+$200,X
 </div>
 <div class="disass_comment">; .......l-i-c-e-n-s-e-d-..f-r-o-m-.......
@@ -5513,7 +5513,7 @@ nosidebar: true
 ; .f-i-r-s-t-..s-t-a-r-..s-o-f-t-w-a-r-e-.
 ; m-i-c-r-o-..f-u-n-.*-.m-i-c-r-o-..f-u-n-
 </div>
-<div class="disass_code"><b>823b</b>   bd d0 69   LDA <a href="#66e8">Top2LinesAndBoulderDashLogo</a>+$2e8,X
+<div class="disass_code"><b>823b</b>   bd d0 69   LDA Top2LinesAndBoulderDashLogo+$2e8,X
 <b>823e</b>   9d e8 0e   STA GameTileMap1_or_TitleTextTileMap+$2e8,X
 <b>8241</b>   e8         INX 
 <b>8242</b>   d0 e5      BNE <a href="#8229">$8229</a>
@@ -5764,7 +5764,7 @@ nosidebar: true
 <div class="disass_code"><b>83ca</b>   ae 00 98   LDX MusicDataIndex
 <b>83cd</b>   ee 00 98   INC MusicDataIndex
 <b>83d0</b>   ee 00 98   INC MusicDataIndex
-<b>83d3</b>   bd e9 5f   LDA <a href="#5fe8">MusicData</a>+1,X
+<b>83d3</b>   bd e9 5f   LDA MusicData+1,X
 <b>83d6</b>   0a         ASL A
 <b>83d7</b>   a8         TAY 
 <b>83d8</b>   b9 03 83   LDA <a href="#8303">MusicNoteToFreqTableBase</a>,Y
@@ -6339,7 +6339,7 @@ nosidebar: true
 <b>8671</b>   8d 11 98   STA $9811
 <b>8674</b>   60         RTS 
 </div>
-<b>IRQHandler:</b><br/>
+<a name="8675"></a><b>IRQHandler:</b><br/>
 <div class="disass_code"><b>8675</b>   ad 19 d0   LDA Vic_IntReq
 <b>8678</b>   8d 19 d0   STA Vic_IntReq
 <b>867b</b>   29 01      AND #$01
@@ -6951,11 +6951,11 @@ nosidebar: true
 <a name="89a1"></a><b>_InitCopyCharsAndTheme:</b><br/>
 <div class="disass_code"><b>89a1</b>   bd 00 50   LDA <a href="#5000">TitleCharData</a>,X
 <b>89a4</b>   9d 00 20   STA CopiedTitleChar,X
-<b>89a7</b>   bd 00 51   LDA <a href="#5000">TitleCharData</a>+$100,X
+<b>89a7</b>   bd 00 51   LDA TitleCharData+$100,X
 <b>89aa</b>   9d 00 21   STA CopiedTitleChar+$100,X
-<b>89ad</b>   bd 00 52   LDA <a href="#5000">TitleCharData</a>+$200,X
+<b>89ad</b>   bd 00 52   LDA TitleCharData+$200,X
 <b>89b0</b>   9d 00 22   STA CopiedTitleChar+$200,X
-<b>89b3</b>   bd 00 53   LDA <a href="#5000">TitleCharData</a>+$300,X
+<b>89b3</b>   bd 00 53   LDA TitleCharData+$300,X
 <b>89b6</b>   9d 00 23   STA CopiedTitleChar+$300,X
 </div>
 <div class="disass_comment">; MusicData $5fe8-$60e7 copied to $3000-$30ff
@@ -6966,9 +6966,9 @@ nosidebar: true
 <b>89bc</b>   9d 00 30   STA CopiedMusicData,X
 <b>89bf</b>   bd e8 60   LDA <a href="#60e8">GameCharData</a>,X
 <b>89c2</b>   9d 00 31   STA CopiedGameCharData,X
-<b>89c5</b>   bd e8 61   LDA <a href="#60e8">GameCharData</a>+$100,X
+<b>89c5</b>   bd e8 61   LDA GameCharData+$100,X
 <b>89c8</b>   9d 00 32   STA CopiedGameCharData+$100,X
-<b>89cb</b>   bd e8 62   LDA <a href="#60e8">GameCharData</a>+$200,X
+<b>89cb</b>   bd e8 62   LDA GameCharData+$200,X
 <b>89ce</b>   9d 00 33   STA CopiedGameCharData+$200,X
 <b>89d1</b>   e8         INX 
 <b>89d2</b>   d0 cd      BNE <a href="#89a1">_InitCopyCharsAndTheme</a>
@@ -7121,14 +7121,14 @@ nosidebar: true
 </div>
 <div class="disass_comment">; 
 </div>
-<div class="disass_code"><b>8aa6</b>   a9 75      LDA #&lt;IRQHandler
+<div class="disass_code"><b>8aa6</b>   a9 75      LDA #&lt;<a href="#8675">IRQHandler</a>
 <b>8aa8</b>   8d 14 03   STA Krnl_IrqLo
-<b>8aab</b>   a9 86      LDA #&gt;IRQHandler
+<b>8aab</b>   a9 86      LDA #&gt;<a href="#8675">IRQHandler</a>
 <b>8aad</b>   8d 15 03   STA Krnl_IrqHi
 <b>8ab0</b>   58         CLI 
 <b>8ab1</b>   60         RTS 
 </div>
-<b>NMIHandler:</b><br/>
+<a name="8ab2"></a><b>NMIHandler:</b><br/>
 <div class="disass_code"><b>8ab2</b>   58         CLI 
 </div>
 <a name="8ab3"></a><div class="disass_comment">; Main entry point.
@@ -7163,9 +7163,9 @@ nosidebar: true
 <div class="disass_comment">; Make NMI (RUN-STOP+RESTORE or cartridge) restart game.
 </div>
 <div class="disass_code"><b>8ade</b>   78         SEI 
-<b>8adf</b>   a9 b2      LDA #&lt;NMIHandler
+<b>8adf</b>   a9 b2      LDA #&lt;<a href="#8ab2">NMIHandler</a>
 <b>8ae1</b>   8d 18 03   STA Krnl_NmiLo
-<b>8ae4</b>   a9 8a      LDA #&gt;NMIHandler
+<b>8ae4</b>   a9 8a      LDA #&gt;<a href="#8ab2">NMIHandler</a>
 <b>8ae6</b>   8d 19 03   STA Krnl_NmiHi
 <b>8ae9</b>   58         CLI 
 </div>
@@ -7185,17 +7185,17 @@ nosidebar: true
 <div class="disass_comment">; Move 7b58-7d57 to 9e00-9fff.
 </div>
 <div class="disass_code"><b>8af6</b>   a0 00      LDY #$00
-<b>8af8</b>   a2 58      LDX #&lt;CopyInflatedCaveSubsetToBackBuffer
+<b>8af8</b>   a2 58      LDX #&lt;<a href="#7b58">CopyInflatedCaveSubsetToBackBuffer</a>
 <b>8afa</b>   86 02      STX __CoverLevel__LineAddressTable
 <b>8afc</b>   86 04      STX __CoverLevel__LineAddressTable+2
-<b>8afe</b>   a2 7b      LDX #&gt;CopyInflatedCaveSubsetToBackBuffer
+<b>8afe</b>   a2 7b      LDX #&gt;<a href="#7b58">CopyInflatedCaveSubsetToBackBuffer</a>
 <b>8b00</b>   86 03      STX __CoverLevel__LineAddressTable+1
 <b>8b02</b>   e8         INX 
 <b>8b03</b>   86 05      STX __CoverLevel__LineAddressTable+3
 <a name="8b05"></a><b>8b05</b>   b1 02      LDA (__CoverLevel__LineAddressTable),Y
 <b>8b07</b>   99 00 9e   STA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>,Y
 <b>8b0a</b>   b1 04      LDA (__CoverLevel__LineAddressTable+2),Y
-<b>8b0c</b>   99 00 9f   STA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$100,Y
+<b>8b0c</b>   99 00 9f   STA MOVEDCopyInflatedCaveSubsetToBackBuffer+$100,Y
 <b>8b0f</b>   c8         INY 
 <b>8b10</b>   d0 f3      BNE <a href="#8b05">$8b05</a>
 </div>
@@ -7348,40 +7348,40 @@ nosidebar: true
 <div class="disass_code"><b>9e00</b>   a5 d6      LDA InflatedCaveSubset
 <b>9e02</b>   18         CLC 
 <b>9e03</b>   69 20      ADC #$20
-<b>9e05</b>   8d 51 9e   STA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$51
+<b>9e05</b>   8d 51 9e   STA MOVEDCopyInflatedCaveSubsetToBackBuffer+$51
 <b>9e08</b>   a5 d7      LDA InflatedCaveSubset+1
 <b>9e0a</b>   69 03      ADC #$03
-<b>9e0c</b>   8d 52 9e   STA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$52
+<b>9e0c</b>   8d 52 9e   STA MOVEDCopyInflatedCaveSubsetToBackBuffer+$52
 <b>9e0f</b>   ad 07 98   LDA BackBufferVICMemControl
 <b>9e12</b>   4a         LSR A
 <b>9e13</b>   4a         LSR A
 <b>9e14</b>   49 03      EOR #$03
 <b>9e16</b>   18         CLC 
 <b>9e17</b>   69 01      ADC #$01
-<b>9e19</b>   8d 55 9e   STA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$55
+<b>9e19</b>   8d 55 9e   STA MOVEDCopyInflatedCaveSubsetToBackBuffer+$55
 <b>9e1c</b>   a9 b8      LDA #$b8
-<b>9e1e</b>   8d 54 9e   STA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$54
+<b>9e1e</b>   8d 54 9e   STA MOVEDCopyInflatedCaveSubsetToBackBuffer+$54
 <b>9e21</b>   a2 00      LDX #$00
-<a name="9e23"></a><b>9e23</b>   bd 51 9e   LDA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$51,X
+<a name="9e23"></a><b>9e23</b>   bd 51 9e   LDA MOVEDCopyInflatedCaveSubsetToBackBuffer+$51,X
 <b>9e26</b>   18         CLC 
 <b>9e27</b>   69 50      ADC #$50
-<b>9e29</b>   9d 57 9e   STA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$57,X
-<b>9e2c</b>   bd 52 9e   LDA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$52,X
+<b>9e29</b>   9d 57 9e   STA MOVEDCopyInflatedCaveSubsetToBackBuffer+$57,X
+<b>9e2c</b>   bd 52 9e   LDA MOVEDCopyInflatedCaveSubsetToBackBuffer+$52,X
 <b>9e2f</b>   69 00      ADC #$00
-<b>9e31</b>   9d 58 9e   STA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$58,X
-<b>9e34</b>   bd 54 9e   LDA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$54,X
+<b>9e31</b>   9d 58 9e   STA MOVEDCopyInflatedCaveSubsetToBackBuffer+$58,X
+<b>9e34</b>   bd 54 9e   LDA MOVEDCopyInflatedCaveSubsetToBackBuffer+$54,X
 <b>9e37</b>   18         CLC 
 <b>9e38</b>   69 28      ADC #$28
-<b>9e3a</b>   9d 5a 9e   STA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$5a,X
-<b>9e3d</b>   bd 55 9e   LDA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$55,X
+<b>9e3a</b>   9d 5a 9e   STA MOVEDCopyInflatedCaveSubsetToBackBuffer+$5a,X
+<b>9e3d</b>   bd 55 9e   LDA MOVEDCopyInflatedCaveSubsetToBackBuffer+$55,X
 <b>9e40</b>   69 00      ADC #$00
-<b>9e42</b>   9d 5b 9e   STA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$5b,X
+<b>9e42</b>   9d 5b 9e   STA MOVEDCopyInflatedCaveSubsetToBackBuffer+$5b,X
 <b>9e45</b>   8a         TXA 
 <b>9e46</b>   18         CLC 
 <b>9e47</b>   69 06      ADC #$06
 <b>9e49</b>   aa         TAX 
 <b>9e4a</b>   e0 4e      CPX #$4e
-<b>9e4c</b>   90 d5      BCC <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$23
+<b>9e4c</b>   90 d5      BCC <a href="#9e23">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$23
 <b>9e4e</b>   a2 27      LDX #$27
 <a name="9e50"></a><b>9e50</b>   bd 00 50   LDA <a href="#5000">TitleCharData</a>,X
 <b>9e53</b>   9d 50 0c   STA GameTileMap1_or_TitleTextTileMap+$50,X
@@ -7412,39 +7412,39 @@ nosidebar: true
 <b>9e9e</b>   bd 00 50   LDA <a href="#5000">TitleCharData</a>,X
 <b>9ea1</b>   9d 50 0c   STA GameTileMap1_or_TitleTextTileMap+$50,X
 <b>9ea4</b>   ca         DEX 
-<b>9ea5</b>   10 a9      BPL <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$50
+<b>9ea5</b>   10 a9      BPL <a href="#9e50">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$50
 <b>9ea7</b>   ad 07 98   LDA BackBufferVICMemControl
 <b>9eaa</b>   4a         LSR A
 <b>9eab</b>   4a         LSR A
 <b>9eac</b>   49 03      EOR #$03
-<b>9eae</b>   8d f4 9e   STA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$f4
+<b>9eae</b>   8d f4 9e   STA MOVEDCopyInflatedCaveSubsetToBackBuffer+$f4
 <b>9eb1</b>   a9 28      LDA #$28
-<b>9eb3</b>   8d f3 9e   STA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$f3
+<b>9eb3</b>   8d f3 9e   STA MOVEDCopyInflatedCaveSubsetToBackBuffer+$f3
 <b>9eb6</b>   a5 d6      LDA InflatedCaveSubset
-<b>9eb8</b>   8d f0 9e   STA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$f0
+<b>9eb8</b>   8d f0 9e   STA MOVEDCopyInflatedCaveSubsetToBackBuffer+$f0
 <b>9ebb</b>   a5 d7      LDA InflatedCaveSubset+1
-<b>9ebd</b>   8d f1 9e   STA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$f1
+<b>9ebd</b>   8d f1 9e   STA MOVEDCopyInflatedCaveSubsetToBackBuffer+$f1
 <b>9ec0</b>   a2 00      LDX #$00
-<a name="9ec2"></a><b>9ec2</b>   bd f0 9e   LDA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$f0,X
+<a name="9ec2"></a><b>9ec2</b>   bd f0 9e   LDA MOVEDCopyInflatedCaveSubsetToBackBuffer+$f0,X
 <b>9ec5</b>   18         CLC 
 <b>9ec6</b>   69 50      ADC #$50
-<b>9ec8</b>   9d f6 9e   STA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$f6,X
-<b>9ecb</b>   bd f1 9e   LDA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$f1,X
+<b>9ec8</b>   9d f6 9e   STA MOVEDCopyInflatedCaveSubsetToBackBuffer+$f6,X
+<b>9ecb</b>   bd f1 9e   LDA MOVEDCopyInflatedCaveSubsetToBackBuffer+$f1,X
 <b>9ece</b>   69 00      ADC #$00
-<b>9ed0</b>   9d f7 9e   STA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$f7,X
-<b>9ed3</b>   bd f3 9e   LDA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$f3,X
+<b>9ed0</b>   9d f7 9e   STA MOVEDCopyInflatedCaveSubsetToBackBuffer+$f7,X
+<b>9ed3</b>   bd f3 9e   LDA MOVEDCopyInflatedCaveSubsetToBackBuffer+$f3,X
 <b>9ed6</b>   18         CLC 
 <b>9ed7</b>   69 28      ADC #$28
-<b>9ed9</b>   9d f9 9e   STA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$f9,X
-<b>9edc</b>   bd f4 9e   LDA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$f4,X
+<b>9ed9</b>   9d f9 9e   STA MOVEDCopyInflatedCaveSubsetToBackBuffer+$f9,X
+<b>9edc</b>   bd f4 9e   LDA MOVEDCopyInflatedCaveSubsetToBackBuffer+$f4,X
 <b>9edf</b>   69 00      ADC #$00
-<b>9ee1</b>   9d fa 9e   STA <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$fa,X
+<b>9ee1</b>   9d fa 9e   STA MOVEDCopyInflatedCaveSubsetToBackBuffer+$fa,X
 <b>9ee4</b>   8a         TXA 
 <b>9ee5</b>   18         CLC 
 <b>9ee6</b>   69 06      ADC #$06
 <b>9ee8</b>   aa         TAX 
 <b>9ee9</b>   e0 36      CPX #$36
-<b>9eeb</b>   90 d5      BCC <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$c2
+<b>9eeb</b>   90 d5      BCC <a href="#9ec2">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$c2
 <b>9eed</b>   a2 27      LDX #$27
 <a name="9eef"></a><b>9eef</b>   bd 00 50   LDA <a href="#5000">TitleCharData</a>,X
 <b>9ef2</b>   9d 50 0c   STA GameTileMap1_or_TitleTextTileMap+$50,X
@@ -7467,10 +7467,10 @@ nosidebar: true
 <b>9f25</b>   bd 00 50   LDA <a href="#5000">TitleCharData</a>,X
 <b>9f28</b>   9d 50 0c   STA GameTileMap1_or_TitleTextTileMap+$50,X
 <b>9f2b</b>   ca         DEX 
-<b>9f2c</b>   10 c1      BPL <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$ef
+<b>9f2c</b>   10 c1      BPL <a href="#9eef">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$ef
 <b>9f2e</b>   20 f7 7a   JSR <a href="#7af7">Animate</a>
 <b>9f31</b>   a5 a8      LDA ExtraLifeFXCounter
-<b>9f33</b>   f0 03      BEQ <a href="#9e00">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$138
+<b>9f33</b>   f0 03      BEQ <a href="#9f38">MOVEDCopyInflatedCaveSubsetToBackBuffer</a>+$138
 <b>9f35</b>   20 54 74   JSR <a href="#7454">ExtraLifeFX</a>
 <a name="9f38"></a><b>9f38</b>   60         RTS 
 </div>
