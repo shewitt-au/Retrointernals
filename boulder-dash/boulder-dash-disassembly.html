@@ -41,7 +41,7 @@ nosidebar: true
 
 
 <div class="disass_container">
-<span class="disass_tiny">built on 2018-08-11 00:54:55+10:00</span><br/>
+<span class="disass_tiny">built on 2018-08-11 01:29:02+10:00</span><br/>
 <h1>Boulder Dash Disassembly</h1>
 <a name="5000"></a><b>TitleCharData:</b><br/>
 <b>5000</b><br/>
@@ -3355,9 +3355,9 @@ nosidebar: true
 <b>7653</b>   d0 0a      BNE <a href="#765f">__ChooseScrollDirection__YNoMatch</a>
 </div>
 <a name="7655"></a><b>__ChooseScrollDirection__YMatch:</b><br/>
-<div class="disass_code"><b>7655</b>   b9 9c 74   LDA $749c,Y
+<div class="disass_code"><b>7655</b>   b9 9c 74   LDA <a href="#749b">YScrollTable</a>+1,Y
 <b>7658</b>   85 ed      STA FineScrollDirY
-<b>765a</b>   b9 9d 74   LDA $749d,Y
+<b>765a</b>   b9 9d 74   LDA <a href="#749b">YScrollTable</a>+2,Y
 <b>765d</b>   85 ee      STA ScrollDirectionY
 </div>
 <a name="765f"></a><b>__ChooseScrollDirection__YNoMatch:</b><br/>
@@ -3383,9 +3383,9 @@ nosidebar: true
 <a name="767f"></a><b>767f</b>   a5 e6      LDA RockfordCellsFromLeftOfScreen
 <b>7681</b>   d9 a7 74   CMP <a href="#74a7">XScrollTable</a>,Y
 <b>7684</b>   d0 0a      BNE <a href="#7690">$7690</a>
-<a name="7686"></a><b>7686</b>   b9 a8 74   LDA $74a8,Y
+<a name="7686"></a><b>7686</b>   b9 a8 74   LDA <a href="#74a7">XScrollTable</a>+1,Y
 <b>7689</b>   85 e9      STA FineScrollDirX
-<b>768b</b>   b9 a9 74   LDA $74a9,Y
+<b>768b</b>   b9 a9 74   LDA <a href="#74a7">XScrollTable</a>+2,Y
 <b>768e</b>   85 ea      STA ScrollDirectionX
 <a name="7690"></a><b>7690</b>   a5 e8      LDA ScreenLeft
 <b>7692</b>   f0 0f      BEQ <a href="#76a3">$76a3</a>
@@ -3757,25 +3757,25 @@ nosidebar: true
 </div>
 <div class="disass_comment">; Right facing.
 </div>
-<div class="disass_code"><b>783a</b>   bd e8 65   LDA $65e8,X
+<div class="disass_code"><b>783a</b>   bd e8 65   LDA <a href="#63e8">RockfordAnimationChars</a>+$200,X
 <b>783d</b>   99 60 32   STA CopiedGameCharData+$160,Y
-<b>7840</b>   bd f0 65   LDA $65f0,X
+<b>7840</b>   bd f0 65   LDA <a href="#63e8">RockfordAnimationChars</a>+$208,X
 <b>7843</b>   99 68 32   STA CopiedGameCharData+$168,Y
-<b>7846</b>   bd 68 66   LDA $6668,X
+<b>7846</b>   bd 68 66   LDA <a href="#63e8">RockfordAnimationChars</a>+$280,X
 <b>7849</b>   99 e0 32   STA CopiedGameCharData+$1e0,Y
-<b>784c</b>   bd 70 66   LDA $6670,X
+<b>784c</b>   bd 70 66   LDA <a href="#63e8">RockfordAnimationChars</a>+$288,X
 <b>784f</b>   99 e8 32   STA CopiedGameCharData+$1e8,Y
 <b>7852</b>   60         RTS 
 </div>
 <a name="7853"></a><div class="disass_comment">; Left facing.
 </div>
-<div class="disass_code"><b>7853</b>   bd e8 64   LDA $64e8,X
+<div class="disass_code"><b>7853</b>   bd e8 64   LDA <a href="#63e8">RockfordAnimationChars</a>+$100,X
 <b>7856</b>   99 60 32   STA CopiedGameCharData+$160,Y
-<b>7859</b>   bd f0 64   LDA $64f0,X
+<b>7859</b>   bd f0 64   LDA <a href="#63e8">RockfordAnimationChars</a>+$108,X
 <b>785c</b>   99 68 32   STA CopiedGameCharData+$168,Y
-<b>785f</b>   bd 68 65   LDA $6568,X
+<b>785f</b>   bd 68 65   LDA <a href="#63e8">RockfordAnimationChars</a>+$180,X
 <b>7862</b>   99 e0 32   STA CopiedGameCharData+$1e0,Y
-<b>7865</b>   bd 70 65   LDA $6570,X
+<b>7865</b>   bd 70 65   LDA <a href="#63e8">RockfordAnimationChars</a>+$188,X
 <b>7868</b>   99 e8 32   STA CopiedGameCharData+$1e8,Y
 <b>786b</b>   60         RTS 
 </div>
@@ -3811,7 +3811,7 @@ nosidebar: true
 <b>788e</b>   f0 0f      BEQ <a href="#789f">AnimateRockford__ResetBlinkingChars</a>
 <b>7890</b>   bd e8 63   LDA <a href="#63e8">RockfordAnimationChars</a>,X
 <b>7893</b>   99 60 32   STA CopiedGameCharData+$160,Y
-<b>7896</b>   bd f0 63   LDA $63f0,X
+<b>7896</b>   bd f0 63   LDA <a href="#63e8">RockfordAnimationChars</a>+8,X
 <b>7899</b>   99 68 32   STA CopiedGameCharData+$168,Y
 <b>789c</b>   4c ab 78   JMP <a href="#78ab">AnimateRockford__RedfineFootTappingChars</a>
 </div>
@@ -3824,9 +3824,9 @@ nosidebar: true
 <a name="78ab"></a><b>AnimateRockford__RedfineFootTappingChars:</b><br/>
 <div class="disass_code"><b>78ab</b>   a5 be      LDA __TapFootFlag
 <b>78ad</b>   f0 0d      BEQ <a href="#78bc">AnimateRockford__ResetFootTappingChars</a>
-<b>78af</b>   bd 68 64   LDA $6468,X
+<b>78af</b>   bd 68 64   LDA <a href="#63e8">RockfordAnimationChars</a>+$80,X
 <b>78b2</b>   99 e0 32   STA CopiedGameCharData+$1e0,Y
-<b>78b5</b>   bd 70 64   LDA $6470,X
+<b>78b5</b>   bd 70 64   LDA <a href="#63e8">RockfordAnimationChars</a>+$88,X
 <b>78b8</b>   99 e8 32   STA CopiedGameCharData+$1e8,Y
 <b>78bb</b>   60         RTS 
 </div>
@@ -5664,9 +5664,7 @@ nosidebar: true
 <b>82ff</b>   e8         INX 
 <b>8300</b>   c8         INY 
 <b>8301</b>   c0 14      CPY #$14
-</div>
-<a name="8303"></a><b>MusicNoteToFreqTableBase:</b><br/>
-<div class="disass_code"><b>8303</b>   d0 ed      BNE <a href="#82f2">__SetupTitleScreenText__F1TextLine4Loop</a>
+<a name="8303"></a><b>8303</b>   d0 ed      BNE <a href="#82f2">__SetupTitleScreenText__F1TextLine4Loop</a>
 <b>8305</b>   a2 27      LDX #$27
 <b>8307</b>   a9 20      LDA #$20
 <a name="8309"></a><b>8309</b>   9d c0 0b   STA CaveMatrix_or_TitleLogoTileMap+$3c0,X
@@ -5677,7 +5675,7 @@ nosidebar: true
 <b>8314</b>   85 cc      STA ForceCreditsMode
 <b>8316</b>   60         RTS 
 </div>
-<b>ActualMusicNoteToFreqTable:</b><br/>
+<a name="8317"></a><b>MusicNoteToFreqTable:</b><br/>
 <div class="disass_code"><b>8317</b>   dc 02 0a 03  3a 03 6c 03  a0 03 d2 03  12 04 4c 04
 <b>8327</b>   92 04 d6 04  20 05 6e 05  b8 05 14 06  74 06 d8 06
 <b>8337</b>   40 07 a4 07  24 08 98 08  24 09 ac 09  40 0a dc 0a
@@ -5763,14 +5761,14 @@ nosidebar: true
 <b>83d3</b>   bd e9 5f   LDA <a href="#5fe8">MusicData</a>+1,X
 <b>83d6</b>   0a         ASL A
 <b>83d7</b>   a8         TAY 
-<b>83d8</b>   b9 03 83   LDA <a href="#8303">MusicNoteToFreqTableBase</a>,Y
+<b>83d8</b>   b9 03 83   LDA <a href="#8317">MusicNoteToFreqTable</a>-$14,Y
 <b>83db</b>   8d 00 d4   STA Sid_Voice1FreqLo
 <b>83de</b>   b9 04 83   LDA $8304,Y
 <b>83e1</b>   8d 01 d4   STA Sid_Voice1FreqHi
 <b>83e4</b>   bd e8 5f   LDA <a href="#5fe8">MusicData</a>,X
 <b>83e7</b>   0a         ASL A
 <b>83e8</b>   a8         TAY 
-<b>83e9</b>   b9 03 83   LDA <a href="#8303">MusicNoteToFreqTableBase</a>,Y
+<b>83e9</b>   b9 03 83   LDA <a href="#8317">MusicNoteToFreqTable</a>-$14,Y
 <b>83ec</b>   8d 07 d4   STA Sid_Voice2FreqLo
 <b>83ef</b>   b9 04 83   LDA $8304,Y
 <b>83f2</b>   8d 08 d4   STA Sid_Voice2FreqHi
