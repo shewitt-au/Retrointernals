@@ -41,7 +41,7 @@ nosidebar: true
 
 
 <div class="disass_container">
-<span class="disass_tiny">built on 2018-08-11 01:49:02+10:00</span><br/>
+<span class="disass_tiny">built on 2018-08-11 02:42:30+10:00</span><br/>
 <h1>Boulder Dash Disassembly</h1>
 <a name="5000"></a><b>TitleCharData:</b><br/>
 <b>5000</b><br/>
@@ -1204,7 +1204,7 @@ nosidebar: true
 <div class="disass_code"><b>6be0</b>   20 10 10 10  10 10 10 20  28 29 27 28  20 10 10 10
 <b>6bf0</b>   10 10 10 20
 </div>
-<b>Text_GameOver:</b><br/>
+<a name="6bf4"></a><b>Text_GameOver:</b><br/>
 <div class="disass_comment">; .g.a.m.e...o.v.e.r..
 </div>
 <div class="disass_code"><b>6bf4</b>   20 27 20 21  20 2d 20 25  20 20 20 2f  20 36 20 25
@@ -1216,13 +1216,13 @@ nosidebar: true
 <div class="disass_code"><b>6c08</b>   30 2c 21 39  25 32 20 11  0d 20 13 20  2d 25 2e 20
 <b>6c18</b>   21 0f 10 20
 </div>
-<b>Text_OutOfTime:</b><br/>
+<a name="6c1c"></a><b>Text_OutOfTime:</b><br/>
 <div class="disass_comment">; ....out.of.time.....
 </div>
 <div class="disass_code"><b>6c1c</b>   20 20 20 20  2f 35 34 20  2f 26 20 34  29 2d 25 20
 <b>6c2c</b>   20 20 20 20
 </div>
-<b>Text_BonusLife:</b><br/>
+<a name="6c30"></a><b>Text_BonusLife:</b><br/>
 <div class="disass_comment">; .b.o.n.u.s..l.i.f.e.
 </div>
 <div class="disass_code"><b>6c30</b>   20 22 20 2f  20 2e 20 35  20 33 20 20  2c 20 29 20
@@ -1234,14 +1234,13 @@ nosidebar: true
 <div class="disass_code"><b>6c44</b>   20 23 21 36  25 1a 20 21  20 20 2c 25  36 25 2c 1a
 <b>6c54</b>   20 11 20 20
 </div>
-<b>Text__SpaceBarToResume:</b><br/>
+<a name="6c58"></a><b>Text__SpaceBarToResume:</b><br/>
 <div class="disass_comment">; .spacebar.to.resume.
 </div>
 <div class="disass_code"><b>6c58</b>   20 33 30 21  23 25 22 21  32 20 34 2f  20 32 25 33
 <b>6c68</b>   35 2d 25 20
 </div>
-<a name="6c6c"></a><b>Text_PressButtonToPlay:</b><br/>
-<div class="disass_comment">; press.button.to.play
+<a name="6c6c"></a><div class="disass_comment">; press.button.to.play
 </div>
 <div class="disass_code"><b>6c6c</b>   30 32 25 33  33 20 22 35  34 34 2f 2e  20 34 2f 20
 <b>6c7c</b>   30 2c 21 39
@@ -2266,9 +2265,9 @@ nosidebar: true
 <a name="7105"></a><div class="disass_comment">; 
 </div>
 <b>SetTopLineToScore:</b><br/>
-<div class="disass_code"><b>7105</b>   a9 3a      LDA #$3a
+<div class="disass_code"><b>7105</b>   a9 3a      LDA #&lt;CurrentPlayerScoresText
 <b>7107</b>   85 46      STA LocalVar
-<b>7109</b>   a9 98      LDA #$98
+<b>7109</b>   a9 98      LDA #&gt;CurrentPlayerScoresText
 <b>710b</b>   85 47      STA LocalVar+1
 <b>710d</b>   20 16 6b   JSR <a href="#6b16">SetTopLineText</a>
 <b>7110</b>   60         RTS 
@@ -4537,12 +4536,9 @@ nosidebar: true
 </div>
 <b>PauseLoop:</b><br/>
 <div class="disass_code"><b>7d2b</b>   20 04 6b   JSR <a href="#6b04">BackupTopLine</a>
-</div>
-<div class="disass_comment">; .spacebar.to.resume.
-</div>
-<div class="disass_code"><b>7d2e</b>   a9 58      LDA #$58
+<b>7d2e</b>   a9 58      LDA #&lt;<a href="#6c58">Text__SpaceBarToResume</a>
 <b>7d30</b>   85 46      STA LocalVar
-<b>7d32</b>   a9 6c      LDA #$6c
+<b>7d32</b>   a9 6c      LDA #&gt;<a href="#6c58">Text__SpaceBarToResume</a>
 <b>7d34</b>   85 47      STA LocalVar+1
 <b>7d36</b>   20 16 6b   JSR <a href="#6b16">SetTopLineText</a>
 <b>7d39</b>   a5 9b      LDA SecondsDontPass
@@ -4552,9 +4548,9 @@ nosidebar: true
 <b>7d41</b>   20 03 7d   JSR <a href="#7d03">Delay</a>
 <b>7d44</b>   85 fc      STA LastKeyInScanRow7_ScannedMoreThanOnce
 <a name="7d46"></a><b>7d46</b>   20 19 7d   JSR <a href="#7d19">DelaySpaceKeyAborts</a>
-<b>7d49</b>   a9 62      LDA #$62
+<b>7d49</b>   a9 62      LDA #&lt;TopLineBackup
 <b>7d4b</b>   85 46      STA LocalVar
-<b>7d4d</b>   a9 98      LDA #$98
+<b>7d4d</b>   a9 98      LDA #&gt;TopLineBackup
 <b>7d4f</b>   85 47      STA LocalVar+1
 <b>7d51</b>   20 16 6b   JSR <a href="#6b16">SetTopLineText</a>
 <b>7d54</b>   20 19 7d   JSR <a href="#7d19">DelaySpaceKeyAborts</a>
@@ -4959,11 +4955,9 @@ nosidebar: true
 <a name="7f9e"></a><div class="disass_comment">; 
 </div>
 <b>SetTopLineTextToGameOverAndDelay:</b><br/>
-<div class="disass_comment">; .g.a.m.e...o.v.e.r..
-</div>
-<div class="disass_code"><b>7f9e</b>   a9 f4      LDA #$f4
+<div class="disass_code"><b>7f9e</b>   a9 f4      LDA #&lt;<a href="#6bf4">Text_GameOver</a>
 <b>7fa0</b>   85 46      STA LocalVar
-<b>7fa2</b>   a9 6b      LDA #$6b
+<b>7fa2</b>   a9 6b      LDA #&gt;<a href="#6bf4">Text_GameOver</a>
 <b>7fa4</b>   85 47      STA LocalVar+1
 <b>7fa6</b>   20 16 6b   JSR <a href="#6b16">SetTopLineText</a>
 <b>7fa9</b>   20 0c 7d   JSR <a href="#7d0c">FourDelays</a>
@@ -5010,22 +5004,18 @@ nosidebar: true
 <div class="disass_code"><b>7fce</b>   a9 14      LDA #$14
 <b>7fd0</b>   8d 06 98   STA __OutOfTimeLoop__Counter
 <a name="7fd3"></a><b>7fd3</b>   20 04 6b   JSR <a href="#6b04">BackupTopLine</a>
-</div>
-<div class="disass_comment">; Set top line text to:
-; ....out.of.time.....
-</div>
-<div class="disass_code"><b>7fd6</b>   a9 1c      LDA #$1c
+<b>7fd6</b>   a9 1c      LDA #&lt;<a href="#6c1c">Text_OutOfTime</a>
 <b>7fd8</b>   85 46      STA LocalVar
-<b>7fda</b>   a9 6c      LDA #$6c
+<b>7fda</b>   a9 6c      LDA #&gt;<a href="#6c1c">Text_OutOfTime</a>
 <b>7fdc</b>   85 47      STA LocalVar+1
 <b>7fde</b>   20 16 6b   JSR <a href="#6b16">SetTopLineText</a>
 <b>7fe1</b>   20 ad 7f   JSR <a href="#7fad">WaitForDelayOrNextPlayersButton</a>
 </div>
 <div class="disass_comment">; Restore top line text.
 </div>
-<div class="disass_code"><b>7fe4</b>   a9 62      LDA #$62
+<div class="disass_code"><b>7fe4</b>   a9 62      LDA #&lt;TopLineBackup
 <b>7fe6</b>   85 46      STA LocalVar
-<b>7fe8</b>   a9 98      LDA #$98
+<b>7fe8</b>   a9 98      LDA #&gt;TopLineBackup
 <b>7fea</b>   85 47      STA LocalVar+1
 <b>7fec</b>   20 16 6b   JSR <a href="#6b16">SetTopLineText</a>
 <b>7fef</b>   20 ad 7f   JSR <a href="#7fad">WaitForDelayOrNextPlayersButton</a>
@@ -5048,22 +5038,16 @@ nosidebar: true
 <b>800a</b>   bd 65 7e   LDA <a href="#7e65">NumTo3DigitDigits__Exit</a>,X
 <b>800d</b>   85 a6      STA IsBonusLevelFlag
 <b>800f</b>   f0 11      BEQ <a href="#8022">$8022</a>
-</div>
-<div class="disass_comment">; .b.o.n.u.s..l.i.f.e.
-</div>
-<div class="disass_code"><b>8011</b>   a9 30      LDA #$30
+<b>8011</b>   a9 30      LDA #&lt;<a href="#6c30">Text_BonusLife</a>
 <b>8013</b>   85 46      STA LocalVar
-<b>8015</b>   a9 6c      LDA #$6c
+<b>8015</b>   a9 6c      LDA #&gt;<a href="#6c30">Text_BonusLife</a>
 <b>8017</b>   85 47      STA LocalVar+1
 <b>8019</b>   20 16 6b   JSR <a href="#6b16">SetTopLineText</a>
 <b>801c</b>   20 39 70   JSR <a href="#7039">ExtraLife</a>
 <b>801f</b>   4c 2d 80   JMP <a href="#802d">$802d</a>
-</div>
-<a name="8022"></a><div class="disass_comment">; $094e = .CurrentPlayerInfoText
-</div>
-<div class="disass_code"><b>8022</b>   a9 4e      LDA #$4e
+<a name="8022"></a><b>8022</b>   a9 4e      LDA #&lt;CurrentPlayerInfoText
 <b>8024</b>   85 46      STA LocalVar
-<b>8026</b>   a9 98      LDA #$98
+<b>8026</b>   a9 98      LDA #&gt;CurrentPlayerInfoText
 <b>8028</b>   85 47      STA LocalVar+1
 <b>802a</b>   20 16 6b   JSR <a href="#6b16">SetTopLineText</a>
 <a name="802d"></a><b>802d</b>   60         RTS 
@@ -5575,7 +5559,7 @@ nosidebar: true
 <a name="827c"></a><b>__SetupTitleScreenText__PressButtonToPlayLoop:</b><br/>
 <div class="disass_comment">; press.button.to.play
 </div>
-<div class="disass_code"><b>827c</b>   b9 6c 6c   LDA <a href="#6c6c">Text_PressButtonToPlay</a>,Y
+<div class="disass_code"><b>827c</b>   b9 6c 6c   LDA <a href="#6c6c">$6c6c</a>,Y
 <b>827f</b>   9d 48 0b   STA CaveMatrix_or_TitleLogoTileMap+$348,X
 <b>8282</b>   e8         INX 
 <b>8283</b>   18         CLC 
@@ -6188,9 +6172,9 @@ nosidebar: true
 </div>
 <div class="disass_code"><b>85f2</b>   a9 00      LDA #$00
 <b>85f4</b>   85 94      STA EnableSomeSFXAndMarqueeUpdates
-<b>85f6</b>   a9 4e      LDA #$4e
+<b>85f6</b>   a9 4e      LDA #&lt;CurrentPlayerInfoText
 <b>85f8</b>   85 46      STA LocalVar
-<b>85fa</b>   a9 98      LDA #$98
+<b>85fa</b>   a9 98      LDA #&gt;CurrentPlayerInfoText
 <b>85fc</b>   85 47      STA LocalVar+1
 <b>85fe</b>   20 16 6b   JSR <a href="#6b16">SetTopLineText</a>
 </div>
