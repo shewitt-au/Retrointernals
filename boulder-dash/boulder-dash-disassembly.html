@@ -41,7 +41,7 @@ nosidebar: true
 
 
 <div class="disass_container">
-<span class="disass_tiny">built on 2018-08-11 03:03:06+10:00</span><br/>
+<span class="disass_tiny">built on 2018-08-13 12:48:28+10:00</span><br/>
 <h1>Boulder Dash Disassembly</h1>
 <a name="5000"></a><b>TitleCharData:</b><br/>
 <b>5000</b><br/>
@@ -5739,14 +5739,14 @@ nosidebar: true
 <b>83d7</b>   a8         TAY 
 <b>83d8</b>   b9 03 83   LDA <a href="#8317">MusicNoteToFreqTable</a>-$14,Y
 <b>83db</b>   8d 00 d4   STA Sid_Voice1FreqLo
-<b>83de</b>   b9 04 83   LDA $8304,Y
+<b>83de</b>   b9 04 83   LDA <a href="#8317">MusicNoteToFreqTable</a>-$13,Y
 <b>83e1</b>   8d 01 d4   STA Sid_Voice1FreqHi
 <b>83e4</b>   bd e8 5f   LDA <a href="#5fe8">MusicData</a>,X
 <b>83e7</b>   0a         ASL A
 <b>83e8</b>   a8         TAY 
 <b>83e9</b>   b9 03 83   LDA <a href="#8317">MusicNoteToFreqTable</a>-$14,Y
 <b>83ec</b>   8d 07 d4   STA Sid_Voice2FreqLo
-<b>83ef</b>   b9 04 83   LDA $8304,Y
+<b>83ef</b>   b9 04 83   LDA <a href="#8317">MusicNoteToFreqTable</a>-$13,Y
 <b>83f2</b>   8d 08 d4   STA Sid_Voice2FreqHi
 <b>83f5</b>   ad 00 98   LDA MusicDataIndex
 <b>83f8</b>   d0 03      BNE <a href="#83fd">__MusicTickRoutine__TweakCurrentNote</a>
@@ -6342,7 +6342,7 @@ nosidebar: true
 <b>86a2</b>   8d 00 dc   STA Cia1_DataA
 <b>86a5</b>   ad 01 dc   LDA Cia1_DataB
 <b>86a8</b>   c9 ff      CMP #$ff
-<b>86aa</b>   f0 0a      BEQ <a href="#86b6">__IRQHanzdler__ScanKeyboardRow7</a>
+<b>86aa</b>   f0 0a      BEQ <a href="#86b6">__IRQHandler__ScanKeyboardRow7</a>
 </div>
 <b>__IRQHandler__KeyInScanRow0:</b><br/>
 <div class="disass_code"><b>86ac</b>   c5 fd      CMP LastKeyInScanRow0
@@ -6350,12 +6350,12 @@ nosidebar: true
 </div>
 <b>__IRQHandler__KeyInScanRow0ScannedMoreThanOnce:</b><br/>
 <div class="disass_code"><b>86b0</b>   85 fb      STA LastKeyInScanRow0_ScannedMoreThanOnce
-<b>86b2</b>   f0 02      BEQ <a href="#86b6">__IRQHanzdler__ScanKeyboardRow7</a>
+<b>86b2</b>   f0 02      BEQ <a href="#86b6">__IRQHandler__ScanKeyboardRow7</a>
 </div>
 <a name="86b4"></a><b>__IRQHandler__KeyInScanRow0ScannedFirstTime:</b><br/>
 <div class="disass_code"><b>86b4</b>   85 fd      STA LastKeyInScanRow0
 </div>
-<a name="86b6"></a><b>__IRQHanzdler__ScanKeyboardRow7:</b><br/>
+<a name="86b6"></a><b>__IRQHandler__ScanKeyboardRow7:</b><br/>
 <div class="disass_code"><b>86b6</b>   a9 7f      LDA #$7f
 <b>86b8</b>   8d 00 dc   STA Cia1_DataA
 <b>86bb</b>   ad 01 dc   LDA Cia1_DataB
