@@ -4,7 +4,10 @@
 - title: Tools
   url: /tools/tools.html
 - title: Boulder Dash
-  url: /boulder-dash/boulder-dash-disassembly.html
+  url: /boulder-dash/boulder-dash-disassembly
+  sublinks:
+    - title: Music
+      url: /boulder-dash/music
 - title: BASIC
   url: /basic/basic.html
   sublinks:
