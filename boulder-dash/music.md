@@ -111,7 +111,7 @@ The closest value to A440 is 435.97705078124994 which is 16 cents below. A perce
 
 ## Tempo
 
-The music routine is called once per frame but only does anything every other frame.
+The music routine is called once per frame but only does anything every other frame. There's some weirdness going on here. Why not just call the routine on every other frame instead of calling it every frame and having it do nothing half of the time? Function calls aren't free.
 
 <pre>
 <b>MusicTickRoutine</b>:
@@ -150,6 +150,8 @@ So on every other frame:
  .
 </pre>
 
-OK, there's some weirdness going on here. Whether the routine advances to the next note (actually the next note for each or the two voices) or just modulates the amplitude of voice one is determined by **MusicTickRoutine__Voice1SustainLevel**. This is initialised to zero before the music starts and a new note is only played when it's $a0. It is incremented every other frame but its value loops is restricted to the range $00-$a7.
+OK, there's some weirdness going on here too. Whether the routine advances to the next note (actually the next note for each of the two voices used) or just modulates the amplitude of voice one is determined by **MusicTickRoutine__Voice1SustainLevel**. This is initialised to $a0 before the music starts and a new note is only played when it's $a0. The lower three bits are incremented every other frame but the $a in the high nybble is entirely pointless. The upshot of all this is the song advances to the next "beat" every 16 frames. We'll use quavers (eighths notes) for the transcription. Given that PAL has around 50 frames per second gives us a BPM of 187.5. We'll call it 188. 
 
 ![Boulder Dash music](./Boulder_Dash.svg)
+
+
