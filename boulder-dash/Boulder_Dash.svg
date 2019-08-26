@@ -286,7 +286,7 @@ c-49 51 -66 122 -66 193s17 142 66 193c47 49 116 69 184 69c87 0 160 -64 175 -150c
 <path transform="translate(23.3564, 17.0760) scale(0.0036, -0.0036)" d="M217 139c57 0 112 -31 112 -94c0 -72 -55 -121 -102 -149c-35 -21 -74 -35 -115 -35c-57 0 -112 31 -112 94c0 72 55 121 102 149c35 21 74 35 115 35z" fill="currentColor"/>
 <text transform="translate(24.5285, 17.5696)" font-family="Century Schoolbook L" font-size="2.2001" text-anchor="start" fill="currentColor">
 <tspan>
- = 185</tspan>
+ = 188</tspan>
 </text>
 </a>
 <rect transform="translate(28.3076, 29.4214)" x="-0.0650" y="-6.5241" width="0.1300" height="5.3363" ry="0.0400" fill="currentColor"/>
