@@ -1,6 +1,6 @@
 # Boulder Dash Theme Music
 
-Ok, I got the idea to score the Boulder Dash music it into my head. I had a look around to see if anyone else had already done so, and they had, kind of. The man himself has a crack [here](https://www.brainjam.ca/wp/2009/11/scoring-the-boulder-dash-theme/). But with some knowledge of the limitations of the music routine it’s clear it’s not a faithful representation, more of an arrangement; the routine doesn’t do rests, or notes of any but one duration. There are other scores out there, but all of them seem to be arrangements of the theme and faithful representations. Let's rectify that.
+Ok, I got the idea to score the Boulder Dash music it into my head. I had a look around to see if anyone else had already done so, and they had, kind of. The man himself has a crack [here](https://www.brainjam.ca/wp/2009/11/scoring-the-boulder-dash-theme/). But with some knowledge of the limitations of the music routine it’s clear it’s not a faithful representation, more of an arrangement; the routine doesn’t do rests, or notes of any but one duration. There are other scores out there, but all of them seem to be arrangements of the theme and not faithful representations. Let's rectify that.
 
 ## Tuning
 I'm going to start by figuring out the tuning. The table which maps notes for SID frequency values looks like this.
