@@ -16,7 +16,7 @@ I'm going to start by figuring out the tuning. The table which maps notes to SID
 <b>8377</b>   c0 2d
 </pre>
 
-The music player routine uses note numbers to index into this table to get the SID values used to play the note of the desired frequency. Each entry is two bytes long. I hacked together the Python code below to get the frequencies of the notes. I live in Australia, so we had PAL machines. I'm only going to consider the PAL case but I've included the code for NTSC machines.
+The music routine uses this table to map from note values to SID frequency values. Each entry is two bytes long. I hacked together the Python code below to get the frequencies of the notes. I live in Australia, so we had PAL machines. I'm only going to consider the PAL case but I've included the code for NTSC machines.
 
 ```python
 #!/usr/bin/env python3
