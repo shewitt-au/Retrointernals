@@ -324,5 +324,6 @@ So on every other call:
 
 OK, there's some weirdness going on here too. Whether the routine advances to the next note (actually the next note for each of the two voices used) or just modulates the amplitude of voice one is determined by **MusicTickRoutine__Voice1SustainLevel**. This is initialised to $a0 before the music starts and a new note is only played when it's $a0. The lower three bits are incremented every other call but the $a in the high nybble is entirely pointless. The upshot of all this is the song advances to the next note every 8 frames. We'll use quavers (eighths notes) for the transcription. Given that PAL has around 50 frames per second this gives us a BPM of 187.5. We'll call it 188. 
 
+*** UNFINISHED ***
 
 ![Boulder Dash music](./Boulder_Dash.svg)
