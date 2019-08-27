@@ -4,7 +4,7 @@ Ok, I got the idea to score the Boulder Dash music it into my head. I had a look
 
 ## Overview
 
-The theme music use two of the SID chip's three voices. The data for the tune is exactly 256 bytes long (not including the note to SID frequency value table) and as mentioned above no rests or notes of any but one duration are supported. The tune data is simply 128 pairs of note numbers for each of the two voices. If we notate the note duration as a quaver (a quarter note) the tune is 16 bars long (4/4 time) repeated twice. I think it's in F minor, and I've notated it as such, but I'm no musician.
+The theme music use two of the SID chip's three voices. The data for the tune is exactly 256 bytes long (not including the note to SID frequency value table) and as mentioned above no rests or notes of any but one duration are supported. The tune data is simply 128 pairs of note numbers, the first value of the pair for one voice and the second for the other. If we notate the note duration as a quaver (a quarter note) the tune is 16 bars long (4/4 time) repeated twice. I think it's in F minor, and I've notated it as such, but I'm no musician.
 
 ## Tuning
 I'm going to start by figuring out the tuning. The table which maps notes to SID frequency values looks like this.
