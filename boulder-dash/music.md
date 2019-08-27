@@ -135,6 +135,14 @@ The closest value to A440 is 435.97705078124994 which is 16 cents below. A perce
 
 This requires some understanding of the maths behind musical tunings. When you start looking into this you can help but wonder how deep the rabbit hole goes. For our purposes we'll only concern ourselves with the [equal temperament](https://en.wikipedia.org/wiki/Equal_temperament) tuning system. To cut a long story short the following Python code will give us a note number measured in semitones from the reference frequency a4.
 
+```pyhhon
+base = 2**(1/12)
+a4 = 435.97705078124994
+
+def freq_to_note(f):
+	return log(f/a4, base)
+```
+
 ## The Tune
 
 Here's the data for the tune:
@@ -159,14 +167,6 @@ Here's the data for the tune:
 </pre>
 
 Again, this is simply 128 pairs of note values, one for each voice. The first number of the pair is the note for voice 2 and the second the note for voice 1. $14 is the first note value and $44 the last (assuming a tuning as described above that f1 and f5 respectively). Increasing a note value by one moves up  a semitone.
-
-```pyhhon
-base = 2**(1/12)
-a4 = 435.97705078124994
-
-def freq_to_note(f):
-	return log(f/a4, base)
-```
 
 ## Tempo
 
