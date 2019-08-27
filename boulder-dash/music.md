@@ -143,6 +143,118 @@ def freq_to_note(f):
 	return log(f/a4, base)
 ```
 
+### Tieing it all together
+
+In short this:
+
+```python
+#!/usr/bin/env python3
+
+from math import log, floor
+
+bd_sid_values = [
+0xdc, 0x02, 0x0a, 0x03,  0x3a, 0x03, 0x6c, 0x03,  0xa0, 0x03, 0xd2, 0x03,  0x12, 0x04, 0x4c, 0x04,
+0x92, 0x04, 0xd6, 0x04,  0x20, 0x05, 0x6e, 0x05,  0xb8, 0x05, 0x14, 0x06,  0x74, 0x06, 0xd8, 0x06,
+0x40, 0x07, 0xa4, 0x07,  0x24, 0x08, 0x98, 0x08,  0x24, 0x09, 0xac, 0x09,  0x40, 0x0a, 0xdc, 0x0a,
+0x70, 0x0b, 0x28, 0x0c,  0xe8, 0x0c, 0xb0, 0x0d,  0x80, 0x0e, 0x48, 0x0f,  0x48, 0x10, 0x30, 0x11,
+0x48, 0x12, 0x58, 0x13,  0x80, 0x14, 0xb8, 0x15,  0xe0, 0x16, 0x50, 0x18,  0xd0, 0x19, 0x60, 0x1b,
+0x00, 0x1d, 0x90, 0x1e,  0x90, 0x20, 0x60, 0x22,  0x90, 0x24, 0xb0, 0x26,  0x00, 0x29, 0x70, 0x2b,
+0xc0, 0x2d]
+
+def chunks():
+	i = iter(bd_sid_values)
+	try:
+		while True:
+			yield next(i)+next(i)*256
+	except StopIteration:
+		return
+
+def note_to_sid(n):
+	return bd_sid_values[n*2]+bd_sid_values[n*2+1]*256
+
+names_sharp=['a{}','a{}♯','b{}','c{}','c{}♯','d{}','d{}♯','e{}','f{}','f{}♯','g{}','g{}♯']
+names_flat=['a{}','b{}♭','b{}','c{}','d{}♭','d{}','e{}♭','e{}','f{}','g{}♭','g{}','a♭{}']
+
+def index_to_name(i, sharp):
+	octave = floor((i-3)/12)+5
+	names = names_sharp if sharp else names_flat
+	return names[i%12].format(octave)
+
+pal_const =  (256**3)/985248
+ntsc_const = (256**3)/1022727
+a4 = 435.97705078124994
+base = 2**(1/12)
+
+def reg_to_freq_pal(reg):
+	return reg/pal_const
+
+def reg_to_freq_ntsc(reg):
+	return reg/ntsc_const
+
+def freq_to_note(f):
+	return log(f/a4, base)
+
+bd_val = 0x14
+for sid in chunks():
+	freq = reg_to_freq_pal(sid)
+	idx = round(freq_to_note(freq))
+	print("${:02x} : {}".format(bd_val, index_to_name(idx, True)))
+	bd_val += 1
+print()
+```
+
+Gives us the note names that correspond to the note numbering Boulder Dash uses:
+
+	$14 : f1
+	$15 : f1♯
+	$16 : g1
+	$17 : g1♯
+	$18 : a1
+	$19 : a1♯
+	$1a : b1
+	$1b : c2
+	$1c : c2♯
+	$1d : d2
+	$1e : d2♯
+	$1f : e2
+	$20 : f2
+	$21 : f2♯
+	$22 : g2
+	$23 : g2♯
+	$24 : a2
+	$25 : a2♯
+	$26 : b2
+	$27 : c3
+	$28 : c3♯
+	$29 : d3
+	$2a : d3♯
+	$2b : e3
+	$2c : f3
+	$2d : f3♯
+	$2e : g3
+	$2f : g3♯
+	$30 : a3
+	$31 : a3♯
+	$32 : b3
+	$33 : c4
+	$34 : c4♯
+	$35 : d4
+	$36 : d4♯
+	$37 : e4
+	$38 : f4
+	$39 : f4♯
+	$3a : g4
+	$3b : g4♯
+	$3c : a4
+	$3d : a4♯
+	$3e : b4
+	$3f : c5
+	$40 : c5♯
+	$41 : d5
+	$42 : d5♯
+	$43 : e5
+	$44 : f5
+
 ## The Tune
 
 Here's the data for the tune:
