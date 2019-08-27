@@ -29,7 +29,7 @@ We'll take one at a time then tie it all together.
 
 ### Mapping from a SID frequency value to a frequency
 
-I Googled a few resources when trying to figure out how to do this. I did briefly consider getting an oscilloscope and verifying what I learned, but I decided that's probably overkill. We'll interpret consistency across multiple sources as verification enough. Anyway, here are some links if you're interested in reading up on this:
+I Googled a few resources when trying to figure out how to do this. I did briefly consider getting an oscilloscope and verifying what I learnt, but I decided that's probably overkill. We'll interpret consistency across multiple sources as verification enough. Anyway, here are some links if you're interested in reading up on this:
 
 
 [The SID (by Stephen L. Judd)](http://www.cbmitapages.it/c64/sid1eng.htm)
