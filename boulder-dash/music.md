@@ -2,6 +2,10 @@
 
 Ok, I got the idea to score the Boulder Dash music it into my head. I had a look around to see if anyone else had already done so, and they had, kind of. The man himself has a crack [here](https://www.brainjam.ca/wp/2009/11/scoring-the-boulder-dash-theme/). But with some knowledge of the limitations of the music routine it’s clear it’s not a faithful representation, more of an arrangement; the routine doesn’t do rests, or notes of any but one duration. There are other scores out there, but all of them seem to be arrangements of the theme and not faithful representations. Let's rectify that.
 
+## Overview
+
+The theme music use two of the SID chip's three voices. The data for the tune is exactly 256 bytes long (not including the note to SID frequency value table) and as mentioned above no rests or notes of any but one duration are supported. The tune data is simply 128 pairs of note numbers for each of the two voices. If we notate the note duration as a quaver (a quarter note) the tune is 16 bars long (4/4 time) repeated twice. I think it's in F minor, and I've notated it as such, but I'm no musician.
+
 ## Tuning
 I'm going to start by figuring out the tuning. The table which maps notes to SID frequency values looks like this.
 
@@ -16,7 +20,25 @@ I'm going to start by figuring out the tuning. The table which maps notes to SID
 <b>8377</b>   c0 2d
 </pre>
 
-The music routine uses this table to map from note values to SID frequency values. Each entry is two bytes long. I hacked together the Python code below to get the frequencies of the notes. I live in Australia, so we had PAL machines. I'm only going to consider the PAL case but I've included the code for NTSC machines.
+The music routine uses this table to map from note values to SID frequency values. Each entry is two bytes long. We need to do two things here:
+
+	1. Map from SID frequency value to a frequency.
+	2. Map from a frequency to a note.
+
+We'll take one at a time then tie it all together.
+
+### Mapping from a SID frequency value to a frequency
+
+I Googled a \few resources when trying to figure out how to do this. I did briefly consider getting an oscilloscope and verifying what I learned, but I decided that's probably overkill. We'll interpret consistency across multiple sources as verification enough. Anyway here are some links if you're interested in reading up on this:
+
+
+[The SID (by Stephen L. Judd)](http://www.cbmitapages.it/c64/sid1eng.htm)
+
+[How to calculate SID frequency tables By FTC/HT](https://codebase64.org/doku.php?id=base:how_to_calculate_your_own_sid_frequency_table)
+
+[Excact Vertical Frequency / Refresh Rate](https://csdb.dk/forums/?roomid=11&topicid=124823&firstpost=2)
+
+I hacked together the Python code below to get the frequencies of the notes. I live in Australia, so we had PAL machines. I'm only going to consider the PAL case but I've included the code for NTSC machines.
 
 ```python
 #!/usr/bin/env python3
@@ -109,6 +131,8 @@ PAL
 
 The closest value to A440 is 435.97705078124994 which is 16 cents below. A perceptible distance. If we use A435 instead this is still the closest value but this time 4 cents higher. That's more like it. Well use this entry as our A4. Here is some info on [cents](https://en.wikipedia.org/wiki/Cent_(music)) and [A440](https://en.wikipedia.org/wiki/A440_(pitch_standard)) for the curious.
 
+### Maping from a frequency to a note
+
 ## Tempo
 
 The music routine is called twice per frame but only does anything of consequence every other call. There's some weirdness going on there. Why not just call the routine once per frame instead of calling it twice and having it do nothing half of the time? Function calls aren't free.
@@ -150,6 +174,33 @@ So on every other call:
  .
 </pre>
 
+
 OK, there's some weirdness going on here too. Whether the routine advances to the next note (actually the next note for each of the two voices used) or just modulates the amplitude of voice one is determined by **MusicTickRoutine__Voice1SustainLevel**. This is initialised to $a0 before the music starts and a new note is only played when it's $a0. The lower three bits are incremented every other call but the $a in the high nybble is entirely pointless. The upshot of all this is the song advances to the next note every 8 frames. We'll use quavers (eighths notes) for the transcription. Given that PAL has around 50 frames per second this gives us a BPM of 187.5. We'll call it 188. 
+
+## The Tune
+
+Here's the data for the tune:
+
+<pre>
+<b>5fe8</b>   16 22 1d 26  22 29 25 2e  14 24 1f 27  20 29 27 30
+<b>5ff8</b>   12 2a 12 2c  1e 2e 12 31  20 2c 33 37  21 2d 31 35
+<b>6008</b>   16 22 16 2e  16 1d 16 24  14 20 14 30  14 24 14 20
+<b>6018</b>   16 22 16 2e  16 1d 16 24  1e 2a 1e 3a  1e 2e 1e 2a
+<b>6028</b>   14 20 14 2c  14 1b 14 22  1c 28 1c 38  1c 2c 1c 28
+<b>6038</b>   11 1d 29 2d  11 1f 29 2e  0f 27 0f 27  16 33 16 27
+<b>6048</b>   16 2e 16 2e  16 2e 16 2e  22 2e 22 2e  16 2e 16 2e
+<b>6058</b>   14 2e 14 2e  14 2e 14 2e  20 2e 20 2e  14 2e 14 2e
+<b>6068</b>   16 2e 32 2e  16 2e 33 2e  22 2e 32 2e  16 2e 33 2e
+<b>6078</b>   14 2e 32 2e  14 2e 33 2e  20 2c 30 2c  14 2c 31 2c
+<b>6088</b>   16 2e 16 3a  16 2e 35 38  22 2e 22 37  16 2e 31 35
+<b>6098</b>   14 2c 14 38  14 2c 14 38  20 2c 20 33  14 2c 14 38
+<b>60a8</b>   16 2e 32 2e  16 2e 33 2e  22 2e 32 2e  16 2e 33 2e
+<b>60b8</b>   14 2e 32 2e  14 2e 33 2e  20 2c 30 2c  14 2c 31 2c
+<b>60c8</b>   2e 32 29 2e  26 29 22 26  2c 30 27 2c  24 27 14 20
+<b>60d8</b>   35 32 32 2e  2e 29 29 26  27 30 24 2c  20 27 14 20
+</pre>
+
+Again, this is simply 128 pairs of note values, one for each voice. The first number of the pair is the note for voice 2 and the second the note for voice 1. $14 is the first note value and $44 the last (assuming a tuning as described above that f1 and f5 respectively). Increasing a note value by one moves up  a semitone.
+
 
 ![Boulder Dash music](./Boulder_Dash.svg)
