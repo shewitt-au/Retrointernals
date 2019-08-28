@@ -1,6 +1,7 @@
 # Boulder Dash Theme Music
 
-Ok, I got the idea to score the Boulder Dash music into my head. I had a look around to see if anyone else had already done so, and they had, kind of. The man himself has a crack [here](https://www.brainjam.ca/wp/2009/11/scoring-the-boulder-dash-theme/). But with some knowledge of the limitations of the music routine it’s clear it’s not a faithful representation, more of an arrangement; the routine doesn’t do rests, or notes of any but one duration. There are other scores out there, but all of them seem to be arrangements of the theme and not faithful representations. Let's rectify that.
+Ok, I got the idea to score the Boulder Dash music into my head. I had a look around to see if anyone else had already done so, and they had, kind of. The man himself has a crack [here](https://www.brainjam.ca/wp/2009/11/scoring-the-boulder-dash-theme/). But with some knowledge of the limitations of the music routine it’s clear it’s not a faithful representation, more of an arrangement; the routine doesn’t do rests, or notes of any but one duration. There are other scores out there, but all of them seem to be arrangements of the theme and not faithful representations. Let's bolt some shit together and get this done.
+
 
 ## Overview
 
@@ -129,7 +130,7 @@ PAL
 687.7913818359375
 </pre>
 
-The closest value to A440 is 435.97705078124994 which is 16 cents below. A perceptible distance. If we use A435 instead this is still the closest value but this time 4 cents higher. That's more like it. Well use this entry as our A4. Here is some info on [cents](https://en.wikipedia.org/wiki/Cent_(music)) and [A440](https://en.wikipedia.org/wiki/A440_(pitch_standard)) for the curious.
+The closest value to A440 is 435.97705078124994 which is 16 cents below. A perceptible distance. If we use A435 instead this is still the closest value but this time 4 cents higher. That's more like it. We'll use this entry as our A4. Here is some info on [cents](https://en.wikipedia.org/wiki/Cent_(music)) and [A440](https://en.wikipedia.org/wiki/A440_(pitch_standard)) for the curious.
 
 ### Maping from a frequency to a note
 
@@ -278,7 +279,159 @@ Here's the data for the tune:
 <b>60d8</b>   35 32 32 2e  2e 29 29 26  27 30 24 2c  20 27 14 20
 </pre>
 
-Again, this is simply 128 pairs of note values, one for each voice. The first number of the pair is the note for voice 2 and the second the note for voice 1. $14 is the first note value and $44 the last (assuming a tuning as described above that f1 and f5 respectively). Increasing a note value by one moves up  a semitone.
+Here's the code with fetches the note data, looks up the SID values for the note and writes the values to the SID chip frequency registers:
+
+<pre>
+<b>83ca</b>   ae 00 98   LDX <b>MusicDataIndex</b>
+<b>83cd</b>   ee 00 98   INC <b>MusicDataIndex</b>
+<b>83d0</b>   ee 00 98   INC <b>MusicDataIndex</b>
+<b>83d3</b>   bd e9 5f   LDA <b>MusicData</b>+1,X
+<b>83d6</b>   0a         ASL A
+<b>83d7</b>   a8         TAY 
+<b>83d8</b>   b9 03 83   LDA <b>MusicNoteToFreqTable</b>-$14,Y
+<b>83db</b>   8d 00 d4   STA <b>Sid_Voice1FreqLo</b>
+<b>83de</b>   b9 04 83   LDA <b>MusicNoteToFreqTable</b>-$13,Y
+<b>83e1</b>   8d 01 d4   STA <b>Sid_Voice1FreqHi</b>
+<b>83e4</b>   bd e8 5f   LDA <b>MusicData</b>,X
+<b>83e7</b>   0a         ASL A
+<b>83e8</b>   a8         TAY 
+<b>83e9</b>   b9 03 83   LDA <b>MusicNoteToFreqTable</b>-$14,Y
+<b>83ec</b>   8d 07 d4   STA <b>Sid_Voice2FreqLo</b>
+<b>83ef</b>   b9 04 83   LDA <b>MusicNoteToFreqTable</b>-$13,Y
+<b>83f2</b>   8d 08 d4   STA <b>Sid_Voice2FreqHi</b>
+</pre>
+
+Again, the music data this is simply 128 pairs of note values, one for each voice. You can see the first number of the pair is for voice 2 and the second for voice 1. Also the first note value is $14 which makes the last $44. I'm guessing this is so the data could the entered as a string in the assembler.
+
+Now we have all the pieces we need to dump the notes for both voices. Let's snap some blocks together:
+
+```python
+#!/usr/bin/env python3
+
+from math import log, floor
+
+bd_sid_values = [
+0xdc, 0x02, 0x0a, 0x03,  0x3a, 0x03, 0x6c, 0x03,  0xa0, 0x03, 0xd2, 0x03,  0x12, 0x04, 0x4c, 0x04,
+0x92, 0x04, 0xd6, 0x04,  0x20, 0x05, 0x6e, 0x05,  0xb8, 0x05, 0x14, 0x06,  0x74, 0x06, 0xd8, 0x06,
+0x40, 0x07, 0xa4, 0x07,  0x24, 0x08, 0x98, 0x08,  0x24, 0x09, 0xac, 0x09,  0x40, 0x0a, 0xdc, 0x0a,
+0x70, 0x0b, 0x28, 0x0c,  0xe8, 0x0c, 0xb0, 0x0d,  0x80, 0x0e, 0x48, 0x0f,  0x48, 0x10, 0x30, 0x11,
+0x48, 0x12, 0x58, 0x13,  0x80, 0x14, 0xb8, 0x15,  0xe0, 0x16, 0x50, 0x18,  0xd0, 0x19, 0x60, 0x1b,
+0x00, 0x1d, 0x90, 0x1e,  0x90, 0x20, 0x60, 0x22,  0x90, 0x24, 0xb0, 0x26,  0x00, 0x29, 0x70, 0x2b,
+0xc0, 0x2d]
+
+def chunks():
+	i = iter(bd_sid_values)
+	try:
+		while True:
+			yield next(i)+next(i)*256
+	except StopIteration:
+		return
+
+def note_to_sid(n):
+	return bd_sid_values[n*2]+bd_sid_values[n*2+1]*256
+
+names_sharp=['a{}','a{}♯','b{}','c{}','c{}♯','d{}','d{}♯','e{}','f{}','f{}♯','g{}','g{}♯']
+names_flat=['a{}','b{}♭','b{}','c{}','d{}♭','d{}','e{}♭','e{}','f{}','g{}♭','g{}','a♭{}']
+
+def index_to_name(i, sharp):
+	octave = floor((i-3)/12)+5
+	names = names_sharp if sharp else names_flat
+	return names[i%12].format(octave)
+
+bd_music = [
+0x16, 0x22, 0x1d, 0x26,  0x22, 0x29, 0x25, 0x2e,  0x14, 0x24, 0x1f, 0x27,  0x20, 0x29, 0x27, 0x30,
+0x12, 0x2a, 0x12, 0x2c,  0x1e, 0x2e, 0x12, 0x31,  0x20, 0x2c, 0x33, 0x37,  0x21, 0x2d, 0x31, 0x35,
+0x16, 0x22, 0x16, 0x2e,  0x16, 0x1d, 0x16, 0x24,  0x14, 0x20, 0x14, 0x30,  0x14, 0x24, 0x14, 0x20,
+0x16, 0x22, 0x16, 0x2e,  0x16, 0x1d, 0x16, 0x24,  0x1e, 0x2a, 0x1e, 0x3a,  0x1e, 0x2e, 0x1e, 0x2a,
+0x14, 0x20, 0x14, 0x2c,  0x14, 0x1b, 0x14, 0x22,  0x1c, 0x28, 0x1c, 0x38,  0x1c, 0x2c, 0x1c, 0x28,
+0x11, 0x1d, 0x29, 0x2d,  0x11, 0x1f, 0x29, 0x2e,  0x0f, 0x27, 0x0f, 0x27,  0x16, 0x33, 0x16, 0x27,
+0x16, 0x2e, 0x16, 0x2e,  0x16, 0x2e, 0x16, 0x2e,  0x22, 0x2e, 0x22, 0x2e,  0x16, 0x2e, 0x16, 0x2e,
+0x14, 0x2e, 0x14, 0x2e,  0x14, 0x2e, 0x14, 0x2e,  0x20, 0x2e, 0x20, 0x2e,  0x14, 0x2e, 0x14, 0x2e,
+0x16, 0x2e, 0x32, 0x2e,  0x16, 0x2e, 0x33, 0x2e,  0x22, 0x2e, 0x32, 0x2e,  0x16, 0x2e, 0x33, 0x2e,
+0x14, 0x2e, 0x32, 0x2e,  0x14, 0x2e, 0x33, 0x2e,  0x20, 0x2c, 0x30, 0x2c,  0x14, 0x2c, 0x31, 0x2c,
+0x16, 0x2e, 0x16, 0x3a,  0x16, 0x2e, 0x35, 0x38,  0x22, 0x2e, 0x22, 0x37,  0x16, 0x2e, 0x31, 0x35,
+0x14, 0x2c, 0x14, 0x38,  0x14, 0x2c, 0x14, 0x38,  0x20, 0x2c, 0x20, 0x33,  0x14, 0x2c, 0x14, 0x38,
+0x16, 0x2e, 0x32, 0x2e,  0x16, 0x2e, 0x33, 0x2e,  0x22, 0x2e, 0x32, 0x2e,  0x16, 0x2e, 0x33, 0x2e,
+0x14, 0x2e, 0x32, 0x2e,  0x14, 0x2e, 0x33, 0x2e,  0x20, 0x2c, 0x30, 0x2c,  0x14, 0x2c, 0x31, 0x2c,
+0x2e, 0x32, 0x29, 0x2e,  0x26, 0x29, 0x22, 0x26,  0x2c, 0x30, 0x27, 0x2c,  0x24, 0x27, 0x14, 0x20,
+0x35, 0x32, 0x32, 0x2e,  0x2e, 0x29, 0x29, 0x26,  0x27, 0x30, 0x24, 0x2c,  0x20, 0x27, 0x14, 0x20]
+
+def voice1():
+	i = iter(bd_music)
+	try:
+		while True:
+			next(i)
+			yield next(i)-10
+	except StopIteration:
+		return
+
+def voice2():
+	i = iter(bd_music)
+	try:
+		while True:
+			yield next(i)-10
+			next(i)
+	except StopIteration:
+		return
+
+pal_const =  (256**3)/985248
+ntsc_const = (256**3)/1022727
+a4 = 435.97705078124994
+base = 2**(1/12)
+
+def reg_to_freq_pal(reg):
+	return reg/pal_const
+
+def reg_to_freq_ntsc(reg):
+	return reg/ntsc_const
+
+def freq_to_note(f):
+	return log(f/a4, base)
+
+v1 = ""
+for n in voice1():
+	sid = note_to_sid(n)
+	f = reg_to_freq_pal(sid)
+	i = round(freq_to_note(f))
+	v1 += index_to_name(i, True)+" "
+
+v2 = ""
+for n in voice2():
+	sid = note_to_sid(n)
+	f = reg_to_freq_pal(sid)
+	i = round(freq_to_note(f))
+	v2 += index_to_name(i, True)+" "
+
+print("Voice 1")
+print("-------")
+print(v1)
+print()
+print("Voice 2")
+print("-------")
+print(v2)
+```
+
+Which spits out this:
+
+<pre>
+Voice 1
+-------
+f3 a3 c4 f4 g3 a3♯ c4 g4 c4♯ d4♯ f4 g4♯ d4♯ d5 e4 c5 f3 f4 c3 g3 d3♯ g4 g3
+d3♯ f3 f4 c3 g3 c4♯ f5 f4 c4♯ d3♯ d4♯ a2♯ f3 b3 d5♯ d4♯ b3 c3 e4 d3 f4 a3♯
+a3♯ a4♯ a3♯ f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4
+f4 f4 f4 f4 f4 f4 f4 d4♯ d4♯ d4♯ d4♯ f4 f5 f4 d5♯ f4 d5 f4 c5 d4♯ d5♯ d4♯
+d5♯ d4♯ a4♯ d4♯ d5♯ f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 d4♯ d4♯ d4♯ d4♯ a4
+f4 c4 a3 g4 d4♯ a3♯ d3♯ a4 f4 c4 a3 g4 d4♯ a3♯ d3♯
+
+Voice 2
+-------
+f2 c3 f3 g3♯ d2♯ d3 d3♯ a3♯ c2♯ c2♯ c3♯ c2♯ d3♯ a4♯ e3 g4♯ f2 f2 f2 f2 d2♯
+d2♯ d2♯ d2♯ f2 f2 f2 f2 c3♯ c3♯ c3♯ c3♯ d2♯ d2♯ d2♯ d2♯ b2 b2 b2 b2 c2 c4
+c2 c4 a1♯ a1♯ f2 f2 f2 f2 f2 f2 f3 f3 f2 f2 d2♯ d2♯ d2♯ d2♯ d3♯ d3♯ d2♯ d2♯
+f2 a4 f2 a4♯ f3 a4 f2 a4♯ d2♯ a4 d2♯ a4♯ d3♯ g4 d2♯ g4♯ f2 f2 f2 c5 f3 f3
+f2 g4♯ d2♯ d2♯ d2♯ d2♯ d3♯ d3♯ d2♯ d2♯ f2 a4 f2 a4♯ f3 a4 f2 a4♯ d2♯ a4 d2♯
+a4♯ d3♯ g4 d2♯ g4♯ f4 c4 a3 f3 d4♯ a3♯ g3 d2♯ c5 a4 f4 c4 a3♯ g3 d3♯ d2♯
+</pre>
 
 ## Tempo
 
