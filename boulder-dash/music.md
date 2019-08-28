@@ -279,7 +279,7 @@ Here's the data for the tune:
 <b>60d8</b>   35 32 32 2e  2e 29 29 26  27 30 24 2c  20 27 14 20
 </pre>
 
-Here's the code with fetches the note data, looks up the SID values for the note and writes the values to the SID chip frequency registers:
+Now we'll take a look at the code which fetches the note data, looks up the SID values for the note and writes the values to the SID chip frequency registers:
 
 <pre>
 <b>83ca</b>   ae 00 98   LDX <b>MusicDataIndex</b>
@@ -303,7 +303,7 @@ Here's the code with fetches the note data, looks up the SID values for the note
 
 Again, the music data this is simply 128 pairs of note values, one for each voice. You can see the first number of the pair is for voice 2 and the second for voice 1. Also the first note value is $14 which makes the last $44. I'm guessing this is so the data could the entered as a string in the assembler.
 
-Now we have all the pieces we need to dump the notes for both voices. Let's snap some blocks together:
+We have all the pieces we need to dump the notes for both voices. Let's snap some blocks together:
 
 ```python
 #!/usr/bin/env python3
@@ -432,6 +432,80 @@ f2 a4 f2 a4♯ f3 a4 f2 a4♯ d2♯ a4 d2♯ a4♯ d3♯ g4 d2♯ g4♯ f2 f2 f2
 f2 g4♯ d2♯ d2♯ d2♯ d2♯ d3♯ d3♯ d2♯ d2♯ f2 a4 f2 a4♯ f3 a4 f2 a4♯ d2♯ a4 d2♯
 a4♯ d3♯ g4 d2♯ g4♯ f4 c4 a3 f3 d4♯ a3♯ g3 d2♯ c5 a4 f4 c4 a3♯ g3 d3♯ d2♯
 </pre>
+
+## What key is it in?
+
+A fair question. At first I tried to stare down the notes until they buckled and gave up the goods. My knowledge of music theory is limited however and any candidate key I picked still had more [accidentals](https://en.wikipedia.org/wiki/Accidental_(music)) than I felt comfortable with. I decided to whip up some code which compares the notes in the theme to all of the major keys and counts up the accidentals. With a bit of luck this would narrow down candidates considerably. This article is getting a little code heavy and there's a bit of repetition, so I'll just show the additional code.
+
+Firstly I added code the count the notes in the melody. All octaves of a note are counted as the same note (so a1 and a2 just count as a).
+
+```python
+class Spectrum(object):
+	def __init__(self):
+		self.notes = [0]*12
+
+	def add(self, n):
+		self.notes[n%12] += 1
+
+	def __str__(self):
+		s = ""
+		for i in range(0, 12):
+			s += names[i].ljust(2)+" : "+str(self.notes[i])+"\n"
+		return s
+```
+
+Next a class to generate the notes in all of the major keys (and the notes which aren't in them):
+
+```python
+class Keys(object):
+	def __init__(self):
+		maj = [0, 2, 2, 1, 2, 2, 2]
+		self.keys = {}
+		for t in range(0, 12):
+			s = []
+			last = t
+			for i in maj:
+				s.append((last+i)%12)
+				last += i
+			self.keys[t] = s
+
+	def notes_in(self, k):
+		return [n for n in range(0, 12) if n in self.keys[k]]
+
+	def notes_not_in(self, k):
+		return [n for n in range(0, 12) if n not in self.keys[k]]
+```
+
+So we get a Spectrum (s below) object, feed it all the notes then run this:
+
+```python
+names = ['a', 'a♯', 'b', 'c', 'c♯', 'd', 'd♯', 'e', 'f', 'f♯', 'g', 'g♯']
+keys = Keys()
+for k in range(0, 12):
+	acc = 0
+	for nkn in keys.notes_not_in(k):
+		acc += s.notes[nkn]
+	print(names[k].ljust(2)+" : "+str(acc))
+```
+
+Here's the results:
+
+<pre>
+a  : 213
+a♯ : 26
+b  : 142
+c  : 105
+c♯ : 38
+d  : 207
+d♯ : 33
+e  : 150
+f  : 90
+f♯ : 50
+g  : 200
+g♯ : 26
+</pre>
+
+We've got two stand outs here: a♯ major and g# major (normally you'd call these B♭ and A♭ major). I actually think it sounds minor. The [relative minor](https://en.wikipedia.org/wiki/Relative_key) keys which correspond are G minor and F minor. Of these I went with F minor after some more note gazing.
 
 ## Tempo
 
