@@ -21,7 +21,7 @@ I'm going to start by figuring out the tuning. The table which maps notes to SID
 <b>8377</b>   c0 2d
 </pre>
 
-The music routine uses this table to map from note values to SID frequency values. Each entry is two bytes long. We need to do two things here:
+Each entry is two bytes long. We need to do two things here:
 
 	1. Map from SID frequency value to a frequency.
 	2. Map from a frequency to a note.
@@ -279,7 +279,7 @@ Here's the data for the tune:
 <b>60d8</b>   35 32 32 2e  2e 29 29 26  27 30 24 2c  20 27 14 20
 </pre>
 
-Now we'll take a look at the code which fetches the note data, looks up the SID values for the note and writes the values to the SID chip frequency registers:
+Now we'll take a look at the code which fetches the note data, looks up the SID values for the note and writes the values to the SID chip's frequency registers:
 
 <pre>
 <b>83ca</b>   ae 00 98   LDX <b>MusicDataIndex</b>
@@ -435,7 +435,7 @@ a4♯ d3♯ g4 d2♯ g4♯ f4 c4 a3 f3 d4♯ a3♯ g3 d2♯ c5 a4 f4 c4 a3♯ g3
 
 ## What key is it in?
 
-A fair question. At first I tried to stare down the notes until they buckled and gave up the goods. My knowledge of music theory is limited however and any candidate key I picked still had more [accidentals](https://en.wikipedia.org/wiki/Accidental_(music)) than I felt comfortable with. I decided to whip up some code which compares the notes in the theme to all of the major keys and counts up the accidentals. With a bit of luck this would narrow down candidates considerably. This article is getting a little code heavy and there's a bit of repetition, so I'll just show the additional code.
+A fair question. At first I tried to stare down the notes until they buckled and gave up the goods. My knowledge of music theory is limited however and any candidate key I picked still had more [accidentals](https://en.wikipedia.org/wiki/Accidental_(music)) than I felt comfortable with. I decided to whip up some code which compares the notes in the theme to all of the major keys and counts up the accidentals. With a bit of luck this would narrow down the candidates considerably. This article is getting a little code heavy and there's a bit of repetition, so I'll just show the additional code.
 
 Firstly I added code the count the notes in the melody. All octaves of a note are counted as the same note (so a1 and a2 just count as a).
 
@@ -470,7 +470,7 @@ class Keys(object):
 			self.keys[t] = s
 
 	def notes_in(self, k):
-		return [n for n in range(0, 12) if n in self.keys[k]]
+		return self.keys[k]
 
 	def notes_not_in(self, k):
 		return [n for n in range(0, 12) if n not in self.keys[k]]
