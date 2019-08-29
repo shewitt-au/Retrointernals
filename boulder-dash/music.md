@@ -561,7 +561,7 @@ OK, there's some weirdness going on here too. Whether the routine advances to th
 
 ## Notes on a staff bitch!
 
-Ok, Ok, I getting to it,
+OK, OK, I getting to it. Writing music engraving software from scratch would obviously be a major undertaking and breaking out my ruler is just offensive. I fired up Google and starting searching for some free software that could do the deed. Something that had an interactive user interface was not a requirement; I needed it to consume a text based file that my software could generate. Initially I came across [VexFlow](http://www.vexflow.com/). It had limitations, but while reading various message boards trying to figure out how to resolve these issues I came discovered [LilyPond](http://lilypond.org/). Holy shit! The stuff they give away for free these days. The other building block I needed was some sort of Python based templating system. My go to for this kind of thing is [Jinja2](https://jinja.palletsprojects.com/en/2.10.x/).
 
 
 *** UNFINISHED ***
