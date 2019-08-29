@@ -579,7 +579,111 @@ def index_to_lily(i, sharp):
 
 See [here](http://lilypond.org/doc/v2.18/Documentation/notation/writing-pitches) and [there](http://lilypond.org/doc/v2.18/Documentation/notation/writing-pitches#note-names-in-other-languages) for information on these note naming conventions.
 
+Next we need a skeletal Lilipond file and to hook up Jinja2 to fill in the blanks. The Jinja2 side of things is pretty simple:
 
-*** UNFINISHED ***
+```python
+# import jinja2
+
+def render(env, template_name, **template_vars):
+    template = env.get_template(template_name)
+    return template.render(**template_vars)
+
+with open("test.ly", "w", encoding='utf-8') as of:
+	v1 = ""
+	for n in voice1():
+		sid = note_to_sid(n)
+		f = reg_to_freq_pal(sid)
+		i = round(freq_to_note(f))
+		v1 += index_to_lily(i, False)+"8 "
+	v2 = ""
+	for n in voice2():
+		sid = note_to_sid(n)
+		f = reg_to_freq_pal(sid)
+		i = round(freq_to_note(f))
+		v2 += index_to_lily(i, False)+"8 "
+
+	env = jinja2.Environment(loader=jinja2.FileSystemLoader('.'))
+	env.globals['voice1'] = v1
+	env.globals['voice2'] = v2
+	env.globals['key'] = r"\key f \minor"
+	env.globals['tempo'] = r"\tempo 4 = 188"
+	s = render(env, 'bd.ly')
+	of.write(s)
+```
+
+And finally out skeleton:
+
+<pre>
+\version "2.16.0"
+
+\header {
+  title = "Boulder Dash (C64)"
+  composer = "Peter Liepa"
+  arranger = "Transcribed by Stephen Hewitt"
+  tagline = "" % removed
+}
+
+\language english
+
+\score
+{
+	\new PianoStaff \with { instrumentName = "SID chip" }
+	<<
+		\new Staff = "up"
+		{
+			<<
+				\new Voice = "voice1"
+				{
+					\voiceOne
+					&lbrace;&lbrace;key&rbrace;
+					&lbrace;&lbrace;tempo&rbrace;
+					\set midiInstrument = #"acoustic guitar (steel)"
+					\autochange
+					\repeat volta 2
+					{
+						&lbrace;&lbrace;voice1&rbrace;
+					}
+				}
+
+				\new Voice = "voice2"
+				{
+					\voiceTwo
+					&lbrace;&lbrace;key&rbrace;
+					\set midiInstrument = #"electric guitar (jazz)"
+					\autochange
+					\repeat volta 2
+					{
+
+						&lbrace;&lbrace;voice2&rbrace;
+					}
+				}
+			>>
+		}
+
+		\new Staff = "down"
+		{
+			\clef bass
+			&lbrace;&lbrace;key&rbrace;
+		}
+	>>
+
+	\layout { }
+	\midi
+	{
+		\context
+		{
+			\Staff
+			\remove "Staff_performer"
+		}
+		\context
+		{
+			\Voice
+			\consists "Staff_performer"
+		}
+	}
+}
+</pre>
+
+This gives us a PDF and a MIDI file.
 
 ![Boulder Dash music](./Boulder_Dash.svg)
