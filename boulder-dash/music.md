@@ -639,26 +639,26 @@ And finally our skeleton:
 				\new Voice = "voice1"
 				{
 					\voiceOne
-					&lbrace;&lbrace;key&rbrace;
-					&lbrace;&lbrace;tempo&rbrace;
+					&lbrace;&lbrace;key&rbrace;&rbrace;
+					&lbrace;&lbrace;tempo&rbrace;&rbrace;
 					\set midiInstrument = #"acoustic guitar (steel)"
 					\autochange
 					\repeat volta 2
 					{
-						&lbrace;&lbrace;voice1&rbrace;
+						&lbrace;&lbrace;voice1&rbrace;&rbrace;
 					}
 				}
 
 				\new Voice = "voice2"
 				{
 					\voiceTwo
-					&lbrace;&lbrace;key&rbrace;
+					&lbrace;&lbrace;key&rbrace;&rbrace;
 					\set midiInstrument = #"electric guitar (jazz)"
 					\autochange
 					\repeat volta 2
 					{
 
-						&lbrace;&lbrace;voice2&rbrace;
+						&lbrace;&lbrace;voice2&rbrace;&rbrace;
 					}
 				}
 			>>
@@ -667,7 +667,7 @@ And finally our skeleton:
 		\new Staff = "down"
 		{
 			\clef bass
-			&lbrace;&lbrace;key&rbrace;
+			&lbrace;&lbrace;key&rbrace;&rbrace;
 		}
 	>>
 
