@@ -2,13 +2,17 @@
 
 Ok, I got the idea to score the Boulder Dash music into my head. I had a look around to see if anyone else had already done so, and they had, kind of. The man himself has a crack [here](https://www.brainjam.ca/wp/2009/11/scoring-the-boulder-dash-theme/). But with some knowledge of the limitations of the music routine it’s clear it’s not a faithful representation, more of an arrangement; the routine doesn’t do rests, or notes of any but one duration. There are other scores out there, but all of them seem to be arrangements of the theme and not faithful representations. Rectifying that might keep me out of trouble for a bit.
 
-*** Hubris for contrast to below ***
-
 ## Congratulations. I don't give a shit!
 
 Ah... It's like that is it?
 
-*** Links for the uninterested ***
+A PDF of the score can be found [here](./Boulder_Dash.pdf)
+
+More of an SVG man? We can [accommodate](./Boulder_Dash.svg)
+
+MIDI? [sure](./Boulder_Dash.mid)
+
+A GitHub repository with all the [code](https://github.com/shewitt-au/BD-Music)
 
 ## Overview
 
