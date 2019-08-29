@@ -615,7 +615,7 @@ with open("test.ly", "w", encoding='utf-8') as of:
 	of.write(s)
 ```
 
-And finally out skeleton:
+And finally our skeleton:
 
 <pre>
 \version "2.16.0"
