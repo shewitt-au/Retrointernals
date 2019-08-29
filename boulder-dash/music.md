@@ -561,7 +561,23 @@ OK, there's some weirdness going on here too. Whether the routine advances to th
 
 ## Notes on a staff bitch!
 
-OK, OK, I getting to it. Writing music engraving software from scratch would obviously be a major undertaking and breaking out my ruler is just offensive. I fired up Google and starting searching for some free software that could do the deed. Something that had an interactive user interface was not a requirement; I needed it to consume a text based file that my software could generate. Initially I came across [VexFlow](http://www.vexflow.com/). It had limitations, but while reading various message boards trying to figure out how to resolve these issues I came discovered [LilyPond](http://lilypond.org/). Holy shit! The stuff they give away for free these days. The other building block I needed was some sort of Python based templating system. My go to for this kind of thing is [Jinja2](https://jinja.palletsprojects.com/en/2.10.x/).
+OK, OK, I getting to it. Writing music engraving software from scratch would obviously be a major undertaking and breaking out my ruler is just offensive. I fired up Google and starting searching for some free software that could do the deed. Something that had an interactive user interface was not a requirement; I needed it to consume a text based file that my software could generate. Initially I came across [VexFlow](http://www.vexflow.com/). It had limitations, but while reading various message boards trying to figure out how to resolve these issues I came discovered [LilyPond](http://lilypond.org/). Holy shit! The stuff they give away for free these days. The other building block I needed was a Python based templating system. My go to for this kind of thing is [Jinja2](https://jinja.palletsprojects.com/en/2.10.x/). So firstly we need the notes in a form that LilyPond can consume. I added this code:
+
+```python
+lilynames_sharp = ['a', 'as', 'b', 'c', 'cs', 'd', 'ds', 'e','f', 'fs', 'g', 'gs']
+lilynames_flat  = ['a', 'bf', 'b', 'c', 'df', 'd', 'ef', 'e','f', 'gf', 'g', 'af']
+
+def index_to_lily(i, sharp):
+	names = lilynames_sharp if sharp else lilynames_flat
+	octave = floor((i-3)/12)+2
+	if octave<0:
+		octave = ','*-octave
+	else:
+		octave = "'"*octave
+	return names[i%12]+octave
+```
+
+See [here](http://lilypond.org/doc/v2.18/Documentation/notation/writing-pitches) and [there](http://lilypond.org/doc/v2.18/Documentation/notation/writing-pitches#note-names-in-other-languages) for information on these note naming conventions.
 
 
 *** UNFINISHED ***
