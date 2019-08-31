@@ -1,3 +1,9 @@
+---
+title: Boulder Dash Theme Music Score
+layout: default
+nosidebar: true
+---
+
 # Boulder Dash Theme Music Score
 
 Ok, I got the idea to score the Boulder Dash music into my head. I had a look around to see if anyone else had already done so, and they had, kind of. The man himself has a crack [here](https://www.brainjam.ca/wp/2009/11/scoring-the-boulder-dash-theme/). But with some knowledge of the limitations of the music routine it’s clear it’s not a faithful representation, more of an arrangement; the routine doesn’t do rests, or notes of any but one duration. There are other scores out there, but all of them seem to be arrangements of the theme and not faithful representations. Rectifying that might keep me out of trouble for a bit.
