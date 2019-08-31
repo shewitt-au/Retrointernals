@@ -526,6 +526,26 @@ g  : 200
 g♯ : 26
 </pre>
 
+Given this key the accidentals should be flats:
+
+<pre>
+Voice 1
+-------
+f3 a3 c4 f4 g3 b3♭ c4 g4 d4♭ e4♭ f4 a♭4 e4♭ d5 e4 c5 f3 f4 c3 g3 e3♭ g4 g3 e3♭ f3 f4 c3 g3
+d4♭ f5 f4 d4♭ e3♭ e4♭ b2♭ f3 b3 e5♭ e4♭ b3 c3 e4 d3 f4 b3♭ b3♭ b4♭ b3♭ f4 f4 f4 f4 f4 f4 f4
+f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 e4♭ e4♭ e4♭ e4♭ f4 f5 f4 e5♭
+f4 d5 f4 c5 e4♭ e5♭ e4♭ e5♭ e4♭ b4♭ e4♭ e5♭ f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 e4♭ e4♭ e4♭
+a4 f4 c4 a3 g4 e4♭ b3♭ e3♭ a4 f4 c4 a3 g4 e4♭ b3♭ e3♭ 
+
+Voice 2
+-------
+f2 c3 f3 a♭3 e2♭ d3 e3♭ b3♭ d2♭ d2♭ d3♭ d2♭ e3♭ b4♭ e3 a♭4 f2 f2 f2 f2 e2♭ e2♭ e2♭ e2♭ f2 f2
+f2 f2 d3♭ d3♭ d3♭ d3♭ e2♭ e2♭ e2♭ e2♭ b2 b2 b2 b2 c2 c4 c2 c4 b1♭ b1♭ f2 f2 f2 f2 f2 f2 f3
+f3 f2 f2 e2♭ e2♭ e2♭ e2♭ e3♭ e3♭ e2♭ e2♭ f2 a4 f2 b4♭ f3 a4 f2 b4♭ e2♭ a4 e2♭ b4♭ e3♭ g4 e2♭
+a♭4 f2 f2 f2 c5 f3 f3 f2 a♭4 e2♭ e2♭ e2♭ e2♭ e3♭ e3♭ e2♭ e2♭ f2 a4 f2 b4♭ f3 a4 f2 b4♭ e2♭
+a4 e2♭ b4♭ e3♭ g4 e2♭ a♭4 f4 c4 a3 f3 e4♭ b3♭ g3 e2♭ c5 a4 f4 c4 b3♭ g3 e3♭ e2♭ 
+</pre>
+
 We've got two stand outs here: a♯ major and g# major (normally you'd call these B♭ and A♭ major). I actually think it sounds minor. The [relative minor](https://en.wikipedia.org/wiki/Relative_key) keys which correspond are G minor and F minor. Of these I went with F minor after some more note gazing.
 
 ## Tempo
