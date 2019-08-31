@@ -273,6 +273,10 @@ Gives us the note names that correspond to the note numbering Boulder Dash uses:
 	$39 : e5
 	$3a : f5
 
+In music notation:
+
+![Note values](./notes.svg)
+
 ## The Tune
 
 Here's the data for the tune:
