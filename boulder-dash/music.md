@@ -526,6 +526,8 @@ g  : 200
 g♯ : 26
 </pre>
 
+We've got two stand outs here: a♯ major and g# major (normally you'd call these B♭ and A♭ major). I actually think it sounds minor. The [relative minor](https://en.wikipedia.org/wiki/Relative_key) keys which correspond are G minor and F minor. Of these I went with F minor after some more note gazing.
+
 Given this key the accidentals should be flats:
 
 <pre>
@@ -545,8 +547,6 @@ f3 f2 f2 e2♭ e2♭ e2♭ e2♭ e3♭ e3♭ e2♭ e2♭ f2 a4 f2 b4♭ f3 a4 f2
 a♭4 f2 f2 f2 c5 f3 f3 f2 a♭4 e2♭ e2♭ e2♭ e2♭ e3♭ e3♭ e2♭ e2♭ f2 a4 f2 b4♭ f3 a4 f2 b4♭ e2♭
 a4 e2♭ b4♭ e3♭ g4 e2♭ a♭4 f4 c4 a3 f3 e4♭ b3♭ g3 e2♭ c5 a4 f4 c4 b3♭ g3 e3♭ e2♭ 
 </pre>
-
-We've got two stand outs here: a♯ major and g# major (normally you'd call these B♭ and A♭ major). I actually think it sounds minor. The [relative minor](https://en.wikipedia.org/wiki/Relative_key) keys which correspond are G minor and F minor. Of these I went with F minor after some more note gazing.
 
 ## Tempo
 
