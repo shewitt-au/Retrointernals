@@ -206,7 +206,7 @@ def reg_to_freq_ntsc(reg):
 def freq_to_note(f):
 	return log(f/a4, base)
 
-bd_val = 0x14
+bd_val = 0x0a
 for sid in chunks():
 	freq = reg_to_freq_pal(sid)
 	idx = round(freq_to_note(freq))
@@ -217,55 +217,55 @@ print()
 
 Gives us the note names that correspond to the note numbering Boulder Dash uses:
 
-	$14 : f1
-	$15 : f1♯
-	$16 : g1
-	$17 : g1♯
-	$18 : a1
-	$19 : a1♯
-	$1a : b1
-	$1b : c2
-	$1c : c2♯
-	$1d : d2
-	$1e : d2♯
-	$1f : e2
-	$20 : f2
-	$21 : f2♯
-	$22 : g2
-	$23 : g2♯
-	$24 : a2
-	$25 : a2♯
-	$26 : b2
-	$27 : c3
-	$28 : c3♯
-	$29 : d3
-	$2a : d3♯
-	$2b : e3
-	$2c : f3
-	$2d : f3♯
-	$2e : g3
-	$2f : g3♯
-	$30 : a3
-	$31 : a3♯
-	$32 : b3
-	$33 : c4
-	$34 : c4♯
-	$35 : d4
-	$36 : d4♯
-	$37 : e4
-	$38 : f4
-	$39 : f4♯
-	$3a : g4
-	$3b : g4♯
-	$3c : a4
-	$3d : a4♯
-	$3e : b4
-	$3f : c5
-	$40 : c5♯
-	$41 : d5
-	$42 : d5♯
-	$43 : e5
-	$44 : f5
+	$0a : f1
+	$0b : f1♯
+	$0c : g1
+	$0d : g1♯
+	$0e : a1
+	$0f : a1♯
+	$10 : b1
+	$11 : c2
+	$12 : c2♯
+	$13 : d2
+	$14 : d2♯
+	$15 : e2
+	$16 : f2
+	$17 : f2♯
+	$18 : g2
+	$19 : g2♯
+	$1a : a2
+	$1b : a2♯
+	$1c : b2
+	$1d : c3
+	$1e : c3♯
+	$1f : d3
+	$20 : d3♯
+	$21 : e3
+	$22 : f3
+	$23 : f3♯
+	$24 : g3
+	$25 : g3♯
+	$26 : a3
+	$27 : a3♯
+	$28 : b3
+	$29 : c4
+	$2a : c4♯
+	$2b : d4
+	$2c : d4♯
+	$2d : e4
+	$2e : f4
+	$2f : f4♯
+	$30 : g4
+	$31 : g4♯
+	$32 : a4
+	$33 : a4♯
+	$34 : b4
+	$35 : c5
+	$36 : c5♯
+	$37 : d5
+	$38 : d5♯
+	$39 : e5
+	$3a : f5
 
 ## The Tune
 
@@ -312,7 +312,7 @@ Now we'll take a look at the code which fetches the note data, looks up the SID 
 <b>83f2</b>   8d 08 d4   STA <b>Sid_Voice2FreqHi</b>
 </pre>
 
-Again, the music data this is simply 128 pairs of note values, one for each voice. You can see the first number of the pair is for voice 2 and the second for voice 1. Also the first note value is $14 which makes the last $44. I'm guessing this is so the data could the entered as a string in the assembler.
+Again, the music data this is simply 128 pairs of note values, one for each voice. You can see the first number of the pair is for voice 2 and the second for voice 1. Also the first note value is $0a which makes the last $3a.
 
 We have all the pieces we need to dump the notes for both voices. Let's snap some blocks together:
 
