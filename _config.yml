@@ -2,3 +2,4 @@ theme: jekyll-theme-architect
 repository: shewitt-au/Retrointernals
 plugins:
   - jekyll-seo-tag
+  - jekyll-sitemap
