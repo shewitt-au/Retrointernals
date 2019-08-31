@@ -70,7 +70,7 @@ bd_sid_values = [
 0x00, 0x1d, 0x90, 0x1e,  0x90, 0x20, 0x60, 0x22,  0x90, 0x24, 0xb0, 0x26,  0x00, 0x29, 0x70, 0x2b,
 0xc0, 0x2d]
 
-def chunks():
+def sid_frequencies():
 	i = iter(bd_sid_values)
 	try:
 		while True:
@@ -88,7 +88,7 @@ def reg_to_freq_ntsc(reg):
 	return reg/ntsc_const
 
 print("PAL\n---")
-for f in chunks():
+for f in sid_frequencies():
 	print(reg_to_freq_pal(f))
 ```
 
@@ -179,7 +179,7 @@ bd_sid_values = [
 0x00, 0x1d, 0x90, 0x1e,  0x90, 0x20, 0x60, 0x22,  0x90, 0x24, 0xb0, 0x26,  0x00, 0x29, 0x70, 0x2b,
 0xc0, 0x2d]
 
-def chunks():
+def sid_frequencies():
 	i = iter(bd_sid_values)
 	try:
 		while True:
@@ -213,7 +213,7 @@ def freq_to_note(f):
 	return log(f/a4, base)
 
 bd_val = 0x0a
-for sid in chunks():
+for sid in sid_frequencies():
 	freq = reg_to_freq_pal(sid)
 	idx = round(freq_to_note(freq))
 	print("${:02x} : {}".format(bd_val, index_to_name(idx, True)))
@@ -340,7 +340,7 @@ bd_sid_values = [
 0x00, 0x1d, 0x90, 0x1e,  0x90, 0x20, 0x60, 0x22,  0x90, 0x24, 0xb0, 0x26,  0x00, 0x29, 0x70, 0x2b,
 0xc0, 0x2d]
 
-def chunks():
+def sid_frequencies():
 	i = iter(bd_sid_values)
 	try:
 		while True:
