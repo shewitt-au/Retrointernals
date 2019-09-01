@@ -61,6 +61,8 @@ I hacked together the Python code below to get the frequencies of the notes. I l
 ```python
 #!/usr/bin/env python3
 
+from math import log
+
 bd_sid_values = [
 0xdc, 0x02, 0x0a, 0x03,  0x3a, 0x03, 0x6c, 0x03,  0xa0, 0x03, 0xd2, 0x03,  0x12, 0x04, 0x4c, 0x04,
 0x92, 0x04, 0xd6, 0x04,  0x20, 0x05, 0x6e, 0x05,  0xb8, 0x05, 0x14, 0x06,  0x74, 0x06, 0xd8, 0x06,
@@ -71,25 +73,29 @@ bd_sid_values = [
 0xc0, 0x2d]
 
 def sid_frequencies():
-	i = iter(bd_sid_values)
-	try:
-		while True:
-			yield next(i)+next(i)*256
-	except StopIteration:
-		return
+    i = iter(bd_sid_values)
+    try:
+        while True:
+            yield next(i)+next(i)*256
+    except StopIteration:
+        return
 
 pal_const =  (256**3)/985248
 ntsc_const = (256**3)/1022727
 
 def reg_to_freq_pal(reg):
-	return reg/pal_const
+    return reg/pal_const
 
 def reg_to_freq_ntsc(reg):
-	return reg/ntsc_const
+    return reg/ntsc_const
+
+def cents_from(f, ref):
+    return 1200*log(f/ref, 2)
 
 print("PAL\n---")
 for f in sid_frequencies():
-	print(reg_to_freq_pal(f))
+    f = reg_to_freq_pal(f)
+    print(reg_to_freq_pal(f))
 ```
 
 Here's the output:
@@ -180,23 +186,23 @@ bd_sid_values = [
 0xc0, 0x2d]
 
 def sid_frequencies():
-	i = iter(bd_sid_values)
-	try:
-		while True:
-			yield next(i)+next(i)*256
-	except StopIteration:
-		return
+    i = iter(bd_sid_values)
+    try:
+        while True:
+            yield next(i)+next(i)*256
+    except StopIteration:
+        return
 
 def note_to_sid(n):
-	return bd_sid_values[n*2]+bd_sid_values[n*2+1]*256
+    return bd_sid_values[n*2]+bd_sid_values[n*2+1]*256
 
 names_sharp=['a{}','a{}♯','b{}','c{}','c{}♯','d{}','d{}♯','e{}','f{}','f{}♯','g{}','g{}♯']
 names_flat=['a{}','b{}♭','b{}','c{}','d{}♭','d{}','e{}♭','e{}','f{}','g{}♭','g{}','a♭{}']
 
 def index_to_name(i, sharp):
-	octave = floor((i-3)/12)+5
-	names = names_sharp if sharp else names_flat
-	return names[i%12].format(octave)
+    octave = floor((i-3)/12)+5
+    names = names_sharp if sharp else names_flat
+    return names[i%12].format(octave)
 
 pal_const =  (256**3)/985248
 ntsc_const = (256**3)/1022727
@@ -204,20 +210,20 @@ a4 = 435.97705078124994
 base = 2**(1/12)
 
 def reg_to_freq_pal(reg):
-	return reg/pal_const
+    return reg/pal_const
 
 def reg_to_freq_ntsc(reg):
-	return reg/ntsc_const
+    return reg/ntsc_const
 
 def freq_to_note(f):
-	return log(f/a4, base)
+    return log(f/a4, base)
 
 bd_val = 0x0a
 for sid in sid_frequencies():
-	freq = reg_to_freq_pal(sid)
-	idx = round(freq_to_note(freq))
-	print("${:02x} : {}".format(bd_val, index_to_name(idx, True)))
-	bd_val += 1
+    freq = reg_to_freq_pal(sid)
+    idx = round(freq_to_note(freq))
+    print("${:02x} : {}".format(bd_val, index_to_name(idx, True)))
+    bd_val += 1
 print()
 ```
 
@@ -341,23 +347,23 @@ bd_sid_values = [
 0xc0, 0x2d]
 
 def sid_frequencies():
-	i = iter(bd_sid_values)
-	try:
-		while True:
-			yield next(i)+next(i)*256
-	except StopIteration:
-		return
+    i = iter(bd_sid_values)
+    try:
+        while True:
+            yield next(i)+next(i)*256
+    except StopIteration:
+        return
 
 def note_to_sid(n):
-	return bd_sid_values[n*2]+bd_sid_values[n*2+1]*256
+    return bd_sid_values[n*2]+bd_sid_values[n*2+1]*256
 
 names_sharp=['a{}','a{}♯','b{}','c{}','c{}♯','d{}','d{}♯','e{}','f{}','f{}♯','g{}','g{}♯']
 names_flat=['a{}','b{}♭','b{}','c{}','d{}♭','d{}','e{}♭','e{}','f{}','g{}♭','g{}','a♭{}']
 
 def index_to_name(i, sharp):
-	octave = floor((i-3)/12)+5
-	names = names_sharp if sharp else names_flat
-	return names[i%12].format(octave)
+    octave = floor((i-3)/12)+5
+    names = names_sharp if sharp else names_flat
+    return names[i%12].format(octave)
 
 bd_music = [
 0x16, 0x22, 0x1d, 0x26,  0x22, 0x29, 0x25, 0x2e,  0x14, 0x24, 0x1f, 0x27,  0x20, 0x29, 0x27, 0x30,
@@ -378,22 +384,22 @@ bd_music = [
 0x35, 0x32, 0x32, 0x2e,  0x2e, 0x29, 0x29, 0x26,  0x27, 0x30, 0x24, 0x2c,  0x20, 0x27, 0x14, 0x20]
 
 def voice1():
-	i = iter(bd_music)
-	try:
-		while True:
-			next(i)
-			yield next(i)-10
-	except StopIteration:
-		return
+    i = iter(bd_music)
+    try:
+        while True:
+            next(i)
+            yield next(i)-10
+    except StopIteration:
+        return
 
 def voice2():
-	i = iter(bd_music)
-	try:
-		while True:
-			yield next(i)-10
-			next(i)
-	except StopIteration:
-		return
+    i = iter(bd_music)
+    try:
+        while True:
+            yield next(i)-10
+            next(i)
+    except StopIteration:
+        return
 
 pal_const =  (256**3)/985248
 ntsc_const = (256**3)/1022727
@@ -401,27 +407,27 @@ a4 = 435.97705078124994
 base = 2**(1/12)
 
 def reg_to_freq_pal(reg):
-	return reg/pal_const
+    return reg/pal_const
 
 def reg_to_freq_ntsc(reg):
-	return reg/ntsc_const
+    return reg/ntsc_const
 
 def freq_to_note(f):
-	return log(f/a4, base)
+    return log(f/a4, base)
 
 v1 = ""
 for n in voice1():
-	sid = note_to_sid(n)
-	f = reg_to_freq_pal(sid)
-	i = round(freq_to_note(f))
-	v1 += index_to_name(i, True)+" "
+    sid = note_to_sid(n)
+    f = reg_to_freq_pal(sid)
+    i = round(freq_to_note(f))
+    v1 += index_to_name(i, True)+" "
 
 v2 = ""
 for n in voice2():
-	sid = note_to_sid(n)
-	f = reg_to_freq_pal(sid)
-	i = round(freq_to_note(f))
-	v2 += index_to_name(i, True)+" "
+    sid = note_to_sid(n)
+    f = reg_to_freq_pal(sid)
+    i = round(freq_to_note(f))
+    v2 += index_to_name(i, True)+" "
 
 print("Voice 1")
 print("-------")
