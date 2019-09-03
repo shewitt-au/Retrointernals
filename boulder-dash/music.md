@@ -157,7 +157,7 @@ The closest value to A440 is 435.97705078124994 which is 16 cents below. A perce
 
 ### Maping from a frequency to a note
 
-This requires some understanding of the maths behind musical tunings. When you start looking into this you can help but wonder how deep the rabbit hole goes. For our purposes we'll only concern ourselves with the [equal temperament](https://en.wikipedia.org/wiki/Equal_temperament) tuning system. To cut a long story short the following Python code will give us a note number measured in semitones from the reference frequency a4.
+This requires some understanding of the maths behind musical tunings. When you start looking into this you can't help but wonder how deep the rabbit hole goes. For our purposes we'll only concern ourselves with the [equal temperament](https://en.wikipedia.org/wiki/Equal_temperament) tuning system. To cut a long story short the following Python code will give us a note number measured in semitones from the reference frequency a4.
 
 ```pyhhon
 base = 2**(1/12)
