@@ -619,7 +619,7 @@ def index_to_lily(i, sharp):
 
 See [here](http://lilypond.org/doc/v2.18/Documentation/notation/writing-pitches) and [there](http://lilypond.org/doc/v2.18/Documentation/notation/writing-pitches#note-names-in-other-languages) for information on these note naming conventions.
 
-Next we need a skeletal Lilipond file and to hook up Jinja2 to fill in the blanks. The Jinja2 side of things is pretty simple:
+Next we need a skeletal Lilipond file and to hook up Jinja2 to fill in the blanks. The hooking up side of things is pretty simple:
 
 ```python
 # import jinja2
