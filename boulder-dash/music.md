@@ -6,7 +6,7 @@ nosidebar: true
 
 # Boulder Dash Theme Score
 
-OK, I got the idea to score the Boulder Dash music into my head. I had a look around to see if anyone else had already done so, and they had, kind of. The man himself has a crack [here](https://www.brainjam.ca/wp/2009/11/scoring-the-boulder-dash-theme/). But with some knowledge of the limitations of the music routine it’s clear it’s not a faithful representation, more of an arrangement; the routine doesn’t do rests, or notes of any but one duration. There are other scores out there, but all of them seem to be arrangements of the theme and not faithful representations. Rectifying this lack of accurate sheet music for this corker might keep me out of trouble for a bit.
+OK, I got the idea to score the Boulder Dash music into my head. I had a look around to see if anyone else had already done so, and they had, kind of. The man himself has a crack [here](https://www.brainjam.ca/wp/2009/11/scoring-the-boulder-dash-theme/). There are other scores out there, but most of them seem to be arrangements of the theme and not faithful representations. Assuring the world has access to accurate sheet music for this corker might keep me out of trouble for a bit.
 
 ## Congratulations. I don't give a shit!
 
@@ -22,7 +22,7 @@ A GitHub repository with all the [code](https://github.com/shewitt-au/BD-Music)
 
 ## Overview
 
-The theme music use two of the SID chip's three voices. The data for the tune is exactly 256 bytes long (not including the note to SID frequency value table) and as mentioned above no rests or notes of any but one duration are supported. The tune data is simply 128 pairs of note numbers, the first value of the pair for one voice and the second for the other. If we notate the note duration as a quaver (a quarter note) the tune is 16 bars long (4/4 time) repeated twice. I think it's in F minor, and I've notated it as such, but I'm no musician.
+The theme music use two of the SID chip's three voices. The data for the tune is exactly 256 bytes long (not including the note to SID frequency value table). The routine doesn't support rests and voice 1 can only have notes of a single duration. Voice 2 is similarly limited but it's envelope generator is set such that two or more consecutive notes of the same pitch blur into a single note, so notes of different durations are supported. The tune data is simply 128 pairs of note numbers, the first value of the pair for one voice and the second for the other. If we notate the note duration as a quaver (a quarter note) the tune is 16 bars long (4/4 time) repeated twice. I think it's in F minor, and I've notated it as such, but I'm no musician.
 
 ## Tuning
 I'm going to start by figuring out the tuning. The table which maps notes to SID frequency values looks like this.
@@ -40,8 +40,8 @@ I'm going to start by figuring out the tuning. The table which maps notes to SID
 
 Each entry is two bytes long. We need to do two things here:
 
-	1. Map from SID frequency value to a frequency.
-	2. Map from a frequency to a note.
+    1. Map from SID frequency value to a frequency.
+    2. Map from a frequency to a note.
 
 We'll take one at a time then tie it all together.
 
@@ -164,7 +164,7 @@ base = 2**(1/12)
 a4 = 435.97705078124994
 
 def freq_to_note(f):
-	return log(f/a4, base)
+    return log(f/a4, base)
 ```
 
 ### Tieing it all together
@@ -229,55 +229,55 @@ print()
 
 Gives us the note names that correspond to the note numbering Boulder Dash uses:
 
-	$0a : f1
-	$0b : f1♯
-	$0c : g1
-	$0d : g1♯
-	$0e : a1
-	$0f : a1♯
-	$10 : b1
-	$11 : c2
-	$12 : c2♯
-	$13 : d2
-	$14 : d2♯
-	$15 : e2
-	$16 : f2
-	$17 : f2♯
-	$18 : g2
-	$19 : g2♯
-	$1a : a2
-	$1b : a2♯
-	$1c : b2
-	$1d : c3
-	$1e : c3♯
-	$1f : d3
-	$20 : d3♯
-	$21 : e3
-	$22 : f3
-	$23 : f3♯
-	$24 : g3
-	$25 : g3♯
-	$26 : a3
-	$27 : a3♯
-	$28 : b3
-	$29 : c4
-	$2a : c4♯
-	$2b : d4
-	$2c : d4♯
-	$2d : e4
-	$2e : f4
-	$2f : f4♯
-	$30 : g4
-	$31 : g4♯
-	$32 : a4
-	$33 : a4♯
-	$34 : b4
-	$35 : c5
-	$36 : c5♯
-	$37 : d5
-	$38 : d5♯
-	$39 : e5
-	$3a : f5
+    $0a : f1
+    $0b : f1♯
+    $0c : g1
+    $0d : g1♯
+    $0e : a1
+    $0f : a1♯
+    $10 : b1
+    $11 : c2
+    $12 : c2♯
+    $13 : d2
+    $14 : d2♯
+    $15 : e2
+    $16 : f2
+    $17 : f2♯
+    $18 : g2
+    $19 : g2♯
+    $1a : a2
+    $1b : a2♯
+    $1c : b2
+    $1d : c3
+    $1e : c3♯
+    $1f : d3
+    $20 : d3♯
+    $21 : e3
+    $22 : f3
+    $23 : f3♯
+    $24 : g3
+    $25 : g3♯
+    $26 : a3
+    $27 : a3♯
+    $28 : b3
+    $29 : c4
+    $2a : c4♯
+    $2b : d4
+    $2c : d4♯
+    $2d : e4
+    $2e : f4
+    $2f : f4♯
+    $30 : g4
+    $31 : g4♯
+    $32 : a4
+    $33 : a4♯
+    $34 : b4
+    $35 : c5
+    $36 : c5♯
+    $37 : d5
+    $38 : d5♯
+    $39 : e5
+    $3a : f5
 
 In music notation:
 
@@ -468,39 +468,39 @@ Firstly I added code the count the notes in the melody. All octaves of a note ar
 
 ```python
 class Spectrum(object):
-	def __init__(self):
-		self.notes = [0]*12
+    def __init__(self):
+        self.notes = [0]*12
 
-	def add(self, n):
-		self.notes[n%12] += 1
+    def add(self, n):
+        self.notes[n%12] += 1
 
-	def __str__(self):
-		s = ""
-		for i in range(0, 12):
-			s += names[i].ljust(2)+" : "+str(self.notes[i])+"\n"
-		return s
+    def __str__(self):
+        s = ""
+        for i in range(0, 12):
+            s += names[i].ljust(2)+" : "+str(self.notes[i])+"\n"
+        return s
 ```
 
 Next a class to generate the notes in all of the major keys (and the notes which aren't in them):
 
 ```python
 class Keys(object):
-	def __init__(self):
-		maj = [0, 2, 2, 1, 2, 2, 2]
-		self.keys = {}
-		for t in range(0, 12):
-			s = []
-			last = t
-			for i in maj:
-				s.append((last+i)%12)
-				last += i
-			self.keys[t] = s
+    def __init__(self):
+        maj = [0, 2, 2, 1, 2, 2, 2]
+        self.keys = {}
+        for t in range(0, 12):
+            s = []
+            last = t
+            for i in maj:
+                s.append((last+i)%12)
+                last += i
+            self.keys[t] = s
 
-	def notes_in(self, k):
-		return self.keys[k]
+    def notes_in(self, k):
+        return self.keys[k]
 
-	def notes_not_in(self, k):
-		return [n for n in range(0, 12) if n not in self.keys[k]]
+    def notes_not_in(self, k):
+        return [n for n in range(0, 12) if n not in self.keys[k]]
 ```
 
 So we get a Spectrum (s below) object, feed it all the notes then run this:
@@ -509,10 +509,10 @@ So we get a Spectrum (s below) object, feed it all the notes then run this:
 names = ['a', 'a♯', 'b', 'c', 'c♯', 'd', 'd♯', 'e', 'f', 'f♯', 'g', 'g♯']
 keys = Keys()
 for k in range(0, 12):
-	acc = 0
-	for nkn in keys.notes_not_in(k):
-		acc += s.notes[nkn]
-	print(names[k].ljust(2)+" : "+str(acc))
+    acc = 0
+    for nkn in keys.notes_not_in(k):
+        acc += s.notes[nkn]
+    print(names[k].ljust(2)+" : "+str(acc))
 ```
 
 Here's the results:
@@ -608,13 +608,13 @@ lilynames_sharp = ['a', 'as', 'b', 'c', 'cs', 'd', 'ds', 'e','f', 'fs', 'g', 'gs
 lilynames_flat  = ['a', 'bf', 'b', 'c', 'df', 'd', 'ef', 'e','f', 'gf', 'g', 'af']
 
 def index_to_lily(i, sharp):
-	names = lilynames_sharp if sharp else lilynames_flat
-	octave = floor((i-3)/12)+2
-	if octave<0:
-		octave = ','*-octave
-	else:
-		octave = "'"*octave
-	return names[i%12]+octave
+    names = lilynames_sharp if sharp else lilynames_flat
+    octave = floor((i-3)/12)+2
+    if octave<0:
+        octave = ','*-octave
+    else:
+        octave = "'"*octave
+    return names[i%12]+octave
 ```
 
 See [here](http://lilypond.org/doc/v2.18/Documentation/notation/writing-pitches) and [there](http://lilypond.org/doc/v2.18/Documentation/notation/writing-pitches#note-names-in-other-languages) for information on these note naming conventions.
@@ -628,27 +628,33 @@ def render(env, template_name, **template_vars):
     template = env.get_template(template_name)
     return template.render(**template_vars)
 
-with open("test.ly", "w", encoding='utf-8') as of:
-	v1 = ""
-	for n in voice1():
-		sid = note_to_sid(n)
-		f = reg_to_freq_pal(sid)
-		i = round(freq_to_note(f))
-		v1 += index_to_lily(i, False)+"8 "
-	v2 = ""
-	for n in voice2():
-		sid = note_to_sid(n)
-		f = reg_to_freq_pal(sid)
-		i = round(freq_to_note(f))
-		v2 += index_to_lily(i, False)+"8 "
+with open("Boulder_Dash.ly", "w", encoding='utf-8') as of:
+    v1 = ""
+    for n in voice1():
+        sid = note_to_sid(n)
+        f = reg_to_freq_pal(sid)
+        i = round(freq_to_note(f))
+        v1 += index_to_lily(i, False)+"8 "
+    v2 = ""
+    last_note = 0
+    for n in voice2():
+        sid = note_to_sid(n)
+        f = reg_to_freq_pal(sid)
+        i = round(freq_to_note(f))
+        s.add(i)
+        if i==last_note:
+            v2 += "~"
+        v2 += " "
+        v2 += index_to_lily(i, False)+"8"
+        last_note = i
 
-	env = jinja2.Environment(loader=jinja2.FileSystemLoader('.'))
-	env.globals['voice1'] = v1
-	env.globals['voice2'] = v2
-	env.globals['key'] = r"\key f \minor"
-	env.globals['tempo'] = r"\tempo 4 = 188"
-	s = render(env, 'bd.ly')
-	of.write(s)
+    env = jinja2.Environment(loader=jinja2.FileSystemLoader('.'))
+    env.globals['voice1'] = v1
+    env.globals['voice2'] = v2
+    env.globals['key'] = r"\key f \minor"
+    env.globals['tempo'] = r"\tempo 4 = 188"
+    s = render(env, 'bd.ly')
+    of.write(s)
 ```
 
 And finally our skeleton:
@@ -667,60 +673,60 @@ And finally our skeleton:
 
 \score
 {
-	\new PianoStaff \with { instrumentName = "SID chip" }
-	<<
-		\new Staff = "up"
-		{
-			<<
-				\new Voice = "voice1"
-				{
-					\voiceOne
-					&lbrace;&lbrace;key&rbrace;&rbrace;
-					&lbrace;&lbrace;tempo&rbrace;&rbrace;
-					\set midiInstrument = #"acoustic guitar (steel)"
-					\autochange
-					\repeat volta 2
-					{
-						&lbrace;&lbrace;voice1&rbrace;&rbrace;
-					}
-				}
+    \new PianoStaff \with { instrumentName = "SID chip" }
+    <<
+        \new Staff = "up"
+        {
+            <<
+                \new Voice = "voice1"
+                {
+                    \voiceOne
+                    &lbrace;&lbrace;key&rbrace;&rbrace;
+                    &lbrace;&lbrace;tempo&rbrace;&rbrace;
+                    \set midiInstrument = #"acoustic guitar (steel)"
+                    \autochange
+                    \repeat volta 2
+                    {
+                        &lbrace;&lbrace;voice1&rbrace;&rbrace;
+                    }
+                }
 
-				\new Voice = "voice2"
-				{
-					\voiceTwo
-					&lbrace;&lbrace;key&rbrace;&rbrace;
-					\set midiInstrument = #"electric guitar (jazz)"
-					\autochange
-					\repeat volta 2
-					{
+                \new Voice = "voice2"
+                {
+                    \voiceTwo
+                    &lbrace;&lbrace;key&rbrace;&rbrace;
+                    \set midiInstrument = #"electric guitar (jazz)"
+                    \autochange
+                    \repeat volta 2
+                    {
 
-						&lbrace;&lbrace;voice2&rbrace;&rbrace;
-					}
-				}
-			>>
-		}
+                        &lbrace;&lbrace;voice2&rbrace;&rbrace;
+                    }
+                }
+            >>
+        }
 
-		\new Staff = "down"
-		{
-			\clef bass
-			&lbrace;&lbrace;key&rbrace;&rbrace;
-		}
-	>>
+        \new Staff = "down"
+        {
+            \clef bass
+            &lbrace;&lbrace;key&rbrace;&rbrace;
+        }
+    >>
 
-	\layout { }
-	\midi
-	{
-		\context
-		{
-			\Staff
-			\remove "Staff_performer"
-		}
-		\context
-		{
-			\Voice
-			\consists "Staff_performer"
-		}
-	}
+    \layout { }
+    \midi
+    {
+        \context
+        {
+            \Staff
+            \remove "Staff_performer"
+        }
+        \context
+        {
+            \Voice
+            \consists "Staff_performer"
+        }
+    }
 }
 </pre>
 
