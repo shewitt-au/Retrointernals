@@ -6,7 +6,7 @@ nosidebar: true
 
 # Boulder Dash Theme Score
 
-OK, I got the idea to score the Boulder Dash music into my head. I had a look around to see if anyone else had already done so, and they had, kind of. The man himself has a crack [here](https://www.brainjam.ca/wp/2009/11/scoring-the-boulder-dash-theme/). There are other scores out there, but most of them seem to be arrangements of the theme and not faithful representations. Assuring the world has access to accurate sheet music for this corker might keep me out of trouble for a bit.
+OK, I got the idea to score the Boulder Dash music into my head. I had a look around to see if anyone else had already done so, and they had, kind of. The man himself has a crack [here](https://brainjam.home.blog/2009/11/11/scoring-the-boulder-dash-theme/). There are other scores out there, but most of them seem to be arrangements of the theme and not faithful representations. Assuring the world has access to accurate sheet music for this corker might keep me out of trouble for a bit.
 
 ## Congratulations. I don't give a shit!
 
