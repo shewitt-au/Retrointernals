@@ -54,7 +54,7 @@ I Googled a few resources when trying to figure out how to do this. I did briefl
 
 [How to calculate SID frequency tables By FTC/HT](https://codebase64.org/doku.php?id=base:how_to_calculate_your_own_sid_frequency_table)
 
-[Excact Vertical Frequency / Refresh Rate](https://csdb.dk/forums/?roomid=11&topicid=124823&firstpost=2)
+[Excact <b>[sic]</b> Vertical Frequency / Refresh Rate](https://csdb.dk/forums/?roomid=11&topicid=124823&firstpost=2)
 
 I hacked together the Python code below to get the frequencies of the notes. I live in Australia, so we had PAL machines. I'm only going to consider the PAL case but I've included the code for NTSC machines.
 
