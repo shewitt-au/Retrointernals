@@ -220,7 +220,7 @@ Now for line 40. At this point I'm starting to wish I picked a smaller program, 
 
 	40 N=A+B
 
-Two first two bytes of the line (the line-link):
+First two bytes of the line (the line-link):
 
 	081d:  27 08
 
