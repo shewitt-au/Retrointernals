@@ -198,7 +198,7 @@ The third line should be more interesting.
 
 	30 PRINT A, B,
 
-Again, following the the lines line-link from the previous line gives us its bounds:
+Again, following the line's line-link gives us its bounds:
 
 	0811:  1d 08
 
