@@ -120,7 +120,7 @@ You can see the majority of the line is simply encoded in PETSCII, including the
 
 	10 PRINT"{clear}"
 
-Note that the '{clear}' denotes a control character, it would appear as a love heart in reverse video. Anyone that's used a C64 will know that when you type in quotes keys that would normally do something, like clear the screen in this example, make funny symbols. When ran this program would clear the screen but when listed a character is printed. Let's have a look at it.
+Note that the '{clear}' denotes a control character, it would appear as a love heart in reverse video. Anyone that's used a C64 will know that when you type in quotes some keys that would normally do something, like clear the screen in this example, make funny symbols. When ran this program would clear the screen but when listed a character is printed. Let's have a look at it.
 
 	0801:  0a 08 0a 00  99 22 93 22  00 00 00   ....."."...
 
@@ -198,7 +198,7 @@ The third line should be more interesting.
 
 	30 PRINT A, B,
 
-Again, following the line-link from the previous line to find its bounds:
+Again, following the the lines line-link from the previous line gives us its bounds:
 
 	0811:  1d 08
 
@@ -220,11 +220,11 @@ Now for line 40. At this point I'm starting to wish I picked a smaller program, 
 
 	40 N=A+B
 
-Two bytes from the previous line-link:
+Two first two bytes of the line (the line-link):
 
 	081d:  27 08
 
-Our live lives at $081d-$0827.
+Our line lives at $081d-$0827.
 
 	081d:  27 08 28 00  4e b2 46 aa  42 00                   '.(.N.A.B.
 
@@ -262,7 +262,7 @@ The {del} represents a control character, it's generated on the keyboard by pres
 
 	4 PRINT"{clear}{white}":POKE53280,0:POKE53281,0:GOSUB700:GOSUB162
 
-When typing inside quotes on a C64 most control character don't perform their usual function. Instead you get some symbol in reverse video that represents it. These stand-ins are shown when the program is listed but when printed they perform their usual function (the stand-ins are expanded to a mnemonic describing their function in the first listing, the second listing is more authentic). This allows changing colours, moving the cursor around and various other things including incomprehensible programs. The DEL key is an exception, it deletes in and out of quotes and doesn't generate a stand-in. I'd guess that whatever code path is responsible for this mercy (it's bad enough not being able to move the cursor around in quotes without losing the power of deletion) also applies when listing a program because the {del} characters in the PRINT at end of the line actually start deleting the line, scrubbing out the apparently top-secret variables TN & TT as well as any visual evidence of the mechanism via which this is achieved. Notice that there's no closing quote, that would leave a tell-tale quotation mark at the end of the line. I'm not sure how the hell this was entered, I suspect a hex editor was used. The same trick is used in line 697.
+When typing inside quotes on a C64 most control character don't perform their usual function. Instead you get some symbol in reverse video that represents it. These stand-ins are shown when the program is listed but when printed they perform their usual function (the stand-ins are expanded to a mnemonic describing their function in the first listing, the second listing is more authentic). This allows changing colours, moving the cursor around and various other things including incomprehensible programs. The DEL key is an exception, it deletes in and out of quotes and doesn't generate a stand-in. I'd guess that whatever code path is responsible for this mercy (it's bad enough not being able to move the cursor around in quotes without losing the power of deletion) also applies when listing a program because the {del} characters in the PRINT at end of the line actually start deleting the line, scrubbing out the apparently top-secret variables TN & TT as well as any visual evidence of the mechanism via which this was achieved. Notice that there's no closing quote, that would leave a tell-tale quotation mark at the end of the line. I'm not sure how the hell this was entered, I suspect a hex editor was used. The same trick is used in line 697.
 
 ### Byte Miser
 
