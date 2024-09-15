@@ -464,7 +464,7 @@ a4♯ d3♯ g4 d2♯ g4♯ f4 c4 a3 f3 d4♯ a3♯ g3 d2♯ c5 a4 f4 c4 a3♯ g3
 
 A fair question. At first I tried to stare down the notes until they buckled and gave up the goods. My knowledge of music theory is limited however and any candidate key I picked still had more [accidentals](https://en.wikipedia.org/wiki/Accidental_(music)) than I felt comfortable with. I decided to whip up some code which compares the notes in the theme to all of the major keys and counts up the accidentals. With a bit of luck this would narrow down the candidates considerably. This article is getting a little code heavy and there's a bit of repetition, so I'll just show the additional code.
 
-Firstly I added code the count the notes in the melody. All octaves of a note are counted as the same note (so a1 and a2 just count as a).
+Firstly I added code to count the occurrences of each note in the melody. All octaves of a note are counted as the same note (so a1 and a2 just count as a).
 
 ```python
 class Spectrum(object):
