@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/assets/css/style.css?v=8179fc8e8c53b9b049fed06cd501798140d3e609" media="screen" type="text/css">
+    <link rel="stylesheet" href="/assets/css/print.css" media="print" type="text/css">
+    <style type="text/css">
+    
+    #main-content {
+      width: 100%;
+      line-height: 1;
+    }
+    
+    #rockford {
+      position: relative;
+      float: right;
+    }
+    #rockfordhead {
+      position: absolute;
+      top: 32px;
+      left: 32px;
+      width: 32px;
+      height: 16px;
+    }
+    #rockfordfeet {
+      position: absolute;
+      top: 48px;
+      left: 32px;
+      width: 32px;
+      height: 16px;
+    }
+    </style>
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <script>
+      rockford_head = [
+        "rockford_head0.png",
+        "rockford_head1.png",
+        "rockford_head2.png",
+        "rockford_head2.png",
+        "rockford_head1.png",
+        "rockford_head0.png",
+        "rockford_head0.png",
+        "rockford_head0.png",
+        "rockford_head0.png"
+      ]
+
+      rockford_feet = [
+        "rockford_feet0.png",
+        "rockford_feet1.png",
+        "rockford_feet1.png",
+        "rockford_feet1.png",
+        "rockford_feet1.png",
+        "rockford_feet5.png",
+        "rockford_feet5.png",
+        "rockford_feet5.png",
+        "rockford_feet5.png"
+        ]
+      function rockfordpreload()
+      {
+        for (i=0; i<=8; ++i)
+        {
+          image = new Image();
+          image.src = "/assets/images/"+rockford_head[i];
+          image = new Image();
+          image.src = "/assets/images/"+rockford_feet[i];
+        }
+      }
+
+      var frame=0;
+      var blink=false;
+      var foottap=false;
+
+      function rockfordtick()
+      {
+        var h = document.getElementById("rockfordhead");
+        var f = document.getElementById("rockfordfeet");
+
+        if (frame==0)
+        {
+          r = Math.floor(Math.random()*256);
+          blink = ((r&0x3)==0); // 1 in 4 chance
+          if ((r&0xf)==0)
+            foottap = !foottap; // 1 in 16 chance of toggling
+
+          if (!blink)
+            h.src = "/assets/images/"+rockford_head[0];
+          if (!foottap)
+            f.src = "/assets/images/"+rockford_feet[0];
+        }
+
+        if (blink)
+          h.src = "/assets/images/"+rockford_head[frame+1];
+        if (foottap)
+          f.src = "/assets/images/"+rockford_feet[frame+1];
+
+        frame += 1;
+        if (frame>=8)
+          frame = 0;
+      }
+    </script>
+
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Boulder Dash Theme Score | Retrointernals</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Boulder Dash Theme Score" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/boulder-dash/music.html" />
+<meta property="og:url" content="http://localhost:4000/boulder-dash/music.html" />
+<meta property="og:site_name" content="Retrointernals" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Boulder Dash Theme Score" />
+<script type="application/ld+json">
+{"@type":"WebPage","headline":"Boulder Dash Theme Score","url":"http://localhost:4000/boulder-dash/music.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <div id="rockford">
+          <image src="/assets/images/rockfordbg.png">
+          <image id="rockfordhead" src="/assets/images/rockford_head0.png">
+          <image id="rockfordfeet" src="/assets/images/rockford_feet0.png">
+        </div>
+        <a href="http://localhost:4000/">
+          <h1>Retrointernals</h1>
+        </a>
+        <h2></h2>
+        
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1 id="boulder-dash-theme-score">Boulder Dash Theme Score</h1>
+
+<p>OK, I got the idea to score the Boulder Dash music into my head. I had a look around to see if anyone else had already done so, and they had, kind of. The man himself has a crack <a href="https://brainjam.home.blog/2009/11/11/scoring-the-boulder-dash-theme/">here</a>. There are other scores out there, but most of them seem to be arrangements of the theme and not faithful representations. Assuring the world has access to accurate sheet music for this corker might keep me out of trouble for a bit.</p>
+
+<h2 id="congratulations-i-dont-give-a-shit">Congratulations. I don’t give a shit!</h2>
+
+<p>Ah… It’s like that is it?</p>
+
+<p>A PDF of the score can be found <a href="/boulder-dash/Boulder_Dash.pdf">here</a></p>
+
+<p>More of an SVG man? We can <a href="/boulder-dash/Boulder_Dash.svg">accommodate</a></p>
+
+<p>MIDI? <a href="/boulder-dash/Boulder_Dash.mid">sure</a></p>
+
+<p>A GitHub repository with all the <a href="https://github.com/shewitt-au/BD-Music">code</a></p>
+
+<h2 id="overview">Overview</h2>
+
+<p>The theme music use two of the SID chip’s three voices. The data for the tune is exactly 256 bytes long (not including the note to SID frequency value table). The routine doesn’t support rests and voice 1 can only have notes of a single duration. Voice 2 is similarly limited but it’s envelope generator is set such that two or more consecutive notes of the same pitch blur into a single note, so notes of different durations are supported. The tune data is simply 128 pairs of note numbers, the first value of the pair for one voice and the second for the other. If we notate the note duration as a quaver (a quarter note) the tune is 16 bars long (4/4 time) repeated twice. I think it’s in F minor, and I’ve notated it as such, but I’m no musician.</p>
+
+<h2 id="tuning">Tuning</h2>
+<p>I’m going to start by figuring out the tuning. The table which maps notes to SID frequency values looks like this.</p>
+
+<pre>
+<b>MusicNoteToFreqTable</b>:
+<b>8317</b>   dc 02 0a 03  3a 03 6c 03  a0 03 d2 03  12 04 4c 04
+<b>8327</b>   92 04 d6 04  20 05 6e 05  b8 05 14 06  74 06 d8 06
+<b>8337</b>   40 07 a4 07  24 08 98 08  24 09 ac 09  40 0a dc 0a
+<b>8347</b>   70 0b 28 0c  e8 0c b0 0d  80 0e 48 0f  48 10 30 11
+<b>8357</b>   48 12 58 13  80 14 b8 15  e0 16 50 18  d0 19 60 1b
+<b>8367</b>   00 1d 90 1e  90 20 60 22  90 24 b0 26  00 29 70 2b
+<b>8377</b>   c0 2d
+</pre>
+
+<p>Each entry is two bytes long. We need to do two things here:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. Map from SID frequency value to a frequency.
+2. Map from a frequency to a note.
+</code></pre></div></div>
+
+<p>We’ll take one at a time then tie it all together.</p>
+
+<h3 id="mapping-from-a-sid-frequency-value-to-a-frequency">Mapping from a SID frequency value to a frequency</h3>
+
+<p>I Googled a few resources when trying to figure out how to do this. I did briefly consider getting an oscilloscope and verifying what I’d learnt, but I decided that was probably overkill. We’ll interpret consistency across multiple sources as verification enough. Anyway, here are some links if you’re interested in reading up on this:</p>
+
+<p><a href="http://www.cbmitapages.it/c64/sid1eng.htm">The SID (by Stephen L. Judd)</a></p>
+
+<p><a href="https://codebase64.org/doku.php?id=base:how_to_calculate_your_own_sid_frequency_table">How to calculate SID frequency tables By FTC/HT</a></p>
+
+<p><a href="https://csdb.dk/forums/?roomid=11&amp;topicid=124823&amp;firstpost=2">Excact <b>[sic]</b> Vertical Frequency / Refresh Rate</a></p>
+
+<p>I hacked together the Python code below to get the frequencies of the notes. I live in Australia, so we had PAL machines. I’m only going to consider the PAL case but I’ve included the code for NTSC machines.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#!/usr/bin/env python3
+</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">log</span>
+
+<span class="n">bd_sid_values</span> <span class="o">=</span> <span class="p">[</span>
+<span class="mh">0xdc</span><span class="p">,</span> <span class="mh">0x02</span><span class="p">,</span> <span class="mh">0x0a</span><span class="p">,</span> <span class="mh">0x03</span><span class="p">,</span>  <span class="mh">0x3a</span><span class="p">,</span> <span class="mh">0x03</span><span class="p">,</span> <span class="mh">0x6c</span><span class="p">,</span> <span class="mh">0x03</span><span class="p">,</span>  <span class="mh">0xa0</span><span class="p">,</span> <span class="mh">0x03</span><span class="p">,</span> <span class="mh">0xd2</span><span class="p">,</span> <span class="mh">0x03</span><span class="p">,</span>  <span class="mh">0x12</span><span class="p">,</span> <span class="mh">0x04</span><span class="p">,</span> <span class="mh">0x4c</span><span class="p">,</span> <span class="mh">0x04</span><span class="p">,</span>
+<span class="mh">0x92</span><span class="p">,</span> <span class="mh">0x04</span><span class="p">,</span> <span class="mh">0xd6</span><span class="p">,</span> <span class="mh">0x04</span><span class="p">,</span>  <span class="mh">0x20</span><span class="p">,</span> <span class="mh">0x05</span><span class="p">,</span> <span class="mh">0x6e</span><span class="p">,</span> <span class="mh">0x05</span><span class="p">,</span>  <span class="mh">0xb8</span><span class="p">,</span> <span class="mh">0x05</span><span class="p">,</span> <span class="mh">0x14</span><span class="p">,</span> <span class="mh">0x06</span><span class="p">,</span>  <span class="mh">0x74</span><span class="p">,</span> <span class="mh">0x06</span><span class="p">,</span> <span class="mh">0xd8</span><span class="p">,</span> <span class="mh">0x06</span><span class="p">,</span>
+<span class="mh">0x40</span><span class="p">,</span> <span class="mh">0x07</span><span class="p">,</span> <span class="mh">0xa4</span><span class="p">,</span> <span class="mh">0x07</span><span class="p">,</span>  <span class="mh">0x24</span><span class="p">,</span> <span class="mh">0x08</span><span class="p">,</span> <span class="mh">0x98</span><span class="p">,</span> <span class="mh">0x08</span><span class="p">,</span>  <span class="mh">0x24</span><span class="p">,</span> <span class="mh">0x09</span><span class="p">,</span> <span class="mh">0xac</span><span class="p">,</span> <span class="mh">0x09</span><span class="p">,</span>  <span class="mh">0x40</span><span class="p">,</span> <span class="mh">0x0a</span><span class="p">,</span> <span class="mh">0xdc</span><span class="p">,</span> <span class="mh">0x0a</span><span class="p">,</span>
+<span class="mh">0x70</span><span class="p">,</span> <span class="mh">0x0b</span><span class="p">,</span> <span class="mh">0x28</span><span class="p">,</span> <span class="mh">0x0c</span><span class="p">,</span>  <span class="mh">0xe8</span><span class="p">,</span> <span class="mh">0x0c</span><span class="p">,</span> <span class="mh">0xb0</span><span class="p">,</span> <span class="mh">0x0d</span><span class="p">,</span>  <span class="mh">0x80</span><span class="p">,</span> <span class="mh">0x0e</span><span class="p">,</span> <span class="mh">0x48</span><span class="p">,</span> <span class="mh">0x0f</span><span class="p">,</span>  <span class="mh">0x48</span><span class="p">,</span> <span class="mh">0x10</span><span class="p">,</span> <span class="mh">0x30</span><span class="p">,</span> <span class="mh">0x11</span><span class="p">,</span>
+<span class="mh">0x48</span><span class="p">,</span> <span class="mh">0x12</span><span class="p">,</span> <span class="mh">0x58</span><span class="p">,</span> <span class="mh">0x13</span><span class="p">,</span>  <span class="mh">0x80</span><span class="p">,</span> <span class="mh">0x14</span><span class="p">,</span> <span class="mh">0xb8</span><span class="p">,</span> <span class="mh">0x15</span><span class="p">,</span>  <span class="mh">0xe0</span><span class="p">,</span> <span class="mh">0x16</span><span class="p">,</span> <span class="mh">0x50</span><span class="p">,</span> <span class="mh">0x18</span><span class="p">,</span>  <span class="mh">0xd0</span><span class="p">,</span> <span class="mh">0x19</span><span class="p">,</span> <span class="mh">0x60</span><span class="p">,</span> <span class="mh">0x1b</span><span class="p">,</span>
+<span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x1d</span><span class="p">,</span> <span class="mh">0x90</span><span class="p">,</span> <span class="mh">0x1e</span><span class="p">,</span>  <span class="mh">0x90</span><span class="p">,</span> <span class="mh">0x20</span><span class="p">,</span> <span class="mh">0x60</span><span class="p">,</span> <span class="mh">0x22</span><span class="p">,</span>  <span class="mh">0x90</span><span class="p">,</span> <span class="mh">0x24</span><span class="p">,</span> <span class="mh">0xb0</span><span class="p">,</span> <span class="mh">0x26</span><span class="p">,</span>  <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x29</span><span class="p">,</span> <span class="mh">0x70</span><span class="p">,</span> <span class="mh">0x2b</span><span class="p">,</span>
+<span class="mh">0xc0</span><span class="p">,</span> <span class="mh">0x2d</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">sid_frequencies</span><span class="p">():</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">bd_sid_values</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="nb">next</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="nb">next</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">*</span><span class="mi">256</span>
+    <span class="k">except</span> <span class="nb">StopIteration</span><span class="p">:</span>
+        <span class="k">return</span>
+
+<span class="n">pal_const</span> <span class="o">=</span>  <span class="p">(</span><span class="mi">256</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span><span class="o">/</span><span class="mi">985248</span>
+<span class="n">ntsc_const</span> <span class="o">=</span> <span class="p">(</span><span class="mi">256</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span><span class="o">/</span><span class="mi">1022727</span>
+
+<span class="k">def</span> <span class="nf">reg_to_freq_pal</span><span class="p">(</span><span class="n">reg</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">reg</span><span class="o">/</span><span class="n">pal_const</span>
+
+<span class="k">def</span> <span class="nf">reg_to_freq_ntsc</span><span class="p">(</span><span class="n">reg</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">reg</span><span class="o">/</span><span class="n">ntsc_const</span>
+
+<span class="k">def</span> <span class="nf">cents_from</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">ref</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">1200</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="n">f</span><span class="o">/</span><span class="n">ref</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">"PAL</span><span class="se">\n</span><span class="s">---"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">sid_frequencies</span><span class="p">():</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">reg_to_freq_pal</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">reg_to_freq_pal</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>Here’s the output:</p>
+<pre>
+PAL
+---
+42.986961364746094
+45.68832778930664
+48.507144927978516
+51.44341278076171
+54.49713134765624
+57.433399200439446
+61.191822052001946
+64.59789276123047
+68.70866775512695
+72.70199203491211
+77.04766845703125
+81.62824630737305
+85.97392272949219
+91.37665557861328
+97.01428985595703
+102.88682556152342
+108.99426269531249
+114.86679840087889
+122.38364410400389
+129.19578552246094
+137.4173355102539
+145.40398406982422
+154.0953369140625
+163.2564926147461
+171.94784545898438
+182.75331115722656
+194.02857971191406
+205.77365112304685
+217.98852539062497
+229.73359680175778
+244.76728820800778
+258.3915710449219
+274.8346710205078
+290.80796813964844
+308.190673828125
+326.5129852294922
+343.89569091796875
+365.5066223144531
+388.0571594238281
+411.5473022460937
+435.97705078124994
+459.46719360351557
+489.53457641601557
+516.7831420898438
+549.6693420410156
+581.6159362792969
+616.38134765625
+653.0259704589844
+687.7913818359375
+</pre>
+
+<p>The closest value to A440 is 435.97705078124994 which is 16 cents below. A perceptible distance. If we use A435 instead this is still the closest value but this time 4 cents higher. That’s more like it. We’ll use this entry as our A4. Here is some info on <a href="https://en.wikipedia.org/wiki/Cent_(music)">cents</a> and <a href="https://en.wikipedia.org/wiki/A440_(pitch_standard)">A440</a> for the curious.</p>
+
+<h3 id="maping-from-a-frequency-to-a-note">Maping from a frequency to a note</h3>
+
+<p>This requires some understanding of the maths behind musical tunings. When you start looking into this you can’t help but wonder how deep the rabbit hole goes. For our purposes we’ll only concern ourselves with the <a href="https://en.wikipedia.org/wiki/Equal_temperament">equal temperament</a> tuning system. To cut a long story short the following Python code will give us a note number measured in semitones from the reference frequency a4.</p>
+
+<pre><code class="language-pyhhon">base = 2**(1/12)
+a4 = 435.97705078124994
+
+def freq_to_note(f):
+    return log(f/a4, base)
+</code></pre>
+
+<h3 id="tieing-it-all-together">Tieing it all together</h3>
+
+<p>In short this:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#!/usr/bin/env python3
+</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">log</span><span class="p">,</span> <span class="n">floor</span>
+
+<span class="n">bd_sid_values</span> <span class="o">=</span> <span class="p">[</span>
+<span class="mh">0xdc</span><span class="p">,</span> <span class="mh">0x02</span><span class="p">,</span> <span class="mh">0x0a</span><span class="p">,</span> <span class="mh">0x03</span><span class="p">,</span>  <span class="mh">0x3a</span><span class="p">,</span> <span class="mh">0x03</span><span class="p">,</span> <span class="mh">0x6c</span><span class="p">,</span> <span class="mh">0x03</span><span class="p">,</span>  <span class="mh">0xa0</span><span class="p">,</span> <span class="mh">0x03</span><span class="p">,</span> <span class="mh">0xd2</span><span class="p">,</span> <span class="mh">0x03</span><span class="p">,</span>  <span class="mh">0x12</span><span class="p">,</span> <span class="mh">0x04</span><span class="p">,</span> <span class="mh">0x4c</span><span class="p">,</span> <span class="mh">0x04</span><span class="p">,</span>
+<span class="mh">0x92</span><span class="p">,</span> <span class="mh">0x04</span><span class="p">,</span> <span class="mh">0xd6</span><span class="p">,</span> <span class="mh">0x04</span><span class="p">,</span>  <span class="mh">0x20</span><span class="p">,</span> <span class="mh">0x05</span><span class="p">,</span> <span class="mh">0x6e</span><span class="p">,</span> <span class="mh">0x05</span><span class="p">,</span>  <span class="mh">0xb8</span><span class="p">,</span> <span class="mh">0x05</span><span class="p">,</span> <span class="mh">0x14</span><span class="p">,</span> <span class="mh">0x06</span><span class="p">,</span>  <span class="mh">0x74</span><span class="p">,</span> <span class="mh">0x06</span><span class="p">,</span> <span class="mh">0xd8</span><span class="p">,</span> <span class="mh">0x06</span><span class="p">,</span>
+<span class="mh">0x40</span><span class="p">,</span> <span class="mh">0x07</span><span class="p">,</span> <span class="mh">0xa4</span><span class="p">,</span> <span class="mh">0x07</span><span class="p">,</span>  <span class="mh">0x24</span><span class="p">,</span> <span class="mh">0x08</span><span class="p">,</span> <span class="mh">0x98</span><span class="p">,</span> <span class="mh">0x08</span><span class="p">,</span>  <span class="mh">0x24</span><span class="p">,</span> <span class="mh">0x09</span><span class="p">,</span> <span class="mh">0xac</span><span class="p">,</span> <span class="mh">0x09</span><span class="p">,</span>  <span class="mh">0x40</span><span class="p">,</span> <span class="mh">0x0a</span><span class="p">,</span> <span class="mh">0xdc</span><span class="p">,</span> <span class="mh">0x0a</span><span class="p">,</span>
+<span class="mh">0x70</span><span class="p">,</span> <span class="mh">0x0b</span><span class="p">,</span> <span class="mh">0x28</span><span class="p">,</span> <span class="mh">0x0c</span><span class="p">,</span>  <span class="mh">0xe8</span><span class="p">,</span> <span class="mh">0x0c</span><span class="p">,</span> <span class="mh">0xb0</span><span class="p">,</span> <span class="mh">0x0d</span><span class="p">,</span>  <span class="mh">0x80</span><span class="p">,</span> <span class="mh">0x0e</span><span class="p">,</span> <span class="mh">0x48</span><span class="p">,</span> <span class="mh">0x0f</span><span class="p">,</span>  <span class="mh">0x48</span><span class="p">,</span> <span class="mh">0x10</span><span class="p">,</span> <span class="mh">0x30</span><span class="p">,</span> <span class="mh">0x11</span><span class="p">,</span>
+<span class="mh">0x48</span><span class="p">,</span> <span class="mh">0x12</span><span class="p">,</span> <span class="mh">0x58</span><span class="p">,</span> <span class="mh">0x13</span><span class="p">,</span>  <span class="mh">0x80</span><span class="p">,</span> <span class="mh">0x14</span><span class="p">,</span> <span class="mh">0xb8</span><span class="p">,</span> <span class="mh">0x15</span><span class="p">,</span>  <span class="mh">0xe0</span><span class="p">,</span> <span class="mh">0x16</span><span class="p">,</span> <span class="mh">0x50</span><span class="p">,</span> <span class="mh">0x18</span><span class="p">,</span>  <span class="mh">0xd0</span><span class="p">,</span> <span class="mh">0x19</span><span class="p">,</span> <span class="mh">0x60</span><span class="p">,</span> <span class="mh">0x1b</span><span class="p">,</span>
+<span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x1d</span><span class="p">,</span> <span class="mh">0x90</span><span class="p">,</span> <span class="mh">0x1e</span><span class="p">,</span>  <span class="mh">0x90</span><span class="p">,</span> <span class="mh">0x20</span><span class="p">,</span> <span class="mh">0x60</span><span class="p">,</span> <span class="mh">0x22</span><span class="p">,</span>  <span class="mh">0x90</span><span class="p">,</span> <span class="mh">0x24</span><span class="p">,</span> <span class="mh">0xb0</span><span class="p">,</span> <span class="mh">0x26</span><span class="p">,</span>  <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x29</span><span class="p">,</span> <span class="mh">0x70</span><span class="p">,</span> <span class="mh">0x2b</span><span class="p">,</span>
+<span class="mh">0xc0</span><span class="p">,</span> <span class="mh">0x2d</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">sid_frequencies</span><span class="p">():</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">bd_sid_values</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="nb">next</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="nb">next</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">*</span><span class="mi">256</span>
+    <span class="k">except</span> <span class="nb">StopIteration</span><span class="p">:</span>
+        <span class="k">return</span>
+
+<span class="k">def</span> <span class="nf">note_to_sid</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">bd_sid_values</span><span class="p">[</span><span class="n">n</span><span class="o">*</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="n">bd_sid_values</span><span class="p">[</span><span class="n">n</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">256</span>
+
+<span class="n">names_sharp</span><span class="o">=</span><span class="p">[</span><span class="s">'a{}'</span><span class="p">,</span><span class="s">'a{}♯'</span><span class="p">,</span><span class="s">'b{}'</span><span class="p">,</span><span class="s">'c{}'</span><span class="p">,</span><span class="s">'c{}♯'</span><span class="p">,</span><span class="s">'d{}'</span><span class="p">,</span><span class="s">'d{}♯'</span><span class="p">,</span><span class="s">'e{}'</span><span class="p">,</span><span class="s">'f{}'</span><span class="p">,</span><span class="s">'f{}♯'</span><span class="p">,</span><span class="s">'g{}'</span><span class="p">,</span><span class="s">'g{}♯'</span><span class="p">]</span>
+<span class="n">names_flat</span><span class="o">=</span><span class="p">[</span><span class="s">'a{}'</span><span class="p">,</span><span class="s">'b{}♭'</span><span class="p">,</span><span class="s">'b{}'</span><span class="p">,</span><span class="s">'c{}'</span><span class="p">,</span><span class="s">'d{}♭'</span><span class="p">,</span><span class="s">'d{}'</span><span class="p">,</span><span class="s">'e{}♭'</span><span class="p">,</span><span class="s">'e{}'</span><span class="p">,</span><span class="s">'f{}'</span><span class="p">,</span><span class="s">'g{}♭'</span><span class="p">,</span><span class="s">'g{}'</span><span class="p">,</span><span class="s">'a♭{}'</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">index_to_name</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">sharp</span><span class="p">):</span>
+    <span class="n">octave</span> <span class="o">=</span> <span class="n">floor</span><span class="p">((</span><span class="n">i</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span><span class="o">/</span><span class="mi">12</span><span class="p">)</span><span class="o">+</span><span class="mi">5</span>
+    <span class="n">names</span> <span class="o">=</span> <span class="n">names_sharp</span> <span class="k">if</span> <span class="n">sharp</span> <span class="k">else</span> <span class="n">names_flat</span>
+    <span class="k">return</span> <span class="n">names</span><span class="p">[</span><span class="n">i</span><span class="o">%</span><span class="mi">12</span><span class="p">].</span><span class="nb">format</span><span class="p">(</span><span class="n">octave</span><span class="p">)</span>
+
+<span class="n">pal_const</span> <span class="o">=</span>  <span class="p">(</span><span class="mi">256</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span><span class="o">/</span><span class="mi">985248</span>
+<span class="n">ntsc_const</span> <span class="o">=</span> <span class="p">(</span><span class="mi">256</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span><span class="o">/</span><span class="mi">1022727</span>
+<span class="n">a4</span> <span class="o">=</span> <span class="mf">435.97705078124994</span>
+<span class="n">base</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">12</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">reg_to_freq_pal</span><span class="p">(</span><span class="n">reg</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">reg</span><span class="o">/</span><span class="n">pal_const</span>
+
+<span class="k">def</span> <span class="nf">reg_to_freq_ntsc</span><span class="p">(</span><span class="n">reg</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">reg</span><span class="o">/</span><span class="n">ntsc_const</span>
+
+<span class="k">def</span> <span class="nf">freq_to_note</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">log</span><span class="p">(</span><span class="n">f</span><span class="o">/</span><span class="n">a4</span><span class="p">,</span> <span class="n">base</span><span class="p">)</span>
+
+<span class="n">bd_val</span> <span class="o">=</span> <span class="mh">0x0a</span>
+<span class="k">for</span> <span class="n">sid</span> <span class="ow">in</span> <span class="n">sid_frequencies</span><span class="p">():</span>
+    <span class="n">freq</span> <span class="o">=</span> <span class="n">reg_to_freq_pal</span><span class="p">(</span><span class="n">sid</span><span class="p">)</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">freq_to_note</span><span class="p">(</span><span class="n">freq</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"${:02x} : {}"</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">bd_val</span><span class="p">,</span> <span class="n">index_to_name</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="bp">True</span><span class="p">)))</span>
+    <span class="n">bd_val</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="k">print</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>Gives us the note names that correspond to the note numbering Boulder Dash uses:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$0a : f1
+$0b : f1♯
+$0c : g1
+$0d : g1♯
+$0e : a1
+$0f : a1♯
+$10 : b1
+$11 : c2
+$12 : c2♯
+$13 : d2
+$14 : d2♯
+$15 : e2
+$16 : f2
+$17 : f2♯
+$18 : g2
+$19 : g2♯
+$1a : a2
+$1b : a2♯
+$1c : b2
+$1d : c3
+$1e : c3♯
+$1f : d3
+$20 : d3♯
+$21 : e3
+$22 : f3
+$23 : f3♯
+$24 : g3
+$25 : g3♯
+$26 : a3
+$27 : a3♯
+$28 : b3
+$29 : c4
+$2a : c4♯
+$2b : d4
+$2c : d4♯
+$2d : e4
+$2e : f4
+$2f : f4♯
+$30 : g4
+$31 : g4♯
+$32 : a4
+$33 : a4♯
+$34 : b4
+$35 : c5
+$36 : c5♯
+$37 : d5
+$38 : d5♯
+$39 : e5
+$3a : f5
+</code></pre></div></div>
+
+<p>In music notation:</p>
+
+<p><img src="/boulder-dash/notes.svg" alt="Note values" /></p>
+
+<h2 id="the-tune">The Tune</h2>
+
+<p>Here’s the data for the tune:</p>
+
+<pre>
+<b>5fe8</b>   16 22 1d 26  22 29 25 2e  14 24 1f 27  20 29 27 30
+<b>5ff8</b>   12 2a 12 2c  1e 2e 12 31  20 2c 33 37  21 2d 31 35
+<b>6008</b>   16 22 16 2e  16 1d 16 24  14 20 14 30  14 24 14 20
+<b>6018</b>   16 22 16 2e  16 1d 16 24  1e 2a 1e 3a  1e 2e 1e 2a
+<b>6028</b>   14 20 14 2c  14 1b 14 22  1c 28 1c 38  1c 2c 1c 28
+<b>6038</b>   11 1d 29 2d  11 1f 29 2e  0f 27 0f 27  16 33 16 27
+<b>6048</b>   16 2e 16 2e  16 2e 16 2e  22 2e 22 2e  16 2e 16 2e
+<b>6058</b>   14 2e 14 2e  14 2e 14 2e  20 2e 20 2e  14 2e 14 2e
+<b>6068</b>   16 2e 32 2e  16 2e 33 2e  22 2e 32 2e  16 2e 33 2e
+<b>6078</b>   14 2e 32 2e  14 2e 33 2e  20 2c 30 2c  14 2c 31 2c
+<b>6088</b>   16 2e 16 3a  16 2e 35 38  22 2e 22 37  16 2e 31 35
+<b>6098</b>   14 2c 14 38  14 2c 14 38  20 2c 20 33  14 2c 14 38
+<b>60a8</b>   16 2e 32 2e  16 2e 33 2e  22 2e 32 2e  16 2e 33 2e
+<b>60b8</b>   14 2e 32 2e  14 2e 33 2e  20 2c 30 2c  14 2c 31 2c
+<b>60c8</b>   2e 32 29 2e  26 29 22 26  2c 30 27 2c  24 27 14 20
+<b>60d8</b>   35 32 32 2e  2e 29 29 26  27 30 24 2c  20 27 14 20
+</pre>
+
+<p>Now we’ll take a look at the code which fetches the note data, looks up the SID values for the note and writes the values to the SID chip’s frequency registers:</p>
+
+<pre>
+<b>83ca</b>   ae 00 98   LDX <b>MusicDataIndex</b>
+<b>83cd</b>   ee 00 98   INC <b>MusicDataIndex</b>
+<b>83d0</b>   ee 00 98   INC <b>MusicDataIndex</b>
+<b>83d3</b>   bd e9 5f   LDA <b>MusicData</b>+1,X
+<b>83d6</b>   0a         ASL A
+<b>83d7</b>   a8         TAY 
+<b>83d8</b>   b9 03 83   LDA <b>MusicNoteToFreqTable</b>-$14,Y
+<b>83db</b>   8d 00 d4   STA <b>Sid_Voice1FreqLo</b>
+<b>83de</b>   b9 04 83   LDA <b>MusicNoteToFreqTable</b>-$13,Y
+<b>83e1</b>   8d 01 d4   STA <b>Sid_Voice1FreqHi</b>
+<b>83e4</b>   bd e8 5f   LDA <b>MusicData</b>,X
+<b>83e7</b>   0a         ASL A
+<b>83e8</b>   a8         TAY 
+<b>83e9</b>   b9 03 83   LDA <b>MusicNoteToFreqTable</b>-$14,Y
+<b>83ec</b>   8d 07 d4   STA <b>Sid_Voice2FreqLo</b>
+<b>83ef</b>   b9 04 83   LDA <b>MusicNoteToFreqTable</b>-$13,Y
+<b>83f2</b>   8d 08 d4   STA <b>Sid_Voice2FreqHi</b>
+</pre>
+
+<p>Again, the music data this is simply 128 pairs of note values, one for each voice. You can see the first number of the pair is for voice 2 and the second for voice 1. Also the first note value is $0a which makes the last $3a.</p>
+
+<p>We have all the pieces we need to dump the notes for both voices. Let’s snap some blocks together:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#!/usr/bin/env python3
+</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">log</span><span class="p">,</span> <span class="n">floor</span>
+
+<span class="n">bd_sid_values</span> <span class="o">=</span> <span class="p">[</span>
+<span class="mh">0xdc</span><span class="p">,</span> <span class="mh">0x02</span><span class="p">,</span> <span class="mh">0x0a</span><span class="p">,</span> <span class="mh">0x03</span><span class="p">,</span>  <span class="mh">0x3a</span><span class="p">,</span> <span class="mh">0x03</span><span class="p">,</span> <span class="mh">0x6c</span><span class="p">,</span> <span class="mh">0x03</span><span class="p">,</span>  <span class="mh">0xa0</span><span class="p">,</span> <span class="mh">0x03</span><span class="p">,</span> <span class="mh">0xd2</span><span class="p">,</span> <span class="mh">0x03</span><span class="p">,</span>  <span class="mh">0x12</span><span class="p">,</span> <span class="mh">0x04</span><span class="p">,</span> <span class="mh">0x4c</span><span class="p">,</span> <span class="mh">0x04</span><span class="p">,</span>
+<span class="mh">0x92</span><span class="p">,</span> <span class="mh">0x04</span><span class="p">,</span> <span class="mh">0xd6</span><span class="p">,</span> <span class="mh">0x04</span><span class="p">,</span>  <span class="mh">0x20</span><span class="p">,</span> <span class="mh">0x05</span><span class="p">,</span> <span class="mh">0x6e</span><span class="p">,</span> <span class="mh">0x05</span><span class="p">,</span>  <span class="mh">0xb8</span><span class="p">,</span> <span class="mh">0x05</span><span class="p">,</span> <span class="mh">0x14</span><span class="p">,</span> <span class="mh">0x06</span><span class="p">,</span>  <span class="mh">0x74</span><span class="p">,</span> <span class="mh">0x06</span><span class="p">,</span> <span class="mh">0xd8</span><span class="p">,</span> <span class="mh">0x06</span><span class="p">,</span>
+<span class="mh">0x40</span><span class="p">,</span> <span class="mh">0x07</span><span class="p">,</span> <span class="mh">0xa4</span><span class="p">,</span> <span class="mh">0x07</span><span class="p">,</span>  <span class="mh">0x24</span><span class="p">,</span> <span class="mh">0x08</span><span class="p">,</span> <span class="mh">0x98</span><span class="p">,</span> <span class="mh">0x08</span><span class="p">,</span>  <span class="mh">0x24</span><span class="p">,</span> <span class="mh">0x09</span><span class="p">,</span> <span class="mh">0xac</span><span class="p">,</span> <span class="mh">0x09</span><span class="p">,</span>  <span class="mh">0x40</span><span class="p">,</span> <span class="mh">0x0a</span><span class="p">,</span> <span class="mh">0xdc</span><span class="p">,</span> <span class="mh">0x0a</span><span class="p">,</span>
+<span class="mh">0x70</span><span class="p">,</span> <span class="mh">0x0b</span><span class="p">,</span> <span class="mh">0x28</span><span class="p">,</span> <span class="mh">0x0c</span><span class="p">,</span>  <span class="mh">0xe8</span><span class="p">,</span> <span class="mh">0x0c</span><span class="p">,</span> <span class="mh">0xb0</span><span class="p">,</span> <span class="mh">0x0d</span><span class="p">,</span>  <span class="mh">0x80</span><span class="p">,</span> <span class="mh">0x0e</span><span class="p">,</span> <span class="mh">0x48</span><span class="p">,</span> <span class="mh">0x0f</span><span class="p">,</span>  <span class="mh">0x48</span><span class="p">,</span> <span class="mh">0x10</span><span class="p">,</span> <span class="mh">0x30</span><span class="p">,</span> <span class="mh">0x11</span><span class="p">,</span>
+<span class="mh">0x48</span><span class="p">,</span> <span class="mh">0x12</span><span class="p">,</span> <span class="mh">0x58</span><span class="p">,</span> <span class="mh">0x13</span><span class="p">,</span>  <span class="mh">0x80</span><span class="p">,</span> <span class="mh">0x14</span><span class="p">,</span> <span class="mh">0xb8</span><span class="p">,</span> <span class="mh">0x15</span><span class="p">,</span>  <span class="mh">0xe0</span><span class="p">,</span> <span class="mh">0x16</span><span class="p">,</span> <span class="mh">0x50</span><span class="p">,</span> <span class="mh">0x18</span><span class="p">,</span>  <span class="mh">0xd0</span><span class="p">,</span> <span class="mh">0x19</span><span class="p">,</span> <span class="mh">0x60</span><span class="p">,</span> <span class="mh">0x1b</span><span class="p">,</span>
+<span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x1d</span><span class="p">,</span> <span class="mh">0x90</span><span class="p">,</span> <span class="mh">0x1e</span><span class="p">,</span>  <span class="mh">0x90</span><span class="p">,</span> <span class="mh">0x20</span><span class="p">,</span> <span class="mh">0x60</span><span class="p">,</span> <span class="mh">0x22</span><span class="p">,</span>  <span class="mh">0x90</span><span class="p">,</span> <span class="mh">0x24</span><span class="p">,</span> <span class="mh">0xb0</span><span class="p">,</span> <span class="mh">0x26</span><span class="p">,</span>  <span class="mh">0x00</span><span class="p">,</span> <span class="mh">0x29</span><span class="p">,</span> <span class="mh">0x70</span><span class="p">,</span> <span class="mh">0x2b</span><span class="p">,</span>
+<span class="mh">0xc0</span><span class="p">,</span> <span class="mh">0x2d</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">sid_frequencies</span><span class="p">():</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">bd_sid_values</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="nb">next</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="nb">next</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">*</span><span class="mi">256</span>
+    <span class="k">except</span> <span class="nb">StopIteration</span><span class="p">:</span>
+        <span class="k">return</span>
+
+<span class="k">def</span> <span class="nf">note_to_sid</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">bd_sid_values</span><span class="p">[</span><span class="n">n</span><span class="o">*</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="n">bd_sid_values</span><span class="p">[</span><span class="n">n</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">256</span>
+
+<span class="n">names_sharp</span><span class="o">=</span><span class="p">[</span><span class="s">'a{}'</span><span class="p">,</span><span class="s">'a{}♯'</span><span class="p">,</span><span class="s">'b{}'</span><span class="p">,</span><span class="s">'c{}'</span><span class="p">,</span><span class="s">'c{}♯'</span><span class="p">,</span><span class="s">'d{}'</span><span class="p">,</span><span class="s">'d{}♯'</span><span class="p">,</span><span class="s">'e{}'</span><span class="p">,</span><span class="s">'f{}'</span><span class="p">,</span><span class="s">'f{}♯'</span><span class="p">,</span><span class="s">'g{}'</span><span class="p">,</span><span class="s">'g{}♯'</span><span class="p">]</span>
+<span class="n">names_flat</span><span class="o">=</span><span class="p">[</span><span class="s">'a{}'</span><span class="p">,</span><span class="s">'b{}♭'</span><span class="p">,</span><span class="s">'b{}'</span><span class="p">,</span><span class="s">'c{}'</span><span class="p">,</span><span class="s">'d{}♭'</span><span class="p">,</span><span class="s">'d{}'</span><span class="p">,</span><span class="s">'e{}♭'</span><span class="p">,</span><span class="s">'e{}'</span><span class="p">,</span><span class="s">'f{}'</span><span class="p">,</span><span class="s">'g{}♭'</span><span class="p">,</span><span class="s">'g{}'</span><span class="p">,</span><span class="s">'a♭{}'</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">index_to_name</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">sharp</span><span class="p">):</span>
+    <span class="n">octave</span> <span class="o">=</span> <span class="n">floor</span><span class="p">((</span><span class="n">i</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span><span class="o">/</span><span class="mi">12</span><span class="p">)</span><span class="o">+</span><span class="mi">5</span>
+    <span class="n">names</span> <span class="o">=</span> <span class="n">names_sharp</span> <span class="k">if</span> <span class="n">sharp</span> <span class="k">else</span> <span class="n">names_flat</span>
+    <span class="k">return</span> <span class="n">names</span><span class="p">[</span><span class="n">i</span><span class="o">%</span><span class="mi">12</span><span class="p">].</span><span class="nb">format</span><span class="p">(</span><span class="n">octave</span><span class="p">)</span>
+
+<span class="n">bd_music</span> <span class="o">=</span> <span class="p">[</span>
+<span class="mh">0x16</span><span class="p">,</span> <span class="mh">0x22</span><span class="p">,</span> <span class="mh">0x1d</span><span class="p">,</span> <span class="mh">0x26</span><span class="p">,</span>  <span class="mh">0x22</span><span class="p">,</span> <span class="mh">0x29</span><span class="p">,</span> <span class="mh">0x25</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span>  <span class="mh">0x14</span><span class="p">,</span> <span class="mh">0x24</span><span class="p">,</span> <span class="mh">0x1f</span><span class="p">,</span> <span class="mh">0x27</span><span class="p">,</span>  <span class="mh">0x20</span><span class="p">,</span> <span class="mh">0x29</span><span class="p">,</span> <span class="mh">0x27</span><span class="p">,</span> <span class="mh">0x30</span><span class="p">,</span>
+<span class="mh">0x12</span><span class="p">,</span> <span class="mh">0x2a</span><span class="p">,</span> <span class="mh">0x12</span><span class="p">,</span> <span class="mh">0x2c</span><span class="p">,</span>  <span class="mh">0x1e</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span> <span class="mh">0x12</span><span class="p">,</span> <span class="mh">0x31</span><span class="p">,</span>  <span class="mh">0x20</span><span class="p">,</span> <span class="mh">0x2c</span><span class="p">,</span> <span class="mh">0x33</span><span class="p">,</span> <span class="mh">0x37</span><span class="p">,</span>  <span class="mh">0x21</span><span class="p">,</span> <span class="mh">0x2d</span><span class="p">,</span> <span class="mh">0x31</span><span class="p">,</span> <span class="mh">0x35</span><span class="p">,</span>
+<span class="mh">0x16</span><span class="p">,</span> <span class="mh">0x22</span><span class="p">,</span> <span class="mh">0x16</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span>  <span class="mh">0x16</span><span class="p">,</span> <span class="mh">0x1d</span><span class="p">,</span> <span class="mh">0x16</span><span class="p">,</span> <span class="mh">0x24</span><span class="p">,</span>  <span class="mh">0x14</span><span class="p">,</span> <span class="mh">0x20</span><span class="p">,</span> <span class="mh">0x14</span><span class="p">,</span> <span class="mh">0x30</span><span class="p">,</span>  <span class="mh">0x14</span><span class="p">,</span> <span class="mh">0x24</span><span class="p">,</span> <span class="mh">0x14</span><span class="p">,</span> <span class="mh">0x20</span><span class="p">,</span>
+<span class="mh">0x16</span><span class="p">,</span> <span class="mh">0x22</span><span class="p">,</span> <span class="mh">0x16</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span>  <span class="mh">0x16</span><span class="p">,</span> <span class="mh">0x1d</span><span class="p">,</span> <span class="mh">0x16</span><span class="p">,</span> <span class="mh">0x24</span><span class="p">,</span>  <span class="mh">0x1e</span><span class="p">,</span> <span class="mh">0x2a</span><span class="p">,</span> <span class="mh">0x1e</span><span class="p">,</span> <span class="mh">0x3a</span><span class="p">,</span>  <span class="mh">0x1e</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span> <span class="mh">0x1e</span><span class="p">,</span> <span class="mh">0x2a</span><span class="p">,</span>
+<span class="mh">0x14</span><span class="p">,</span> <span class="mh">0x20</span><span class="p">,</span> <span class="mh">0x14</span><span class="p">,</span> <span class="mh">0x2c</span><span class="p">,</span>  <span class="mh">0x14</span><span class="p">,</span> <span class="mh">0x1b</span><span class="p">,</span> <span class="mh">0x14</span><span class="p">,</span> <span class="mh">0x22</span><span class="p">,</span>  <span class="mh">0x1c</span><span class="p">,</span> <span class="mh">0x28</span><span class="p">,</span> <span class="mh">0x1c</span><span class="p">,</span> <span class="mh">0x38</span><span class="p">,</span>  <span class="mh">0x1c</span><span class="p">,</span> <span class="mh">0x2c</span><span class="p">,</span> <span class="mh">0x1c</span><span class="p">,</span> <span class="mh">0x28</span><span class="p">,</span>
+<span class="mh">0x11</span><span class="p">,</span> <span class="mh">0x1d</span><span class="p">,</span> <span class="mh">0x29</span><span class="p">,</span> <span class="mh">0x2d</span><span class="p">,</span>  <span class="mh">0x11</span><span class="p">,</span> <span class="mh">0x1f</span><span class="p">,</span> <span class="mh">0x29</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span>  <span class="mh">0x0f</span><span class="p">,</span> <span class="mh">0x27</span><span class="p">,</span> <span class="mh">0x0f</span><span class="p">,</span> <span class="mh">0x27</span><span class="p">,</span>  <span class="mh">0x16</span><span class="p">,</span> <span class="mh">0x33</span><span class="p">,</span> <span class="mh">0x16</span><span class="p">,</span> <span class="mh">0x27</span><span class="p">,</span>
+<span class="mh">0x16</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span> <span class="mh">0x16</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span>  <span class="mh">0x16</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span> <span class="mh">0x16</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span>  <span class="mh">0x22</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span> <span class="mh">0x22</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span>  <span class="mh">0x16</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span> <span class="mh">0x16</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span>
+<span class="mh">0x14</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span> <span class="mh">0x14</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span>  <span class="mh">0x14</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span> <span class="mh">0x14</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span>  <span class="mh">0x20</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span> <span class="mh">0x20</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span>  <span class="mh">0x14</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span> <span class="mh">0x14</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span>
+<span class="mh">0x16</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span> <span class="mh">0x32</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span>  <span class="mh">0x16</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span> <span class="mh">0x33</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span>  <span class="mh">0x22</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span> <span class="mh">0x32</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span>  <span class="mh">0x16</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span> <span class="mh">0x33</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span>
+<span class="mh">0x14</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span> <span class="mh">0x32</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span>  <span class="mh">0x14</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span> <span class="mh">0x33</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span>  <span class="mh">0x20</span><span class="p">,</span> <span class="mh">0x2c</span><span class="p">,</span> <span class="mh">0x30</span><span class="p">,</span> <span class="mh">0x2c</span><span class="p">,</span>  <span class="mh">0x14</span><span class="p">,</span> <span class="mh">0x2c</span><span class="p">,</span> <span class="mh">0x31</span><span class="p">,</span> <span class="mh">0x2c</span><span class="p">,</span>
+<span class="mh">0x16</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span> <span class="mh">0x16</span><span class="p">,</span> <span class="mh">0x3a</span><span class="p">,</span>  <span class="mh">0x16</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span> <span class="mh">0x35</span><span class="p">,</span> <span class="mh">0x38</span><span class="p">,</span>  <span class="mh">0x22</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span> <span class="mh">0x22</span><span class="p">,</span> <span class="mh">0x37</span><span class="p">,</span>  <span class="mh">0x16</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span> <span class="mh">0x31</span><span class="p">,</span> <span class="mh">0x35</span><span class="p">,</span>
+<span class="mh">0x14</span><span class="p">,</span> <span class="mh">0x2c</span><span class="p">,</span> <span class="mh">0x14</span><span class="p">,</span> <span class="mh">0x38</span><span class="p">,</span>  <span class="mh">0x14</span><span class="p">,</span> <span class="mh">0x2c</span><span class="p">,</span> <span class="mh">0x14</span><span class="p">,</span> <span class="mh">0x38</span><span class="p">,</span>  <span class="mh">0x20</span><span class="p">,</span> <span class="mh">0x2c</span><span class="p">,</span> <span class="mh">0x20</span><span class="p">,</span> <span class="mh">0x33</span><span class="p">,</span>  <span class="mh">0x14</span><span class="p">,</span> <span class="mh">0x2c</span><span class="p">,</span> <span class="mh">0x14</span><span class="p">,</span> <span class="mh">0x38</span><span class="p">,</span>
+<span class="mh">0x16</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span> <span class="mh">0x32</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span>  <span class="mh">0x16</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span> <span class="mh">0x33</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span>  <span class="mh">0x22</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span> <span class="mh">0x32</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span>  <span class="mh">0x16</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span> <span class="mh">0x33</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span>
+<span class="mh">0x14</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span> <span class="mh">0x32</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span>  <span class="mh">0x14</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span> <span class="mh">0x33</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span>  <span class="mh">0x20</span><span class="p">,</span> <span class="mh">0x2c</span><span class="p">,</span> <span class="mh">0x30</span><span class="p">,</span> <span class="mh">0x2c</span><span class="p">,</span>  <span class="mh">0x14</span><span class="p">,</span> <span class="mh">0x2c</span><span class="p">,</span> <span class="mh">0x31</span><span class="p">,</span> <span class="mh">0x2c</span><span class="p">,</span>
+<span class="mh">0x2e</span><span class="p">,</span> <span class="mh">0x32</span><span class="p">,</span> <span class="mh">0x29</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span>  <span class="mh">0x26</span><span class="p">,</span> <span class="mh">0x29</span><span class="p">,</span> <span class="mh">0x22</span><span class="p">,</span> <span class="mh">0x26</span><span class="p">,</span>  <span class="mh">0x2c</span><span class="p">,</span> <span class="mh">0x30</span><span class="p">,</span> <span class="mh">0x27</span><span class="p">,</span> <span class="mh">0x2c</span><span class="p">,</span>  <span class="mh">0x24</span><span class="p">,</span> <span class="mh">0x27</span><span class="p">,</span> <span class="mh">0x14</span><span class="p">,</span> <span class="mh">0x20</span><span class="p">,</span>
+<span class="mh">0x35</span><span class="p">,</span> <span class="mh">0x32</span><span class="p">,</span> <span class="mh">0x32</span><span class="p">,</span> <span class="mh">0x2e</span><span class="p">,</span>  <span class="mh">0x2e</span><span class="p">,</span> <span class="mh">0x29</span><span class="p">,</span> <span class="mh">0x29</span><span class="p">,</span> <span class="mh">0x26</span><span class="p">,</span>  <span class="mh">0x27</span><span class="p">,</span> <span class="mh">0x30</span><span class="p">,</span> <span class="mh">0x24</span><span class="p">,</span> <span class="mh">0x2c</span><span class="p">,</span>  <span class="mh">0x20</span><span class="p">,</span> <span class="mh">0x27</span><span class="p">,</span> <span class="mh">0x14</span><span class="p">,</span> <span class="mh">0x20</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">voice1</span><span class="p">():</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">bd_music</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="nb">next</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="k">yield</span> <span class="nb">next</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">-</span><span class="mi">10</span>
+    <span class="k">except</span> <span class="nb">StopIteration</span><span class="p">:</span>
+        <span class="k">return</span>
+
+<span class="k">def</span> <span class="nf">voice2</span><span class="p">():</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">bd_music</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="nb">next</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">-</span><span class="mi">10</span>
+            <span class="nb">next</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">except</span> <span class="nb">StopIteration</span><span class="p">:</span>
+        <span class="k">return</span>
+
+<span class="n">pal_const</span> <span class="o">=</span>  <span class="p">(</span><span class="mi">256</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span><span class="o">/</span><span class="mi">985248</span>
+<span class="n">ntsc_const</span> <span class="o">=</span> <span class="p">(</span><span class="mi">256</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span><span class="o">/</span><span class="mi">1022727</span>
+<span class="n">a4</span> <span class="o">=</span> <span class="mf">435.97705078124994</span>
+<span class="n">base</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">12</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">reg_to_freq_pal</span><span class="p">(</span><span class="n">reg</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">reg</span><span class="o">/</span><span class="n">pal_const</span>
+
+<span class="k">def</span> <span class="nf">reg_to_freq_ntsc</span><span class="p">(</span><span class="n">reg</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">reg</span><span class="o">/</span><span class="n">ntsc_const</span>
+
+<span class="k">def</span> <span class="nf">freq_to_note</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">log</span><span class="p">(</span><span class="n">f</span><span class="o">/</span><span class="n">a4</span><span class="p">,</span> <span class="n">base</span><span class="p">)</span>
+
+<span class="n">v1</span> <span class="o">=</span> <span class="s">""</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">voice1</span><span class="p">():</span>
+    <span class="n">sid</span> <span class="o">=</span> <span class="n">note_to_sid</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">reg_to_freq_pal</span><span class="p">(</span><span class="n">sid</span><span class="p">)</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">freq_to_note</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
+    <span class="n">v1</span> <span class="o">+=</span> <span class="n">index_to_name</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span><span class="o">+</span><span class="s">" "</span>
+
+<span class="n">v2</span> <span class="o">=</span> <span class="s">""</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">voice2</span><span class="p">():</span>
+    <span class="n">sid</span> <span class="o">=</span> <span class="n">note_to_sid</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">reg_to_freq_pal</span><span class="p">(</span><span class="n">sid</span><span class="p">)</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">freq_to_note</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
+    <span class="n">v2</span> <span class="o">+=</span> <span class="n">index_to_name</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span><span class="o">+</span><span class="s">" "</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">"Voice 1"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"-------"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"Voice 2"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"-------"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Which spits out this:</p>
+
+<pre>
+Voice 1
+-------
+f3 a3 c4 f4 g3 a3♯ c4 g4 c4♯ d4♯ f4 g4♯ d4♯ d5 e4 c5 f3 f4 c3 g3 d3♯ g4 g3
+d3♯ f3 f4 c3 g3 c4♯ f5 f4 c4♯ d3♯ d4♯ a2♯ f3 b3 d5♯ d4♯ b3 c3 e4 d3 f4 a3♯
+a3♯ a4♯ a3♯ f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4
+f4 f4 f4 f4 f4 f4 f4 d4♯ d4♯ d4♯ d4♯ f4 f5 f4 d5♯ f4 d5 f4 c5 d4♯ d5♯ d4♯
+d5♯ d4♯ a4♯ d4♯ d5♯ f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 d4♯ d4♯ d4♯ d4♯ a4
+f4 c4 a3 g4 d4♯ a3♯ d3♯ a4 f4 c4 a3 g4 d4♯ a3♯ d3♯
+
+Voice 2
+-------
+f2 c3 f3 g3♯ d2♯ d3 d3♯ a3♯ c2♯ c2♯ c3♯ c2♯ d3♯ a4♯ e3 g4♯ f2 f2 f2 f2 d2♯
+d2♯ d2♯ d2♯ f2 f2 f2 f2 c3♯ c3♯ c3♯ c3♯ d2♯ d2♯ d2♯ d2♯ b2 b2 b2 b2 c2 c4
+c2 c4 a1♯ a1♯ f2 f2 f2 f2 f2 f2 f3 f3 f2 f2 d2♯ d2♯ d2♯ d2♯ d3♯ d3♯ d2♯ d2♯
+f2 a4 f2 a4♯ f3 a4 f2 a4♯ d2♯ a4 d2♯ a4♯ d3♯ g4 d2♯ g4♯ f2 f2 f2 c5 f3 f3
+f2 g4♯ d2♯ d2♯ d2♯ d2♯ d3♯ d3♯ d2♯ d2♯ f2 a4 f2 a4♯ f3 a4 f2 a4♯ d2♯ a4 d2♯
+a4♯ d3♯ g4 d2♯ g4♯ f4 c4 a3 f3 d4♯ a3♯ g3 d2♯ c5 a4 f4 c4 a3♯ g3 d3♯ d2♯
+</pre>
+
+<h2 id="what-key-is-it-in">What key is it in?</h2>
+
+<p>A fair question. At first I tried to stare down the notes until they buckled and gave up the goods. My knowledge of music theory is limited however and any candidate key I picked still had more <a href="https://en.wikipedia.org/wiki/Accidental_(music)">accidentals</a> than I felt comfortable with. I decided to whip up some code which compares the notes in the theme to all of the major keys and counts up the accidentals. With a bit of luck this would narrow down the candidates considerably. This article is getting a little code heavy and there’s a bit of repetition, so I’ll just show the additional code.</p>
+
+<p>Firstly I added code to count the occurrences of each note in the melody. All octaves of a note are counted as the same note (so a1 and a2 just count as a).</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Spectrum</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">notes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">12</span>
+
+    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">notes</span><span class="p">[</span><span class="n">n</span><span class="o">%</span><span class="mi">12</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="s">""</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">12</span><span class="p">):</span>
+            <span class="n">s</span> <span class="o">+=</span> <span class="n">names</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">ljust</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="s">" : "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">notes</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">+</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span>
+        <span class="k">return</span> <span class="n">s</span>
+</code></pre></div></div>
+
+<p>Next a class to generate the notes in all of the major keys (and the notes which aren’t in them):</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Keys</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">maj</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">keys</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">12</span><span class="p">):</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">last</span> <span class="o">=</span> <span class="n">t</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">maj</span><span class="p">:</span>
+                <span class="n">s</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">last</span><span class="o">+</span><span class="n">i</span><span class="p">)</span><span class="o">%</span><span class="mi">12</span><span class="p">)</span>
+                <span class="n">last</span> <span class="o">+=</span> <span class="n">i</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">keys</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span>
+
+    <span class="k">def</span> <span class="nf">notes_in</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">keys</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">notes_not_in</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span> <span class="k">if</span> <span class="n">n</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">keys</span><span class="p">[</span><span class="n">k</span><span class="p">]]</span>
+</code></pre></div></div>
+
+<p>So we get a Spectrum (s below) object, feed it all the notes then run this:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'a♯'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span> <span class="s">'c'</span><span class="p">,</span> <span class="s">'c♯'</span><span class="p">,</span> <span class="s">'d'</span><span class="p">,</span> <span class="s">'d♯'</span><span class="p">,</span> <span class="s">'e'</span><span class="p">,</span> <span class="s">'f'</span><span class="p">,</span> <span class="s">'f♯'</span><span class="p">,</span> <span class="s">'g'</span><span class="p">,</span> <span class="s">'g♯'</span><span class="p">]</span>
+<span class="n">keys</span> <span class="o">=</span> <span class="n">Keys</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">12</span><span class="p">):</span>
+    <span class="n">acc</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">nkn</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">.</span><span class="n">notes_not_in</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+        <span class="n">acc</span> <span class="o">+=</span> <span class="n">s</span><span class="p">.</span><span class="n">notes</span><span class="p">[</span><span class="n">nkn</span><span class="p">]</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">names</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">ljust</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="s">" : "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">acc</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>Here’s the results:</p>
+
+<pre>
+a  : 213
+a♯ : 26
+b  : 142
+c  : 105
+c♯ : 38
+d  : 207
+d♯ : 33
+e  : 150
+f  : 90
+f♯ : 50
+g  : 200
+g♯ : 26
+</pre>
+
+<p>We’ve got two stand outs here: a♯ major and g# major (normally you’d call these B♭ and A♭ major). I actually think it sounds minor. The <a href="https://en.wikipedia.org/wiki/Relative_key">relative minor</a> keys which correspond are G minor and F minor. Of these I went with F minor after some more note gazing.</p>
+
+<p>Given this key the accidentals should be flats:</p>
+
+<pre>
+Voice 1
+-------
+f3 a3 c4 f4 g3 b3♭ c4 g4 d4♭ e4♭ f4 a♭4 e4♭ d5 e4 c5 f3 f4 c3 g3 e3♭ g4 g3 e3♭ f3 f4 c3 g3
+d4♭ f5 f4 d4♭ e3♭ e4♭ b2♭ f3 b3 e5♭ e4♭ b3 c3 e4 d3 f4 b3♭ b3♭ b4♭ b3♭ f4 f4 f4 f4 f4 f4 f4
+f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 e4♭ e4♭ e4♭ e4♭ f4 f5 f4 e5♭
+f4 d5 f4 c5 e4♭ e5♭ e4♭ e5♭ e4♭ b4♭ e4♭ e5♭ f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 f4 e4♭ e4♭ e4♭
+a4 f4 c4 a3 g4 e4♭ b3♭ e3♭ a4 f4 c4 a3 g4 e4♭ b3♭ e3♭ 
+
+Voice 2
+-------
+f2 c3 f3 a♭3 e2♭ d3 e3♭ b3♭ d2♭ d2♭ d3♭ d2♭ e3♭ b4♭ e3 a♭4 f2 f2 f2 f2 e2♭ e2♭ e2♭ e2♭ f2 f2
+f2 f2 d3♭ d3♭ d3♭ d3♭ e2♭ e2♭ e2♭ e2♭ b2 b2 b2 b2 c2 c4 c2 c4 b1♭ b1♭ f2 f2 f2 f2 f2 f2 f3
+f3 f2 f2 e2♭ e2♭ e2♭ e2♭ e3♭ e3♭ e2♭ e2♭ f2 a4 f2 b4♭ f3 a4 f2 b4♭ e2♭ a4 e2♭ b4♭ e3♭ g4 e2♭
+a♭4 f2 f2 f2 c5 f3 f3 f2 a♭4 e2♭ e2♭ e2♭ e2♭ e3♭ e3♭ e2♭ e2♭ f2 a4 f2 b4♭ f3 a4 f2 b4♭ e2♭
+a4 e2♭ b4♭ e3♭ g4 e2♭ a♭4 f4 c4 a3 f3 e4♭ b3♭ g3 e2♭ c5 a4 f4 c4 b3♭ g3 e3♭ e2♭ 
+</pre>
+
+<h2 id="tempo">Tempo</h2>
+
+<p>The music routine is called twice per frame but only does anything of consequence every other call. There’s some weirdness going on there. Why not just call the routine once per frame instead of calling it twice and having it do nothing half of the time? Function calls aren’t free.</p>
+
+<pre>
+<b>MusicTickRoutine</b>:
+<b>83ac</b>   a5 c1      LDA <b>TitleScreenFrameCountMod4</b>
+<b>83ae</b>   29 01      AND #$01
+<b>83b0</b>   d0 01      BNE $83b3
+<b>83b2</b>   60         RTS 
+</pre>
+
+<p>So on every other call:</p>
+
+<pre>
+<b>83b3</b>   ad 0c 98   LDA <b>MusicTickRoutine__Voice1SustainLevel</b>
+<b>83b6</b>   c9 a0      CMP #$a0
+<b>83b8</b>   d0 43      BNE <b>__MusicTickRoutine__TweakCurrentNote</b>
+<b>__MusicTickRoutine__NextNote</b>:
+; Set voice 1&amp;2 to triangle wave.
+<b>83ba</b>   a9 10      LDA #$10
+<b>83bc</b>   8d 04 d4   STA <b>Sid_Voice1Ctrl</b>
+<b>83bf</b>   8d 0b d4   STA <b>Sid_Voice2Ctrl</b>
+ .
+ .
+ .
+<b>__MusicTickRoutine__TweakCurrentNote</b>:
+<b>83fd</b>   ad 0c 98   LDA <b>MusicTickRoutine__Voice1SustainLevel</b>
+ .
+ .
+ .
+<b>8413</b>   ad 0c 98   LDA <b>MusicTickRoutine__Voice1SustainLevel</b>
+<b>8416</b>   18         CLC 
+<b>8417</b>   69 01      ADC #$01
+<b>8419</b>   29 a7      AND #$a7
+<b>841b</b>   8d 0c 98   STA <b>MusicTickRoutine__Voice1SustainLevel</b>
+ .
+ .
+ .
+</pre>
+
+<p>OK, there’s some weirdness going on here too. Whether the routine advances to the next note (actually the next note for each of the two voices used) or just modulates the amplitude of voice one is determined by <strong>MusicTickRoutine__Voice1SustainLevel</strong>. This is initialised to $a0 before the music starts and a new note is only played when it’s $a0. The lower three bits are incremented every other call but the $a in the high nybble is entirely pointless. The upshot of all this is the song advances to the next note every 8 frames. We’ll use quavers (eighths notes) for the transcription. Given that PAL has around 50 frames per second this gives us a BPM of 187.5. We’ll call it 188.</p>
+
+<h2 id="notes-on-a-staff-bitch">Notes on a staff bitch!</h2>
+
+<p>OK, OK, I’m getting to it. Writing music engraving software from scratch would obviously be a major undertaking and breaking out my ruler is just offensive. I fired up Google and starting searching for some free software that could do the deed. Something that had an interactive user interface was not a requirement; I needed it to consume a text based file that my software could generate. Initially I came across <a href="http://www.vexflow.com/">VexFlow</a>. It had limitations, but while reading various message boards trying to figure out how to resolve these issues I came discovered <a href="http://lilypond.org/">LilyPond</a>. Holy shit! The stuff they give away for free these days. The other building block I needed was a Python based templating system. My go to for this kind of thing is <a href="https://jinja.palletsprojects.com/en/2.10.x/">Jinja2</a>. So firstly we need the notes in a form that LilyPond can consume. I added this code:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">lilynames_sharp</span> <span class="o">=</span> <span class="p">[</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'as'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span> <span class="s">'c'</span><span class="p">,</span> <span class="s">'cs'</span><span class="p">,</span> <span class="s">'d'</span><span class="p">,</span> <span class="s">'ds'</span><span class="p">,</span> <span class="s">'e'</span><span class="p">,</span><span class="s">'f'</span><span class="p">,</span> <span class="s">'fs'</span><span class="p">,</span> <span class="s">'g'</span><span class="p">,</span> <span class="s">'gs'</span><span class="p">]</span>
+<span class="n">lilynames_flat</span>  <span class="o">=</span> <span class="p">[</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'bf'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span> <span class="s">'c'</span><span class="p">,</span> <span class="s">'df'</span><span class="p">,</span> <span class="s">'d'</span><span class="p">,</span> <span class="s">'ef'</span><span class="p">,</span> <span class="s">'e'</span><span class="p">,</span><span class="s">'f'</span><span class="p">,</span> <span class="s">'gf'</span><span class="p">,</span> <span class="s">'g'</span><span class="p">,</span> <span class="s">'af'</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">index_to_lily</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">sharp</span><span class="p">):</span>
+    <span class="n">names</span> <span class="o">=</span> <span class="n">lilynames_sharp</span> <span class="k">if</span> <span class="n">sharp</span> <span class="k">else</span> <span class="n">lilynames_flat</span>
+    <span class="n">octave</span> <span class="o">=</span> <span class="n">floor</span><span class="p">((</span><span class="n">i</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span><span class="o">/</span><span class="mi">12</span><span class="p">)</span><span class="o">+</span><span class="mi">2</span>
+    <span class="k">if</span> <span class="n">octave</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">:</span>
+        <span class="n">octave</span> <span class="o">=</span> <span class="s">','</span><span class="o">*-</span><span class="n">octave</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">octave</span> <span class="o">=</span> <span class="s">"'"</span><span class="o">*</span><span class="n">octave</span>
+    <span class="k">return</span> <span class="n">names</span><span class="p">[</span><span class="n">i</span><span class="o">%</span><span class="mi">12</span><span class="p">]</span><span class="o">+</span><span class="n">octave</span>
+</code></pre></div></div>
+
+<p>See <a href="http://lilypond.org/doc/v2.18/Documentation/notation/writing-pitches">here</a> and <a href="http://lilypond.org/doc/v2.18/Documentation/notation/writing-pitches#note-names-in-other-languages">there</a> for information on these note naming conventions.</p>
+
+<p>Next we need a skeletal Lilipond file and to hook up Jinja2 to fill in the blanks. The hooking up side of things is pretty simple:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># import jinja2
+</span>
+<span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">template_name</span><span class="p">,</span> <span class="o">**</span><span class="n">template_vars</span><span class="p">):</span>
+    <span class="n">template</span> <span class="o">=</span> <span class="n">env</span><span class="p">.</span><span class="n">get_template</span><span class="p">(</span><span class="n">template_name</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">template</span><span class="p">.</span><span class="n">render</span><span class="p">(</span><span class="o">**</span><span class="n">template_vars</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"Boulder_Dash.ly"</span><span class="p">,</span> <span class="s">"w"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">'utf-8'</span><span class="p">)</span> <span class="k">as</span> <span class="n">of</span><span class="p">:</span>
+    <span class="n">v1</span> <span class="o">=</span> <span class="s">""</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">voice1</span><span class="p">():</span>
+        <span class="n">sid</span> <span class="o">=</span> <span class="n">note_to_sid</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">reg_to_freq_pal</span><span class="p">(</span><span class="n">sid</span><span class="p">)</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">freq_to_note</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
+        <span class="n">v1</span> <span class="o">+=</span> <span class="n">index_to_lily</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span><span class="o">+</span><span class="s">"8 "</span>
+    <span class="n">v2</span> <span class="o">=</span> <span class="s">""</span>
+    <span class="n">last_note</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">voice2</span><span class="p">():</span>
+        <span class="n">sid</span> <span class="o">=</span> <span class="n">note_to_sid</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">reg_to_freq_pal</span><span class="p">(</span><span class="n">sid</span><span class="p">)</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">freq_to_note</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
+        <span class="n">s</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="n">last_note</span><span class="p">:</span>
+            <span class="n">v2</span> <span class="o">+=</span> <span class="s">"~"</span>
+        <span class="n">v2</span> <span class="o">+=</span> <span class="s">" "</span>
+        <span class="n">v2</span> <span class="o">+=</span> <span class="n">index_to_lily</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span><span class="o">+</span><span class="s">"8"</span>
+        <span class="n">last_note</span> <span class="o">=</span> <span class="n">i</span>
+
+    <span class="n">env</span> <span class="o">=</span> <span class="n">jinja2</span><span class="p">.</span><span class="n">Environment</span><span class="p">(</span><span class="n">loader</span><span class="o">=</span><span class="n">jinja2</span><span class="p">.</span><span class="n">FileSystemLoader</span><span class="p">(</span><span class="s">'.'</span><span class="p">))</span>
+    <span class="n">env</span><span class="p">.</span><span class="nb">globals</span><span class="p">[</span><span class="s">'voice1'</span><span class="p">]</span> <span class="o">=</span> <span class="n">v1</span>
+    <span class="n">env</span><span class="p">.</span><span class="nb">globals</span><span class="p">[</span><span class="s">'voice2'</span><span class="p">]</span> <span class="o">=</span> <span class="n">v2</span>
+    <span class="n">env</span><span class="p">.</span><span class="nb">globals</span><span class="p">[</span><span class="s">'key'</span><span class="p">]</span> <span class="o">=</span> <span class="sa">r</span><span class="s">"\key f \minor"</span>
+    <span class="n">env</span><span class="p">.</span><span class="nb">globals</span><span class="p">[</span><span class="s">'tempo'</span><span class="p">]</span> <span class="o">=</span> <span class="sa">r</span><span class="s">"\tempo 4 = 188"</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">render</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="s">'bd.ly'</span><span class="p">)</span>
+    <span class="n">of</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>And finally our skeleton:</p>
+
+<pre>
+\version "2.16.0"
+
+\header {
+  title = "Boulder Dash (C64)"
+  composer = "Peter Liepa"
+  arranger = "Transcribed by Stephen Hewitt"
+  tagline = "" % removed
+}
+
+\language english
+
+\score
+{
+    \new PianoStaff \with { instrumentName = "SID chip" }
+    &lt;&lt;
+        \new Staff = "up"
+        {
+            &lt;&lt;
+                \new Voice = "voice1"
+                {
+                    \voiceOne
+                    &lbrace;&lbrace;key&rbrace;&rbrace;
+                    &lbrace;&lbrace;tempo&rbrace;&rbrace;
+                    \set midiInstrument = #"acoustic guitar (steel)"
+                    \autochange
+                    \repeat volta 2
+                    {
+                        &lbrace;&lbrace;voice1&rbrace;&rbrace;
+                    }
+                }
+
+                \new Voice = "voice2"
+                {
+                    \voiceTwo
+                    &lbrace;&lbrace;key&rbrace;&rbrace;
+                    \set midiInstrument = #"electric guitar (jazz)"
+                    \autochange
+                    \repeat volta 2
+                    {
+
+                        &lbrace;&lbrace;voice2&rbrace;&rbrace;
+                    }
+                }
+            &gt;&gt;
+        }
+
+        \new Staff = "down"
+        {
+            \clef bass
+            &lbrace;&lbrace;key&rbrace;&rbrace;
+        }
+    &gt;&gt;
+
+    \layout { }
+    \midi
+    {
+        \context
+        {
+            \Staff
+            \remove "Staff_performer"
+        }
+        \context
+        {
+            \Voice
+            \consists "Staff_performer"
+        }
+    }
+}
+</pre>
+
+<p>This gives us a PDF and a MIDI file.</p>
+
+<p><img src="/boulder-dash/Boulder_Dash.svg" alt="Boulder Dash music" /></p>
+
+        </section>
+
+        
+        
+      </div>
+    </div>
+
+    
+  </body>
+
+<script>
+  rockfordpreload();
+  setInterval(rockfordtick, 40);
+</script>
+
+</html>

@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/assets/css/style.css?v=8179fc8e8c53b9b049fed06cd501798140d3e609" media="screen" type="text/css">
+    <link rel="stylesheet" href="/assets/css/print.css" media="print" type="text/css">
+    <style type="text/css">
+    
+    #main-content {
+      width: 100%;
+      line-height: 1;
+    }
+    
+    #rockford {
+      position: relative;
+      float: right;
+    }
+    #rockfordhead {
+      position: absolute;
+      top: 32px;
+      left: 32px;
+      width: 32px;
+      height: 16px;
+    }
+    #rockfordfeet {
+      position: absolute;
+      top: 48px;
+      left: 32px;
+      width: 32px;
+      height: 16px;
+    }
+    </style>
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <script>
+      rockford_head = [
+        "rockford_head0.png",
+        "rockford_head1.png",
+        "rockford_head2.png",
+        "rockford_head2.png",
+        "rockford_head1.png",
+        "rockford_head0.png",
+        "rockford_head0.png",
+        "rockford_head0.png",
+        "rockford_head0.png"
+      ]
+
+      rockford_feet = [
+        "rockford_feet0.png",
+        "rockford_feet1.png",
+        "rockford_feet1.png",
+        "rockford_feet1.png",
+        "rockford_feet1.png",
+        "rockford_feet5.png",
+        "rockford_feet5.png",
+        "rockford_feet5.png",
+        "rockford_feet5.png"
+        ]
+      function rockfordpreload()
+      {
+        for (i=0; i<=8; ++i)
+        {
+          image = new Image();
+          image.src = "/assets/images/"+rockford_head[i];
+          image = new Image();
+          image.src = "/assets/images/"+rockford_feet[i];
+        }
+      }
+
+      var frame=0;
+      var blink=false;
+      var foottap=false;
+
+      function rockfordtick()
+      {
+        var h = document.getElementById("rockfordhead");
+        var f = document.getElementById("rockfordfeet");
+
+        if (frame==0)
+        {
+          r = Math.floor(Math.random()*256);
+          blink = ((r&0x3)==0); // 1 in 4 chance
+          if ((r&0xf)==0)
+            foottap = !foottap; // 1 in 16 chance of toggling
+
+          if (!blink)
+            h.src = "/assets/images/"+rockford_head[0];
+          if (!foottap)
+            f.src = "/assets/images/"+rockford_feet[0];
+        }
+
+        if (blink)
+          h.src = "/assets/images/"+rockford_head[frame+1];
+        if (foottap)
+          f.src = "/assets/images/"+rockford_feet[frame+1];
+
+        frame += 1;
+        if (frame>=8)
+          frame = 0;
+      }
+    </script>
+
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Retrointernals</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Retrointernals" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/basic/tsobm/tsobm_listing.html" />
+<meta property="og:url" content="http://localhost:4000/basic/tsobm/tsobm_listing.html" />
+<meta property="og:site_name" content="Retrointernals" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Retrointernals" />
+<script type="application/ld+json">
+{"@type":"WebPage","headline":"Retrointernals","url":"http://localhost:4000/basic/tsobm/tsobm_listing.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <div id="rockford">
+          <image src="/assets/images/rockfordbg.png">
+          <image id="rockfordhead" src="/assets/images/rockford_head0.png">
+          <image id="rockfordfeet" src="/assets/images/rockford_feet0.png">
+        </div>
+        <a href="http://localhost:4000/">
+          <h1>Retrointernals</h1>
+        </a>
+        <h2></h2>
+        
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <!doctype html>
+
+<html>
+<head>
+<meta charset="utf-8"/>
+<style>.container {
+	font-family: monospace;
+}
+.comment {
+	font-family: inherit;
+	white-space: pre;
+	color : blue;
+}
+.code {
+	font-family: inherit;
+	white-space: pre;
+}
+.hole {
+	border: 2px solid red;
+}
+.basic {white-space: pre;
+}
+.notinterested {
+	background-color: orange;
+}
+.intro {
+	background-color: lightgreen;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+
+
+<div class="basic">5 PRINT"{clear}":V=53248:A$="                                       "
+10 DIMS$(27,7),R$(27,3),T$(5)
+12 X1$="BRECLICUTDROEATFILGETGO HEL":X2$="INVLIGLOOMOVOPEPREPUL"
+13 X3$="QUIREAREMRINSAVUNLTHRWEA":YY$="   (FILLED)":A9=66
+14 Y$="O.K.":Y2$="I ALREADY HAVE":ZZ$="ITS LOCKED "
+15 B=1:X=0:Y1$="SORRY,CAN'T TRANSLATE.TRY AGAIN":WW$="   (WORN)"
+16 H2$="{crsr right}{crsr right}{crsr right}{cyan}├┼┼┼┼┼┼┤":H3$="{cyan}{crsr right}{crsr right}{crsr right}├┼┼┼{crsr right}{crsr right}{crsr right}│"
+17 POKE775,168
+18 GOTO<a href="#8404">4900</a>
+<a name="0991"></a>20 N$=MID$(P$,5,3)
+21 IFN$="APP"THENN$="KNIFE":GOSUB<a href="#4158">1560</a>:GOTO<a href="#09e5">23</a>
+22 PRINT"THAT WILL NOT HELP":GOTO<a href="#421f">1600</a>
+<a name="09e5"></a>23 IFE=0THEN<a href="#42a0">1630</a>
+24 IFE=1THENN$="APPLE":GOSUB<a href="#417f">1565</a>:IFE=0THEN<a href="#42a0">1630</a>
+25 IFE=1THENGOSUB<a href="#4111">1550</a>:N$="SMALL KEY":T$(A)="":GOTO<a href="#4252">1620</a>
+27 PRINT"PARDON ?":GOTO<a href="#421f">1600</a>
+<a name="0a5a"></a>30 N$=MID$(P$,5,3)
+31 IFN$="APP"THENN$="APPLE":GOSUB<a href="#4158">1560</a>:GOTO<a href="#0aae">33</a>
+32 PRINT"THAT WILL NOT HELP":GOTO<a href="#421f">1600</a>
+<a name="0aae"></a>33 IFE=0THEN<a href="#42a0">1630</a>
+34 IFE=1THENPRINTY$" FEELS LUMPY....":T$(A)="":GOTO<a href="#421f">1600</a>
+35 PRINT"PARDON ?":GOTO<a href="#421f">1600</a>
+<a name="0b00"></a>41 PRINTY$:GOSUB<a href="#4111">1550</a>
+<a name="0b0e"></a>42 PRINT"{clear}"
+44 POKE53280,X:POKE53281,X
+46 IFB>13THEN<a href="#0b82">52</a>
+51 ONBGOTO<a href="#5185">2000</a>,<a href="#5b1b">2400</a>,<a href="#56f1">2200</a>,<a href="#5924">2300</a>,<a href="#5495">2100</a>,<a href="#5fb2">2600</a>,<a href="#5d70">2500</a>,<a href="#60e9">2700</a>,<a href="#62d7">2800</a>,<a href="#6512">2900</a>,<a href="#6759">3000</a>,<a href="#6a32">3100</a>,<a href="#6c17">3200</a>
+<a name="0b82"></a>52 B=B-13
+53 ONBGOTO<a href="#6e5a">3300</a>,<a href="#6f38">3400</a>,<a href="#7051">3500</a>,<a href="#71db">3600</a>,<a href="#734d">3700</a>,<a href="#7510">3800</a>,<a href="#8063">4450</a>,<a href="#76f0">4100</a>,<a href="#7952">4200</a>,<a href="#7be4">4250</a>,<a href="#7de3">4300</a>,<a href="#7f00">4350</a>,<a href="#7f5b">4400</a>,<a href="#8274">4500</a>
+<a name="0bda"></a>57 IFB=26THENPRINT"{yellow}":GOTO<a href="#0bf6">60</a>
+58 PRINT"{grey}"
+<a name="0bf6"></a>60 PRINT"{home}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}"
+61 PRINT"I AM ";:IFB>23THEN<a href="#0c6e">63</a>
+62 ONBGOTO<a href="#0c90">64</a>,<a href="#0cb4">66</a>,<a href="#0cd1">68</a>,<a href="#0cef">70</a>,<a href="#0d19">72</a>,<a href="#0d37">74</a>,<a href="#0d5d">76</a>,<a href="#0d86">78</a>,<a href="#0da8">80</a>,<a href="#0dd1">82</a>,<a href="#0dfa">84</a>,<a href="#0e23">86</a>,<a href="#0e3e">88</a>,<a href="#0e5d">90</a>,<a href="#0e7a">91</a>,<a href="#0e9b">92</a>,<a href="#0ebd">93</a>,<a href="#0ee0">94</a>,<a href="#0efe">95</a>,<a href="#0f20">96</a>,<a href="#0f3b">98</a>,<a href="#0f53">99</a>
+<a name="0c6e"></a>63 B=B-22:ONBGOTO<a href="#0f6c">100</a>,<a href="#0fa6">102</a>,<a href="#0fda">104</a>,<a href="#0ff5">105</a>,<a href="#1021">106</a>
+<a name="0c90"></a>64 PRINT"OUTSIDE THE MANOR GATES":GOTO<a href="#1057">110</a>
+<a name="0cb4"></a>66 PRINT"ON A GRAVEL PATH":GOTO<a href="#1057">110</a>
+<a name="0cd1"></a>68 PRINT"AT THE FRONT DOOR":GOTO<a href="#1057">110</a>
+<a name="0cef"></a>70 PRINT"AT THE EAST SIDE OF THE MANOR":GOTO<a href="#1057">110</a>
+<a name="0d19"></a>72 PRINT"BY THE MANOR WALL":GOTO<a href="#1057">110</a>
+<a name="0d37"></a>74 PRINT"AT THE TOP OF A DEAD TREE":GOTO<a href="#1057">110</a>
+<a name="0d5d"></a>76 PRINT"IN THE GARDEN OUTSIDE A SHED":GOTO<a href="#1057">110</a>
+<a name="0d86"></a>78 PRINT"INSIDE A STORAGE SHED":GOTO<a href="#1057">110</a>
+<a name="0da8"></a>80 IFCC=0THEN<a href="#4d5b">1920</a>
+81 PRINT"IN A DIM ROOM":GOTO<a href="#1057">110</a>
+<a name="0dd1"></a>82 PRINT"AT THE NORTH END OF THE HALL":GOTO<a href="#1057">110</a>
+<a name="0dfa"></a>84 PRINT"AT THE SOUTH END OF THE HALL":GOTO<a href="#1057">110</a>
+<a name="0e23"></a>86 PRINT"IN THE KITCHEN":GOTO<a href="#1057">110</a>
+<a name="0e3e"></a>88 PRINT"IN THE WINE CELLAR":GOTO<a href="#1057">110</a>
+<a name="0e5d"></a>90 PRINT"IN A SECRET ROOM":GOTO<a href="#1057">110</a>
+<a name="0e7a"></a>91 PRINT"IN THE TREASURE ROOM":GOTO<a href="#1057">110</a>
+<a name="0e9b"></a>92 PRINT"IN THE MASTER BEDROOM":GOTO<a href="#1057">110</a>
+<a name="0ebd"></a>93 PRINT"IN THE MASTER BATHROOM":GOTO<a href="#1057">110</a>
+<a name="0ee0"></a>94 PRINT"ON A WINDOW LEDGE":GOTO<a href="#1057">110</a>
+<a name="0efe"></a>95 PRINT"IN THE ENTRANCE FOYER":GOTO<a href="#1057">110</a>
+<a name="0f20"></a>96 PRINT"IN THE LIBRARY":GOTO<a href="#1057">110</a>
+<a name="0f3b"></a>98 PRINT"IN A CLOSET":GOTO<a href="#1057">110</a>
+<a name="0f53"></a>99 PRINT"IN THE STUDY":GOTO<a href="#1057">110</a>
+<a name="0f6c"></a>100 IFCC=0THEN<a href="#4d5b">1920</a>
+101 PRINT"IN A DARK, MOSS COVERED TUNNEL":GOTO<a href="#104c">109</a>
+<a name="0fa6"></a>102 IFCC=0THEN<a href="#4d5b">1920</a>
+103 PRINT"IN A DAMP STONE CORRIDOR":GOTO<a href="#104c">109</a>
+<a name="0fda"></a>104 PRINT"IN A DARK ROOM":GOTO<a href="#104c">109</a>
+<a name="0ff5"></a>105 PRINT"IN A SECRET LABORATORY.MY GOSH!":GOTO<a href="#104c">109</a>
+<a name="1021"></a>106 IFCC=0THEN<a href="#4d5b">1920</a>
+107 PRINT"IN A STONE CELL":GOTO<a href="#104c">109</a>
+<a name="104c"></a>109 B=B+22
+<a name="1057"></a>110 II=0:PRINT:PRINT"I SEE ";:FORA=1TO7:IFS$(B,A)="*"THENS$(B,A)=""
+111 IFS$(B,A)=""THEN<a href="#10c1">114</a>
+112 PRINTS$(B,A)".";:II=II+1:IFII=4THENPRINT
+<a name="10c1"></a>114 NEXT:PRINT:IFII=>4THEN<a href="#10da">116</a>
+115 PRINT
+<a name="10da"></a>116 GOTO<a href="#119f">140</a>
+118 PRINT"I CAN GO ";
+120 IFR$(B,1)=""THEN<a href="#118a">130</a>
+122 FORA=1TO3
+123 IFR$(B,A)="N"THENPRINT"NORTH.";
+124 IFR$(B,A)="S"THENPRINT"SOUTH.";
+125 IFR$(B,A)="W"THENPRINT"WEST.";
+126 IFR$(B,A)="E"THENPRINT"EAST.";
+128 NEXT:RETURN
+<a name="118a"></a>130 PRINT" NOWHERE!!!":RETURN
+<a name="119f"></a>140 IFPB=1ANDPC=0THENPA=PA+1:Z6$=A6$+A9$
+142 IFPA=1THENPRINT"{purple}{rvs on} I HEAR DOGS HOWLING !! {grey}":GOSUB<a href="#4d2d">1900</a>
+144 IFPA>7THENPRINT"{purple}{rvs on} THE DOGS ATTACK ME...":GOSUB<a href="#4134">1554</a>:GOTO<a href="#42c3">1650</a>
+146 IFPA>2THENPRINT"{purple}{rvs on} BARK!  BARK!  BARK!  {grey}":GOSUB<a href="#4d2d">1900</a>
+150 N$="BRANCH":GOSUB<a href="#4158">1560</a>:IFE=1THENHB=HB+1:IFHB>3THENHJ=1
+151 IFHB>3ANDB=8ANDHJ=1THENN$="BRANCH":GOSUB<a href="#4158">1560</a>:GOTO<a href="#141a">181</a>
+155 IFHK=4ANDB=21THENPRINT"{yellow}AN OLD MAN ENTERS";:GOSUB<a href="#4122">1552</a>:PRINT" EVERYTHING GOES BLACK":GOTO<a href="#4c60">1890</a>
+160 IFB=14ANDHR=0THEN<a href="#4a2a">1760</a>
+165 IFLR=1THENPRINT"{lightblue}I HEAR BELLS RINGING SOMEWHERE{grey}":LR=2:GOSUB<a href="#4d2d">1900</a>
+166 IFLR=3THENLT=LT+1:PRINT"{lightblue}THE SKELETON COMES AFTER YOU..{grey}":GOSUB<a href="#4d2d">1900</a>
+167 IFLR=2ANDB=26THENPRINT"{rvs on}THE SKELETON STIRS AND COMES FOR YOU{grey}":LR=3:GOSUB<a href="#4d2d">1900</a>
+168 IFB=8ANDH8=1THENLT=0:PC=0:PA=3
+169 IFLT>4THENPRINT"{lightblue}THE SKELETON ATTACKS...{grey}":GOSUB<a href="#4134">1554</a>:GOTO<a href="#42c3">1650</a>
+180 GOTO<a href="#1459">300</a>
+<a name="141a"></a>181 IFE=0THEN<a href="#1459">300</a>
+184 PRINT"I'M VERY TIRED..CAN'T GO ANY FURTHER":GOSUB<a href="#4d2d">1900</a>
+<a name="1459"></a>300 P$="":INPUT"{cyan}> WHAT NOW ";P$:D=LEN(P$):C=C+1
+302 IFB=26THENPRINT"{yellow}":GOTO<a href="#14a1">305</a>
+303 PRINT"{grey}"
+<a name="14a1"></a>305 IFD=0THEN<a href="#0b0e">42</a>
+306 IFD>1THEN<a href="#18d5">360</a>
+308 IFP$="I"THEN<a href="#3f4b">1500</a>
+310 IFP$="G"THENGOSUB118:GOTO<a href="#421f">1600</a>
+320 IFP$="N"ANDB=10THENB=19:GOTO<a href="#0b00">41</a>
+321 IFP$="S"ANDB=9THENB=23:GOTO<a href="#0b00">41</a>
+322 IFP$="N"ANDB=23THENB=9:GOTO<a href="#0b00">41</a>
+323 IFP$="S"ANDB=23ANDDB=0THEN<a href="#42a0">1630</a>
+324 IFP$="S"ANDB=23ANDDB=1THENB=24:GOTO<a href="#0b00">41</a>
+325 IFP$="N"ANDB=24ANDDB=0THEN<a href="#42a0">1630</a>
+326 IFP$="N"ANDB=24ANDDB=1THENB=23:GOTO<a href="#0b00">41</a>
+327 IFP$="N"ANDB=8ANDHJ=1THEN<a href="#1c7c">397</a>
+328 IFP$="E"ANDB=19THENPRINTY$:GOSUB<a href="#4122">1552</a>:GOTO<a href="#47ed">1720</a>
+329 IFP$="W"ANDB=14THENB=27:PRINTY$:GOSUB<a href="#4122">1552</a>:POKEV+6,0:POKEV+7,0:GOTO<a href="#0b0e">42</a>
+330 IFP$="E"ANDB=14THENB=15:PRINTY$:GOSUB<a href="#4122">1552</a>:POKEV+6,0:POKEV+7,0:GOTO<a href="#0b0e">42</a>
+331 IFP$="W"ANDB=2ANDH8=1THEN<a href="#4aa2">1780</a>
+333 IFP$="S"ANDB=19THENB=10:GOTO<a href="#0b00">41</a>
+334 IFP$="E"ANDB=22THENB=11:GOTO<a href="#0b00">41</a>
+335 IFP$="W"ANDB=12THENB=21:GOTO<a href="#0b00">41</a>
+336 IFP$="E"ANDB=21THENB=12:GOTO<a href="#0b00">41</a>
+337 IFP$="S"ANDB=1THENB=5:GOTO<a href="#0b00">41</a>
+338 IFP$="N"ANDB=5THENB=1:GOTO<a href="#0b00">41</a>
+341 IFP$="S"ANDB=2THENB=7:GOTO<a href="#0b00">41</a>
+342 IFP$="N"ANDB=7THENB=2:GOTO<a href="#0b00">41</a>
+343 IFP$="W"ANDB=24THENB=25:GOTO<a href="#0b00">41</a>
+344 IFP$="E"ANDB=25THENB=24:GOTO<a href="#0b00">41</a>
+345 IFP$="S"ANDB=24THENB=26:X=2:GOTO<a href="#0b00">41</a>
+348 IFP$="E"ANDB=26THENB=27:X=0:PRINTY$:GOSUB<a href="#4122">1552</a>:POKEV+8,0:POKEV+9,0:GOTO<a href="#0b0e">42</a>
+350 IFP$="N"ANDB=26THENB=24:X=0:PRINTY$:GOSUB<a href="#4122">1552</a>:POKEV+8,0:POKEV+9,0:GOTO<a href="#0b0e">42</a>
+351 IFP$="W"ANDB=9THENB=8:GOTO<a href="#0b00">41</a>
+352 IFP$="S"ANDB=7THENB=8:PC=1:PA=0:GOTO<a href="#0b00">41</a>
+353 IFP$="N"ANDB=8ANDHJ=0THENB=7:PC=0:GOTO<a href="#0b00">41</a>
+354 FORA=1TO3:IFR$(B,A)<>P$THEN<a href="#18b0">359</a>
+355 IFP$="N"THENB=B-1:GOTO<a href="#0b00">41</a>
+356 IFP$="S"THENB=B+1:GOTO<a href="#0b00">41</a>
+357 IFP$="E"THENB=B+1:GOTO<a href="#0b00">41</a>
+358 IFP$="W"THENB=B-1:GOTO<a href="#0b00">41</a>
+<a name="18b0"></a>359 NEXT:PRINT"SORRY, CAN'T GO THERE":GOTO<a href="#421f">1600</a>
+<a name="18d5"></a>360 IFASC(P$)>80THEN<a href="#19a5">366</a>
+361 IFASC(P$)>72THEN<a href="#1952">364</a>
+362 FORA=1TO9:IFLEFT$(P$,3)=MID$(X1$,A*3-2,3)THENONAGOTO<a href="#2645">500</a>,<a href="#271c">530</a>,<a href="#0991">20</a>,<a href="#1dc2">420</a>,<a href="#0a5a">30</a>,<a href="#2810">550</a>,<a href="#1c9e">400</a>,<a href="#1a02">370</a>,<a href="#28b2">570</a>
+363 NEXT:PRINTY1$:GOTO<a href="#421f">1600</a>
+<a name="1952"></a>364 FORA=1TO7:IFLEFT$(P$,3)=MID$(X2$,A*3-2,3)THENONAGOTO<a href="#1e7a">430</a>,<a href="#2929">600</a>,<a href="#1e84">435</a>,<a href="#298d">620</a>,<a href="#34aa">875</a>,<a href="#2a35">640</a>,<a href="#2a83">660</a>
+365 NEXT:PRINTY1$:GOTO<a href="#421f">1600</a>
+<a name="19a5"></a>366 FORA=1TO8:IFLEFT$(P$,3)=MID$(X3$,A*3-2,3)THENONAGOTO<a href="#2b45">700</a>,<a href="#2c3a">730</a>,<a href="#2e07">750</a>,<a href="#2e9d">760</a>,<a href="#2f19">774</a>,<a href="#31de">800</a>,<a href="#3341">830</a>,<a href="#340d">860</a>
+367 NEXT:PRINTY1$:GOTO<a href="#421f">1600</a>
+368 NEXT
+<a name="1a02"></a>370 N$=MID$(P$,4,3):IFB=1ANDN$="GAT"ANDAM=1THENB=2:GOTO<a href="#0b00">41</a>
+371 IFB=1ANDDK=1ANDN$="GAT"THEN<a href="#42a0">1630</a>
+372 IFB=8ANDKK=1ANDN$="TRA"THENN$="LADDER":GOSUB<a href="#4158">1560</a>:GOTO<a href="#4de8">1930</a>
+<a name="1a79"></a>373 IFB=8ANDN$="TRA"ANDKK=1ANDHJ=0THENB=9:GOTO<a href="#0b00">41</a>
+374 IFB=10ANDN$="DOO"THEN<a href="#40f3">1545</a>
+375 IFB=11ANDN$="DOO"ANDGG=0THEN<a href="#40f3">1545</a>
+376 IFB=11ANDN$="STA"THENB=16:GOTO<a href="#0b00">41</a>
+377 IFB=16ANDN$="STA"THENB=11:GOTO<a href="#0b00">41</a>
+378 IFB=16ANDN$="WIN"ANDBW=1THENB=18:GOTO<a href="#0b00">41</a>
+379 IFB=3ANDN$="DOO"THEN<a href="#40f3">1545</a>
+381 IFB=11ANDGG=1ANDGZ=1ANDN$="DOO"THENB=22:GOTO<a href="#0b00">41</a>
+382 IFB=11ANDN$="DOO"ANDGG=1ANDGZ=0THEN<a href="#42a0">1630</a>
+385 IFB=9ANDG7=1ANDN$="DOO"THENB=10:CW=1:GOTO<a href="#0b00">41</a>
+386 IFB=18ANDCW<>1ANDN$="WIN"THENPRINTZZ$:GOTO<a href="#421f">1600</a>
+387 IFB=18ANDBW=1ANDN$="WIN"THENB=16:GOTO<a href="#0b00">41</a>
+388 IFB=16ANDN$="BED"THENPRINT"NO TIME FOR THAT!":GOTO<a href="#421f">1600</a>
+389 IFB=9ANDG7=0ANDN$="DOO"THEN<a href="#42a0">1630</a>
+390 IFB=16ANDBW=0ANDN$="WIN"THEN<a href="#42a0">1630</a>
+391 IFB=27ANDN$="HOL"ANDHH=1THENB=14:GOTO<a href="#0b00">41</a>
+<a name="1c7c"></a>397 PRINT"SORRY CAN'T GO THERE":GOTO<a href="#421f">1600</a>
+<a name="1c9e"></a>400 GOSUB<a href="#3988">1400</a>
+405 FORA=1TO5:IFT$(A)=N$THENPRINT"I ALREADY HAVE IT":GOTO<a href="#421f">1600</a>
+406 :NEXT
+407 FORA=1TO7:IFS$(B,A)=N$THEN<a href="#1d48">410</a>
+408 NEXT:IFN$="999"THENPRINT"I'M NOT THAT STRONG":GOTO<a href="#421f">1600</a>
+409 PRINT"I CAN'T SEE IT HERE":GOTO<a href="#421f">1600</a>
+<a name="1d48"></a>410 FORAA=1TO5:IFT$(AA)=""THEN<a href="#1d9b">412</a>
+411 NEXT:PRINT"MY PACK IS FULL";:PRINT" TRY INVENTORY":GOSUB<a href="#4bae">1820</a>:GOTO<a href="#421f">1600</a>
+<a name="1d9b"></a>412 PRINTY$:T$(AA)=N$:S$(B,A)="":GOSUB<a href="#4122">1552</a>:GOTO<a href="#0b0e">42</a>
+<a name="1dc2"></a>420 GOSUB<a href="#3988">1400</a>
+421 FORA=1TO5:IFT$(A)=N$THEN<a href="#1e07">423</a>
+422 NEXT:PRINT"ITS NOT IN MY PACK":GOTO<a href="#421f">1600</a>
+<a name="1e07"></a>423 FORAA=1TO7:IFS$(B,AA)=""THEN<a href="#1e5d">425</a>
+424 NEXT:PRINT"SORRY THERE'S TOO MUCH HERE ALREADY":GOSUB<a href="#4c37">1840</a>:GOTO<a href="#421f">1600</a>
+<a name="1e5d"></a>425 T$(A)="":S$(B,AA)=N$:GOTO<a href="#0b00">41</a>
+<a name="1e7a"></a>430 GOTO<a href="#3f4b">1500</a>
+<a name="1e84"></a>435 N$=MID$(P$,6,3):IFBM=3ANDHK=2THENBM=5
+436 IFB=1ANDN$="GAT"ANDAB=0THENPRINTZZ$;:GOSUB<a href="#4111">1550</a>:N$="IRON KEY":AB=1:GOTO<a href="#4252">1620</a>
+437 IFB=5ANDN$="MAI"ANDBM=1THENN$="LETTER":BM=2:GOTO<a href="#4252">1620</a>
+438 IFB=5ANDBM=0ANDN$="MAI"THENPRINTZZ$:GOTO<a href="#421f">1600</a>
+439 IFB=5ANDN$="TRE"THENPRINT"ITS DEAD":GOTO<a href="#421f">1600</a>
+440 IFB=3ANDN$="DOO"THENPRINT"VERY NICE, SOLID OAK":GOTO<a href="#421f">1600</a>
+441 IFB=1ANDAB=1ANDN$="KEY"THENN$="IRON KEY":GOSUB<a href="#417f">1565</a>:IFE=1THEN<a href="#25bb">481</a>
+442 IFB=2ANDN$="MAN"THENPRINT"VERY EERIE...":GOTO<a href="#421f">1600</a>
+443 IFB=7ANDLL=0ANDN$="SHE"THENN$="LADDER":LL=1:GOTO<a href="#4252">1620</a>
+444 IFB=8ANDBB=1ANDN$="CAS"THENN$="APPLE":BB=2:GOTO<a href="#4252">1620</a>
+445 IFB=10ANDN$="DOO"THENPRINTZZ$:GOTO<a href="#421f">1600</a>
+446 IFB=12ANDN$="TAB"THENPRINT"STRANGE...THERE'S HOT FOOD THERE":GOTO<a href="#421f">1600</a>
+447 IFB=15ANDH8=0ANDN$="CHE"THENPRINT"IT HAS A COMBINATION LOCK!":GOTO<a href="#421f">1600</a>
+448 IFB=16ANDN$="BED"THENPRINT"VERY INVITING..":GOTO<a href="#421f">1600</a>
+449 IFB=17ANDN$="BAT"THENPRINT"THERE ARE TAPS THERE":GOTO<a href="#421f">1600</a>
+450 IFB=19ANDN$="BAL"THENPRINT"I THOUGHT I SAW A MOVEMENT!":GOTO<a href="#421f">1600</a>
+451 IFB=5ANDN$="MAI"ANDBM=2THENN$="TORCH":BM=3:GOTO<a href="#4252">1620</a>
+452 IFB=22ANDN$="DES"THENPRINT"IT HAS A DRAWER":GOTO<a href="#421f">1600</a>
+453 IFB=22ANDBA=1ANDN$="DRA"THENN$="PENCIL":BA=2:GOTO<a href="#4252">1620</a>
+454 IFB=1ANDN$="GAT"ANDDK=0THENPRINTZZ$:GOTO<a href="#421f">1600</a>
+455 IFB=15ANDN$="GOL"ANDCO=1THENPRINT"ITS WHAT I CAME FOR..":GOTO<a href="#421f">1600</a>
+456 IFB=4ANDN$="DOO"THENPRINT"ITS THE BASEMENT DOOR":GOTO<a href="#421f">1600</a>
+457 IFB=4ANDN$="WIN"THENPRINT"ITS ON THE SECOND FLOOR":GOTO<a href="#421f">1600</a>
+458 IFB=18ANDCW=0ANDN$="WIN"THENPRINT"ITS LOCKED":GOTO<a href="#421f">1600</a>
+459 IFB=6ANDN$="TRE"THENPRINT"I SEE A BRANCH":GOTO<a href="#421f">1600</a>
+460 IFB=8ANDBB=2ANDN$="APP"THENPRINT"LOOKS LIKE A IIE":GOTO<a href="#421f">1600</a>
+461 IFB=9ANDDA=0ANDN$="DOO"THENPRINT"IT'S SECURED WITH A BEAM":GOTO<a href="#421f">1600</a>
+463 IFB=23ANDN$="PIT"THENPRINT"MY GOSH!! IT'S FULL OF SNAKES":GOTO<a href="#421f">1600</a>
+464 IFB=26ANDN$="SKE"THENPRINT"I THOUGHT IT MOVED!":GOTO<a href="#421f">1600</a>
+465 IFB=5ANDN$="MAI"ANDBM=5THENN$="BRASS KEY":BM=6:GOTO<a href="#4252">1620</a>
+466 IFB=20ANDN$="DES"THENPRINT"THERE'S AN OPEN BOOK THERE..":GOTO<a href="#421f">1600</a>
+467 IFB=9ANDN$="BEA"THENPRINT"LOOKS V E R Y HEAVY..":GOTO<a href="#421f">1600</a>
+468 IFB=24ANDN$="TOO"ANDDC=1THENN$="CROWBAR":DC=2:GOTO<a href="#4252">1620</a>
+469 IFB=27ANDN$="WAL"THENPRINT"I HEAR A NOISE BEHIND IT!":GOTO<a href="#421f">1600</a>
+470 IFB=10ANDN$="CLO"ANDDF=1THENN$="KNIFE":GOTO<a href="#4252">1620</a>
+471 IFN$="BOX"ANDBN=2ANDHU=0THENN$="SMALL BOX":GOSUB<a href="#417f">1565</a>:GOTO<a href="#25ea">482</a>
+472 IFB=14ANDN$="ROB"ANDHR=1THENPRINT"ITS SHORTED OUT!":GOTO<a href="#421f">1600</a>
+473 IFB=15ANDH8=1ANDMJ=0ANDN$="CHE"THENN$="GOLD":MJ=1:GOTO<a href="#4252">1620</a>
+480 PRINT"I SEE NOTHING SPECIAL":GOTO<a href="#421f">1600</a>
+<a name="25bb"></a>481 PRINT"ITS ON THE GROUND INSIDE THE GATE":GOTO<a href="#421f">1600</a>
+<a name="25ea"></a>482 IFE=1THEN<a href="#42a0">1630</a>
+483 GOSUB<a href="#4158">1560</a>:IFE=1THEN<a href="#2627">485</a>
+484 PRINT"I CAN'T SEE IT":GOTO<a href="#421f">1600</a>
+<a name="2627"></a>485 N$="NOTE":HU=1:BN=3:GOTO<a href="#4252">1620</a>
+<a name="2645"></a>500 N$=MID$(P$,7,3)
+501 IFB=18ANDCW=0ANDN$="WIN"THEN<a href="#26cd">512</a>
+506 IFB=6ANDN$="BRA"ANDBR=0THENS$(6,1)="BRANCH":BR=1:PRINTY$:GOTO<a href="#421f">1600</a>
+510 PRINT"SORRY,I'M NOT A VANDAL":GOTO<a href="#421f">1600</a>
+<a name="26cd"></a>512 PRINT"{rvs on}{orange}VANDAL!":GOSUB<a href="#4122">1552</a>:PRINT"{grey}{crsr right}{crsr right}{crsr right}{crsr right}YOU CUT YOUR WRIST ON THE GLASS"
+513 GOSUB<a href="#4134">1554</a>:GOTO<a href="#42c3">1650</a>
+<a name="271c"></a>530 N$=MID$(P$,7,3):IFB=1ANDN$="WAL"THEN<a href="#5149">1997</a>
+531 IFB=6ANDN$="TRE"THENB=5:PC=0:GOTO<a href="#0b00">41</a>
+532 IFB=5ANDN$="TRE"THENB=6:PA=0:PC=1:GOTO<a href="#0b00">41</a>
+533 IFB=4ANDN$="LAD"THENN$="LADDER":GOSUB<a href="#417f">1565</a>:GOTO<a href="#50fe">1994</a>
+534 IFB=18ANDN$="LAD"THENN$="LADDER":GOSUB<a href="#417f">1565</a>:GOTO<a href="#50c2">1991</a>
+535 IFB=5ANDN$="WAL"THEN<a href="#5149">1997</a>
+540 PRINT"THAT WILL NOT HELP!":GOTO<a href="#421f">1600</a>
+<a name="2810"></a>550 N$=MID$(P$,6,3)
+551 IFB=17ANDN$="BUC"THENN$="BUCKET":GOSUB<a href="#4158">1560</a>:GOTO<a href="#2861">555</a>
+552 PRINT"PARDON ?":GOTO<a href="#421f">1600</a>
+<a name="2861"></a>555 IFE=0THEN<a href="#42a0">1630</a>
+556 IFE=1THENPRINTY$" I USE THE BATH TAP":AF=1:GOTO<a href="#421f">1600</a>
+558 PRINT"PARDON ?":GOTO<a href="#421f">1600</a>
+<a name="28b2"></a>570 N$=MID$(P$,6,3)
+571 IFLW=6THENPRINT"I'M AS CONFUSED AS YOU!":LW=0:GOTO<a href="#421f">1600</a>
+572 PRINT"LOOK AROUND AND THINK!":LW=LW+1:GOTO<a href="#421f">1600</a>
+576 GOTO<a href="#421f">1600</a>
+<a name="2929"></a>600 N$=MID$(P$,7,3):A5$=CHR$(70)
+601 IFN$="TOR"THENN$="TORCH":GOSUB<a href="#4158">1560</a>:IFE=1THENPRINTY$:CC=1:GOTO<a href="#421f">1600</a>
+605 PRINT"PARDON ?":GOTO<a href="#421f">1600</a>
+<a name="298d"></a>620 N$=MID$(P$,6,3)
+621 IFB=8ANDN$="CAS"ANDKK=0THENN$="TRAPDOOR":KK=1:G9=1:GOTO<a href="#4252">1620</a>
+622 IFB=21ANDN$="CRA"ANDHX=0THENH2=1:N$="BRASS KEY":HK=4:HX=1:GOTO<a href="#4252">1620</a>
+638 PRINT"SORRY,THAT WILL NOT HELP":GOTO<a href="#421f">1600</a>
+<a name="2a35"></a>640 N$=MID$(P$,7,3)
+641 IFB=22ANDN$="PAN"THENN$="BUTTON":DP=1:GOTO<a href="#4252">1620</a>
+645 PRINT"SORRY":GOTO<a href="#421f">1600</a>
+<a name="2a83"></a>660 N$=MID$(P$,6,3):A1$=CHR$(73)
+661 IFB=25ANDN$="SWI"THENPRINTY$" I HEAR A WHIRRR...":GOSUB<a href="#4134">1554</a>:GOTO<a href="#4e2e">1940</a>
+662 IFB=22ANDN$="BUT"ANDDP=1ANDAZ=0THENPRINTY$" I HEAR A RUMBLE":GOTO<a href="#2b21">665</a>
+664 PRINT"SORRY":GOTO<a href="#421f">1600</a>
+<a name="2b21"></a>665 HH=1:S$(27,7)="HOLE":AZ=1:GOTO<a href="#421f">1600</a>
+<a name="2b45"></a>700 PRINT"{clear}":POKE53280,0:POKE53281,0
+701 PRINT"{crsr down}{crsr down}{crsr down}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{lightblue}DO YOU WANT TO QUIT{crsr down}{crsr down}"
+702 INPUT"           Y/N ";EE$
+704 IFEE$="N"THEN<a href="#0b0e">42</a>
+705 IFEE$="Y"THEN<a href="#2bcc">707</a>
+706 GOTO<a href="#2b45">700</a>
+<a name="2bcc"></a>707 PRINT"{crsr down}{crsr down}{crsr right}{crsr right}{crsr right}DO YOU WANT TO SAVE THE GAME{crsr down}"
+708 INPUT"           Y/N ";EE$
+709 IFEE$="Y"THEN<a href="#2f5a">780</a>
+710 IFEE$="N"THENNEW
+711 GOTO<a href="#2b45">700</a>
+<a name="2c3a"></a>730 N$=MID$(P$,6,3)
+731 IFB=5ANDN$="SIG"THENPRINT"IT SAYS...{rvs on}{yellow}BASTOW MANOR{crsr right}{crsr right}{crsr right}KEEP OUT {grey}":GOTO<a href="#421f">1600</a>
+732 IFB=3ANDN$="SIG"THENPRINT"IT SAYS...{rvs on}{yellow} RING BELL AND ENTER {grey}":GOTO<a href="#421f">1600</a>
+733 IFB=20ANDN$="BOO"THENPRINTY$:GOSUB<a href="#4122">1552</a>:GOTO<a href="#45da">1699</a>
+734 IFN$="LET"ANDBM>=2THENN$="LETTER":GOSUB<a href="#4158">1560</a>:GOTO<a href="#2d6b">741</a>
+735 IFN$="NOT"THENN$="NOTE":GOSUB<a href="#4158">1560</a>:GOTO<a href="#2dc6">744</a>
+740 PRINT"SORRY,MUST HAVE DROPPED MY GLASSES":GOTO<a href="#421f">1600</a>
+<a name="2d6b"></a>741 IFE=0THEN<a href="#42a0">1630</a>
+742 IFE=1THENPRINT"THE LEFT IS RIGHT":PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}..OR IS THE RIGHT WRONG?":GOTO<a href="#421f">1600</a>
+<a name="2dc6"></a>744 IFE=0THEN<a href="#42a0">1630</a>
+745 IFE=1THENPRINT"I SEE WRITING.LOOKS LIKE 'VI'...":GOTO<a href="#421f">1600</a>
+<a name="2e07"></a>750 N$=MID$(P$,8,3)
+751 IFB=9ANDG8=0ANDN$="BEA"THENN$="CROWBAR":GOSUB<a href="#4158">1560</a>:IFE=1THEN<a href="#2e6d">757</a>
+754 PRINT"SORRY,THAT WONT HELP":GOTO<a href="#421f">1600</a>
+<a name="2e6d"></a>757 PRINTY$" I USE THE CROWBAR":G8=1:GOSUB<a href="#4122">1552</a>:DA=1:GOTO<a href="#0b0e">42</a>
+<a name="2e9d"></a>760 N$=MID$(P$,6,3)
+761 IFB=3ANDN$="BEL"THENPRINTY$" DING-DONG";:GOSUB<a href="#4122">1552</a>:PRINT" A CHUTE OPENS..":GOTO<a href="#2f06">771</a>
+770 PRINT"PARDON ?":GOTO<a href="#421f">1600</a>
+<a name="2f06"></a>771 H1=1:GOSUB<a href="#4122">1552</a>:GOTO<a href="#0b0e">42</a>
+<a name="2f19"></a>774 PRINT"{clear}INSERT AND REWIND BLANK TAPE{crsr down}"
+775 INPUT"PRESS RETURN...";KP$
+<a name="2f5a"></a>780 PRINT"{clear}":PRINT"SAVING GAME DATA...":U$=CHR$(13)
+781 OPEN1,1,1,"MANSAV"
+782 PRINT#1,B;U$;X;U$;CC;U$;PB;U$;PC;U$;PA;U$;HB;U$;HJ;U$;DB;U$;HK
+783 PRINT#1,HR;U$;LR;U$;LT;U$;H8;U$;C;U$;AM;U$;DK;U$;KK;U$;GG;U$;BW;U$;GZ;U$;G7
+784 PRINT#1,CW;U$;HH;U$;BM;U$;AB;U$;LL;U$;BB;U$;BA;U$;CO;U$;DA;U$;DC;U$;DF
+785 PRINT#1,BN;U$;HU;U$;BR;U$;AF;U$;LW;U$;G9;U$;HX;U$;HZ;U$;DP;U$;AZ;U$;H1;U$;HT
+786 PRINT#1,AW;U$;G1;U$;H5;U$;DG;U$;G6;U$;H6;U$;H7;U$;H3;U$;ZA;U$;G5;U$;G8
+787 PRINT#1,DN;U$;DE
+788 FORA=1TO5:IFT$(A)=""THENT$(A)="*"
+789 PRINT#1,T$(A)
+790 NEXT
+791 FORA=1TO27:FORAA=1TO7:IFS$(A,AA)=""THENS$(A,AA)="*"
+792 PRINT#1,S$(A,AA)
+793 NEXTAA,A
+794 IFA5$=""THENA5$="*"
+795 IFA1$=""THENA1$="*"
+796 IFZ2$=""THENZ2$="*"
+799 PRINT#1,A5$;U$;A1$;U$;Z2$:CLOSE1:GOTO<a href="#0b0e">42</a>
+<a name="31de"></a>800 N$=MID$(P$,8,3)
+801 IFB=1ANDN$="GAT"THENN$="IRON KEY":GOSUB<a href="#4158">1560</a>:IFE=1THENDK=1:PRINTY$:GOTO<a href="#421f">1600</a>
+803 IFB=11ANDN$="DOO"THENN$="BRASS KEY":GOSUB<a href="#4158">1560</a>:IFE=1THENGG=1:PRINTY$:GOTO<a href="#421f">1600</a>
+804 IFB=5ANDN$="MAI"THENN$="IRON KEY":GOSUB<a href="#4158">1560</a>:IFE=1THENBM=1:PRINTY$:GOTO<a href="#421f">1600</a>
+805 IFN$="BOX"THENN$="SMALL BOX":GOSUB<a href="#4158">1560</a>:IFE=1THEN<a href="#3306">815</a>
+806 IFB=15ANDHR=1ANDN$="CHE"THENPRINTY$:GOSUB<a href="#4122">1552</a>:GOTO<a href="#493a">1740</a>
+807 PRINT"SORRY":GOTO<a href="#421f">1600</a>
+<a name="3306"></a>815 N$="SMALL KEY":GOSUB<a href="#4158">1560</a>:IFE=0THEN<a href="#42a0">1630</a>
+816 IFE=1THENBN=1:PRINTY$:GOTO<a href="#421f">1600</a>
+<a name="3341"></a>830 N$=MID$(P$,7,3):Z2$=A1$+Z6$+A5$
+831 IFB=27ANDN$="WAT"ANDAF=1THEN<a href="#33a4">835</a>
+832 PRINT"SORRY,THAT WILL NOT HELP":GOTO<a href="#421f">1600</a>
+<a name="33a4"></a>835 INPUT"WHERE ";MM$:IFLEFT$(MM$,3)="HOL"THEN<a href="#33dd">837</a>
+836 PRINT"SORRY":GOTO<a href="#421f">1600</a>
+<a name="33dd"></a>837 PRINTY$:AF=0:HT=HT+1:IFHT=3THENHR=1:GOTO<a href="#421f">1600</a>
+838 GOTO<a href="#421f">1600</a>
+<a name="340d"></a>860 N$=MID$(P$,6,3)
+861 IFN$="ARM"THENN$="ARMOUR":GOSUB<a href="#4158">1560</a>:GOTO<a href="#3469">865</a>
+863 PRINT"SORRY,THAT WILL NOT HELP":GOTO<a href="#421f">1600</a>
+<a name="3469"></a>865 IFE=0THEN<a href="#42a0">1630</a>
+866 IFE=1THENPRINTY$" IS ARMOUR IN THIS YEAR ?":AW=1:GOTO<a href="#421f">1600</a>
+<a name="34aa"></a>875 N$=MID$(P$,6,3)
+876 IFB=22ANDN$="DRA"ANDBA=1THENPRINTY2$:GOTO<a href="#421f">1600</a>
+877 IFB=22ANDN$="DRA"THENPRINTY$:BA=1:GOTO<a href="#421f">1600</a>
+878 IFB=8ANDN$="CAS"ANDBB=1THENPRINTY2$:GOTO<a href="#421f">1600</a>
+879 IFB=8ANDN$="CAS"THENBB=1:PRINTY$:GOTO<a href="#421f">1600</a>
+880 IFB=16ANDN$="WIN"ANDBW=1THENPRINTY2$:GOTO<a href="#421f">1600</a>
+881 IFB=16ANDN$="WIN"THENBW=1:GOTO<a href="#0b00">41</a>
+882 IFB=1ANDN$="GAT"ANDDK=1ANDAM=1THENPRINTY2$:GOTO<a href="#421f">1600</a>
+883 IFB=9ANDG8=1ANDN$="DOO"THENG7=1:GOTO<a href="#0b00">41</a>
+884 IFB=24ANDDC=0ANDN$="TOO"THENPRINTY$:DC=1:GOTO<a href="#421f">1600</a>
+885 IFB=24ANDDC=1ANDN$="TOO"THENPRINTY2$:GOTO<a href="#421f">1600</a>
+886 IFB=10ANDN$="DOO"THENPRINTZZ$:GOTO<a href="#421f">1600</a>
+887 IFB=11ANDN$="DOO"ANDGG=1THENGZ=1:GOTO<a href="#0b00">41</a>
+888 IFB=3ANDN$="DOO"THENPRINTZZ$:GOTO<a href="#421f">1600</a>
+889 IFB=19ANDN$="DOO"THENPRINT"SORRY,IT'S SEALED TIGHT":GOTO<a href="#421f">1600</a>
+890 IFN$="BOX"ANDBN=1THENN$="SMALL BOX":GOSUB<a href="#4158">1560</a>:IFE=1THENPRINTY$:BN=2:GOTO<a href="#421f">1600</a>
+891 IFB=10ANDN$="CLO"THENPRINTY$:DF=1:GOTO<a href="#421f">1600</a>
+892 IFB=1ANDN$="GAT"ANDDK=1THENG1=1:AM=1:PB=1:GOTO<a href="#0b00">41</a>
+893 IFB=4ANDN$="DOO"THENPRINT"SORRY,ITS JAMMED SHUT!":GOTO<a href="#421f">1600</a>
+895 PRINT"SORRY":GOTO<a href="#421f">1600</a>
+998 PRINT"{clear}PLACE SAVE GAME TAPE IN CASSETTE{crsr down}"
+999 INPUT"PRESS RETURN....";MK$
+1000 PRINT"{clear}":PRINT"RESTORING SAVED GAME DATA..."
+1002 OPEN1,1,0,"MANSAV"
+1003 INPUT# 1,B,X,CC,PB,PC,PA,HB,HJ,DB,HK,HR,LR,LT,H8,C,AM,DK,KK,GG,BW,GZ,G7,CW
+1004 INPUT#1,HH,BM,AB,LL,BB,BA,CO,DA,DC,DF,BN,HU,BR,AF,LW,G9,HX,HZ,DP,AZ,H1,HT
+1006 INPUT#1,AW,G1,H5,DG,G6,H6,H7,H3,ZA,G5,G8,DN,DE
+1007 FORA=1TO5:INPUT#1,T$(A)
+1008 IFT$(A)="*"THENT$(A)=""
+1009 NEXT
+1010 FORA=1TO27:FORAA=1TO7:INPUT#1,S$(A,AA)
+1011 IFS$(A,AA)="*"THENS$(A,AA)=""
+1012 NEXTAA,A
+1013 INPUT#1,A5$,A1$,Z2$
+1014 IFA5$="*"THENA5$=""
+1015 IFA1$="*"THENA1$=""
+1016 IFZ2$="*"THENZ2$=""
+1020 CLOSE1:GOTO<a href="#0b0e">42</a>
+<a name="3988"></a>1400 IFASC(P$)=71THENK=5:GOTO<a href="#39a8">1404</a>
+1402 K=6
+<a name="39a8"></a>1404 N$=MID$(P$,K,3):IFK=5ANDB=13ANDN$="ARM"THENH5=1:N$="ARMOUR":RETURN
+1405 IFK=6ANDB=13ANDN$="ARM"THENH5=0:N$="ARMOUR":RETURN
+1406 IFK=5ANDB=15ANDH8=1ANDN$="GOL"THENN$="GOLD":LR=1:RETURN
+1408 IFK=5ANDB=23ANDN$="BRA"THENN$="BRANCH":GOSUB<a href="#417f">1565</a>:IFE=1THENDB=0:N$="BRA"
+1410 IFK=6ANDB=23ANDN$="BRA"THENN$="BRANCH":GOSUB<a href="#4158">1560</a>:IFE=1THENDB=1:N$="BRA"
+1411 IFK=6ANDB=8ANDN$="BRA"THENHJ=0:HB=0:N$="BRANCH":RETURN
+1412 IFN$="CRO"THENN$="CROWBAR":RETURN
+1413 IFK=6ANDN$="BRA"THENN$="BRANCH":HJ=0:RETURN
+1414 IFK=6ANDN$="ARM"THENN$="ARMOUR":AW=0:RETURN
+1416 IFK=5ANDN$="LAD"ANDB=4THENN$="LADDER":S$(18,5)="":DG=0:RETURN
+1418 IFN$="APP"THENN$="APPLE":RETURN
+1420 IFK=6ANDN$="TOR"THENN$="TORCH":CC=0:RETURN
+1421 IFK=6ANDN$="BOX"ANDB=9THENN$="SMALL BOX":G6=0:RETURN
+1422 IFK=5ANDN$="BOX"ANDB=9THENN$="SMALL BOX":G6=1:RETURN
+1423 IFK=6ANDN$="BUC"ANDB=21THENN$="BUCKET":H6=0:RETURN
+1424 IFK=6ANDN$="LAD"ANDB=4THENDG=1:N$="LADDER":RETURN
+1425 IFK=5ANDN$="BUC"ANDB=21THENN$="BUCKET":H6=1:RETURN
+1426 IFN$="TOR"THENN$="TORCH":RETURN
+1427 IFK=5ANDN$="MOP"ANDB=21THENN$="MOP":H7=1:RETURN
+1428 IFN$="LET"THENN$="LETTER":RETURN
+1429 IFK=6ANDN$="MOP"ANDB=21THENN$="MOP":H7=0:RETURN
+1432 IFN$="BOX"THENN$="SMALL BOX":RETURN
+1434 IFN$="ARM"THENN$="ARMOUR":RETURN
+1436 IFN$="BUC"THENN$="BUCKET":RETURN
+1438 IFN$="MOP"THENN$="MOP":RETURN
+1442 IFN$="GOL"THENN$="GOLD":RETURN
+1444 IFN$="KEY"THENINPUT"WHICH ONE ";PP$:NN$=LEFT$(PP$,3):GOTO<a href="#3e4a">1456</a>
+1446 IFN$="BRA"THENN$="BRANCH":RETURN
+1448 IFN$="LAD"THENN$="LADDER":RETURN
+1450 IFN$="KNI"THENN$="KNIFE":RETURN
+1452 IFN$="NOT"THENN$="NOTE":RETURN
+1454 N$="999":RETURN
+<a name="3e4a"></a>1456 IFNN$="BRA"ANDK=5THENN$="BRASS KEY":H3=1:RETURN
+1458 IFNN$="BRA"THENN$="BRASS KEY":RETURN
+1460 IFNN$="SMA"THENN$="SMALL KEY":RETURN
+1462 IFNN$="IRO"ANDB=1ANDDM=0THENN$="BRANCH":GOSUB<a href="#4158">1560</a>:GOTO<a href="#3f02">1466</a>
+1464 IFNN$="IRO"THENN$="IRON KEY":RETURN
+<a name="3f02"></a>1466 IFE=0THENPRINT:PRINT"I CAN'T DO THAT...YET";:GOTO<a href="#508a">1986</a>
+1468 IFE=1THENN$="IRON KEY":DM=1:RETURN
+<a name="3f4b"></a>1500 GOSUB<a href="#40b9">1518</a>:PRINT"{clear}":POKE53280,0:POKE53281,0:PRINT"{crsr down}{crsr down}":ZB=0
+1502 PRINT"{lightblue}I HAVE IN MY PACK :{crsr down}{crsr down}"
+1504 FORA=1TO5:IFT$(A)="*"THENT$(A)=""
+1505 IFT$(A)=""THEN<a href="#4056">1512</a>
+1508 IFT$(A)="ARMOUR"ANDAW=1THENPRINT"{crsr right}{crsr right}{crsr right}";T$(A);WW$:ZB=ZB+1:GOTO<a href="#4050">1511</a>
+1509 IFT$(A)="BUCKET"ANDAF=1THENPRINT"{crsr right}{crsr right}{crsr right}";T$(A);YY$:ZB=ZB+1:GOTO<a href="#4050">1511</a>
+1510 PRINT"{crsr right}{crsr right}{crsr right}";T$(A):ZB=ZB+1
+<a name="4050"></a>1511 PRINT
+<a name="4056"></a>1512 NEXT:IFZB=0THENPRINT"{home}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}NOT A CRACKER !"
+1513 PRINT"{crsr down}{crsr down}I CAN CARRY FIVE ITEMS ONLY"
+1514 GOSUB<a href="#4146">1556</a>:GOTO<a href="#0b0e">42</a>
+<a name="40b9"></a>1518 IFB=26THENPOKEV+8,0:POKEV+9,0:RETURN
+1520 IFB=14THENPOKEV+6,0:POKEV+7,0:RETURN
+1521 RETURN
+<a name="40f3"></a>1545 PRINT"SORRY ITS LOCKED":GOTO<a href="#421f">1600</a>
+<a name="4111"></a>1550 FORH=1TO500:NEXT:RETURN
+<a name="4122"></a>1552 FORH=1TO1000:NEXT:RETURN
+<a name="4134"></a>1554 FORH=1TO2000:NEXT:RETURN
+<a name="4146"></a>1556 FORH=1TO4000:NEXT:RETURN
+<a name="4158"></a>1560 E=0:FORA=1TO5:IFT$(A)=N$THENE=1:RETURN
+1561 NEXT:RETURN
+<a name="417f"></a>1565 E=0:FORA=1TO7:IFS$(B,A)=N$THENE=1:RETURN
+1566 NEXT:RETURN
+1570 S=54272:POKES+12,17:POKES+13,244:POKES+24,15
+<a name="41d0"></a>1571 READHF,LF,DR:IFHF<0THENPOKES+11,0:RETURN
+1572 POKES+8,HF:POKES+7,LF:POKES+11,33:FORT=1TODR:NEXT
+1573 GOTO<a href="#41d0">1571</a>
+<a name="421f"></a>1600 GOSUB<a href="#4134">1554</a>:PRINT"{home}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}"
+1605 FORA=1TO8:PRINTA$:NEXT:GOTO<a href="#0bf6">60</a>
+<a name="4252"></a>1620 PRINT"I SEE SOMETHING...":FORA=1TO7:IFS$(B,A)=""THENS$(B,A)=N$:GOSUB<a href="#4122">1552</a>:GOTO<a href="#0b0e">42</a>
+1621 NEXT:GOTO<a href="#421f">1600</a>
+<a name="42a0"></a>1630 PRINT"I CAN'T DO THAT...YET":GOTO<a href="#421f">1600</a>
+<a name="42c3"></a>1650 PRINT"{clear}":POKE53280,0:POKE53281,0
+1651 PRINT"{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{darkgrey}{rvs on}     {rvs off}"SPC(22)"{red}●"
+1652 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{darkgrey}{rvs on} {rvs off}RIP{rvs on} "SPC(21)"{rvs off}{red}●{crsr right}●":PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{darkgrey}{rvs on}     "SPC(22)"{rvs off}{red}●"
+1653 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{darkgrey}{rvs on}     "SPC(16)"{rvs off}{orange}●{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{green}│"
+1654 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{darkgrey}{rvs on}     "SPC(15)"{rvs off}{orange}●{crsr right}●{crsr right}{crsr right}{crsr right}{crsr right}{green}│"
+1655 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{darkgrey}{rvs on}     "SPC(16)"{rvs off}{orange}●{crsr right}{crsr right}{light-red}●{crsr right}{crsr right}{green}│"
+1656 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{grey}╭─{darkgrey}{rvs on}     {rvs off}{grey}─────────────╮{crsr right}{crsr right}{green}│{crsr right}{light-red}●{crsr right}●{crsr right}{green}│"
+1657 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{darkgrey}{rvs on}                     {crsr right}{crsr right}{rvs off}{green}│{crsr right}{crsr right}{light-red}●{crsr right}{crsr right}{green}│"
+1658 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{darkgrey}{rvs on}                     {crsr right}{crsr right}{rvs off}{green}│{crsr right}{crsr right}│{crsr right}{crsr right}│"
+1659 PRINT"{crsr right}{green}▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒"
+1660 S=54272:POKES+5,136:POKES+6,136:POKES+24,15:POKES+1,3:POKES,35:POKES+4,33
+1661 FORH=1TO2000:NEXT:FORZ=15TO0STEP-1:POKES+24,Z:FORH=1TO100:NEXTH,Z:POKES+4,0
+1662 PRINT"{home}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{red}{rvs on}                  ":PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs on}  YOU'RE DEAD !!  "
+1663 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs on}                  {yellow}{crsr down}"
+1664 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}YOU HAVE PLAYED";C;" MOVES{crsr down}"
+1665 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}WANT TO  TRY AGAIN{crsr down}":INPUT"              Y/N ";EE$
+1666 IFEE$="N"THENNEW
+1667 IFEE$="Y"THENRUN
+1668 GOTO<a href="#42c3">1650</a>
+<a name="45da"></a>1699 PRINT"{clear}{rvs on}{lightgrey}{crsr down}{crsr down}{crsr down}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}                           "
+1700 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs on} LOCKS AND CUNNING ESCAPES "
+1701 PRINT"{rvs on}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right} {rvs on} "
+1702 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs on}  ..AND AS A GENERAL RULE  ":PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs on}  FOR  OPENING  TREASURE   "
+1703 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs on}  CHESTS, TRY...           ":PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs on}                           "
+1704 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs on}        RIGHT    3         ":PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs on}        LEFT     7         "
+1705 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs on}        RIGHT    2         "
+1706 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs on} ▃▃▃▂▍{rvs off}{rvs on}  ▃▃▄▃▄▄▃▂▂{rvs off}▘{crsr down}{crsr down}{crsr down}{crsr down}"
+1707 PRINT"{yellow}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}...THE REST OF THE PAGE{crsr down}":PRINTSPC(14)"IS MISSING.."
+1708 GOSUB<a href="#4146">1556</a>:GOSUB<a href="#4146">1556</a>:GOTO<a href="#0b0e">42</a>
+<a name="47ed"></a>1720 POKEV+21,1:POKEV+39,7:POKEV+0,180:POKEV+23,1:POKEV+29,1
+1722 FORY=50TO144STEP3
+1724 POKEV+1,Y:POKE2040,13:NEXT:GOSUB<a href="#4134">1554</a>
+1728 POKEV+0,0:POKEV+1,0:PRINT"{clear}"
+1730 PRINT"{yellow}{crsr down}{crsr down}{crsr down}{crsr down}OLD MAN BASTOW DROPS A SAFE FROM{crsr down}":PRINT"THE BALCONY...{crsr down}{crsr down}{crsr down}{crsr down}":GOSUB<a href="#4122">1552</a>
+1731 IFAW=1THEN<a href="#4903">1736</a>
+1734 PRINT"AS YOUR SHOULDERS AND ANKLES MEET{crsr down}":PRINT"YOU REALISE THAT...":GOSUB<a href="#4146">1556</a>:GOTO<a href="#42c3">1650</a>
+<a name="4903"></a>1736 PRINT"LUCKY YOU ARE WEARING THE ARMOUR":GOSUB<a href="#4134">1554</a>:B=20:GOTO<a href="#0b0e">42</a>
+<a name="493a"></a>1740 PRINT"{clear}{lightblue}{crsr down}{crsr down}{crsr down}":PRINT"THE COMBINATION LOCK HAS ALL THE{crsr down}"
+1741 PRINT"LETTERS OF THE ALPHABET ARRANGED{crsr down}":PRINT"AROUND ITS RIM{crsr down}"
+<a name="49a8"></a>1742 PRINT"{crsr down}ENTER LETTERS OR TYPE '*'TO QUIT{crsr down}{crsr down}":INPUT"      ";Z9$
+1744 IFZ9$="*"THEN<a href="#0b0e">42</a>
+1745 IFZ9$=Z2$THENPRINT"{crsr down}THATS IT!":H8=1:CO=1:GOSUB<a href="#4134">1554</a>:GOTO<a href="#0b0e">42</a>
+1746 GOTO<a href="#49a8">1742</a>
+<a name="4a2a"></a>1760 PRINT"THE ROBOT PUSHES YOU BACK!":GOSUB<a href="#4122">1552</a>:FORHL=200TO68STEP-4
+1761 POKEV+6,HL:POKE2043,14:FORH=1TO80:NEXT
+1763 NEXT:GOSUB<a href="#4122">1552</a>:POKEV+6,0:POKEV+7,0:B=27:GOTO<a href="#0b0e">42</a>
+<a name="4aa2"></a>1780 PRINT"{clear}{crsr down}{crsr down}{crsr down}{crsr down}{yellow}":PRINT"THATS IT YOU'VE GOT THE GOLD{crsr down}{crsr down}{crsr down}"
+1782 PRINT"....AND YOUR LIFE!"
+1784 GOSUB<a href="#4146">1556</a>:NEW
+<a name="4af9"></a>1800 S=54272:POKES+5,136:POKES+6,136:POKES+24,15
+<a name="4b20"></a>1802 READHF,LF,DR:QW=QW+1:IFQW>14THENRETURN
+1803 IFQW=9THENGOSUB4924
+1804 POKES+12,128:POKES+13,240:POKES+8,2:POKES+7,163:POKES+11,17
+1806 POKES+1,HF:POKES,LF:POKES+4,33
+1808 FORT=1TODR:NEXT:GOTO<a href="#4b20">1802</a>
+<a name="4bae"></a>1820 IFK=5ANDB=21ANDN$="BUCKET"THENH6=0:RETURN
+1821 IFK=5ANDB=21ANDN$="MOP"THENH7=0:RETURN
+1822 IFK=5ANDB=9ANDN$="SMALL BOX"THENG6=0:RETURN
+1823 IFK=5ANDB=13ANDN$="ARMOUR"THENH5=0:RETURN
+1826 RETURN
+<a name="4c37"></a>1840 IFK=6ANDB=9ANDN$="SMALL BOX"THENG6=1:RETURN
+1845 RETURN
+<a name="4c60"></a>1890 GOSUB<a href="#4134">1554</a>:PRINT"{clear}":GOSUB<a href="#4146">1556</a>
+1891 FORA=1TO7:IFS$(21,A)="BRASS KEY"THENS$(21,A)="":BM=5
+1892 NEXT:H3=1:HK=2
+1893 PRINT"{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}MY HEAD SPINS...":GOSUB<a href="#4134">1554</a>
+1894 PRINT"{crsr down}{crsr down}{crsr down}SLOWLY...";:GOSUB<a href="#4122">1552</a>:PRINT"  MY HEAD CLEARS":GOSUB<a href="#4122">1552</a>
+1895 PRINT"{crsr down}{crsr down}{crsr down}I SEE...":GOSUB<a href="#4122">1552</a>:GOTO<a href="#0b0e">42</a>
+<a name="4d2d"></a>1900 PRINT"{home}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}":GOSUB<a href="#4134">1554</a>:PRINTA$:PRINT"{crsr up}{crsr up}":RETURN
+<a name="4d5b"></a>1920 PRINT"{clear}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}I AM IN A VERY DARK PLACE{crsr down}":PRINT"I SEE{crsr down}"
+1921 INPUT"{lightgreen}WHAT NOW ";WW$
+1922 PRINT"{crsr down}{grey}IT'S DANGEROUS TO MOVE IN THE DARK..":GOSUB<a href="#4134">1554</a>:GOTO<a href="#42c3">1650</a>
+<a name="4de8"></a>1930 IFE=1THENPRINT"SORRY,SOMETHING W1LL NOT FIT":GOTO<a href="#421f">1600</a>
+1931 IFE=0THENN$="TRA":GOTO<a href="#1a79">373</a>
+<a name="4e2e"></a>1940 PRINT"{clear}":POKE53281,15:GOSUB<a href="#5057">1957</a>
+1941 G4$="{crsr right}{rvs on}{black} {crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right} {crsr down}"
+1942 FORH=1TO11:PRINTG4$:NEXT:PRINT"{crsr right}{rvs on} "SPC(35)"{rvs on} "
+1944 PRINT"{home}{crsr down}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{blue}*** COMING  SOON ***{crsr down}{crsr down}":GOSUB<a href="#4122">1552</a>
+1945 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{black}GRAPHIC ADVENTURE  NO. 2{crsr down}{crsr down}{crsr down}":GOSUB<a href="#4122">1552</a>
+1946 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{green}{rvs on}                       ":PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs on}    005 SUPER  SPY     "
+1947 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs on}                       {crsr down}":GOSUB<a href="#4122">1552</a>
+1948 PRINTSPC(17)"{black}FROM{crsr down}":PRINTSPC(9)"{red}{rvs on}                     "
+1949 PRINTSPC(9)"{rvs on}           ":PRINTSPC(9)"{rvs on}                     {crsr down}":GOSUB <a href="#4122">1552</a>
+1950 GOSUB<a href="#4122">1552</a>
+1951 PRINTSPC(12)"{blue}LOOK FOR IT   {crsr down}":PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}                           {crsr down}{crsr down}"
+1952 PRINTSPC(12)"***************":GOSUB<a href="#4134">1554</a>:GOTO<a href="#0b0e">42</a>
+<a name="5057"></a>1957 IFZA=0THENG5=1:ZA=ZA+1:RETURN
+1958 IFZA=1THENG5=0:ZA=0
+1959 RETURN
+<a name="508a"></a>1986 GOSUB<a href="#4134">1554</a>:PRINT"{home}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}"
+1988 FORA=1TO8:PRINTA$:NEXT:PRINTA$;:GOTO<a href="#0bf6">60</a>
+<a name="50c2"></a>1991 IFE=0THENPRINT"I CAN'T SEE IT HERE":GOTO<a href="#421f">1600</a>
+1992 IFE=1THENB=4:PC=0:GOTO<a href="#0b00">41</a>
+<a name="50fe"></a>1994 IFE=0THEN<a href="#42a0">1630</a>
+1995 IFE=1THENB=18:S$(18,5)="LADDER":DG=1:PC=1:PA=0:GOTO<a href="#0b00">41</a>
+1996 GOTO<a href="#421f">1600</a>
+<a name="5149"></a>1997 PRINTY$;:GOSUB<a href="#4111">1550</a>:PRINT" I SLIP AND BREAK MY NECK....":GOSUB<a href="#4134">1554</a>:GOTO<a href="#42c3">1650</a>
+<a name="5185"></a>2000 REM
+2020 PRINTSPC(30)"{rvs on}{red}◤      {crsr down}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}◤       "
+2021 PRINTSPC(31)"{darkgrey}▏┌┐{crsr down}{crsr left}{crsr left}{crsr left}▏└┘":PRINTSPC(24)"{rvs on}{red}◤             "
+2022 PRINTSPC(23)"{rvs on}{red}◤              "
+2023 PRINT"{yellow}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}.{crsr up}{crsr up}{crsr left}.{crsr right}{crsr right}{crsr up}.{crsr up}{crsr left}{crsr left}.{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}.{crsr down}{crsr down}.{crsr down}"
+2024 PRINTSPC(24)"{darkgrey}▏┌┐{crsr right}{crsr right}┌┐"
+2025 IFG1=1THENPRINTSPC(10)"{grey}│{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{darkgrey}▏└┘{crsr right}{crsr right}└┘":GOTO<a href="#528f">2027</a>
+2026 PRINTSPC(10)"{grey}││││││││{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{darkgrey}▏└┘{crsr right}{crsr right}└┘"
+<a name="528f"></a>2027 IFG1=1THENPRINT"{crsr right}{crsr right}{rvs on}{blue}        {rvs off}{grey}┼{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs on}{blue}                     ":GOTO<a href="#5304">2029</a>
+2028 PRINT"{crsr right}{crsr right}{rvs on}{blue}        {rvs off}{grey}┼┼┼┼┼┼┼┼{rvs on}{blue}                    "
+<a name="5304"></a>2029 IFG1=1THENPRINT"{crsr right}{crsr right}{rvs on}{brown} {crsr right}{crsr right}{crsr right}{crsr right}{darkgrey} {rvs off}{brown}{grey}│{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{brown}▎{crsr right}{crsr right}{red}┌─┐{crsr right}{crsr right}{crsr right}{rvs on}{darkgrey} {crsr right}{brown}  {crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right} ":GOTO<a href="#5382">2031</a>
+2030 PRINT"{crsr right}{crsr right}{rvs on}{brown} {crsr right}{crsr right}{crsr right}{crsr right}{darkgrey} {rvs off}{brown}▕{grey}││││││││{brown}▏{crsr right}{crsr right}{red}┌─┐{crsr right}{crsr right}{crsr right}{rvs on}{darkgrey} {crsr right}{brown}  {crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right} "
+<a name="5382"></a>2031 IFG1=1THENPRINT"{crsr right}{crsr right}{rvs on}{darkgrey}{crsr right} {crsr right}{crsr right}{brown}▃{crsr right}{crsr right} {rvs off}{grey}│{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{brown}▎{rvs on}{darkgrey} {crsr right}{rvs off}{red}└─┘{crsr right}{rvs on}{brown}  {crsr right}{crsr right}{crsr right}{crsr right} {crsr right}{crsr right}▂{crsr right}{crsr right}":GOTO<a href="#5402">2033</a>
+2032 PRINT"{crsr right}{crsr right}{rvs on}{darkgrey}{crsr right} {crsr right}{crsr right}{brown}▃{crsr right}{crsr right} {rvs off}{grey}││││││││{brown}▏{rvs on}{darkgrey} {crsr right}{rvs off}{red}└─┘{crsr right}{rvs on}{brown}  {crsr right}{crsr right}{crsr right}{crsr right} {crsr right}{crsr right}▂{crsr right}{crsr right}"
+<a name="5402"></a>2033 IFG1=1THENPRINT"{crsr right}{crsr right}{brown}▂▂{rvs on}{darkgrey} {rvs off}{brown}▂▂▂{rvs on}{darkgrey} {rvs off}{brown}{grey}┼{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{brown}▂▂{rvs on}{darkgrey} {rvs off}{brown}▂▂▂{rvs on} {rvs off}▂▂▂▂▂▂▂▂▂▂▂▂▂":GOTO<a href="#548d">2040</a>
+2034 PRINT"{crsr right}{crsr right}{brown}▂▂{rvs on}{darkgrey} {rvs off}{brown}▂▂▂{rvs on}{darkgrey} {rvs off}{brown}{grey}┼┼┼┼┼┼┼┼{brown}▂{rvs on}{darkgrey} {rvs off}{brown}▂▂▂{rvs on} {rvs off}▂▂▂▂▂▂▂▂▂▂▂▂▂"
+<a name="548d"></a>2040 GOTO<a href="#0bda">57</a>
+<a name="5495"></a>2100 REM
+2120 PRINT"{crsr up}{crsr right}{brown}◥{rvs on}◥{crsr right} ":PRINT"{crsr right}{crsr right}◥{rvs on}◥ ":PRINT"{crsr right}{crsr right}{crsr right}◥{rvs on}  {crsr right}{crsr right}{crsr right}{crsr right}◤ ▂▃▄"
+2122 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{rvs on}  {crsr right}{crsr right}{crsr right}◤{rvs off}◤":PRINT"{crsr right}{crsr right}{rvs on}{blue}  {brown}  ◤  {rvs off}◤{rvs on}{blue}                           "
+2124 PRINT"{crsr right}{crsr right}{rvs on}{blue}  {brown}  {rvs off}◤{rvs on}{blue}                              "
+2126 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{rvs on}{brown}  {crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}  {crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{darkgrey}    {crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{brown}  "
+2128 PRINT"{crsr right}{crsr right}{crsr right}{rvs on}{brown}   {crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{darkgrey}  {crsr right} {crsr right}{crsr right}{crsr right}{crsr right}    {crsr right}{crsr right}{crsr right}{brown}  {lightblue}    {crsr right}{darkgrey} "
+2130 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{rvs on}{brown}  {crsr right}{crsr right}  {crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right} {crsr right}{crsr right}{crsr right}{crsr right}{crsr right}   {crsr right}{crsr right}  {lightblue}    "
+2132 PRINT"{crsr right}{crsr right}{crsr right}{rvs on}{darkgrey} {brown}  {darkgrey}   {brown} {crsr right}{red}     {crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{darkgrey}   "
+2134 PRINT"{crsr right}{crsr right}{rvs on}{darkgrey} {crsr right}{brown}  {darkgrey}   {crsr right}{crsr right}{red}  {rvs off}▄▄{rvs on} {crsr right}{crsr right}{crsr right}{crsr right}{brown}   {crsr right}{crsr right}{crsr right}{crsr right}  {crsr right}{crsr right}{crsr right}{crsr right} "
+2136 PRINT"{crsr right}{crsr right}{green}▂▂{rvs on}{brown}   {rvs off}{green}▂▂▂▂▂▂▂{rvs on}{red} {rvs off}{green}▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂{rvs on}{brown}  "
+2138 PRINT"{crsr right}{crsr right}{green}▒▒{rvs on}{brown}   {green}{rvs off}▒▒▒▒▒▒▒{rvs on}{red} {rvs off}{green}▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒"
+2140 PRINT"{crsr right}{crsr right}{green}▒▒▒▒▒▒▒▒▒▒▒▒{rvs on}{red} {rvs off}{green}▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒"
+2142 PRINT"{crsr right}{crsr right}";:FORA=1TO35:PRINT"{green}▒";:NEXT
+2150 GOTO<a href="#0bda">57</a>
+<a name="56f1"></a>2200 REM
+2210 G4$="{rvs on}{brown}◤     ◥":G5$="{rvs on}{brown}◤       ◥"
+2220 REM
+2230 PRINTSPC(9)"{darkgrey}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}┌┬┬┐"
+2232 PRINTSPC(9)"▂▂▂▂▂▂▂▂▂{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}├┼┼┤"
+2236 PRINTSPC(10)"{rvs on}{darkgrey} {rvs off}{brown}│││││││{rvs on}{darkgrey} {crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs off}{darkgrey}├┼┼┤"
+2238 PRINTSPC(9)"{rvs on}  {rvs off}{brown}│││││││{rvs on}{darkgrey}  {crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs off}{darkgrey}├┼┼┤"
+2240 PRINTSPC(10)"{rvs on} {rvs off}{brown}│││││││{rvs on}{darkgrey} {crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs off}├┼┼┤"
+2242 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{rvs on}{blue}   {rvs off}{darkgrey}╭╮{rvs on}  {rvs off}{brown}│││││││{rvs on}{darkgrey}  {crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs off}├┼┼┤"
+2244 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}╰╯{crsr right}{rvs on} {brown}{rvs off}○││││││{rvs on}{darkgrey} {crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs off}├┼┼┤"
+2246 PRINTSPC(9)"{rvs on}  {rvs off}{brown}│││││││{rvs on}{darkgrey}  {crsr right}{crsr right}{crsr right}{crsr right}      "
+2248 PRINTSPC(10)"{rvs on}{darkgrey} {rvs off}{brown}│││││││{rvs on}{darkgrey} "
+2250 PRINT"{crsr right}{crsr right}▁▁▁▁▁▁▁{rvs on}{darkgrey}  {rvs off}{brown}│││││││{rvs on}{darkgrey}  {rvs off}▁▁▁▁▁▁▁▁▁▁▁▁":PRINTSPC(11)"{brown}"
+2252 PRINTSPC(11)G4$:PRINTSPC(10)G5$
+2255 IFH1=0THEN<a href="#0bda">57</a>
+2256 IFH1=1THENPRINT"{home}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}"SPC(11)"{crsr right}{grey}{crsr down}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}▏   ▕"
+2257 PRINTSPC(10)"":GOSUB<a href="#4134">1554</a>:GOTO<a href="#42c3">1650</a>
+<a name="5924"></a>2300 REM
+2310 H4$="{yellow}├┤{crsr down}{crsr left}{crsr left}├┤{crsr down}{crsr left}{crsr left}├┤{crsr down}{crsr left}{crsr left}├┤{crsr down}{crsr left}{crsr left}├┤{crsr down}{crsr left}{crsr left}├┤{crsr down}{crsr left}{crsr left}├┤{crsr down}{crsr left}{crsr left}├┤{crsr down}{crsr left}{crsr left}├┤"
+2330 PRINT"{crsr up}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{darkgrey}┌┬┬┐":PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}├┼┼┤{crsr right}{crsr right}{rvs on} "
+2332 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}├┼┼┤{crsr right}{rvs on} "SPC(12)"{brown}   "
+2334 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{darkgrey}└┴┴┘{crsr right}{crsr right}{crsr right}{rvs on}  "SPC(18)"{rvs on} "
+2336 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{darkgrey}"SPC(13)"{brown}{rvs on}  ":PRINTSPC(10)"{brown}{rvs on}  "SPC(10)"{rvs on}  {crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{darkgrey}    "
+2338 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{rvs on}  "SPC(11)"{rvs on} "SPC(14)"{rvs on}   "
+2340 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs on} "SPC(11)"{brown}{rvs on}  {crsr down}"
+2342 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs on}   "SPC(15)"{rvs off}╭┬┬╮{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs on} "
+2344 PRINTSPC(9)"{rvs on}  {crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{darkgrey}   {crsr right}{crsr right}{rvs off}{brown}││││{crsr right}{crsr right}{crsr right}{rvs on}  "
+2346 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs on} "SPC(10)"{darkgrey}{rvs on}   {crsr right}{rvs off}{brown}││││{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{darkgrey}{rvs on}  "
+2348 PRINTSPC(23)"{brown}││││":PRINT"{crsr right}{crsr right}";:FORA=1TO36:PRINT"{green}▒";:NEXT
+2350 IFDG=1THENPRINT"{home}{crsr down}{crsr down}{crsr down}{crsr down}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}";:PRINTH4$:GOTO<a href="#0bda">57</a>
+2360 GOTO<a href="#0bda">57</a>
+<a name="5b1b"></a>2400 REM
+2430 PRINTSPC(25)"{crsr up}{rvs on}{brown} ":PRINTSPC(25)"{rvs on} {rvs off}╱":PRINTSPC(25)"{rvs on} "
+2432 PRINT"{crsr right}{crsr right}{rvs on}{blue}                                    "
+2434 PRINT"{crsr right}{crsr right}{green}▗▖{crsr right}{rvs on}{brown}  {crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}  {crsr right}{crsr right}{crsr right}{crsr right}{rvs off}▗▖{crsr right}{darkgrey}{rvs on} {crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs off}{orange}▗▖{crsr right}{crsr right}{rvs on}{brown} "
+2436 PRINT"{crsr right}{crsr right}{green}{rvs on}  {rvs off}▖{crsr right}{crsr right}{brown}{rvs on} {crsr right}{crsr right}{rvs off}{lightgreen}▗▖{rvs on}{brown} {crsr right}{crsr right}{crsr right}{crsr right}{darkgrey} {crsr right}{crsr right}{rvs off}{green}▝{rvs on}  {rvs off}▖{crsr right}{darkgrey}{rvs on}   {crsr right}{crsr right}{rvs off}{orange}▗{rvs on}  {crsr right}{crsr right}{crsr right}{brown}{rvs on}  "
+2437 PRINT"{crsr right}{crsr right}{rvs on}{green}   {crsr right}{crsr right}{crsr right}{crsr right}{rvs off}{lightgreen}▗{rvs on}  {rvs off}▖{rvs on}{brown} {crsr right}{crsr right}{crsr right}{crsr right}{crsr right} {green}{rvs off}▗{rvs on}  {rvs off}▖{crsr right}{rvs on}{brown} {crsr right}{crsr right}  {orange}   {rvs off}▖{rvs on}{darkgrey}   "
+2438 PRINT"{crsr right}{crsr right}{green}{rvs on}    {rvs off}▖▗▖{rvs on} {lightgreen}    {rvs off}▖{crsr right}{darkgrey}{rvs on}  {crsr right}{rvs off}{green}▗{rvs on}    {rvs off}▖▗▖{crsr right}{crsr right}{orange}▗{rvs on}    "
+2440 PRINT"{crsr right}{crsr right}{green}{rvs on}       {lightgreen}      {rvs off}▖▗{brown}▂▂{rvs on}{green}        {rvs off}▖{orange}▗{rvs on}    {rvs off}▖▗▖{brown}▂▂"
+2442 PRINT"{crsr right}{crsr right}{green}{rvs on}      {lightgreen}         {rvs off}{green}▗{rvs on}          {orange}        {rvs off}{green}▒▒"
+2443 PRINT"{crsr right}{crsr right}";:FORA=1TO36:PRINT"{green}▒";:NEXT
+2444 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}";:FORA=1TO36:PRINT"{rvs on}{brown} ";:NEXT
+2446 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}";:FORA=1TO36:PRINT"{rvs on}{brown} ";:NEXT
+2450 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{green}▒▒▒▒▒▒▒▒▒▒▒▒{rvs off}{brown}◥{rvs on}   ◥{rvs off}{green}▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒"
+2460 GOTO<a href="#0bda">57</a>
+<a name="5d70"></a>2500 REM
+2530 PRINTSPC(23)"{rvs on}{green}{crsr right}{crsr right} ":PRINTSPC(22)"{rvs on} {crsr right} {crsr right} {crsr right} "
+2532 PRINTSPC(10)"{blue}┌──────────┐{crsr right}{rvs on}{green} {crsr right} {crsr right} {rvs off}{brown}╱{rvs on}{green} "
+2534 PRINTSPC(10)"{blue}└┬────────┬┘{rvs on}{green} {crsr right}{rvs off}{brown}╲{rvs on}{green}▖ {rvs off}{brown}╱{rvs on}{green} {crsr right} "
+2536 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{orange}{rvs on} {crsr right}{crsr right}{crsr right}{rvs off}{lightblue}┌────────┐{rvs on}{green} {crsr right} {crsr right} {brown} {green} {crsr right} "
+2538 PRINT"{crsr right}{crsr right}{crsr right}{rvs on}{red} {f7}{f7}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{f7}{f7}{orange} {f7}{f7}{rvs off}{lightblue}├──┬──┬──┤{crsr right}{rvs on}{green} {crsr right} {crsr right}{brown} {rvs off}╱{crsr right}{crsr right}{rvs on}{green} "
+2540 PRINT"{crsr right}{crsr right}{rvs on}{red} {crsr right} {crsr right}{orange}  {crsr right} {crsr right}{rvs off}{lightblue}├──┤{crsr right}{crsr right}├──┤{crsr right}{crsr right}{crsr right}{crsr right}{rvs off}{brown}╲{rvs on} {crsr right}{crsr right}{green} "
+2542 PRINT"{crsr right}{crsr right}{red}{rvs on} {crsr right} {orange}{rvs off}▗▖{rvs on} {crsr right} {rvs off}{lightblue}├──┤{crsr right}{crsr right}├──┤{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{brown}{rvs on} "
+2544 PRINT"{crsr right}{rvs on}{red}  {crsr right}  {orange}    {rvs off}{green}─{lightblue}├──┤{crsr right}{crsr right}├──┤{green}─────{rvs on}{brown} {rvs off}{green}─────────"
+2546 PRINT"{crsr right}{crsr right}{rvs on}{red}▃▃▃▃{rvs off}{green}▒▒▒▒▒{lightblue}└──┴──┴──┘{green}▒▒▒▒▒{rvs on}{brown} {rvs off}{green}▒▒▒▒▒▒▒▒▒"
+2548 PRINT"{crsr right}{green}▒▒▒▒▒▒▒▒▒▒▒▒▒{brown}{rvs on}◤  ◥{rvs off}{green}▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒"
+2549 PRINT"{crsr right}{green}▒▒▒▒▒▒▒▒▒▒▒▒{rvs on}{brown}◤    ◥{rvs off}{green}▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒"
+2550 PRINT"{crsr right}{green}▒▒▒▒▒▒▒▒▒▒▒{brown}{rvs on}◤                       "
+2560 GOTO<a href="#0bda">57</a>
+<a name="5fb2"></a>2600 REM
+2630 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs on}{brown} {crsr right}◤":PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs on} ◤{rvs off}◤"
+2632 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs on}  {rvs off}◤":PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs on}  ":PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs on}  "
+2634 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs on}  ":PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs on}   ":PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs on}   {crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}◤"
+2636 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs on}   {crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}◤{rvs off}◤":PRINT"{crsr right}{crsr right}{crsr right}{crsr right}◥{rvs on}◥{crsr right}          {rvs off}◤"
+2638 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}◥{rvs on}◥    {rvs off}◤":PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}◥{rvs on}    "
+2640 PRINT"{crsr right}{crsr right}{rvs on}{blue}     {brown}    {blue}                           "
+2660 GOTO<a href="#0bda">57</a>
+<a name="60e9"></a>2700 REM
+<a name="60ef"></a>2730 PRINT"{crsr right}{crsr right}{grey}╲"SPC(28)"╱":PRINT"{crsr right}{crsr right}{crsr right}╲"SPC(26)"╱"
+2731 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}"
+2732 FORA=1TO7:PRINT"{crsr right}{crsr right}{crsr right}{crsr right}▏"SPC(24)"▕":NEXT
+2734 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂"
+2735 PRINT"{crsr right}{crsr right}{crsr right}╱"SPC(26)"╲":PRINT"{crsr right}{crsr right}╱"SPC(28)"╲"
+2736 IFDE=1THENRETURN
+2737 IFDO=1THENRETURN
+2738 IFDN=1THENRETURN
+2739 IFG9=1THEN<a href="#622e">2742</a>
+2740 PRINT"{home}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs on}{red}     {orange} ":PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs on}{red}     {orange} ":PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs on}{red}     {orange} "
+2741 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs on}{red}     {rvs off}{orange}◤":GOTO<a href="#0bda">57</a>
+<a name="622e"></a>2742 PRINT"{home}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs on}{red}     {orange} ":PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs on}{red}     {orange} "
+2743 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs on}{red}     {orange} ":PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs on}{red}     {orange}{rvs off}◤"
+2744 PRINT"{home}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{grey}{rvs on}◤▏    {rvs off}◤"
+2745 GOTO<a href="#0bda">57</a>
+<a name="62d7"></a>2800 PRINT"{clear}":IFCC=0THEN<a href="#4d5b">1920</a>
+2810 PRINTSPC(32)"{crsr up}{grey}╱":PRINTSPC(32)"▏":PRINTSPC(32)"▏"
+2812 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}▏":PRINTSPC(29)"▕▏"
+2814 PRINTSPC(9)"{brown}┌───┐"SPC(15)"{grey}▕{crsr right}{crsr right}▏":PRINTSPC(9)"{brown}│{crsr right}{crsr right}{crsr right}│"SPC(15)"{grey}▕{crsr right}{crsr right}▏"
+2816 PRINTSPC(9)"{brown}│{crsr right}{crsr right}{crsr right}│"SPC(15)"{grey}▕{crsr right}{crsr right}▏"
+2818 PRINTSPC(9)"{brown}│{crsr right}{crsr right}{crsr right}│"SPC(15)"{grey}▕{crsr right}{crsr right}▏":PRINTSPC(9)"{brown}│{crsr right}{crsr right}{crsr right}│"SPC(15)"{grey}▕▂▂▏"
+2820 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}▂▂▂▂{brown}│{crsr right}{crsr right}{crsr right}│{grey}▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂{crsr right}{crsr right}▏"
+2822 PRINTSPC(9)"{brown}▔▔▔▔▔"SPC(18)"{grey}▏":PRINTSPC(32)"╲"
+2825 IFG7=0THENGOSUB2840
+2826 IFG8=0THENGOSUB2846
+2827 IFG6=0THENPRINT"{home}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}"SPC(18)"{green}{rvs on}  {crsr down}{crsr left}{crsr left}  "
+2828 IFG7=1THENGOSUB2852
+2829 IFG8=1THENGOSUB2858
+2832 GOTO<a href="#0bda">57</a>
+2840 PRINT"{home}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}"SPC(10)"{brown}┬┬┬":G7$="{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{brown}│││"
+2841 FORH=1TO5:PRINTG7$:NEXT:RETURN
+2846 PRINT"{home}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{brown}{rvs on}│     │":RETURN
+2852 RETURN
+2858 PRINT"{home}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr right}{crsr right}{crsr right}{crsr right}{brown}{rvs on}       ":RETURN
+<a name="6512"></a>2900 REM
+2910 PRINT"{crsr up}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{grey}╲"SPC(23)"╱":PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{darkgrey}{rvs on}◥{crsr right}{rvs off}{grey}╲"SPC(21)"╱"
+2912 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{darkgrey}{rvs on} ◥{crsr right}{rvs off}{grey}{crsr right}╱"
+2914 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{darkgrey}{rvs on}  {crsr right}{grey}{rvs off}▏"SPC(19)"▕{crsr right}▏"
+2916 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{darkgrey}{rvs on}  {crsr right}{rvs off}{grey}▏▕{crsr right}{rvs on}{brown}    {rvs off}{grey}▕{crsr right}▏"
+2918 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{darkgrey}{rvs on}  {rvs off}{crsr right}{grey}▏▕{crsr right}▏▏{crsr right}{crsr right}{crsr right}▏{crsr right}{crsr right}{crsr right}▏{crsr right}▕{crsr right}{brown}{rvs on} {rvs off}{yellow}╲{crsr right}{rvs on}{brown} {rvs off}{grey}▕{crsr right}▏"
+2920 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{darkgrey}{rvs on}  {crsr right}{rvs off}{grey}▏▕{crsr right}▏▏{crsr right}{crsr right}{crsr right}▏{crsr right}{crsr right}{crsr right}▏{crsr right}▕{crsr right}{brown}{rvs on} {rvs off}{yellow}{crsr right}▔{rvs on}{brown} {rvs off}{grey}▕{crsr right}▏"
+2921 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{darkgrey}{rvs on}  {crsr right}{rvs off}{grey}▏▕{crsr right}▏▏{crsr right}{crsr right}{crsr right}▏{crsr right}▕{crsr right}{rvs on}{brown}    {rvs off}{grey}▕{crsr right}▏"
+2922 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{darkgrey}{rvs on}  {crsr right}{rvs off}{grey}▏▕{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs on}{brown} {rvs off}{yellow}{crsr right}▏{rvs on}{brown} {rvs off}{grey}▕{crsr right}▏"
+2924 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{darkgrey}{rvs on} .{crsr right}{rvs off}{grey}▏▕╱"SPC(11)"▕{crsr right}{brown}{rvs on} {rvs off}{yellow}{crsr right}▏{rvs on}{brown} {rvs off}{grey}▕{crsr right}▏"
+2926 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{darkgrey}{rvs on}  {rvs off}{grey}{crsr right}▏▕"SPC(12)"▕{crsr right}{rvs on}{brown} {rvs off}{yellow}╭╮{rvs on}{brown} {rvs off}{grey}▕{crsr right}▏"
+2928 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{darkgrey}{rvs on}  {rvs off}{crsr right}{grey}"SPC(12)"▕{crsr right}{rvs on}{brown} {rvs off}{yellow}╰╯{rvs on}{brown} {rvs off}{grey}{crsr right}▏"
+2930 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{darkgrey}{rvs on}  {rvs off}{grey}╱"SPC(15)"{rvs on}{brown}▃▃▃▃{rvs off}{grey}{crsr right}╲▏"
+2932 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{darkgrey}{rvs on} {rvs off}◤":PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}◤"
+2940 GOTO<a href="#0bda">57</a>
+<a name="6759"></a>3000 REM
+3010 PRINT"{crsr down}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{grey}":PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}▏{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}▕"SPC(13)"{yellow}"
+3012 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{grey}{crsr right}▏{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}▕"SPC(13)"{yellow}▏▕"
+3014 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{grey}▏{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}▕"SPC(13)"{yellow}▏▏{crsr right}●{crsr right}{crsr right}{crsr right}{crsr right}{rvs on}{green}◤◥{rvs off}{yellow}▕"
+3016 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{grey}▏{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}▕"SPC(13)"{yellow}▎{rvs on}{green}◤◥{crsr right}{crsr right}{crsr right}{crsr right}◤  {rvs off}{yellow}▕"
+3018 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{grey}▎{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}"SPC(13)"{yellow}▎{rvs on}{green}  ◥{crsr right}{crsr right}◤   {rvs off}{yellow}▕"
+3020 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{grey}"SPC(13)"{yellow}▎{rvs on}{green}    ╱    {rvs off}{yellow}▕"
+3022 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{grey}"SPC(13)"{yellow}▂▂▂▂▂▂▂▂▂"
+3024 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{grey}":PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{grey}"
+3026 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{grey}"
+3028 PRINT"{grey}{crsr right}"
+3029 IFGZ=1THEN<a href="#69c8">3035</a>
+3030 IFGZ=0THENPRINT"{home}{crsr down}{crsr down}{crsr down}{crsr down}"SPC(17)"{brown}{rvs on}       {crsr down}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}       {crsr down}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}       "
+3031 PRINTSPC(17)"{rvs on}       {crsr down}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}      ●{crsr down}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}       {crsr down}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}       "
+3032 PRINTSPC(17)"{rvs on}       {crsr down}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}       ":GOTO<a href="#0bda">57</a>
+<a name="69c8"></a>3035 H5$="{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{brown}{rvs on}  {rvs off}{crsr right}{crsr right}{crsr right}{crsr right}▕"
+3036 PRINT"{home}{crsr down}{crsr down}{crsr down}{crsr down}"SPC(17)"{brown}{rvs on}  {rvs off}":FORA=1TO7:PRINTH5$:NEXT
+3037 PRINTSPC(17)"{rvs on} {rvs off}◤{crsr right}{crsr right}{crsr right}{crsr right}▕":GOTO<a href="#0bda">57</a>
+<a name="6a32"></a>3100 REM
+3110 PRINT"{crsr right}{crsr right}{crsr right}{grey}╲":PRINT"{crsr right}{crsr right}{crsr right}▕"
+3112 PRINT"{crsr right}{crsr right}{crsr right}▕":PRINT"{crsr right}{crsr right}{crsr right}▕{crsr right}▕▏":PRINT"{crsr right}{crsr right}{crsr right}▕{crsr right}▕{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}▏"
+3113 PRINT"{crsr right}{crsr right}{crsr right}{grey}▕{crsr right}▕{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}▏"
+3114 PRINT"{crsr right}{crsr right}{crsr right}▕{crsr right}▕{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}▏{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{green}│":PRINT"{crsr right}{crsr right}{crsr right}{grey}▕{crsr right}▕{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}▏{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs on}{green} "
+3116 PRINT"{crsr right}{crsr right}{crsr right}{grey}▕{crsr right}▕{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}▏{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs on}{green} {crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs off}{yellow}────{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs on}{brown}"
+3118 PRINT"{crsr right}{crsr right}{crsr right}{grey}▕{crsr right}▕{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}▏{crsr right}{crsr right}{orange}{rvs on}              {crsr right}{crsr right}{crsr right}{crsr right}{brown}"
+3120 PRINT"{crsr right}{crsr right}{crsr right}{grey}▕{crsr right}▕▏{crsr right}{crsr right}{crsr right}{brown}{rvs on} "SPC(10)"{rvs on} {crsr right}{crsr right}{crsr right}{crsr right}{crsr right}"
+3122 PRINT"{crsr right}{crsr right}{crsr right}{grey}▕{crsr right}▕{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}▏{crsr right}{crsr right}{crsr right}{brown}{rvs on} "SPC(10)"{rvs on} {crsr right}    "
+3124 PRINT"{crsr right}{crsr right}{crsr right}{grey}▕{crsr right}▕{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}▏{crsr right}{crsr right}{crsr right}{brown}{rvs on} "SPC(10)"{rvs on} {crsr right}{crsr right}{crsr right}{crsr right}"
+3126 PRINT"{crsr right}{crsr right}{crsr right}{grey}╱{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{brown}{rvs on} {rvs off}{grey}{brown}{rvs on} {rvs off}{grey}{rvs on}{brown}{rvs off}{grey}{rvs on}{brown}{rvs off}{grey}"
+3130 GOTO<a href="#0bda">57</a>
+<a name="6c17"></a>3200 REM
+3210 PRINT"{home}{crsr right}{crsr right}{darkgrey}╲":PRINT"{crsr right}{crsr right}▕{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs on} {crsr right}  {crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}  "
+3212 PRINT"{crsr right}╲▕{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs on} "SPC(21)"{rvs on}  ":PRINT"{crsr right}▕▕"SPC(12)"{rvs on}   "SPC(18)"{rvs on}  "
+3214 PRINT"{crsr right}▕▕{crsr right}{crsr right}{green}○○○○○○○○○○○○○○○○○○○":PRINT"{crsr right}{darkgrey}▕▕{crsr right}{crsr right}{green}○○○○○○○○○○○○○○○○○○○{crsr right}{crsr right}{darkgrey}{rvs on}    "
+3216 PRINT"{crsr right}▕▕{crsr right}{crsr right}{brown}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{darkgrey}{rvs on}  "
+3218 PRINT"{crsr right}▕▕{crsr right}{crsr right}{red}○○○○○○○○○○○○○○○○○○○":PRINT"{crsr right}{darkgrey}▕▕{rvs on} {rvs off}{crsr right}{red}○○○○○○○○○○○○○○○○○○○"SPC(8)"{darkgrey}{rvs on}   "
+3220 PRINT"{crsr right}▕▕{crsr right}{rvs on} {rvs off}{brown}{crsr right}{crsr right}{darkgrey}{rvs on} "
+3222 PRINT"{crsr right}▕▕{crsr right}{rvs on} {rvs off}{lightgrey}○○○○○○○○○○○○○○○○○○○{crsr right}{darkgrey}{rvs on}  "
+3224 PRINT"{crsr right}╱{lightgrey}○○○○○○○○○○○○○○○○○○○{darkgrey}"
+3226 PRINT"{crsr right}╱{crsr right}{crsr right}{crsr right}{brown}"
+3230 IFH5=1THEN<a href="#6e52">3240</a>
+3231 PRINT"{home}{crsr down}{crsr down}{crsr down}"SPC(29)"{yellow}♣♣{crsr down}{crsr left}{crsr left}{grey}╭╮{crsr down}{crsr left}{crsr left}╰╯{crsr down}{crsr left}{crsr left}{crsr left}{red}{rvs on}▎{grey}  {red}{crsr down}{crsr left}{crsr left}{crsr left}{crsr left}{grey}{rvs off}│{red}{rvs on}▎{rvs off}{grey}│{crsr down}{crsr left}{crsr left}{crsr left}{crsr left}[{rvs on}{red}{rvs off}{grey}]"
+3232 PRINTSPC(29)"{red}{rvs on}▎{crsr down}{crsr left}{crsr left}▎{crsr down}{crsr left}{crsr left}{crsr left}{rvs off}▗{rvs on}▍{rvs off}▖":GOTO<a href="#0bda">57</a>
+<a name="6e52"></a>3240 GOTO<a href="#0bda">57</a>
+<a name="6e5a"></a>3300 REM
+3310 DO=1:GOSUB<a href="#60ef">2730</a>:DO=0
+3312 PRINT"{home}{crsr down}{crsr down}{crsr down}{crsr right}{crsr right}{grey}╲{crsr down}{crsr left}▕{crsr down}{crsr left}▕{crsr down}{crsr left}▕{crsr down}{crsr left}▕{crsr down}{crsr left}▕{crsr down}{crsr left}▕{crsr down}{crsr left}▕{crsr down}{crsr left}▕{crsr down}{crsr left}▕"
+3314 PRINT"{home}{crsr down}{crsr down}{crsr down}"SPC(31)"{grey}╱{crsr down}{crsr left}▏{crsr down}{crsr left}▏{crsr down}{crsr left}▏{crsr down}{crsr left}▏{crsr down}{crsr left}▏{crsr down}{crsr left}▏{crsr down}{crsr left}▏{crsr down}{crsr left}▏{crsr down}{crsr left}▏"
+3320 POKEV+21,8:POKEV+42,7:POKEV+28,8:POKEV+37,6:POKEV+38,1:POKE2043,14
+3321 POKEV+29,8:POKEV+23,8:POKEV+6,200:POKEV+7,122
+3350 B=B+13:GOTO<a href="#0bda">57</a>
+<a name="6f38"></a>3400 DN=1:GOSUB<a href="#60ef">2730</a>:DN=0
+3410 PRINT"{home}{grey}{crsr down}{crsr down}{crsr down}{crsr right}{crsr right}╲{crsr down}{crsr left}▕{crsr down}{crsr left}▕{crsr down}{crsr left}▕{crsr down}{crsr left}▕{crsr down}{crsr left}▕{crsr down}{crsr left}▕{crsr down}{crsr left}▕{crsr down}{crsr left}▕{crsr down}{crsr left}▕"
+3412 IFH8=0THEN<a href="#6fcf">3415</a>
+3413 PRINT"{home}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}"SPC(16)"{brown}":PRINTSPC(16)"▏{crsr right}{crsr right}{yellow}{crsr right}{crsr right}{crsr right}{crsr right}▕"
+3414 PRINTSPC(16)"{brown}▏{yellow}▒▒▒▒{grey}▕"
+<a name="6fcf"></a>3415 PRINT"{home}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}"
+3416 PRINTSPC(16)"{rvs on}{brown}▂{orange}▂▂▂▂▂▂▂▂▂{crsr down}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}{brown} {orange}    ●    "
+3417 PRINTSPC(16)"{rvs on}{brown} {orange}         {crsr down}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}{rvs off}{brown}◥{rvs on}{orange}         "
+3450 B=B+13:GOTO<a href="#0bda">57</a>
+<a name="7051"></a>3500 REM
+3512 PRINT"{clear}{crsr down}{crsr down}{crsr down}{crsr down}"SPC(15)"{rvs on}{yellow}▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂"
+3514 PRINTSPC(14)"{yellow}{rvs on}◤                    "
+3516 H4$="{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{orange}{rvs on}▎{rvs off}                  {rvs on}▎"
+3517 FORA=1TO4:PRINTH4$:NEXT
+3518 PRINTSPC(15)"{orange}{rvs on}▎"SPC(13)"{lightblue}{rvs on}◤    {orange}▎"
+3520 PRINTSPC(13)"{blue}{rvs on}◤                     "
+3522 PRINT"{crsr right}{crsr right}{grey}{blue}{rvs on}                      "
+3524 PRINTSPC(15)"{orange}▃"SPC(18)"{rvs on}▃"
+3526 IFBW=0THEN<a href="#71a7">3528</a>
+3527 PRINT"{home}{crsr down}{crsr down}{crsr right}{crsr right}{crsr right}{cyan}┌┬┬┬───┐":FORA=1TO9:PRINTH3$:NEXT:GOTO<a href="#71cc">3540</a>
+<a name="71a7"></a>3528 PRINT"{home}{crsr down}{crsr down}{crsr right}{crsr right}{crsr right}{cyan}┌┬┬┬┬┬┬┐":FORA=1TO9:PRINTH2$:NEXT
+<a name="71cc"></a>3540 B=B+13:GOTO<a href="#0bda">57</a>
+<a name="71db"></a>3600 REM
+3610 PRINTSPC(9)"{grey}▏":PRINTSPC(9)"▏":PRINTSPC(9)"▏"SPC(14)"{blue}●─{rvs on}{yellow}  {rvs off}{blue}─{rvs on}{red}   {rvs off}{blue}─●"
+<a name="7217"></a>3612 PRINTSPC(9)"{grey}▏"SPC(16)"{yellow}{rvs on}  {crsr right}{red}   ":LI=LI+1:IFLI=2THEN<a href="#7250">3614</a>
+3613 GOTO<a href="#7217">3612</a>
+<a name="7250"></a>3614 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{blue}┬{crsr right}{grey}▏"SPC(19)"{red}{rvs on}   ":PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{red}┬{lightgreen}●╮{grey}{lightgreen}▂▂▂▂▂▂▂▂▂▂▂▂▂▂"
+3615 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}●╮"SPC(15)"╱▏":PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{lightgreen}╱{lightblue}{rvs on}◤             {rvs off}◤{lightgreen}╱{crsr right}{grey}"
+3616 PRINT"{lightgreen}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{grey}▏":PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{lightgreen}▏"SPC(14)"▕{crsr right}╱"
+3617 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{grey}╱{lightgreen}▂▂▂▂▂▂▂▂▂▂▂▂▂▂╱":PRINT"{grey}{crsr right}{crsr right}{crsr right}{crsr right}╱"
+3620 B=B+13:LI=0:GOTO<a href="#0bda">57</a>
+<a name="734d"></a>3700 REM
+3707 IFBW=1THEN<a href="#73a8">3712</a>
+3710 IFBW=0THENPRINT"{crsr down}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{cyan}┌┬┬┬┬┬┬┐"
+3711 FORA=1TO9:PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}";H2$:NEXT:GOTO<a href="#73de">3714</a>
+<a name="73a8"></a>3712 PRINT"{cyan}{crsr down}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}┌┬┬┬───┐":FORA=1TO9:PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}";H3$:NEXT
+<a name="73de"></a>3714 PRINT"{home}{crsr down}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs on}{green} {crsr down}{crsr left}{crsr left}▍{crsr down}{crsr left}{crsr left}▎{crsr right}{rvs off}▖{rvs off}{crsr down}{crsr left}{crsr left}{rvs on} {crsr down}{crsr left}{crsr left}{crsr left}{rvs on} {crsr right}▃{crsr down}{crsr left}{crsr left}{crsr left}▍▍{crsr down}{crsr left}▎▍{crsr down}{crsr left}{crsr left}{crsr left} {crsr down}{crsr left}{crsr left}▎{crsr right}▍{crsr down}{crsr left}{crsr left}{crsr left}{rvs off}▗▖"
+3716 PRINT"{rvs on}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right} {rvs off}▖{crsr down}{crsr left}{crsr left}{rvs on} {crsr right}{rvs off}▘{crsr down}{rvs on}{crsr left}{crsr left} {crsr right} {crsr down}{crsr left}{crsr left} "
+3718 PRINT"{crsr up}{crsr up}{crsr up}{crsr up}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{darkgrey}{rvs on}            ":PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs on}            "
+3720 IFDG=0THENB=B+13:GOTO<a href="#0bda">57</a>
+3722 IFDG=1THENPRINT"{home}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}"SPC(22)"{yellow}│{crsr right}{crsr right}{crsr right}│{crsr down}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}├───┤{crsr down}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}│{crsr right}{crsr right}{crsr right}│{crsr down}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}├───┤
+3724 PRINTSPC(22)"│{crsr right}{crsr right}{crsr right}│{crsr down}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}├───┤"
+3726 B=B+13:GOTO<a href="#0bda">57</a>
+<a name="7510"></a>3800 REM
+3810 PRINTSPC(25)"{cyan}╱":PRINTSPC(24)"╱▏▏▏▏▏"
+3811 PRINTSPC(8)"▕{blue}▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒{cyan}▏▏▏▏▏▏":PRINTSPC(8)"{cyan}▕{blue}▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒{cyan}▏▏▏▏▏▏"
+3812 PRINTSPC(8)"▕{blue}▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒{cyan}":PRINTSPC(8)"{cyan}▕{blue}▒▒▒▒{rvs on}{brown}{rvs off}{blue}▒▒▒▒{cyan}▕"
+3813 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{yellow}♠{cyan}▕{blue}▒{yellow}♠{blue}▒▒{brown}{rvs on}▎{rvs off}{rvs on}{rvs off}{blue}▒▒▒▒{cyan}▕{crsr right}"
+3814 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{yellow}♠{crsr right}{blue}H{cyan}▕{blue}▒H▒▒{brown}{rvs on}▎{rvs off}▏▏▏▏▏▏{rvs on}{rvs off}{blue}▒▒▒▒{cyan}▕{crsr right}▏▕"
+3815 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{blue}H{crsr right}{crsr right}{cyan}▕{blue}▒▒▒▒{brown}{rvs on}▎{rvs off}▏▏▏▏▏▏{rvs on}{rvs off}{blue}▒▒▒▒{cyan}▕{crsr right}▏▕"
+3816 PRINTSPC(8)"▕{blue}▒▒▒▒{brown}{rvs on}▎{rvs off}▏▏▏▏▏▏{rvs on}{rvs off}{blue}▒▒▒▒{cyan}▕{crsr right}▏▕"
+3817 PRINTSPC(8)"▕{blue}▒▒▒▒{brown}{rvs on}▎{rvs off}▏▏▏▏▏▏{rvs on}{rvs off}{blue}▒▒▒▒{cyan}▕{crsr right}▏▕"
+3818 PRINTSPC(8)"╱╲":PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}╱"SPC(20)"▕":PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}╱"SPC(21)"▕"
+3830 B=B+13:GOTO<a href="#0bda">57</a>
+<a name="76f0"></a>4100 REM
+4110 PRINT"{home}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{grey}▏":PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}▏"SPC(15)"▏{crsr right}▏"
+4112 G5$="{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{grey}▏{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}▏{crsr right}▏"
+4113 FORH=1TO10:PRINTG5$:NEXT
+4120 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}╲{crsr right}▏"
+4121 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}▏"SPC(16)"╲▏"
+4122 PRINT"{crsr right}{crsr right}{crsr right}"SPC(18)""
+4124 IFH2=0THENPRINT"{home}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}";:GOTO<a href="#780e">4128</a>
+4126 PRINT"{home}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}";
+<a name="780e"></a>4128 PRINT"{brown}{rvs on} {orange}      ":PRINTSPC(17)"{rvs on}{brown} {orange}      ":PRINTSPC(17)"{brown}{rvs on} {orange}      "
+4130 PRINTSPC(17)"{brown}{rvs on} {orange}      ":PRINTSPC(17)"{brown}◥{rvs on}{orange}      "
+4132 IFH2=1ANDH3=0THENPRINT"{home}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}"SPC(19)"{yellow}○─{rvs on}"
+4134 IFH6=0THENPRINT"{home}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}"SPC(9)"{grey}╭─╮{crsr down}{crsr left}{crsr left}{crsr left}│{crsr right}│{crsr down}{crsr left}{crsr left}{crsr left}{darkgrey}{rvs on}   {crsr down}{crsr left}{crsr left}{crsr left}   {crsr down}{crsr left}{crsr left}{crsr left}   "
+4136 IFH7=0THEN<a href="#78f4">4146</a>
+4140 B=B+13:GOTO<a href="#0bda">57</a>
+<a name="78f4"></a>4146 IFH7=0THENPRINT"{home}{crsr down}{crsr down}{crsr down}"SPC(13)"{brown}▏{crsr down}{crsr left}{crsr left}▎{crsr down}{crsr left}{crsr left}▎{crsr down}{crsr left}{crsr left}▎{crsr down}{crsr left}{crsr left}▎{crsr down}{crsr left}{crsr left}▎{crsr down}{crsr left}{crsr left}{yellow}╭╮{crsr down}{crsr left}{crsr left}{rvs on}"
+4147 PRINTSPC(13)"▒▒{crsr down}{crsr left}{crsr left}▒▒":B=B+13:GOTO<a href="#0bda">57</a>
+<a name="7952"></a>4200 REM
+4210 PRINT"{crsr down}{crsr right}{crsr right}{crsr right}{crsr right}{darkgrey}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{grey}{crsr right}{crsr right}{crsr up}▏{crsr down}{crsr left}▏"
+4212 PRINT"{darkgrey}{crsr right}{crsr right}{crsr right}{crsr right}▏ ▕{crsr right}▏{crsr right}▕{crsr right}▏{crsr right}▕{crsr right}▏{crsr right}▕{crsr right}▏{crsr right}▕{crsr right}▏{crsr right}▕{crsr right}▏{crsr right}▕{crsr right}{grey}{crsr right}{crsr right}▏"
+4214 PRINT"{darkgrey}{crsr right}{crsr right}{crsr right}{crsr right}▏{crsr right}▕{crsr right}▏{crsr right}▕{crsr right}▏{crsr right}▕{crsr right}▏{crsr right}▕{crsr right}▏{red}{crsr right}{grey}▏"
+4216 PRINT"{darkgrey}{crsr right}{crsr right}{crsr right}{crsr right}▏{light-red}{rvs on}  {crsr right}{darkgrey}{rvs off}▏{crsr right}▕{crsr right}▏{crsr right}▕{crsr right}▏{crsr right}▕{crsr right}▏{red}▏{rvs on}{green} ◥{rvs off}{red}{rvs on}{lightgrey} {rvs off}{red}▕{crsr right}{grey}▏"
+4218 PRINT"{crsr right}{darkgrey}{crsr right}{crsr right}{crsr right}▏{light-red}{rvs on}  {crsr right}{rvs off}{darkgrey}▏{crsr right}▕{crsr right}▏{crsr right}▕{crsr right}▏{crsr right}▕{crsr right}▏￾{red}▏{rvs on}{green}  ◥{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{lightgrey}{rvs off}│{red}▕▕{crsr right}{grey}▏"
+4220 PRINT"{crsr right}{darkgrey}{crsr right}{crsr right}{crsr right}▏{yellow}╭╮{crsr right}{darkgrey}▏{crsr right}▕{crsr right}▏{crsr right}▕{crsr right}▏{crsr right}▕{crsr right}▏{red}▏{rvs on}{green}   ◥{crsr right}{crsr right}{crsr right}{crsr right}{lightgrey} {rvs off}{red}▕▕{crsr right}{grey}▏"
+4222 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{darkgrey}▏{yellow}╰╯{crsr right}{darkgrey}▏{crsr right}▕{crsr right}▏{crsr right}▕{crsr right}▏{crsr right}▕{crsr right}▏{red}▏{blue}{rvs on}          {rvs off}{red}▕{crsr right}{grey}▏"
+4224 PRINT"{crsr right}{crsr right}{crsr right}{brown}▄▄{rvs on}  {rvs off}▄▄▄▄▄▄▄▄▄▄▄{darkgrey}▕{crsr right}▏{red}▂▂▂▂▂▂▂▂▂▂{crsr right}{grey}▏"
+4226 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{rvs on}{brown} {darkgrey}       {brown} {crsr right}{crsr right}{crsr right} {rvs off}{crsr right}{darkgrey}▕{crsr right}▏{crsr right}▕{crsr right}▏{crsr right}▕{crsr right}▏{crsr right}▕{crsr right}{crsr right}{crsr right}{grey}▏"
+4228 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{brown}{rvs on} {darkgrey}       {brown} {rvs off}{rvs on} {rvs off}{darkgrey}▂{crsr right}▂{crsr right}▂{crsr right}▂{crsr right}{crsr right}{crsr right}{grey}▏"
+4230 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{brown}{rvs on} {lightgrey}       {brown} {rvs off}{rvs on} "SPC(17)"{rvs off}{grey}▏"
+4232 PRINT"{crsr right}{brown}{rvs on} {crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}     {rvs off}{grey}╲"
+4234 IFDP=1THENPRINT"{home}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}"SPC(16)"{darkgrey}{rvs on} . {crsr down}{crsr left}{crsr left}{crsr left}   "
+4240 B=B+13:GOTO<a href="#0bda">57</a>
+<a name="7be4"></a>4250 IFCC=0THEN<a href="#4d5b">1920</a>
+4256 PRINT"{crsr up}"SPC(11)"{grey}╲"SPC(11)"╱":PRINTSPC(11)"▎"
+4258 PRINTSPC(11)"▎{darkgrey}╲{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}╱{grey}▎":PRINTSPC(11)"▎{crsr right}{darkgrey}{crsr right}{grey}▎"
+4260 PRINTSPC(11)"▎{crsr right}{darkgrey}▏{rvs on}{red}     {rvs off}{darkgrey}{crsr right}{grey}▎":PRINTSPC(11)"▎{crsr right}{darkgrey}▏{rvs on}{red}     {rvs off}{darkgrey}{crsr right}{grey}▎"
+4262 PRINTSPC(11)"▎{crsr right}{darkgrey}▏{rvs on}{red}     {rvs off}{darkgrey}{crsr right}{grey}▎":PRINTSPC(11)"▎{crsr right}{darkgrey}▏{rvs on}{red}     {rvs off}{darkgrey}{crsr right}{grey}▎"
+4264 PRINTSPC(11)"▎{blue}{rvs on}  {rvs off}{darkgrey}╲{grey}▎":PRINTSPC(11)"{darkgrey}╱{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}╲{grey}▎"
+4266 PRINTSPC(11)"{grey}{rvs on}◤           ◥":PRINTSPC(10)"{rvs on}◤{rvs off}◤{darkgrey}▏{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}▕{grey}◥{rvs on}◥"
+4268 PRINTSPC(9)"{rvs on}◤{rvs off}◤{crsr right}{darkgrey}▏{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}▕{crsr right}{grey}◥{rvs on}◥":PRINTSPC(8)"{rvs on}◤{rvs off}◤{crsr right}{crsr right}{darkgrey}▏{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}▕{crsr right}{crsr right}{grey}◥{rvs on}◥"
+4270 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs on}◤                   ◥"
+4271 IFDB=0THEN<a href="#7dd4">4275</a>
+4272 IFDB=1THENPRINT"{home}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}"SPC(16)"{rvs on}{brown} {crsr down}{crsr left} {crsr down}{crsr left} {crsr down}{crsr left} {crsr down}{crsr left} "
+<a name="7dd4"></a>4275 B=B+13:GOTO<a href="#0bda">57</a>
+<a name="7de3"></a>4300 IFCC=0THEN<a href="#4d5b">1920</a>
+4304 PRINTSPC(9)"{grey}╲"SPC(19)"╱":PRINTSPC(10)"╲"SPC(17)"╱"
+4306 PRINTSPC(11)"╲▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂╱":PRINTSPC(11)"▕{rvs on}{red}               {rvs off}{grey}▏╱▏"
+4307 G2$="{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{grey}▕{rvs on}{red}               {rvs off}{grey}▏▏▏"
+4308 FORH=1TO6:PRINTG2$:NEXT
+4310 PRINTSPC(9)"{rvs on}{blue}   {lightblue} "SPC(14)"{rvs off}{grey}╲▏▏":PRINTSPC(9)"{rvs on}{blue}   {lightblue} "SPC(15)"{rvs off}{grey}╲▏"
+4312 PRINTSPC(9)"{rvs on}{blue}   {lightblue}{rvs off}◤"SPC(16)"{grey}╲":PRINTSPC(8)"╱"SPC(21)"╲"
+4320 B=B+13:GOTO<a href="#0bda">57</a>
+<a name="7f00"></a>4350 IFG5=1THEN<a href="#7f30">4362</a>
+4360 PRINT"{crsr right}{crsr right}{crsr down}{crsr down}{crsr down}{crsr down}{yellow}▎{crsr down}{crsr left}{crsr left}▎{crsr down}{crsr left}{crsr left}":GOTO<a href="#7f4c">4370</a>
+<a name="7f30"></a>4362 PRINT"{crsr right}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{yellow}{crsr down}{crsr left}{crsr left}▎{crsr down}{crsr left}{crsr left}▎"
+<a name="7f4c"></a>4370 B=B+13:GOTO<a href="#0bda">57</a>
+<a name="7f5b"></a>4400 POKE53280,2:POKE53281,2
+4410 PRINTSPC(15)"{black}╭┬┬╮":PRINTSPC(15)"├┼┼┤"
+4412 PRINTSPC(15)"├┼┼┤"SPC(9)"{white}▄{crsr right}{crsr right}":PRINTSPC(15)"{black}└┴┴┘"SPC(9)"{white}│{crsr right}{crsr right}VVV{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}"
+4414 PRINTSPC(16)"{black}{rvs on}                ":PRINTSPC(18)"{rvs on} "SPC(10)"{rvs on} "
+4416 PRINTSPC(18)"{rvs on} "SPC(10)"{rvs on} "
+4422 POKEV+21,16:POKEV+43,1:POKE2044,15:POKEV+29,16:POKEV+23,16
+4424 POKEV+8,80:POKEV+9,110
+4426 B=B+13:GOTO<a href="#0bda">57</a>
+<a name="8063"></a>4450 REM
+4454 PRINTSPC(8)"{crsr down}{red}{rvs on}{crsr right}{crsr right}▎▎▎":PRINTSPC(8)"{rvs on}{crsr right}{crsr right}▎▎▎"
+4456 PRINT"{crsr right}{crsr right}{grey}"
+4457 FORA=1TO2
+4458 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{rvs on}{yellow} {crsr right} ▎▎▎▎{crsr right}{red} ▍▍▍▎▎▎▌▌▌{green} {crsr right} ▎▎▌▌▍▍▎▎▎▎▎▎":NEXT
+4460 PRINT"{crsr right}{crsr right}{grey}"
+4462 PRINT"{crsr right}{crsr right}{rvs on}{blue}▎▎▎{crsr right}{light-red}▌▌▌▎▎{green}"SPC(10)"{rvs on}{lightblue}▎▎▎▎▌▌▎▎{red}▎▎▎▎▎"
+4464 PRINT"{crsr right}{crsr right}{rvs on}{blue}▎▎▎{crsr right}{light-red}▌▌▌▎▎{green}{crsr right}{crsr right}{orange}◤      {crsr right}{lightblue}▎▎▎▎▌▌▎▎{red}▎▎▎▎▎"
+4465 PRINT"{crsr right}{crsr right}{grey}{orange}{rvs on}◤     {rvs off}◤{rvs on}{brown} {rvs off}{grey}"
+4466 PRINTSPC(15)"{brown}{rvs on} {crsr right}{crsr right}{crsr right} {crsr right} "
+4468 PRINT"{crsr right}{crsr right}{grey}▁▁▁▁▁▁▁▁▁▁▁▁▁{brown}{rvs on} {rvs off}{grey}▁▁▁{rvs on}{brown} {rvs off}{grey}▁{rvs on}{brown} {rvs off}{grey}▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁"
+4470 PRINT"{crsr right}{crsr right}{blue}▒▒▒▒▒▒▒▒▒▒▒▒▒{brown}{rvs on} {rvs off}{blue}▒▒▒{rvs on}{brown} {rvs off}{blue}▒{rvs on}{brown}▃{rvs off}{blue}▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒"
+4472 PRINT"{crsr right}{crsr right}";:FORA=1TO35:PRINT"{blue}▒";:NEXT
+4475 B=B+13:GOTO<a href="#0bda">57</a>
+<a name="8274"></a>4500 IFCC=0THEN<a href="#4d5b">1920</a>
+4502 DE=1:GOSUB<a href="#60ef">2730</a>:DE=0
+4504 PRINT"{home}{crsr down}{crsr down}{crsr down}{crsr down}{crsr right}{crsr right}{grey}╲"SPC(25)"{rvs on}{darkgrey}  ":PRINT"{crsr right}{crsr right}{grey}▕"SPC(11)"{darkgrey}{rvs on}   "SPC(9)"{rvs on}  {crsr right}{crsr right}{crsr right}{crsr right}◤"
+4506 PRINT"{crsr right}{crsr right}{grey}▕"SPC(29)"{rvs on}{darkgrey} ":PRINT"{crsr right}{crsr right}{grey}▕"SPC(29)"{darkgrey}◤"
+4507 PRINT"{crsr right}{crsr right}{grey}▕"SPC(16)"{rvs on}{darkgrey} "SPC(11)"{rvs on}◤"
+4508 PRINT"{crsr right}{crsr right}{grey}▕{crsr right}{crsr right}{crsr right}{crsr right}{darkgrey}{rvs on}  "SPC(11)"{rvs on}{darkgrey}  {crsr right}{crsr right}  {crsr right}{crsr right}{crsr right}{crsr right}{crsr right} ":PRINT"{crsr right}{crsr right}{grey}▕{crsr right}{crsr right}{rvs on}{darkgrey}  "SPC(24)"{rvs off}◥"
+4510 PRINT"{crsr right}{crsr right}{grey}▕":PRINT"{crsr right}{crsr right}▕"
+4512 IFHH=0THEN<a href="#83ed">4520</a>
+4513 PRINT"{home}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}"SPC(20)"{rvs on}{cyan}       {rvs off}{grey}{crsr down}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}{rvs on}{cyan}       {grey}{rvs off}▕"
+4514 PRINTSPC(20)"{rvs on}{cyan}       {grey}{rvs off}▕{crsr down}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}{rvs off}{rvs on}{cyan}       {rvs off}{grey}▕{crsr down}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}{crsr left}{rvs on}{cyan}       {rvs off}{grey}"
+<a name="83ed"></a>4520 B=B+13:GOTO<a href="#0bda">57</a>
+4700 GOTO<a href="#0bf6">60</a>
+<a name="8404"></a>4900 POKE53280,0:POKE53281,0
+4910 PRINT"{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{crsr down}{rvs on}{blue}              ":PRINT"{rvs on} {rvs off}◤◥{rvs on}  {rvs off}◤◥{rvs on}       "
+4912 PRINT"◤{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}◥{rvs on}      ":PRINT"{rvs on} {crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}       ":PRINT"{rvs on}  {crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs off}◥{rvs on}   "
+4914 PRINT"{rvs on}  {crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs off}◥{rvs on}  ":PRINT"◤{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{rvs on}   ":PRINT"{rvs on} {crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right} {crsr right} "
+4916 PRINT"{rvs on} {crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right} ":PRINT"{rvs on} {crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right} ":PRINT"{rvs on} {crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right} "
+4918 PRINT"{rvs on} {crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{brown} ":PRINT"◤{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}◥"
+4920 PRINT"{home}":PRINTSPC(29)"{lightblue}T H E{crsr down}":PRINTSPC(23)"S E C R E T{crsr down}":PRINTSPC(31)"O F{crsr down}"
+4922 PRINTSPC(23)"B A S T O W{crsr down}":PRINTSPC(25)"M A N O R{crsr down}{crsr down}{crsr down}":A6=68
+4923 GOSUB<a href="#4af9">1800</a>:GOTO<a href="#85e7">5000</a>
+4924 PRINTSPC(31)"{darkgrey}   {crsr down}":PRINTSPC(30)"1983{crsr down}":PRINTSPC(26)"        {crsr down}"
+4926 RETURN
+<a name="85e7"></a>5000 POKEV+21,6:POKEV+40,11:P=13:POKEV+23,2:POKEV+29,2:A9$=CHR$(A6)
+5001 FORN=0TO62:READQ:POKE832+N,Q:NEXT
+5002 FORN=0TO62:READQ:POKE896+N,Q:NEXT
+5003 FORN=0TO62:READQ:POKE960+N,Q:NEXT
+5004 POKEV+41,0:FORH=15TO0STEP-1:POKES+24,H:FORZ=1TO100:NEXT:NEXT
+5006 POKES+11,0:POKES+4,0:FORZ=0TO240STEP3
+5007 POKE2041,P:POKE2042,P:POKEV+2,Z:POKEV+3,Z:POKEV+4,Z:POKEV+5,240-Z
+5008 FORH=1TO50:NEXT
+5009 P=P+1:IFP>15THENP=13
+5010 NEXTZ:PRINT"{clear}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{lightblue}SPECIAL COMMANDS{crsr down}{crsr down}"
+5011 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}'I'    LISTS CONTENTS OF PACK{crsr down}":PRINT"{crsr right}{crsr right}{crsr right}{crsr right}'SAVE' SAVES CURRENT GAME{crsr down}"
+5012 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}'G'    LISTS EXITS FROM SITES{crsr down}"
+5013 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}'QUIT' STOPS HAIR PULLING{crsr down}{crsr down}"
+5014 PRINT"{crsr right}{crsr right}{crsr right}{crsr right}DIRECTION COMMANDS{crsr down}":PRINT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}FIRST LETTER ONLY 'E'-EAST ETC"
+5015 FORA=1TO27:FORAA=1TO3:READR$(A,AA):NEXTAA,A:POKEV+21,1
+5055 FORN=0TO62:READQ:POKE832+N,Q:NEXT
+5060 FORN=0TO62:READQ:POKE896+N,Q:NEXT
+5065 FORN=0TO62:READQ:POKE960+N,Q:NEXT
+5070 PRINT"{crsr down}{crsr down}{crsr down}":PRINT"{crsr right}{crsr right}DO YOU WISH TO RESUME A SAVED GAME{crsr down}{crsr down}":A6$=CHR$(A9)
+5071 INPUT"{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}{crsr right}Y/N";X$
+5072 IFLEFT$(X$,1)="Y"THENGOTO998
+5080 FORA=1TO27:FORAA=1TO7:READO$:S$(A,AA)=O$:IFO$=""THENAA=7
+5082 NEXTAA,A:GOTO<a href="#0b0e">42</a>
+5900 DATA8,255,800,7,119,600,5,237,1024,5,152,250,4,180,300,6,71,270,6,71,400
+5902 DATA4,180,128,5,152,300,4,180,250,6,71,128,7,12,128,7,233,128,7,12,568
+5904 DATA4,48,1056
+6000 DATA0,1,0,0,1,0,0,1,0,0,3,0,0,3,0,0,3,0,0,6,0,0,12,0,0,12,0
+6002 DATA0,8,0,248,120,0,31,252,0,15,224,0,0,0,0,0,0,0
+6004 DATA0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+6006 DATA0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,31,0,0,120,0,7,240
+6008 DATA0,7,224,0,14,0,0,120,0,0,60,0,0,96,0,1,192,0
+6010 DATA3,128,0,15,0,0,30,0,0,56,0,0,96,0,0,0,0,0,0,0,0
+6012 DATA0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+6014 DATA0,0,0,0,124,0,0,63,192,0,33,255,0,48,0,0,96,0
+6016 DATA0,96,0,0,192,0,0,192,0,1,128,0,1,0,0,1,0,0
+6040 DATAS, , ,W,S,E,W,E, ,W, , ,N, , , , , ,N,S, ,N, , ,W,S, ,N,S, ,N,S,
+6042 DATAN,W,S,N, , ,W,E, ,W, , ,S, , ,N, , , , , ,S,E, ,W, , ,E, , ,E, ,
+6043 DATAN,S, ,N,W,S,E, , ,N,E, ,W, ,
+6100 DATA0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,255,192,2,0,64,2,255,64,2,239,192
+6105 DATA2,199,64,2,239,64,2,255,192,2,255,64,2,0,64,3,255,192
+6110 DATA2,0,64,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+6120 DATA0,0,0,0,40,0,0,8,0,0,40,0,0,0,0,0,20,0,4,61,0,6,173,0,0,61,0,0,20,0
+6122 DATA0,60,0,0,20,0,0,60,0,0,4,0,0,4,0,0,12,0,0,12,0,0,4,0,0,4,0
+6124 DATA0,60,0,0,60,0
+6130 DATA0,56,0,0,56,0,0,16,0,0,16,0,0,254,0,1,147,0,1,125,0,0,16,0,1,125,0,1,1,0
+6132 DATA1,109,0,1,85,0,0,68,0,0,68,0,0,0,0,0,68,0,0,68,0,0,68,0,0,68,0
+6134 DATA0,198,0,1,199,0
+6200 DATAGATE,WALL, ,GARDEN,MANOR, ,DOOR,BELL,SIGN, ,DOOR,WINDOW,
+6205 DATATREE,MAILBOX,SIGN, , , ,CASE, ,SMALL BOX,DOOR, ,DOOR,CLOCK,
+6210 DATADOOR,STAIRS, ,TABLE, ,RACKS OF WINE,ARMOUR, ,ROBOT, ,CHEST,
+6215 DATASTAIRS,BED,WINDOW, ,BATH, ,IVY,WINDOW, ,DOOR,BALCONY,
+6220 DATADESK,BOOKS, ,MOP,BUCKET,CRATE,
+6225 DATADESK,PICTURE, ,DEEP PIT,
+6230 DATATOOLBOX, ,SWITCH, ,BLOODY TABLE,SKELETON, ,
+</div>
+</div>
+
+</body>
+
+</html>
+        </section>
+
+        
+        
+      </div>
+    </div>
+
+    
+  </body>
+
+<script>
+  rockfordpreload();
+  setInterval(rockfordtick, 40);
+</script>
+
+</html>

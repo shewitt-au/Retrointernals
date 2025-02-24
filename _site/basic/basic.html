@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/assets/css/style.css?v=8179fc8e8c53b9b049fed06cd501798140d3e609" media="screen" type="text/css">
+    <link rel="stylesheet" href="/assets/css/print.css" media="print" type="text/css">
+    <style type="text/css">
+    
+    #rockford {
+      position: relative;
+      float: right;
+    }
+    #rockfordhead {
+      position: absolute;
+      top: 32px;
+      left: 32px;
+      width: 32px;
+      height: 16px;
+    }
+    #rockfordfeet {
+      position: absolute;
+      top: 48px;
+      left: 32px;
+      width: 32px;
+      height: 16px;
+    }
+    </style>
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <script>
+      rockford_head = [
+        "rockford_head0.png",
+        "rockford_head1.png",
+        "rockford_head2.png",
+        "rockford_head2.png",
+        "rockford_head1.png",
+        "rockford_head0.png",
+        "rockford_head0.png",
+        "rockford_head0.png",
+        "rockford_head0.png"
+      ]
+
+      rockford_feet = [
+        "rockford_feet0.png",
+        "rockford_feet1.png",
+        "rockford_feet1.png",
+        "rockford_feet1.png",
+        "rockford_feet1.png",
+        "rockford_feet5.png",
+        "rockford_feet5.png",
+        "rockford_feet5.png",
+        "rockford_feet5.png"
+        ]
+      function rockfordpreload()
+      {
+        for (i=0; i<=8; ++i)
+        {
+          image = new Image();
+          image.src = "/assets/images/"+rockford_head[i];
+          image = new Image();
+          image.src = "/assets/images/"+rockford_feet[i];
+        }
+      }
+
+      var frame=0;
+      var blink=false;
+      var foottap=false;
+
+      function rockfordtick()
+      {
+        var h = document.getElementById("rockfordhead");
+        var f = document.getElementById("rockfordfeet");
+
+        if (frame==0)
+        {
+          r = Math.floor(Math.random()*256);
+          blink = ((r&0x3)==0); // 1 in 4 chance
+          if ((r&0xf)==0)
+            foottap = !foottap; // 1 in 16 chance of toggling
+
+          if (!blink)
+            h.src = "/assets/images/"+rockford_head[0];
+          if (!foottap)
+            f.src = "/assets/images/"+rockford_feet[0];
+        }
+
+        if (blink)
+          h.src = "/assets/images/"+rockford_head[frame+1];
+        if (foottap)
+          f.src = "/assets/images/"+rockford_feet[frame+1];
+
+        frame += 1;
+        if (frame>=8)
+          frame = 0;
+      }
+    </script>
+
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>BASIC | Retrointernals</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="BASIC" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/basic/basic.html" />
+<meta property="og:url" content="http://localhost:4000/basic/basic.html" />
+<meta property="og:site_name" content="Retrointernals" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="BASIC" />
+<script type="application/ld+json">
+{"@type":"WebPage","headline":"BASIC","url":"http://localhost:4000/basic/basic.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <div id="rockford">
+          <image src="/assets/images/rockfordbg.png">
+          <image id="rockfordhead" src="/assets/images/rockford_head0.png">
+          <image id="rockfordfeet" src="/assets/images/rockford_feet0.png">
+        </div>
+        <a href="http://localhost:4000/">
+          <h1>Retrointernals</h1>
+        </a>
+        <h2></h2>
+        
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1 id="basic">BASIC</h1>
+
+<p>I didn’t initially plan writing anything on BASIC at all. When I was working on my disassembler one day it struck me it would be kind of cool to have it handle the SYS in the BASIC bootstrap so many C64 games had (mostly after they’d been cracked, except for some early games from what I’ve seen). The encoding is pretty simple so I just kept on going after I’d got the SYSes to work and got it the run on entire programs, after which I tested it on some. After you see a program on the “big screen” you wonder how the hell anyone ever got these things to work with only 40 columns. Anyway, I’ll document what I discovered along the way.</p>
+
+<h2 id="encoding">Encoding</h2>
+
+<p>The encoding of BASIC programs is relatively straightforward, little more than a PETSCII (Commodore’s version of ASCII) rendition of the program with tokens for the commands. Before we go into that be aware that PRG files are prefixed  with a load address (16-bit little-endian). If the command ‘LOAD “file”,8,1’ is used the file is loaded at this address; if the ‘LOAD “file”,8’ variant is used it is loaded at $0801 (the “,8” in both these examples assumes loading from disc); the load address itself is not loaded with either variant. On the C64 basic programs start at the hexadecimal address $0801 and can continue on to $9fff, although location $0800 must be zero or attempting to run the program results in a syntax error. From $0801 onwards the lines follow in line-number order. Each line consists of a header, followed by a series of PETSCII characters and tokens, and is terminated by a zero. Immediately after the terminating zero the next line begins. The header of each line consists of two 16-bit (little-endian) unsigned integers. The first of these is the line-link; this is a pointer to the start of the next line, a line-link with a high byte of $00 marking the end of the program. Normally both bytes of the terminating line-link are zero, only checking the high byte is probably an optimization, but as we’ll see later you do come across machine language programs with BASIC bootstraps taking advantage of this to save two bytes. These line-links form a linked list so every line of the program can be visited and lines looked up: RUN, LIST, GOTO, GOSUB and line additions/deletions use this mechanism to find the target line. Note that sequential execution doesn’t use the line-links. The second 16-bit number is the line number. You’d think this would mean that line numbers can be in the range 0-65535, but for some reason only 0- 63999 can be used (I’ll try to find out why one day). When GOTO or GOSUB (or the other constructs that use the links) are executed the lines are traversed using the line-links and the target line number compared to the line number member of the of the header. This obviously implies that GOTO and GOSUB are potentially inefficient given a linear search is performed. The structure of the rest of a line is a series of PETSCII characters and tokens. If the byte has the MSB set it is interpreted as a token and if it’s clear it’s a character (not quite true, see the second example below). The tokens are listed below:</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td><strong>Value</strong></td>
+      <td><strong>Command</strong></td>
+    </tr>
+    <tr>
+      <td>$80</td>
+      <td>END</td>
+    </tr>
+    <tr>
+      <td>$81</td>
+      <td>FOR</td>
+    </tr>
+    <tr>
+      <td>$82</td>
+      <td>NEXT</td>
+    </tr>
+    <tr>
+      <td>$83</td>
+      <td>DATA</td>
+    </tr>
+    <tr>
+      <td>$84</td>
+      <td>INPUT#</td>
+    </tr>
+    <tr>
+      <td>$85</td>
+      <td>INPUT</td>
+    </tr>
+    <tr>
+      <td>$86</td>
+      <td>DIM</td>
+    </tr>
+    <tr>
+      <td>$87</td>
+      <td>READ</td>
+    </tr>
+    <tr>
+      <td>$88</td>
+      <td>LET</td>
+    </tr>
+    <tr>
+      <td>$89</td>
+      <td>GOTO</td>
+    </tr>
+    <tr>
+      <td>$8a</td>
+      <td>RUN</td>
+    </tr>
+    <tr>
+      <td>$8b</td>
+      <td>IF</td>
+    </tr>
+    <tr>
+      <td>$8c</td>
+      <td>RESTORE</td>
+    </tr>
+    <tr>
+      <td>$8d</td>
+      <td>GOSUB</td>
+    </tr>
+    <tr>
+      <td>$8e</td>
+      <td>RETURN</td>
+    </tr>
+    <tr>
+      <td>$8f</td>
+      <td>REM</td>
+    </tr>
+    <tr>
+      <td>$90</td>
+      <td>STOP</td>
+    </tr>
+    <tr>
+      <td>$91</td>
+      <td>ON</td>
+    </tr>
+    <tr>
+      <td>$92</td>
+      <td>WAIT</td>
+    </tr>
+    <tr>
+      <td>$93</td>
+      <td>LOAD</td>
+    </tr>
+    <tr>
+      <td>$94</td>
+      <td>SAVE</td>
+    </tr>
+    <tr>
+      <td>$95</td>
+      <td>VERIFY</td>
+    </tr>
+    <tr>
+      <td>$96</td>
+      <td>DEF</td>
+    </tr>
+    <tr>
+      <td>$97</td>
+      <td>POKE</td>
+    </tr>
+    <tr>
+      <td>$98</td>
+      <td>PRINT#</td>
+    </tr>
+    <tr>
+      <td>$99</td>
+      <td>PRINT</td>
+    </tr>
+    <tr>
+      <td>$9a</td>
+      <td>CONT</td>
+    </tr>
+    <tr>
+      <td>$9b</td>
+      <td>LIST</td>
+    </tr>
+    <tr>
+      <td>$9c</td>
+      <td>CLR</td>
+    </tr>
+    <tr>
+      <td>$9d</td>
+      <td>CMD</td>
+    </tr>
+    <tr>
+      <td>$9e</td>
+      <td>SYS</td>
+    </tr>
+    <tr>
+      <td>$9f</td>
+      <td>OPEN</td>
+    </tr>
+    <tr>
+      <td>$a0</td>
+      <td>CLOSE</td>
+    </tr>
+    <tr>
+      <td>$a1</td>
+      <td>GET</td>
+    </tr>
+    <tr>
+      <td>$a2</td>
+      <td>NEW</td>
+    </tr>
+    <tr>
+      <td>$a3</td>
+      <td>TAB(</td>
+    </tr>
+    <tr>
+      <td>$a4</td>
+      <td>TO</td>
+    </tr>
+    <tr>
+      <td>$a5</td>
+      <td>FN</td>
+    </tr>
+    <tr>
+      <td>$a6</td>
+      <td>SPC(</td>
+    </tr>
+    <tr>
+      <td>$a7</td>
+      <td>THEN</td>
+    </tr>
+    <tr>
+      <td>$a8</td>
+      <td>NOT</td>
+    </tr>
+    <tr>
+      <td>$a9</td>
+      <td>STEP</td>
+    </tr>
+    <tr>
+      <td>$aa</td>
+      <td>+</td>
+    </tr>
+    <tr>
+      <td>$ab</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>$ac</td>
+      <td>*</td>
+    </tr>
+    <tr>
+      <td>$ad</td>
+      <td>/</td>
+    </tr>
+    <tr>
+      <td>$ae</td>
+      <td>↑</td>
+    </tr>
+    <tr>
+      <td>$af</td>
+      <td>AND</td>
+    </tr>
+    <tr>
+      <td>$b0</td>
+      <td>OR</td>
+    </tr>
+    <tr>
+      <td>$b1</td>
+      <td>&gt;</td>
+    </tr>
+    <tr>
+      <td>$b2</td>
+      <td>=</td>
+    </tr>
+    <tr>
+      <td>$b3</td>
+      <td>&lt;</td>
+    </tr>
+    <tr>
+      <td>$b4</td>
+      <td>SGN</td>
+    </tr>
+    <tr>
+      <td>$b5</td>
+      <td>INT</td>
+    </tr>
+    <tr>
+      <td>$b6</td>
+      <td>ABS</td>
+    </tr>
+    <tr>
+      <td>$b7</td>
+      <td>USR</td>
+    </tr>
+    <tr>
+      <td>$b7</td>
+      <td>FRE</td>
+    </tr>
+    <tr>
+      <td>$b9</td>
+      <td>POS</td>
+    </tr>
+    <tr>
+      <td>$ba</td>
+      <td>SQR</td>
+    </tr>
+    <tr>
+      <td>$bb</td>
+      <td>RND</td>
+    </tr>
+    <tr>
+      <td>$bc</td>
+      <td>LOG</td>
+    </tr>
+    <tr>
+      <td>$bd</td>
+      <td>EXP</td>
+    </tr>
+    <tr>
+      <td>$be</td>
+      <td>COS</td>
+    </tr>
+    <tr>
+      <td>$bf</td>
+      <td>SIN</td>
+    </tr>
+    <tr>
+      <td>$c0</td>
+      <td>TAN</td>
+    </tr>
+    <tr>
+      <td>$c1</td>
+      <td>ATN</td>
+    </tr>
+    <tr>
+      <td>$c2</td>
+      <td>PEEK</td>
+    </tr>
+    <tr>
+      <td>$c3</td>
+      <td>LEN</td>
+    </tr>
+    <tr>
+      <td>$c4</td>
+      <td>STR$</td>
+    </tr>
+    <tr>
+      <td>$c5</td>
+      <td>VAL</td>
+    </tr>
+    <tr>
+      <td>$c6</td>
+      <td>ASC</td>
+    </tr>
+    <tr>
+      <td>$c7</td>
+      <td>CHR$</td>
+    </tr>
+    <tr>
+      <td>$c8</td>
+      <td>LEFT$</td>
+    </tr>
+    <tr>
+      <td>$c9</td>
+      <td>RIGHT$</td>
+    </tr>
+    <tr>
+      <td>$ca</td>
+      <td>MID$</td>
+    </tr>
+    <tr>
+      <td>$ff</td>
+      <td>π</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Note how the TAB and SPC command come with an embedded opening bracket, the closing one is encoded as a PETSCII character. Other commands which require brackets encode both as PETSCII characters following the tokenised command.</p>
+
+<h3 id="example---hello-world">Example - Hello, World!</h3>
+
+<p>Ok, time for some examples. Let’s follow tradition and start with “Hello, World!”:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>10 PRINT "HELLO, WORLD!"
+</code></pre></div></div>
+
+<p>In memory this looks like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0801:  17 08 0a 00  99 20 22 48  45 4c 4c 4f  2c 20 57 4f  52 4c 44 21  22 00 00 00
+</code></pre></div></div>
+
+<p>Dumped using VICE’s ‘ii’ command (reformatted slightly):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0801: whj@. "HELLO, WORLD!"@@@
+</code></pre></div></div>
+
+<p>You can see the majority of the line is simply encoded in PETSCII, including the quotes and the space after the PRINT statement before the opening quote. Let’s break it down:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0801:  17 08   ; Line-link of $0817
+0803:  0a 00   ; Line number, 10
+0805:  99      ; Here the MSB is set so it's a token, PRINT
+0806:  20      ; The space after the PRINT, PETSCII
+0807:  "HELLO, WORLD!" ; PETSCII here
+0816:  00      ; Terminates the line
+0817:  00 00   ; A line-link with high byte of zero terminates the program.
+               ; Note that this is linked to by the previous line-link.
+</code></pre></div></div>
+
+<h3 id="example---sometimes-a-cigar-is-just-a-cigar">Example - Sometimes a Cigar Is Just a Cigar</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>10 PRINT"{clear}"
+</code></pre></div></div>
+
+<p>Note that the ‘{clear}’ denotes a control character, it would appear as a love heart in reverse video. Anyone that’s used a C64 will know that when you type in quotes some keys that would normally do something, like clear the screen in this example, make funny symbols. When ran this program would clear the screen but when listed a character is printed. Let’s have a look at it.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0801:  0a 08 0a 00  99 22 93 22  00 00 00   ....."."...
+</code></pre></div></div>
+
+<p>We have the line-link, line number, the line terminating zero and a two-byte NULL line-link which ends the program. That leaves this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0805:  99 22 93 22
+</code></pre></div></div>
+
+<p>$99 is the token for PRINT; $22, PETSCII for a quote; $93, which looks like the token for LOAD (but isn’t in this case); and $22, the closing quotes. The normal rule of a byte with its MSB set being a token doesn’t apply within quotes, if if did this program would look like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>10 PRINT"LOAD"
+</code></pre></div></div>
+
+<p>This allows PETSCII characters greater than $7f in quotes.</p>
+
+<h3 id="example---nothing">Example - Nothing</h3>
+
+<p>OK, so how is an empty BASIC program encoded. I’ll fill $0801-$9fff with $ff, do a NEW and take a look. The addresses $2b-$2c &amp; $2d-$2e come in handy. The first two contain the start of the program and the second two the byte following the end.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>002b:  01 08
+002d:  03 08
+</code></pre></div></div>
+
+<p>So an empty program starts at $0801 and the last byte is at $0802. We’ll dump a bit more after the end.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0801:  00 00 ff ff
+</code></pre></div></div>
+
+<p>Our $ff’s are still there, the NEW did indeed only seem to touch $0801-$0802. An empty program is encoded with a line-link of zero (any number with a high byte of zero would do).</p>
+
+<h3 id="example---fibonacci-numbers">Example - Fibonacci numbers</h3>
+
+<p>OK, for the final example we’ll use a more elaborate program: calculating Fibonacci numbers.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>10 A=1
+20 B=1
+30 PRINT A, B,
+40 N=A+B
+50 PRINT N,
+60 A=B:B=N
+70 GOTO40
+</code></pre></div></div>
+
+<p>Here’s what it looks like in memory:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0801:  09 08 0a 00  41 b2 31 00  11 08 14 00  42 b2 31 00   ....A.1.....B.1.
+0811:  1d 08 1e 00  99 20 41 2c  20 42 2c 00  27 08 28 00   ..... A, B,.'.(.
+0821:  4e b2 41 aa  42 00 30 08  32 00 99 20  4e 2c 00 3c   N.A.B.0.2.. N,.&lt;
+0831:  08 3c 00 41  b2 42 3a 42  b2 4e 00 44  08 46 00 89   .&lt;.A.B:B.N.D.F..
+0841:  34 30 00 00  00                                      40...
+</code></pre></div></div>
+
+<p>We’ll follow the line-links and analyse it line by the. Here’s the first two bytes:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0801:  09 08
+</code></pre></div></div>
+
+<p>Since the line-link points to the next line the first occupies $0801-$0808</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0801:  09 08 0a 00  41 b2 31 00
+</code></pre></div></div>
+
+<p>The first two bytes are the line-link as described earlier, and the second two the line number. Note that the space after the line number and before the contents of the line itself is not encoded but added by the code for LIST. The last byte is the terminating zero, so that leaves this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0805:  41 b2 31
+</code></pre></div></div>
+
+<p>Or like this with VICE’s ‘ii’ command:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0805: A.1
+</code></pre></div></div>
+
+<p>Straight away you’ll notice that both the variable name and the number that’s assigned to it are simply PETSCII. I’ll be the first to admit that the primitiveness of this surprised me! In-between is $b2, this is a token as the MSB is set, in this case the token for ‘=’.</p>
+
+<p>Ok, now to find the bounds on the second line. Following the line-link above:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0809:  11 08
+</code></pre></div></div>
+
+<p>The second line is at $0809-$0810. We’ll just dump that using ‘ii’ as it’s basically the same as the last.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0809: qht@B.1@
+</code></pre></div></div>
+
+<p>The third line should be more interesting.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>30 PRINT A, B,
+</code></pre></div></div>
+
+<p>Again, following the line’s line-link gives us its bounds:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0811:  1d 08
+</code></pre></div></div>
+
+<p>This one can be found at $0811-$081c.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0811:  1d 08 1e 00  99 20 41 2c  20 42 2c 00
+</code></pre></div></div>
+
+<p>We have all the usual suspects here, the line-link is $081d, the line number is $1e or 30 in decimal and at the end the terminating zero. This leaves the following:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0815:  99 20 41 2c  20 42 2c
+</code></pre></div></div>
+
+<p>Using ‘ii’:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0815: . A, B,
+</code></pre></div></div>
+
+<p>Actually, nothing to see here! Apart from the token for PRINT it’s all PETSCII. Get used to that.</p>
+
+<p>Now for line 40. At this point I’m starting to wish I picked a smaller program, but we’ll push on.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>40 N=A+B
+</code></pre></div></div>
+
+<p>First two bytes of the line (the line-link):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>081d:  27 08
+</code></pre></div></div>
+
+<p>Our line lives at $081d-$0827.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>081d:  27 08 28 00  4e b2 46 aa  42 00                   '.(.N.A.B.
+</code></pre></div></div>
+
+<p>Again, all the usual suspects. The only points on interest are $b2 and $aa, the tokens for ‘=’ and ‘+’ respectively.</p>
+
+<p>Moving to line 50:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>50 PRINT N,
+
+0827:  30 08 32 00  99 20 4e 2c  00                         0.2.. N,.
+</code></pre></div></div>
+
+<p>Same old same old.</p>
+
+<p>Line 60:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>60 A=B:B=N
+
+0830:  3c 08 3c 00  41 b2 42 3a  42 b2 4e 00                &lt;.&lt;.A.B:B.N.
+</code></pre></div></div>
+
+<p>About the only thing of interest if the colon: it’s simply PETSCII. Here it’s interpreted as a separator but in a REM statement it’s just a colon. It depends on the context and not explicit in the binary format.</p>
+
+<p>I’m going to skip over the last line, the GOTO. You may not be shocked to learn the line number is encoded as PETSCII, although I was.</p>
+
+<h2 id="tricks">Tricks</h2>
+
+<p>So, apart from writing tools, can any of this knowledge of how BASIC programs are encoded be put to any use? It didn’t take long before I discovered some sneaky shenanigans out there in the wild and thought of one myself. I’ll describe some below and add more as I come across them.</p>
+
+<h3 id="line-scrubbing">Line Scrubbing</h3>
+
+<p>The first program I tested my BASIC lister on was Monopole by JOHN O’HARE (colour and sound added by Tim Borion and Sal Oeper). I have added two listings, <a href="/basic/monopole/monopole_listing.html">one</a> with a modern looking font and <a href="/basic/monopole/monopole_c64font_listing.html">another</a> using the C64’s font. Here’s a line (taken from the first listing) that occurs early in the program:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>4 PRINT"{clear}{white}":POKE53280,0:POKE53281,0:GOSUB700:GOSUB162:TN=832:TT=886:PRINT"{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}{del}
+</code></pre></div></div>
+
+<p>The {del} represents a control character, it’s generated on the keyboard by pressing the DEL key. {clear} and {white} are also control characters. If you list the program on a C64 what you get isn’t quite as interesting:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>4 PRINT"{clear}{white}":POKE53280,0:POKE53281,0:GOSUB700:GOSUB162
+</code></pre></div></div>
+
+<p>When typing inside quotes on a C64 most control character don’t perform their usual function. Instead you get some symbol in reverse video that represents it. These stand-ins are shown when the program is listed but when printed they perform their usual function (the stand-ins are expanded to a mnemonic describing their function in the first listing, the second listing is more authentic). This allows changing colours, moving the cursor around and various other things including incomprehensible programs. The DEL key is an exception, it deletes in and out of quotes and doesn’t generate a stand-in. I’d guess that whatever code path is responsible for this mercy (it’s bad enough not being able to move the cursor around in quotes without losing the power of deletion) also applies when listing a program because the {del} characters in the PRINT at end of the line actually start deleting the line, scrubbing out the apparently top-secret variables TN &amp; TT as well as any visual evidence of the mechanism via which this was achieved. Notice that there’s no closing quote, that would leave a tell-tale quotation mark at the end of the line. I’m not sure how the hell this was entered, I suspect a hex editor was used. The same trick is used in line 697.</p>
+
+<h3 id="byte-miser">Byte Miser</h3>
+
+<p>I came across this trick when I was having a look at a game that had been cracked &amp; packed. Here’s a piece of it:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0801   0b 08 ca 07  9e 32 30 35  39 00 a2 00
+1994 SYS2059
+080b   a2 00      LDX #$00
+080d   78         SEI 
+080e   e6 01      INC $01
+0810   bd 4e 6c   LDA $6c4e,X
+0813   9d f0 00   STA $00f0,X
+0816   e8         INX 
+0817   d0 f7      BNE $0810
+0819   4c 4e 01   JMP $014e
+</code></pre></div></div>
+
+<p>The BASIC bootstrap occupies $0801-$080c, its BASIC listing is shown on the line below it. The machine code starts at $080b (2059 in decimal) which is where the machine code execution starts. The careful reader will notice that the BASIC and machine code sections overlap by two bytes (they share ‘a2 00’). ‘a2 00’ serves as a legal terminating line-link as its high byte is zero and this also happens to encode the instruction ‘LDX #$00’. I thought the instruction ordering was strange until I realised what was going on.</p>
+
+<h3 id="line-skipping">Line Skipping</h3>
+
+<p>I came up with this one myself, although it’s pretty obvious so I have no doubt it’s been discovered many times by many different people. The motivating thought is that since a BASIC program forms a linked list of lines, what would happen if we edited a link to skip over some? Here’s a BASIC program we’ll test this on:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>10 PRINT 10
+20 PRINT 20
+30 PRINT 30
+</code></pre></div></div>
+
+<p>Let’s crack it open:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0801:   0a 08 0a 00  99 20 31 30  00 13 08 14  00 99 20 32
+0811:   30 00 1c 08  1e 00 99 20  33 30 00 00  00
+</code></pre></div></div>
+
+<p>We’ll take it line by line:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0801:   0a 08   ; Line-link of $080a
+0803:	0a 00   ; Line number 10
+0805:   99      ; PRINT token
+0806:   20      ; PETSCII for a space
+0807:   31 30   ; PETSCII: 10
+0809:   0       ; Line terminator
+080a:   13 08   ; Line-link of $0813
+080c:   14  00  ; Line number 20
+ .
+ .
+ .
+0813:   1c 08   ; Line-link of $081c
+0815:   1e 00	; Line number 30
+ .
+ .
+ .
+081c:   00  00  ; NULL line-link terminates program
+</code></pre></div></div>
+
+<p>Lest see what happens if we edit out line 20. To do this we’ll point the line-link from line 10 to line 30 (instead of line 20). Writing ‘13 08’ to $0801 should do the trick. He’s a listing from a C64 after this edit:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>10 PRINT 10
+30 PRINT 30
+</code></pre></div></div>
+
+<p>Now here’s it’s output</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 10
+ 20
+ 30
+</code></pre></div></div>
+
+<p>So linear execution still works, but constructs like GOTO and GOBUB use the line-links (and LIST clearly does). Let’s test this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>10 GOTO 30
+20 END
+30 PRINT 30
+
+0801:   0a 08 0a 00  89 20 33 30  00 10 08 14  00 80 00 19
+0811:   08 1e 00 99  20 33 30 00  00 00
+</code></pre></div></div>
+
+<p>I’ll just dump the chain of line-links:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0801:   0a 08 ; Line 10
+ .
+080a:   10 08 ; Line 20
+ .
+0810:   19 08 ; Line 30
+ .
+0819:   00 00 ; The end
+</code></pre></div></div>
+
+<p>So we’ll edit out line 30 by writing ‘19 08’ to $080a. He’s the listing after that:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>10 GOTO 30
+20 END
+</code></pre></div></div>
+
+<p>And now we’ll run it:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>?UNDEF'D STATEMENT  ERROR IN 10
+</code></pre></div></div>
+
+<p>Not unexpected. Execution must “fall” into a skipped line, GOTO and GOSUB fail to find it.</p>
+
+<h2 id="games">Games</h2>
+
+<p>I’ll add listings of BAISC games here. So far I’ve got two.</p>
+
+<h3 id="monopole">Monopole</h3>
+
+<p>Monopoly? The first real program I tested my BASIC lister on. We’ve all played the board game so there’s not much to say really.</p>
+
+<p><a href="/basic/monopole/monopole_listing.html">Listing</a></p>
+
+<p><a href="/basic/monopole/monopole_c64font_listing.html">Listing with C64 font</a></p>
+
+<h3 id="the-secret-of-bastow-manor">The Secret of Bastow Manor</h3>
+
+<p>An old adventure game from 1983. I remember swapping games with a kid at school and feeling like I’d got the bad side of the trade when I loaded it up. It’s pretty hard, I had to look up a walkthrough. Looking at the spaghetti isn’t as much help as one might hope.</p>
+
+<p><a href="/basic/tsobm/tsobm_listing.html">Listing</a></p>
+
+<p><a href="/basic/tsobm/tsobm_c64font_listing.html">Listing with C64 font</a></p>
+
+        </section>
+
+        
+        <aside id="sidebar">
+          <nav>
+    <ul style="margin-bottom: 0px;">
+
+    
+    
+    <li><a href="/">Home</a></li>
+    
+
+    
+    
+    <li><a href="/tools/tools.html">Tools</a></li>
+    
+
+    
+    
+    <li><a href="/boulder-dash/boulder-dash-disassembly">Boulder Dash</a>
+    <ul style="margin-bottom: 0px;">
+
+    
+    
+    <li><a href="/boulder-dash/music">Music</a></li>
+    
+
+</ul>
+</li>
+    
+
+    
+    
+    <li><a href="/basic/basic.html">BASIC</a>
+    <ul style="margin-bottom: 0px;">
+
+    
+    
+    <li><a href="/basic/basic.html#encoding">Encoding</a></li>
+    
+
+    
+    
+    <li><a href="/basic/basic.html#example---hello-world">Example - Hello, World!</a></li>
+    
+
+    
+    
+    <li><a href="/basic/basic.html#example---sometimes-a-cigar-is-just-a-cigar">Example - Sometimes a Cigar Is Just a Cigar</a></li>
+    
+
+    
+    
+    <li><a href="/basic/basic.html#example---nothing">Example - Nothing</a></li>
+    
+
+    
+    
+    <li><a href="/basic/basic.html#example---fibonacci-numbers">Example - Fibonacci numbers</a></li>
+    
+
+    
+    
+    <li><a href="/basic/basic.html#tricks">Tricks</a>
+    <ul style="margin-bottom: 0px;">
+
+    
+    
+    <li><a href="/basic/basic.html#line-scrubbing">Line Scrubbing</a></li>
+    
+
+    
+    
+    <li><a href="/basic/basic.html#byte-miser">Byte Miser</a></li>
+    
+
+    
+    
+    <li><a href="/basic/basic.html#line-skipping">Line Skipping</a></li>
+    
+
+</ul>
+</li>
+    
+
+    
+    
+    <li><a href="/basic/basic.html#games">Games</a>
+    <ul style="margin-bottom: 0px;">
+
+    
+    
+    <li><a href="/basic/basic.html#monopole">Monopole</a>
+    <ul style="margin-bottom: 0px;">
+
+    
+    
+    <li><a href="/basic/monopole/monopole_listing.html">Listing</a></li>
+    
+
+    
+    
+    <li><a href="/basic/monopole/monopole_c64font_listing.html">Listing with C64 font</a></li>
+    
+
+</ul>
+</li>
+    
+
+    
+    
+    <li><a href="/basic/basic.html#the-secret-of-bastow-manor">The Secret of Bastow Manor</a>
+    <ul style="margin-bottom: 0px;">
+
+    
+    
+    <li><a href="/basic/tsobm/tsobm_listing.html">Listing</a></li>
+    
+
+    
+    
+    <li><a href="/basic/tsobm/tsobm_c64font_listing.html">Listing with C64 font</a></li>
+    
+
+</ul>
+</li>
+    
+
+</ul>
+</li>
+    
+
+</ul>
+</li>
+    
+
+</ul>
+
+</nav>
+<br/>
+
+
+          
+
+          The C64 fonts used in the BASIC section can be found <a href="http://style64.org/c64-truetype">here</a><br/><br/>
+
+          
+            <p class="repo-owner"><a href="https://github.com/shewitt-au/Retrointernals">Retrointernals</a> is maintained by <a href="https://github.com/shewitt-au">shewitt-au</a>.</p>
+          
+          You can reach me by email <a href="mailto:retrointernals@gmail.com">here</a>.
+        </aside>
+        
+      </div>
+    </div>
+
+    
+  </body>
+
+<script>
+  rockfordpreload();
+  setInterval(rockfordtick, 40);
+</script>
+
+</html>

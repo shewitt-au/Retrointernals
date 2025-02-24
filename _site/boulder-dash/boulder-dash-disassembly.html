@@ -1,9 +1,146 @@
----
-title: Boulder Dash Disassembly
-layout: default
-nosidebar: true
----
-<!doctype html>
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/assets/css/style.css?v=8179fc8e8c53b9b049fed06cd501798140d3e609" media="screen" type="text/css">
+    <link rel="stylesheet" href="/assets/css/print.css" media="print" type="text/css">
+    <style type="text/css">
+    
+    #main-content {
+      width: 100%;
+      line-height: 1;
+    }
+    
+    #rockford {
+      position: relative;
+      float: right;
+    }
+    #rockfordhead {
+      position: absolute;
+      top: 32px;
+      left: 32px;
+      width: 32px;
+      height: 16px;
+    }
+    #rockfordfeet {
+      position: absolute;
+      top: 48px;
+      left: 32px;
+      width: 32px;
+      height: 16px;
+    }
+    </style>
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <script>
+      rockford_head = [
+        "rockford_head0.png",
+        "rockford_head1.png",
+        "rockford_head2.png",
+        "rockford_head2.png",
+        "rockford_head1.png",
+        "rockford_head0.png",
+        "rockford_head0.png",
+        "rockford_head0.png",
+        "rockford_head0.png"
+      ]
+
+      rockford_feet = [
+        "rockford_feet0.png",
+        "rockford_feet1.png",
+        "rockford_feet1.png",
+        "rockford_feet1.png",
+        "rockford_feet1.png",
+        "rockford_feet5.png",
+        "rockford_feet5.png",
+        "rockford_feet5.png",
+        "rockford_feet5.png"
+        ]
+      function rockfordpreload()
+      {
+        for (i=0; i<=8; ++i)
+        {
+          image = new Image();
+          image.src = "/assets/images/"+rockford_head[i];
+          image = new Image();
+          image.src = "/assets/images/"+rockford_feet[i];
+        }
+      }
+
+      var frame=0;
+      var blink=false;
+      var foottap=false;
+
+      function rockfordtick()
+      {
+        var h = document.getElementById("rockfordhead");
+        var f = document.getElementById("rockfordfeet");
+
+        if (frame==0)
+        {
+          r = Math.floor(Math.random()*256);
+          blink = ((r&0x3)==0); // 1 in 4 chance
+          if ((r&0xf)==0)
+            foottap = !foottap; // 1 in 16 chance of toggling
+
+          if (!blink)
+            h.src = "/assets/images/"+rockford_head[0];
+          if (!foottap)
+            f.src = "/assets/images/"+rockford_feet[0];
+        }
+
+        if (blink)
+          h.src = "/assets/images/"+rockford_head[frame+1];
+        if (foottap)
+          f.src = "/assets/images/"+rockford_feet[frame+1];
+
+        frame += 1;
+        if (frame>=8)
+          frame = 0;
+      }
+    </script>
+
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Boulder Dash Disassembly | Retrointernals</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Boulder Dash Disassembly" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/boulder-dash/boulder-dash-disassembly.html" />
+<meta property="og:url" content="http://localhost:4000/boulder-dash/boulder-dash-disassembly.html" />
+<meta property="og:site_name" content="Retrointernals" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Boulder Dash Disassembly" />
+<script type="application/ld+json">
+{"@type":"WebPage","headline":"Boulder Dash Disassembly","url":"http://localhost:4000/boulder-dash/boulder-dash-disassembly.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <div id="rockford">
+          <image src="/assets/images/rockfordbg.png">
+          <image id="rockfordhead" src="/assets/images/rockford_head0.png">
+          <image id="rockfordfeet" src="/assets/images/rockford_feet0.png">
+        </div>
+        <a href="http://localhost:4000/">
+          <h1>Retrointernals</h1>
+        </a>
+        <h2></h2>
+        
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <!doctype html>
 
 <html>
 <head>
@@ -7445,5 +7582,21 @@ nosidebar: true
 </div>
 </div>
 </body>
+
+</html>
+        </section>
+
+        
+        
+      </div>
+    </div>
+
+    
+  </body>
+
+<script>
+  rockfordpreload();
+  setInterval(rockfordtick, 40);
+</script>
 
 </html>

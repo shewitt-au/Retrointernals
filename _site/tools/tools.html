@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/assets/css/style.css?v=8179fc8e8c53b9b049fed06cd501798140d3e609" media="screen" type="text/css">
+    <link rel="stylesheet" href="/assets/css/print.css" media="print" type="text/css">
+    <style type="text/css">
+    
+    #rockford {
+      position: relative;
+      float: right;
+    }
+    #rockfordhead {
+      position: absolute;
+      top: 32px;
+      left: 32px;
+      width: 32px;
+      height: 16px;
+    }
+    #rockfordfeet {
+      position: absolute;
+      top: 48px;
+      left: 32px;
+      width: 32px;
+      height: 16px;
+    }
+    </style>
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <script>
+      rockford_head = [
+        "rockford_head0.png",
+        "rockford_head1.png",
+        "rockford_head2.png",
+        "rockford_head2.png",
+        "rockford_head1.png",
+        "rockford_head0.png",
+        "rockford_head0.png",
+        "rockford_head0.png",
+        "rockford_head0.png"
+      ]
+
+      rockford_feet = [
+        "rockford_feet0.png",
+        "rockford_feet1.png",
+        "rockford_feet1.png",
+        "rockford_feet1.png",
+        "rockford_feet1.png",
+        "rockford_feet5.png",
+        "rockford_feet5.png",
+        "rockford_feet5.png",
+        "rockford_feet5.png"
+        ]
+      function rockfordpreload()
+      {
+        for (i=0; i<=8; ++i)
+        {
+          image = new Image();
+          image.src = "/assets/images/"+rockford_head[i];
+          image = new Image();
+          image.src = "/assets/images/"+rockford_feet[i];
+        }
+      }
+
+      var frame=0;
+      var blink=false;
+      var foottap=false;
+
+      function rockfordtick()
+      {
+        var h = document.getElementById("rockfordhead");
+        var f = document.getElementById("rockfordfeet");
+
+        if (frame==0)
+        {
+          r = Math.floor(Math.random()*256);
+          blink = ((r&0x3)==0); // 1 in 4 chance
+          if ((r&0xf)==0)
+            foottap = !foottap; // 1 in 16 chance of toggling
+
+          if (!blink)
+            h.src = "/assets/images/"+rockford_head[0];
+          if (!foottap)
+            f.src = "/assets/images/"+rockford_feet[0];
+        }
+
+        if (blink)
+          h.src = "/assets/images/"+rockford_head[frame+1];
+        if (foottap)
+          f.src = "/assets/images/"+rockford_feet[frame+1];
+
+        frame += 1;
+        if (frame>=8)
+          frame = 0;
+      }
+    </script>
+
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Tools | Retrointernals</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Tools" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/tools/tools.html" />
+<meta property="og:url" content="http://localhost:4000/tools/tools.html" />
+<meta property="og:site_name" content="Retrointernals" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Tools" />
+<script type="application/ld+json">
+{"@type":"WebPage","headline":"Tools","url":"http://localhost:4000/tools/tools.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <div id="rockford">
+          <image src="/assets/images/rockfordbg.png">
+          <image id="rockfordhead" src="/assets/images/rockford_head0.png">
+          <image id="rockfordfeet" src="/assets/images/rockford_feet0.png">
+        </div>
+        <a href="http://localhost:4000/">
+          <h1>Retrointernals</h1>
+        </a>
+        <h2></h2>
+        
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1 id="tools">Tools</h1>
+
+<p>This is the tools page where you can find the software I use for my reverse engineering.</p>
+
+<h2 id="negentropy">Negentropy</h2>
+
+<p>Negentropy is a disassembler for the C64 that I’m working on written in Python. It’s the tool used to generate the disassemblies on this site, all of which are unedited output, images and all. It’s my first real Python program and is still a work in progress, but nevertheless it’s quite useful. The repo can be found <a href="https://github.com/shewitt-au/negentropy">here</a>. Here’s a list of some of the features currently implemented:</p>
+<ul>
+  <li>Generate HTML pages, complete with images and links.</li>
+  <li>Disassemble 6502 machine code.</li>
+  <li>List BASIC programs.</li>
+  <li>Annotate the generated output with labels and comments provided in configuration files.</li>
+  <li>Generate images for character sets.</li>
+  <li>Links, including in BASIC programs, machine code programs and even from SYS commands in BASIC to the target code.</li>
+</ul>
+
+<p>In addition to Python’s standard library the following packages are used:</p>
+<ul>
+  <li><em>Jinja2</em> - used for templates. Currently only HTML is supported (there are other incomplete templates). Checkout its website <a href="http://jinja.pocoo.org/">here</a></li>
+  <li><em>Pillow</em> - for image generation. It’s <a href="https://python-pillow.org/">website</a></li>
+  <li><em>Lark</em> - for parsing. It’s LALR parser is bloody fast (and its author tolerant of stupid questions😊). It’s <a href="https://github.com/lark-parser/lark">website</a></li>
+</ul>
+
+        </section>
+
+        
+        <aside id="sidebar">
+          <nav>
+    <ul style="margin-bottom: 0px;">
+
+    
+    
+    <li><a href="/">Home</a></li>
+    
+
+    
+    
+    <li><a href="/tools/tools.html">Tools</a></li>
+    
+
+    
+    
+    <li><a href="/boulder-dash/boulder-dash-disassembly">Boulder Dash</a>
+    <ul style="margin-bottom: 0px;">
+
+    
+    
+    <li><a href="/boulder-dash/music">Music</a></li>
+    
+
+</ul>
+</li>
+    
+
+    
+    
+    <li><a href="/basic/basic.html">BASIC</a>
+    <ul style="margin-bottom: 0px;">
+
+    
+    
+    <li><a href="/basic/basic.html#encoding">Encoding</a></li>
+    
+
+    
+    
+    <li><a href="/basic/basic.html#example---hello-world">Example - Hello, World!</a></li>
+    
+
+    
+    
+    <li><a href="/basic/basic.html#example---sometimes-a-cigar-is-just-a-cigar">Example - Sometimes a Cigar Is Just a Cigar</a></li>
+    
+
+    
+    
+    <li><a href="/basic/basic.html#example---nothing">Example - Nothing</a></li>
+    
+
+    
+    
+    <li><a href="/basic/basic.html#example---fibonacci-numbers">Example - Fibonacci numbers</a></li>
+    
+
+    
+    
+    <li><a href="/basic/basic.html#tricks">Tricks</a>
+    <ul style="margin-bottom: 0px;">
+
+    
+    
+    <li><a href="/basic/basic.html#line-scrubbing">Line Scrubbing</a></li>
+    
+
+    
+    
+    <li><a href="/basic/basic.html#byte-miser">Byte Miser</a></li>
+    
+
+    
+    
+    <li><a href="/basic/basic.html#line-skipping">Line Skipping</a></li>
+    
+
+</ul>
+</li>
+    
+
+    
+    
+    <li><a href="/basic/basic.html#games">Games</a>
+    <ul style="margin-bottom: 0px;">
+
+    
+    
+    <li><a href="/basic/basic.html#monopole">Monopole</a>
+    <ul style="margin-bottom: 0px;">
+
+    
+    
+    <li><a href="/basic/monopole/monopole_listing.html">Listing</a></li>
+    
+
+    
+    
+    <li><a href="/basic/monopole/monopole_c64font_listing.html">Listing with C64 font</a></li>
+    
+
+</ul>
+</li>
+    
+
+    
+    
+    <li><a href="/basic/basic.html#the-secret-of-bastow-manor">The Secret of Bastow Manor</a>
+    <ul style="margin-bottom: 0px;">
+
+    
+    
+    <li><a href="/basic/tsobm/tsobm_listing.html">Listing</a></li>
+    
+
+    
+    
+    <li><a href="/basic/tsobm/tsobm_c64font_listing.html">Listing with C64 font</a></li>
+    
+
+</ul>
+</li>
+    
+
+</ul>
+</li>
+    
+
+</ul>
+</li>
+    
+
+</ul>
+
+</nav>
+<br/>
+
+
+          
+
+          The C64 fonts used in the BASIC section can be found <a href="http://style64.org/c64-truetype">here</a><br/><br/>
+
+          
+            <p class="repo-owner"><a href="https://github.com/shewitt-au/Retrointernals">Retrointernals</a> is maintained by <a href="https://github.com/shewitt-au">shewitt-au</a>.</p>
+          
+          You can reach me by email <a href="mailto:retrointernals@gmail.com">here</a>.
+        </aside>
+        
+      </div>
+    </div>
+
+    
+  </body>
+
+<script>
+  rockfordpreload();
+  setInterval(rockfordtick, 40);
+</script>
+
+</html>

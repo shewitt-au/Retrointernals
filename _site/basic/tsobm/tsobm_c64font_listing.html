@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/assets/css/style.css?v=8179fc8e8c53b9b049fed06cd501798140d3e609" media="screen" type="text/css">
+    <link rel="stylesheet" href="/assets/css/print.css" media="print" type="text/css">
+    <style type="text/css">
+    
+    #main-content {
+      width: 100%;
+      line-height: 1;
+    }
+    
+    #rockford {
+      position: relative;
+      float: right;
+    }
+    #rockfordhead {
+      position: absolute;
+      top: 32px;
+      left: 32px;
+      width: 32px;
+      height: 16px;
+    }
+    #rockfordfeet {
+      position: absolute;
+      top: 48px;
+      left: 32px;
+      width: 32px;
+      height: 16px;
+    }
+    </style>
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <script>
+      rockford_head = [
+        "rockford_head0.png",
+        "rockford_head1.png",
+        "rockford_head2.png",
+        "rockford_head2.png",
+        "rockford_head1.png",
+        "rockford_head0.png",
+        "rockford_head0.png",
+        "rockford_head0.png",
+        "rockford_head0.png"
+      ]
+
+      rockford_feet = [
+        "rockford_feet0.png",
+        "rockford_feet1.png",
+        "rockford_feet1.png",
+        "rockford_feet1.png",
+        "rockford_feet1.png",
+        "rockford_feet5.png",
+        "rockford_feet5.png",
+        "rockford_feet5.png",
+        "rockford_feet5.png"
+        ]
+      function rockfordpreload()
+      {
+        for (i=0; i<=8; ++i)
+        {
+          image = new Image();
+          image.src = "/assets/images/"+rockford_head[i];
+          image = new Image();
+          image.src = "/assets/images/"+rockford_feet[i];
+        }
+      }
+
+      var frame=0;
+      var blink=false;
+      var foottap=false;
+
+      function rockfordtick()
+      {
+        var h = document.getElementById("rockfordhead");
+        var f = document.getElementById("rockfordfeet");
+
+        if (frame==0)
+        {
+          r = Math.floor(Math.random()*256);
+          blink = ((r&0x3)==0); // 1 in 4 chance
+          if ((r&0xf)==0)
+            foottap = !foottap; // 1 in 16 chance of toggling
+
+          if (!blink)
+            h.src = "/assets/images/"+rockford_head[0];
+          if (!foottap)
+            f.src = "/assets/images/"+rockford_feet[0];
+        }
+
+        if (blink)
+          h.src = "/assets/images/"+rockford_head[frame+1];
+        if (foottap)
+          f.src = "/assets/images/"+rockford_feet[frame+1];
+
+        frame += 1;
+        if (frame>=8)
+          frame = 0;
+      }
+    </script>
+
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Retrointernals</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Retrointernals" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/basic/tsobm/tsobm_c64font_listing.html" />
+<meta property="og:url" content="http://localhost:4000/basic/tsobm/tsobm_c64font_listing.html" />
+<meta property="og:site_name" content="Retrointernals" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Retrointernals" />
+<script type="application/ld+json">
+{"@type":"WebPage","headline":"Retrointernals","url":"http://localhost:4000/basic/tsobm/tsobm_c64font_listing.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <div id="rockford">
+          <image src="/assets/images/rockfordbg.png">
+          <image id="rockfordhead" src="/assets/images/rockford_head0.png">
+          <image id="rockfordfeet" src="/assets/images/rockford_feet0.png">
+        </div>
+        <a href="http://localhost:4000/">
+          <h1>Retrointernals</h1>
+        </a>
+        <h2></h2>
+        
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <!doctype html>
+
+<html>
+<head>
+<meta charset="utf-8"/>
+<style>@font-face {
+	 font-family: "C64 Pro Mono Local";
+	 src: url("/assets/C64_Pro_Mono-STYLE.woff2") format("woff2");
+}.container {
+	font-family: monospace;
+}
+.comment {
+	font-family: inherit;
+	white-space: pre;
+	color : blue;
+}
+.code {
+	font-family: inherit;
+	white-space: pre;
+}
+.hole {
+	border: 2px solid red;
+}
+.basic {font: normal 8pt "C64 Pro Mono Local", verdana, helvetica, sans-serif;
+	letter-spacing: 0px;
+	padding: 0;
+	margin: 0;white-space: pre;
+}
+.notinterested {
+	background-color: orange;
+}
+.intro {
+	background-color: lightgreen;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+
+
+<div class="basic">5 PRINT"":=:=""
+10 DIM,,,,
+12 ="":=""
+13 ="":="":=
+14 ="":="":=""
+15 =:=:="":=""
+16 ="":=""
+17 POKE,
+18 GOTO<a href="#8404">4900</a>
+<a name="0991"></a>20 =MID$,,
+21 IF=""THEN="":GOSUB<a href="#4158">1560</a>:GOTO<a href="#09e5">23</a>
+22 PRINT"":GOTO<a href="#421f">1600</a>
+<a name="09e5"></a>23 IF=THEN<a href="#42a0">1630</a>
+24 IF=THEN="":GOSUB<a href="#417f">1565</a>:IF=THEN<a href="#42a0">1630</a>
+25 IF=THENGOSUB<a href="#4111">1550</a>:="":="":GOTO<a href="#4252">1620</a>
+27 PRINT"":GOTO<a href="#421f">1600</a>
+<a name="0a5a"></a>30 =MID$,,
+31 IF=""THEN="":GOSUB<a href="#4158">1560</a>:GOTO<a href="#0aae">33</a>
+32 PRINT"":GOTO<a href="#421f">1600</a>
+<a name="0aae"></a>33 IF=THEN<a href="#42a0">1630</a>
+34 IF=THENPRINT"":="":GOTO<a href="#421f">1600</a>
+35 PRINT"":GOTO<a href="#421f">1600</a>
+<a name="0b00"></a>41 PRINT:GOSUB<a href="#4111">1550</a>
+<a name="0b0e"></a>42 PRINT""
+44 POKE,:POKE,
+46 IF>THEN<a href="#0b82">52</a>
+51 ONGOTO<a href="#5185">2000</a><a href="#5b1b">2400</a><a href="#56f1">2200</a><a href="#5924">2300</a><a href="#5495">2100</a><a href="#5fb2">2600</a><a href="#5d70">2500</a><a href="#60e9">2700</a><a href="#62d7">2800</a><a href="#6512">2900</a><a href="#6759">3000</a><a href="#6a32">3100</a><a href="#6c17">3200</a>
+<a name="0b82"></a>52 =-
+53 ONGOTO<a href="#6e5a">3300</a><a href="#6f38">3400</a><a href="#7051">3500</a><a href="#71db">3600</a><a href="#734d">3700</a><a href="#7510">3800</a><a href="#8063">4450</a><a href="#76f0">4100</a><a href="#7952">4200</a><a href="#7be4">4250</a><a href="#7de3">4300</a><a href="#7f00">4350</a><a href="#7f5b">4400</a><a href="#8274">4500</a>
+<a name="0bda"></a>57 IF=THENPRINT"":GOTO<a href="#0bf6">60</a>
+58 PRINT""
+<a name="0bf6"></a>60 PRINT""
+61 PRINT"":IF>THEN<a href="#0c6e">63</a>
+62 ONGOTO<a href="#0c90">64</a><a href="#0cb4">66</a><a href="#0cd1">68</a><a href="#0cef">70</a><a href="#0d19">72</a><a href="#0d37">74</a><a href="#0d5d">76</a><a href="#0d86">78</a><a href="#0da8">80</a><a href="#0dd1">82</a><a href="#0dfa">84</a><a href="#0e23">86</a><a href="#0e3e">88</a><a href="#0e5d">90</a><a href="#0e7a">91</a><a href="#0e9b">92</a><a href="#0ebd">93</a><a href="#0ee0">94</a><a href="#0efe">95</a><a href="#0f20">96</a><a href="#0f3b">98</a><a href="#0f53">99</a>
+<a name="0c6e"></a>63 =-:ONGOTO<a href="#0f6c">100</a><a href="#0fa6">102</a><a href="#0fda">104</a><a href="#0ff5">105</a><a href="#1021">106</a>
+<a name="0c90"></a>64 PRINT"":GOTO<a href="#1057">110</a>
+<a name="0cb4"></a>66 PRINT"":GOTO<a href="#1057">110</a>
+<a name="0cd1"></a>68 PRINT"":GOTO<a href="#1057">110</a>
+<a name="0cef"></a>70 PRINT"":GOTO<a href="#1057">110</a>
+<a name="0d19"></a>72 PRINT"":GOTO<a href="#1057">110</a>
+<a name="0d37"></a>74 PRINT"":GOTO<a href="#1057">110</a>
+<a name="0d5d"></a>76 PRINT"":GOTO<a href="#1057">110</a>
+<a name="0d86"></a>78 PRINT"":GOTO<a href="#1057">110</a>
+<a name="0da8"></a>80 IF=THEN<a href="#4d5b">1920</a>
+81 PRINT"":GOTO<a href="#1057">110</a>
+<a name="0dd1"></a>82 PRINT"":GOTO<a href="#1057">110</a>
+<a name="0dfa"></a>84 PRINT"":GOTO<a href="#1057">110</a>
+<a name="0e23"></a>86 PRINT"":GOTO<a href="#1057">110</a>
+<a name="0e3e"></a>88 PRINT"":GOTO<a href="#1057">110</a>
+<a name="0e5d"></a>90 PRINT"":GOTO<a href="#1057">110</a>
+<a name="0e7a"></a>91 PRINT"":GOTO<a href="#1057">110</a>
+<a name="0e9b"></a>92 PRINT"":GOTO<a href="#1057">110</a>
+<a name="0ebd"></a>93 PRINT"":GOTO<a href="#1057">110</a>
+<a name="0ee0"></a>94 PRINT"":GOTO<a href="#1057">110</a>
+<a name="0efe"></a>95 PRINT"":GOTO<a href="#1057">110</a>
+<a name="0f20"></a>96 PRINT"":GOTO<a href="#1057">110</a>
+<a name="0f3b"></a>98 PRINT"":GOTO<a href="#1057">110</a>
+<a name="0f53"></a>99 PRINT"":GOTO<a href="#1057">110</a>
+<a name="0f6c"></a>100 IF=THEN<a href="#4d5b">1920</a>
+101 PRINT"":GOTO<a href="#104c">109</a>
+<a name="0fa6"></a>102 IF=THEN<a href="#4d5b">1920</a>
+103 PRINT"":GOTO<a href="#104c">109</a>
+<a name="0fda"></a>104 PRINT"":GOTO<a href="#104c">109</a>
+<a name="0ff5"></a>105 PRINT"":GOTO<a href="#104c">109</a>
+<a name="1021"></a>106 IF=THEN<a href="#4d5b">1920</a>
+107 PRINT"":GOTO<a href="#104c">109</a>
+<a name="104c"></a>109 =+
+<a name="1057"></a>110 =:PRINT:PRINT"":FOR=TO:IF,=""THEN,=""
+111 IF,=""THEN<a href="#10c1">114</a>
+112 PRINT,"":=+:IF=THENPRINT
+<a name="10c1"></a>114 NEXT:PRINT:IF=>THEN<a href="#10da">116</a>
+115 PRINT
+<a name="10da"></a>116 GOTO<a href="#119f">140</a>
+118 PRINT""
+120 IF,=""THEN<a href="#118a">130</a>
+122 FOR=TO
+123 IF,=""THENPRINT""
+124 IF,=""THENPRINT""
+125 IF,=""THENPRINT""
+126 IF,=""THENPRINT""
+128 NEXT:RETURN
+<a name="118a"></a>130 PRINT"":RETURN
+<a name="119f"></a>140 IF=AND=THEN=+:=+
+142 IF=THENPRINT"":GOSUB<a href="#4d2d">1900</a>
+144 IF>THENPRINT"":GOSUB<a href="#4134">1554</a>:GOTO<a href="#42c3">1650</a>
+146 IF>THENPRINT"":GOSUB<a href="#4d2d">1900</a>
+150 ="":GOSUB<a href="#4158">1560</a>:IF=THEN=+:IF>THEN=
+151 IF>AND=AND=THEN="":GOSUB<a href="#4158">1560</a>:GOTO<a href="#141a">181</a>
+155 IF=AND=THENPRINT"":GOSUB<a href="#4122">1552</a>:PRINT"":GOTO<a href="#4c60">1890</a>
+160 IF=AND=THEN<a href="#4a2a">1760</a>
+165 IF=THENPRINT"":=:GOSUB<a href="#4d2d">1900</a>
+166 IF=THEN=+:PRINT"":GOSUB<a href="#4d2d">1900</a>
+167 IF=AND=THENPRINT"":=:GOSUB<a href="#4d2d">1900</a>
+168 IF=AND=THEN=:=:=
+169 IF>THENPRINT"":GOSUB<a href="#4134">1554</a>:GOTO<a href="#42c3">1650</a>
+180 GOTO<a href="#1459">300</a>
+<a name="141a"></a>181 IF=THEN<a href="#1459">300</a>
+184 PRINT"":GOSUB<a href="#4d2d">1900</a>
+<a name="1459"></a>300 ="":INPUT"":=LEN:=+
+302 IF=THENPRINT"":GOTO<a href="#14a1">305</a>
+303 PRINT""
+<a name="14a1"></a>305 IF=THEN<a href="#0b0e">42</a>
+306 IF>THEN<a href="#18d5">360</a>
+308 IF=""THEN<a href="#3f4b">1500</a>
+310 IF=""THENGOSUB118:GOTO<a href="#421f">1600</a>
+320 IF=""AND=THEN=:GOTO<a href="#0b00">41</a>
+321 IF=""AND=THEN=:GOTO<a href="#0b00">41</a>
+322 IF=""AND=THEN=:GOTO<a href="#0b00">41</a>
+323 IF=""AND=AND=THEN<a href="#42a0">1630</a>
+324 IF=""AND=AND=THEN=:GOTO<a href="#0b00">41</a>
+325 IF=""AND=AND=THEN<a href="#42a0">1630</a>
+326 IF=""AND=AND=THEN=:GOTO<a href="#0b00">41</a>
+327 IF=""AND=AND=THEN<a href="#1c7c">397</a>
+328 IF=""AND=THENPRINT:GOSUB<a href="#4122">1552</a>:GOTO<a href="#47ed">1720</a>
+329 IF=""AND=THEN=:PRINT:GOSUB<a href="#4122">1552</a>:POKE+,:POKE+,:GOTO<a href="#0b0e">42</a>
+330 IF=""AND=THEN=:PRINT:GOSUB<a href="#4122">1552</a>:POKE+,:POKE+,:GOTO<a href="#0b0e">42</a>
+331 IF=""AND=AND=THEN<a href="#4aa2">1780</a>
+333 IF=""AND=THEN=:GOTO<a href="#0b00">41</a>
+334 IF=""AND=THEN=:GOTO<a href="#0b00">41</a>
+335 IF=""AND=THEN=:GOTO<a href="#0b00">41</a>
+336 IF=""AND=THEN=:GOTO<a href="#0b00">41</a>
+337 IF=""AND=THEN=:GOTO<a href="#0b00">41</a>
+338 IF=""AND=THEN=:GOTO<a href="#0b00">41</a>
+341 IF=""AND=THEN=:GOTO<a href="#0b00">41</a>
+342 IF=""AND=THEN=:GOTO<a href="#0b00">41</a>
+343 IF=""AND=THEN=:GOTO<a href="#0b00">41</a>
+344 IF=""AND=THEN=:GOTO<a href="#0b00">41</a>
+345 IF=""AND=THEN=:=:GOTO<a href="#0b00">41</a>
+348 IF=""AND=THEN=:=:PRINT:GOSUB<a href="#4122">1552</a>:POKE+,:POKE+,:GOTO<a href="#0b0e">42</a>
+350 IF=""AND=THEN=:=:PRINT:GOSUB<a href="#4122">1552</a>:POKE+,:POKE+,:GOTO<a href="#0b0e">42</a>
+351 IF=""AND=THEN=:GOTO<a href="#0b00">41</a>
+352 IF=""AND=THEN=:=:=:GOTO<a href="#0b00">41</a>
+353 IF=""AND=AND=THEN=:=:GOTO<a href="#0b00">41</a>
+354 FOR=TO:IF,<>THEN<a href="#18b0">359</a>
+355 IF=""THEN=-:GOTO<a href="#0b00">41</a>
+356 IF=""THEN=+:GOTO<a href="#0b00">41</a>
+357 IF=""THEN=+:GOTO<a href="#0b00">41</a>
+358 IF=""THEN=-:GOTO<a href="#0b00">41</a>
+<a name="18b0"></a>359 NEXT:PRINT"":GOTO<a href="#421f">1600</a>
+<a name="18d5"></a>360 IFASC>THEN<a href="#19a5">366</a>
+361 IFASC>THEN<a href="#1952">364</a>
+362 FOR=TO:IFLEFT$,=MID$,*-,THENONGOTO<a href="#2645">500</a><a href="#271c">530</a><a href="#0991">20</a><a href="#1dc2">420</a><a href="#0a5a">30</a><a href="#2810">550</a><a href="#1c9e">400</a><a href="#1a02">370</a><a href="#28b2">570</a>
+363 NEXT:PRINT:GOTO<a href="#421f">1600</a>
+<a name="1952"></a>364 FOR=TO:IFLEFT$,=MID$,*-,THENONGOTO<a href="#1e7a">430</a><a href="#2929">600</a><a href="#1e84">435</a><a href="#298d">620</a><a href="#34aa">875</a><a href="#2a35">640</a><a href="#2a83">660</a>
+365 NEXT:PRINT:GOTO<a href="#421f">1600</a>
+<a name="19a5"></a>366 FOR=TO:IFLEFT$,=MID$,*-,THENONGOTO<a href="#2b45">700</a><a href="#2c3a">730</a><a href="#2e07">750</a><a href="#2e9d">760</a><a href="#2f19">774</a><a href="#31de">800</a><a href="#3341">830</a><a href="#340d">860</a>
+367 NEXT:PRINT:GOTO<a href="#421f">1600</a>
+368 NEXT
+<a name="1a02"></a>370 =MID$,,:IF=AND=""AND=THEN=:GOTO<a href="#0b00">41</a>
+371 IF=AND=AND=""THEN<a href="#42a0">1630</a>
+372 IF=AND=AND=""THEN="":GOSUB<a href="#4158">1560</a>:GOTO<a href="#4de8">1930</a>
+<a name="1a79"></a>373 IF=AND=""AND=AND=THEN=:GOTO<a href="#0b00">41</a>
+374 IF=AND=""THEN<a href="#40f3">1545</a>
+375 IF=AND=""AND=THEN<a href="#40f3">1545</a>
+376 IF=AND=""THEN=:GOTO<a href="#0b00">41</a>
+377 IF=AND=""THEN=:GOTO<a href="#0b00">41</a>
+378 IF=AND=""AND=THEN=:GOTO<a href="#0b00">41</a>
+379 IF=AND=""THEN<a href="#40f3">1545</a>
+381 IF=AND=AND=AND=""THEN=:GOTO<a href="#0b00">41</a>
+382 IF=AND=""AND=AND=THEN<a href="#42a0">1630</a>
+385 IF=AND=AND=""THEN=:=:GOTO<a href="#0b00">41</a>
+386 IF=AND<>AND=""THENPRINT:GOTO<a href="#421f">1600</a>
+387 IF=AND=AND=""THEN=:GOTO<a href="#0b00">41</a>
+388 IF=AND=""THENPRINT"":GOTO<a href="#421f">1600</a>
+389 IF=AND=AND=""THEN<a href="#42a0">1630</a>
+390 IF=AND=AND=""THEN<a href="#42a0">1630</a>
+391 IF=AND=""AND=THEN=:GOTO<a href="#0b00">41</a>
+<a name="1c7c"></a>397 PRINT"":GOTO<a href="#421f">1600</a>
+<a name="1c9e"></a>400 GOSUB<a href="#3988">1400</a>
+405 FOR=TO:IF=THENPRINT"":GOTO<a href="#421f">1600</a>
+406 :NEXT
+407 FOR=TO:IF,=THEN<a href="#1d48">410</a>
+408 NEXT:IF=""THENPRINT"":GOTO<a href="#421f">1600</a>
+409 PRINT"":GOTO<a href="#421f">1600</a>
+<a name="1d48"></a>410 FOR=TO:IF=""THEN<a href="#1d9b">412</a>
+411 NEXT:PRINT"":PRINT"":GOSUB<a href="#4bae">1820</a>:GOTO<a href="#421f">1600</a>
+<a name="1d9b"></a>412 PRINT:=:,="":GOSUB<a href="#4122">1552</a>:GOTO<a href="#0b0e">42</a>
+<a name="1dc2"></a>420 GOSUB<a href="#3988">1400</a>
+421 FOR=TO:IF=THEN<a href="#1e07">423</a>
+422 NEXT:PRINT"":GOTO<a href="#421f">1600</a>
+<a name="1e07"></a>423 FOR=TO:IF,=""THEN<a href="#1e5d">425</a>
+424 NEXT:PRINT"":GOSUB<a href="#4c37">1840</a>:GOTO<a href="#421f">1600</a>
+<a name="1e5d"></a>425 ="":,=:GOTO<a href="#0b00">41</a>
+<a name="1e7a"></a>430 GOTO<a href="#3f4b">1500</a>
+<a name="1e84"></a>435 =MID$,,:IF=AND=THEN=
+436 IF=AND=""AND=THENPRINT:GOSUB<a href="#4111">1550</a>:="":=:GOTO<a href="#4252">1620</a>
+437 IF=AND=""AND=THEN="":=:GOTO<a href="#4252">1620</a>
+438 IF=AND=AND=""THENPRINT:GOTO<a href="#421f">1600</a>
+439 IF=AND=""THENPRINT"":GOTO<a href="#421f">1600</a>
+440 IF=AND=""THENPRINT"":GOTO<a href="#421f">1600</a>
+441 IF=AND=AND=""THEN="":GOSUB<a href="#417f">1565</a>:IF=THEN<a href="#25bb">481</a>
+442 IF=AND=""THENPRINT"":GOTO<a href="#421f">1600</a>
+443 IF=AND=AND=""THEN="":=:GOTO<a href="#4252">1620</a>
+444 IF=AND=AND=""THEN="":=:GOTO<a href="#4252">1620</a>
+445 IF=AND=""THENPRINT:GOTO<a href="#421f">1600</a>
+446 IF=AND=""THENPRINT"":GOTO<a href="#421f">1600</a>
+447 IF=AND=AND=""THENPRINT"":GOTO<a href="#421f">1600</a>
+448 IF=AND=""THENPRINT"":GOTO<a href="#421f">1600</a>
+449 IF=AND=""THENPRINT"":GOTO<a href="#421f">1600</a>
+450 IF=AND=""THENPRINT"":GOTO<a href="#421f">1600</a>
+451 IF=AND=""AND=THEN="":=:GOTO<a href="#4252">1620</a>
+452 IF=AND=""THENPRINT"":GOTO<a href="#421f">1600</a>
+453 IF=AND=AND=""THEN="":=:GOTO<a href="#4252">1620</a>
+454 IF=AND=""AND=THENPRINT:GOTO<a href="#421f">1600</a>
+455 IF=AND=""AND=THENPRINT"":GOTO<a href="#421f">1600</a>
+456 IF=AND=""THENPRINT"":GOTO<a href="#421f">1600</a>
+457 IF=AND=""THENPRINT"":GOTO<a href="#421f">1600</a>
+458 IF=AND=AND=""THENPRINT"":GOTO<a href="#421f">1600</a>
+459 IF=AND=""THENPRINT"":GOTO<a href="#421f">1600</a>
+460 IF=AND=AND=""THENPRINT"":GOTO<a href="#421f">1600</a>
+461 IF=AND=AND=""THENPRINT"":GOTO<a href="#421f">1600</a>
+463 IF=AND=""THENPRINT"":GOTO<a href="#421f">1600</a>
+464 IF=AND=""THENPRINT"":GOTO<a href="#421f">1600</a>
+465 IF=AND=""AND=THEN="":=:GOTO<a href="#4252">1620</a>
+466 IF=AND=""THENPRINT"":GOTO<a href="#421f">1600</a>
+467 IF=AND=""THENPRINT"":GOTO<a href="#421f">1600</a>
+468 IF=AND=""AND=THEN="":=:GOTO<a href="#4252">1620</a>
+469 IF=AND=""THENPRINT"":GOTO<a href="#421f">1600</a>
+470 IF=AND=""AND=THEN="":GOTO<a href="#4252">1620</a>
+471 IF=""AND=AND=THEN="":GOSUB<a href="#417f">1565</a>:GOTO<a href="#25ea">482</a>
+472 IF=AND=""AND=THENPRINT"":GOTO<a href="#421f">1600</a>
+473 IF=AND=AND=AND=""THEN="":=:GOTO<a href="#4252">1620</a>
+480 PRINT"":GOTO<a href="#421f">1600</a>
+<a name="25bb"></a>481 PRINT"":GOTO<a href="#421f">1600</a>
+<a name="25ea"></a>482 IF=THEN<a href="#42a0">1630</a>
+483 GOSUB<a href="#4158">1560</a>:IF=THEN<a href="#2627">485</a>
+484 PRINT"":GOTO<a href="#421f">1600</a>
+<a name="2627"></a>485 ="":=:=:GOTO<a href="#4252">1620</a>
+<a name="2645"></a>500 =MID$,,
+501 IF=AND=AND=""THEN<a href="#26cd">512</a>
+506 IF=AND=""AND=THEN6="":=:PRINT:GOTO<a href="#421f">1600</a>
+510 PRINT"":GOTO<a href="#421f">1600</a>
+<a name="26cd"></a>512 PRINT"":GOSUB<a href="#4122">1552</a>:PRINT""
+513 GOSUB<a href="#4134">1554</a>:GOTO<a href="#42c3">1650</a>
+<a name="271c"></a>530 =MID$,,:IF=AND=""THEN<a href="#5149">1997</a>
+531 IF=AND=""THEN=:=:GOTO<a href="#0b00">41</a>
+532 IF=AND=""THEN=:=:=:GOTO<a href="#0b00">41</a>
+533 IF=AND=""THEN="":GOSUB<a href="#417f">1565</a>:GOTO<a href="#50fe">1994</a>
+534 IF=AND=""THEN="":GOSUB<a href="#417f">1565</a>:GOTO<a href="#50c2">1991</a>
+535 IF=AND=""THEN<a href="#5149">1997</a>
+540 PRINT"":GOTO<a href="#421f">1600</a>
+<a name="2810"></a>550 =MID$,,
+551 IF=AND=""THEN="":GOSUB<a href="#4158">1560</a>:GOTO<a href="#2861">555</a>
+552 PRINT"":GOTO<a href="#421f">1600</a>
+<a name="2861"></a>555 IF=THEN<a href="#42a0">1630</a>
+556 IF=THENPRINT"":=:GOTO<a href="#421f">1600</a>
+558 PRINT"":GOTO<a href="#421f">1600</a>
+<a name="28b2"></a>570 =MID$,,
+571 IF=THENPRINT"":=:GOTO<a href="#421f">1600</a>
+572 PRINT"":=+:GOTO<a href="#421f">1600</a>
+576 GOTO<a href="#421f">1600</a>
+<a name="2929"></a>600 =MID$,,:=CHR$
+601 IF=""THEN="":GOSUB<a href="#4158">1560</a>:IF=THENPRINT:=:GOTO<a href="#421f">1600</a>
+605 PRINT"":GOTO<a href="#421f">1600</a>
+<a name="298d"></a>620 =MID$,,
+621 IF=AND=""AND=THEN="":=:=:GOTO<a href="#4252">1620</a>
+622 IF=AND=""AND=THEN2=:="":=:=:GOTO<a href="#4252">1620</a>
+638 PRINT"":GOTO<a href="#421f">1600</a>
+<a name="2a35"></a>640 =MID$,,
+641 IF=AND=""THEN="":=:GOTO<a href="#4252">1620</a>
+645 PRINT"":GOTO<a href="#421f">1600</a>
+<a name="2a83"></a>660 =MID$,,:=CHR$
+661 IF=AND=""THENPRINT"":GOSUB<a href="#4134">1554</a>:GOTO<a href="#4e2e">1940</a>
+662 IF=AND=""AND=AND=THENPRINT"":GOTO<a href="#2b21">665</a>
+664 PRINT"":GOTO<a href="#421f">1600</a>
+<a name="2b21"></a>665 =:,="":=:GOTO<a href="#421f">1600</a>
+<a name="2b45"></a>700 PRINT"":POKE,:POKE,
+701 PRINT""
+702 INPUT""
+704 IF=""THEN<a href="#0b0e">42</a>
+705 IF=""THEN<a href="#2bcc">707</a>
+706 GOTO<a href="#2b45">700</a>
+<a name="2bcc"></a>707 PRINT""
+708 INPUT""
+709 IF=""THEN<a href="#2f5a">780</a>
+710 IF=""THENNEW
+711 GOTO<a href="#2b45">700</a>
+<a name="2c3a"></a>730 =MID$,,
+731 IF=AND=""THENPRINT"":GOTO<a href="#421f">1600</a>
+732 IF=AND=""THENPRINT"":GOTO<a href="#421f">1600</a>
+733 IF=AND=""THENPRINT:GOSUB<a href="#4122">1552</a>:GOTO<a href="#45da">1699</a>
+734 IF=""AND>=THEN="":GOSUB<a href="#4158">1560</a>:GOTO<a href="#2d6b">741</a>
+735 IF=""THEN="":GOSUB<a href="#4158">1560</a>:GOTO<a href="#2dc6">744</a>
+740 PRINT"":GOTO<a href="#421f">1600</a>
+<a name="2d6b"></a>741 IF=THEN<a href="#42a0">1630</a>
+742 IF=THENPRINT"":PRINT"":GOTO<a href="#421f">1600</a>
+<a name="2dc6"></a>744 IF=THEN<a href="#42a0">1630</a>
+745 IF=THENPRINT"":GOTO<a href="#421f">1600</a>
+<a name="2e07"></a>750 =MID$,,
+751 IF=AND=AND=""THEN="":GOSUB<a href="#4158">1560</a>:IF=THEN<a href="#2e6d">757</a>
+754 PRINT"":GOTO<a href="#421f">1600</a>
+<a name="2e6d"></a>757 PRINT"":=:GOSUB<a href="#4122">1552</a>:=:GOTO<a href="#0b0e">42</a>
+<a name="2e9d"></a>760 =MID$,,
+761 IF=AND=""THENPRINT"":GOSUB<a href="#4122">1552</a>:PRINT"":GOTO<a href="#2f06">771</a>
+770 PRINT"":GOTO<a href="#421f">1600</a>
+<a name="2f06"></a>771 =:GOSUB<a href="#4122">1552</a>:GOTO<a href="#0b0e">42</a>
+<a name="2f19"></a>774 PRINT""
+775 INPUT""
+<a name="2f5a"></a>780 PRINT"":PRINT"":=CHR$
+781 OPEN,,,""
+782 PRINT#,
+783 PRINT#,
+784 PRINT#,
+785 PRINT#,
+786 PRINT#,
+787 PRINT#,
+788 FOR=TO:IF=""THEN=""
+789 PRINT#,
+790 NEXT
+791 FOR=TO:FOR=TO:IF,=""THEN,=""
+792 PRINT#,,
+793 NEXT,
+794 IF=""THEN5=""
+795 IF=""THEN1=""
+796 IF=""THEN2=""
+799 PRINT#,:CLOSE:GOTO<a href="#0b0e">42</a>
+<a name="31de"></a>800 =MID$,,
+801 IF=AND=""THEN="":GOSUB<a href="#4158">1560</a>:IF=THEN=:PRINT:GOTO<a href="#421f">1600</a>
+803 IF=AND=""THEN="":GOSUB<a href="#4158">1560</a>:IF=THEN=:PRINT:GOTO<a href="#421f">1600</a>
+804 IF=AND=""THEN="":GOSUB<a href="#4158">1560</a>:IF=THEN=:PRINT:GOTO<a href="#421f">1600</a>
+805 IF=""THEN="":GOSUB<a href="#4158">1560</a>:IF=THEN<a href="#3306">815</a>
+806 IF=AND=AND=""THENPRINT:GOSUB<a href="#4122">1552</a>:GOTO<a href="#493a">1740</a>
+807 PRINT"":GOTO<a href="#421f">1600</a>
+<a name="3306"></a>815 ="":GOSUB<a href="#4158">1560</a>:IF=THEN<a href="#42a0">1630</a>
+816 IF=THEN=:PRINT:GOTO<a href="#421f">1600</a>
+<a name="3341"></a>830 =MID$,,:=++
+831 IF=AND=""AND=THEN<a href="#33a4">835</a>
+832 PRINT"":GOTO<a href="#421f">1600</a>
+<a name="33a4"></a>835 INPUT"":IFLEFT$,=""THEN<a href="#33dd">837</a>
+836 PRINT"":GOTO<a href="#421f">1600</a>
+<a name="33dd"></a>837 PRINT:=:=+:IF=THEN=:GOTO<a href="#421f">1600</a>
+838 GOTO<a href="#421f">1600</a>
+<a name="340d"></a>860 =MID$,,
+861 IF=""THEN="":GOSUB<a href="#4158">1560</a>:GOTO<a href="#3469">865</a>
+863 PRINT"":GOTO<a href="#421f">1600</a>
+<a name="3469"></a>865 IF=THEN<a href="#42a0">1630</a>
+866 IF=THENPRINT"":=:GOTO<a href="#421f">1600</a>
+<a name="34aa"></a>875 =MID$,,
+876 IF=AND=""AND=THENPRINT:GOTO<a href="#421f">1600</a>
+877 IF=AND=""THENPRINT:=:GOTO<a href="#421f">1600</a>
+878 IF=AND=""AND=THENPRINT:GOTO<a href="#421f">1600</a>
+879 IF=AND=""THEN=:PRINT:GOTO<a href="#421f">1600</a>
+880 IF=AND=""AND=THENPRINT:GOTO<a href="#421f">1600</a>
+881 IF=AND=""THEN=:GOTO<a href="#0b00">41</a>
+882 IF=AND=""AND=AND=THENPRINT:GOTO<a href="#421f">1600</a>
+883 IF=AND=AND=""THEN7=:GOTO<a href="#0b00">41</a>
+884 IF=AND=AND=""THENPRINT:=:GOTO<a href="#421f">1600</a>
+885 IF=AND=AND=""THENPRINT:GOTO<a href="#421f">1600</a>
+886 IF=AND=""THENPRINT:GOTO<a href="#421f">1600</a>
+887 IF=AND=""AND=THEN=:GOTO<a href="#0b00">41</a>
+888 IF=AND=""THENPRINT:GOTO<a href="#421f">1600</a>
+889 IF=AND=""THENPRINT"":GOTO<a href="#421f">1600</a>
+890 IF=""AND=THEN="":GOSUB<a href="#4158">1560</a>:IF=THENPRINT:=:GOTO<a href="#421f">1600</a>
+891 IF=AND=""THENPRINT:=:GOTO<a href="#421f">1600</a>
+892 IF=AND=""AND=THEN1=:=:=:GOTO<a href="#0b00">41</a>
+893 IF=AND=""THENPRINT"":GOTO<a href="#421f">1600</a>
+895 PRINT"":GOTO<a href="#421f">1600</a>
+998 PRINT""
+999 INPUT""
+1000 PRINT"":PRINT""
+1002 OPEN,,,""
+1003 INPUT#,,,,,,,,,,,,,,,,,,,,,,,
+1004 INPUT#,,,,,,,,,,,,,,,,,,,,,,
+1006 INPUT#,,,,,,,,,,,,,
+1007 FOR=TO:INPUT#,
+1008 IF=""THEN=""
+1009 NEXT
+1010 FOR=TO:FOR=TO:INPUT#,,
+1011 IF,=""THEN,=""
+1012 NEXT,
+1013 INPUT#,,,
+1014 IF=""THEN5=""
+1015 IF=""THEN1=""
+1016 IF=""THEN2=""
+1020 CLOSE:GOTO<a href="#0b0e">42</a>
+<a name="3988"></a>1400 IFASC=THEN=:GOTO<a href="#39a8">1404</a>
+1402 =
+<a name="39a8"></a>1404 =MID$,,:IF=AND=AND=""THEN5=:="":RETURN
+1405 IF=AND=AND=""THEN5=:="":RETURN
+1406 IF=AND=AND=AND=""THEN="":=:RETURN
+1408 IF=AND=AND=""THEN="":GOSUB<a href="#417f">1565</a>:IF=THEN=:=""
+1410 IF=AND=AND=""THEN="":GOSUB<a href="#4158">1560</a>:IF=THEN=:=""
+1411 IF=AND=AND=""THEN=:=:="":RETURN
+1412 IF=""THEN="":RETURN
+1413 IF=AND=""THEN="":=:RETURN
+1414 IF=AND=""THEN="":=:RETURN
+1416 IF=AND=""AND=THEN="":,="":=:RETURN
+1418 IF=""THEN="":RETURN
+1420 IF=AND=""THEN="":=:RETURN
+1421 IF=AND=""AND=THEN="":=:RETURN
+1422 IF=AND=""AND=THEN="":=:RETURN
+1423 IF=AND=""AND=THEN="":=:RETURN
+1424 IF=AND=""AND=THEN=:="":RETURN
+1425 IF=AND=""AND=THEN="":=:RETURN
+1426 IF=""THEN="":RETURN
+1427 IF=AND=""AND=THEN="":=:RETURN
+1428 IF=""THEN="":RETURN
+1429 IF=AND=""AND=THEN="":=:RETURN
+1432 IF=""THEN="":RETURN
+1434 IF=""THEN="":RETURN
+1436 IF=""THEN="":RETURN
+1438 IF=""THEN="":RETURN
+1442 IF=""THEN="":RETURN
+1444 IF=""THENINPUT"":=LEFT$,:GOTO<a href="#3e4a">1456</a>
+1446 IF=""THEN="":RETURN
+1448 IF=""THEN="":RETURN
+1450 IF=""THEN="":RETURN
+1452 IF=""THEN="":RETURN
+1454 ="":RETURN
+<a name="3e4a"></a>1456 IF=""AND=THEN="":=:RETURN
+1458 IF=""THEN="":RETURN
+1460 IF=""THEN="":RETURN
+1462 IF=""AND=AND=THEN="":GOSUB<a href="#4158">1560</a>:GOTO<a href="#3f02">1466</a>
+1464 IF=""THEN="":RETURN
+<a name="3f02"></a>1466 IF=THENPRINT:PRINT"":GOTO<a href="#508a">1986</a>
+1468 IF=THEN="":=:RETURN
+<a name="3f4b"></a>1500 GOSUB<a href="#40b9">1518</a>:PRINT"":POKE,:POKE,:PRINT"":=
+1502 PRINT""
+1504 FOR=TO:IF=""THEN=""
+1505 IF=""THEN<a href="#4056">1512</a>
+1508 IF=""AND=THENPRINT"":=+:GOTO<a href="#4050">1511</a>
+1509 IF=""AND=THENPRINT"":=+:GOTO<a href="#4050">1511</a>
+1510 PRINT"":=+
+<a name="4050"></a>1511 PRINT
+<a name="4056"></a>1512 NEXT:IF=THENPRINT""
+1513 PRINT""
+1514 GOSUB<a href="#4146">1556</a>:GOTO<a href="#0b0e">42</a>
+<a name="40b9"></a>1518 IF=THENPOKE+,:POKE+,:RETURN
+1520 IF=THENPOKE+,:POKE+,:RETURN
+1521 RETURN
+<a name="40f3"></a>1545 PRINT"":GOTO<a href="#421f">1600</a>
+<a name="4111"></a>1550 FOR=TO:NEXT:RETURN
+<a name="4122"></a>1552 FOR=TO:NEXT:RETURN
+<a name="4134"></a>1554 FOR=TO:NEXT:RETURN
+<a name="4146"></a>1556 FOR=TO:NEXT:RETURN
+<a name="4158"></a>1560 =:FOR=TO:IF=THEN=:RETURN
+1561 NEXT:RETURN
+<a name="417f"></a>1565 =:FOR=TO:IF,=THEN=:RETURN
+1566 NEXT:RETURN
+1570 =:POKE+,:POKE+,:POKE+,
+<a name="41d0"></a>1571 READ,,:IF<THENPOKE+,:RETURN
+1572 POKE+,:POKE+,:POKE+,:FOR=TO:NEXT
+1573 GOTO<a href="#41d0">1571</a>
+<a name="421f"></a>1600 GOSUB<a href="#4134">1554</a>:PRINT""
+1605 FOR=TO:PRINT:NEXT:GOTO<a href="#0bf6">60</a>
+<a name="4252"></a>1620 PRINT"":FOR=TO:IF,=""THEN,=:GOSUB<a href="#4122">1552</a>:GOTO<a href="#0b0e">42</a>
+1621 NEXT:GOTO<a href="#421f">1600</a>
+<a name="42a0"></a>1630 PRINT"":GOTO<a href="#421f">1600</a>
+<a name="42c3"></a>1650 PRINT"":POKE,:POKE,
+1651 PRINT""SPC(""
+1652 PRINT""SPC("":PRINT""SPC(""
+1653 PRINT""SPC(""
+1654 PRINT""SPC(""
+1655 PRINT""SPC(""
+1656 PRINT""
+1657 PRINT""
+1658 PRINT""
+1659 PRINT""
+1660 =:POKE+,:POKE+,:POKE+,:POKE+,:POKE,:POKE+,
+1661 FOR=TO:NEXT:FOR=TOSTEP-:POKE+,:FOR=TO:NEXT,:POKE+,
+1662 PRINT"":PRINT""
+1663 PRINT""
+1664 PRINT""""
+1665 PRINT"":INPUT""
+1666 IF=""THENNEW
+1667 IF=""THENRUN
+1668 GOTO<a href="#42c3">1650</a>
+<a name="45da"></a>1699 PRINT""
+1700 PRINT""
+1701 PRINT""
+1702 PRINT"":PRINT""
+1703 PRINT"":PRINT""
+1704 PRINT"":PRINT""
+1705 PRINT""
+1706 PRINT""
+1707 PRINT"":PRINTSPC(""
+1708 GOSUB<a href="#4146">1556</a>:GOSUB<a href="#4146">1556</a>:GOTO<a href="#0b0e">42</a>
+<a name="47ed"></a>1720 POKE+,:POKE+,:POKE+,:POKE+,:POKE+,
+1722 FOR=TOSTEP
+1724 POKE+,:POKE,:NEXT:GOSUB<a href="#4134">1554</a>
+1728 POKE+,:POKE+,:PRINT""
+1730 PRINT"":PRINT"":GOSUB<a href="#4122">1552</a>
+1731 IF=THEN<a href="#4903">1736</a>
+1734 PRINT"":PRINT"":GOSUB<a href="#4146">1556</a>:GOTO<a href="#42c3">1650</a>
+<a name="4903"></a>1736 PRINT"":GOSUB<a href="#4134">1554</a>:=:GOTO<a href="#0b0e">42</a>
+<a name="493a"></a>1740 PRINT"":PRINT""
+1741 PRINT"":PRINT""
+<a name="49a8"></a>1742 PRINT"":INPUT""
+1744 IF=""THEN<a href="#0b0e">42</a>
+1745 IF=THENPRINT"":=:=:GOSUB<a href="#4134">1554</a>:GOTO<a href="#0b0e">42</a>
+1746 GOTO<a href="#49a8">1742</a>
+<a name="4a2a"></a>1760 PRINT"":GOSUB<a href="#4122">1552</a>:FOR=TOSTEP-
+1761 POKE+,:POKE,:FOR=TO:NEXT
+1763 NEXT:GOSUB<a href="#4122">1552</a>:POKE+,:POKE+,:=:GOTO<a href="#0b0e">42</a>
+<a name="4aa2"></a>1780 PRINT"":PRINT""
+1782 PRINT""
+1784 GOSUB<a href="#4146">1556</a>:NEW
+<a name="4af9"></a>1800 =:POKE+,:POKE+,:POKE+,
+<a name="4b20"></a>1802 READ,,:=+:IF>THENRETURN
+1803 IF=THENGOSUB4924
+1804 POKE+,:POKE+,:POKE+,:POKE+,:POKE+,
+1806 POKE+,:POKE,:POKE+,
+1808 FOR=TO:NEXT:GOTO<a href="#4b20">1802</a>
+<a name="4bae"></a>1820 IF=AND=AND=""THEN6=:RETURN
+1821 IF=AND=AND=""THEN7=:RETURN
+1822 IF=AND=AND=""THEN6=:RETURN
+1823 IF=AND=AND=""THEN5=:RETURN
+1826 RETURN
+<a name="4c37"></a>1840 IF=AND=AND=""THEN6=:RETURN
+1845 RETURN
+<a name="4c60"></a>1890 GOSUB<a href="#4134">1554</a>:PRINT"":GOSUB<a href="#4146">1556</a>
+1891 FOR=TO:IF,=""THEN21="":=
+1892 NEXT:=:=
+1893 PRINT"":GOSUB<a href="#4134">1554</a>
+1894 PRINT"":GOSUB<a href="#4122">1552</a>:PRINT"":GOSUB<a href="#4122">1552</a>
+1895 PRINT"":GOSUB<a href="#4122">1552</a>:GOTO<a href="#0b0e">42</a>
+<a name="4d2d"></a>1900 PRINT"":GOSUB<a href="#4134">1554</a>:PRINT:PRINT"":RETURN
+<a name="4d5b"></a>1920 PRINT"":PRINT""
+1921 INPUT""
+1922 PRINT"":GOSUB<a href="#4134">1554</a>:GOTO<a href="#42c3">1650</a>
+<a name="4de8"></a>1930 IF=THENPRINT"":GOTO<a href="#421f">1600</a>
+1931 IF=THEN="":GOTO<a href="#1a79">373</a>
+<a name="4e2e"></a>1940 PRINT"":POKE,:GOSUB<a href="#5057">1957</a>
+1941 =""
+1942 FOR=TO:PRINT:NEXT:PRINT""SPC(""
+1944 PRINT"":GOSUB<a href="#4122">1552</a>
+1945 PRINT"":GOSUB<a href="#4122">1552</a>
+1946 PRINT"":PRINT""
+1947 PRINT"":GOSUB<a href="#4122">1552</a>
+1948 PRINTSPC("":PRINTSPC(""
+1949 PRINTSPC("":PRINTSPC("":GOSUB<a href="#4122">1552</a>
+1950 GOSUB<a href="#4122">1552</a>
+1951 PRINTSPC("":PRINT""
+1952 PRINTSPC("":GOSUB<a href="#4134">1554</a>:GOTO<a href="#0b0e">42</a>
+<a name="5057"></a>1957 IF=THEN5=:=+:RETURN
+1958 IF=THEN5=:=
+1959 RETURN
+<a name="508a"></a>1986 GOSUB<a href="#4134">1554</a>:PRINT""
+1988 FOR=TO:PRINT:NEXT:PRINT:GOTO<a href="#0bf6">60</a>
+<a name="50c2"></a>1991 IF=THENPRINT"":GOTO<a href="#421f">1600</a>
+1992 IF=THEN=:=:GOTO<a href="#0b00">41</a>
+<a name="50fe"></a>1994 IF=THEN<a href="#42a0">1630</a>
+1995 IF=THEN=:,="":=:=:=:GOTO<a href="#0b00">41</a>
+1996 GOTO<a href="#421f">1600</a>
+<a name="5149"></a>1997 PRINT:GOSUB<a href="#4111">1550</a>:PRINT"":GOSUB<a href="#4134">1554</a>:GOTO<a href="#42c3">1650</a>
+<a name="5185"></a>2000 REM
+2020 PRINTSPC(""
+2021 PRINTSPC("":PRINTSPC(""
+2022 PRINTSPC(""
+2023 PRINT""
+2024 PRINTSPC(""
+2025 IF=THENPRINTSPC("":GOTO<a href="#528f">2027</a>
+2026 PRINTSPC(""
+<a name="528f"></a>2027 IF=THENPRINT"":GOTO<a href="#5304">2029</a>
+2028 PRINT""
+<a name="5304"></a>2029 IF=THENPRINT"":GOTO<a href="#5382">2031</a>
+2030 PRINT""
+<a name="5382"></a>2031 IF=THENPRINT"":GOTO<a href="#5402">2033</a>
+2032 PRINT""
+<a name="5402"></a>2033 IF=THENPRINT"":GOTO<a href="#548d">2040</a>
+2034 PRINT""
+<a name="548d"></a>2040 GOTO<a href="#0bda">57</a>
+<a name="5495"></a>2100 REM
+2120 PRINT"":PRINT"":PRINT""
+2122 PRINT"":PRINT""
+2124 PRINT""
+2126 PRINT""
+2128 PRINT""
+2130 PRINT""
+2132 PRINT""
+2134 PRINT""
+2136 PRINT""
+2138 PRINT""
+2140 PRINT""
+2142 PRINT"":FOR=TO:PRINT"":NEXT
+2150 GOTO<a href="#0bda">57</a>
+<a name="56f1"></a>2200 REM
+2210 ="":=""
+2220 REM
+2230 PRINTSPC(""
+2232 PRINTSPC(""
+2236 PRINTSPC(""
+2238 PRINTSPC(""
+2240 PRINTSPC(""
+2242 PRINT""
+2244 PRINT""
+2246 PRINTSPC(""
+2248 PRINTSPC(""
+2250 PRINT"":PRINTSPC(""
+2252 PRINTSPC(:PRINTSPC(
+2255 IF=THEN<a href="#0bda">57</a>
+2256 IF=THENPRINT""SPC(""
+2257 PRINTSPC("":GOSUB<a href="#4134">1554</a>:GOTO<a href="#42c3">1650</a>
+<a name="5924"></a>2300 REM
+2310 =""
+2330 PRINT"":PRINT""
+2332 PRINT""SPC(""
+2334 PRINT""SPC(""
+2336 PRINT""SPC("":PRINTSPC(""SPC(""
+2338 PRINT""SPC(""SPC(""
+2340 PRINT""SPC(""
+2342 PRINT""SPC(""
+2344 PRINTSPC(""
+2346 PRINT""SPC(""
+2348 PRINTSPC("":PRINT"":FOR=TO:PRINT"":NEXT
+2350 IF=THENPRINT"":PRINT:GOTO<a href="#0bda">57</a>
+2360 GOTO<a href="#0bda">57</a>
+<a name="5b1b"></a>2400 REM
+2430 PRINTSPC("":PRINTSPC("":PRINTSPC(""
+2432 PRINT""
+2434 PRINT""
+2436 PRINT""
+2437 PRINT""
+2438 PRINT""
+2440 PRINT""
+2442 PRINT""
+2443 PRINT"":FOR=TO:PRINT"":NEXT
+2444 PRINT"":FOR=TO:PRINT"":NEXT
+2446 PRINT"":FOR=TO:PRINT"":NEXT
+2450 PRINT""
+2460 GOTO<a href="#0bda">57</a>
+<a name="5d70"></a>2500 REM
+2530 PRINTSPC("":PRINTSPC(""
+2532 PRINTSPC(""
+2534 PRINTSPC(""
+2536 PRINT""
+2538 PRINT""
+2540 PRINT""
+2542 PRINT""
+2544 PRINT""
+2546 PRINT""
+2548 PRINT""
+2549 PRINT""
+2550 PRINT""
+2560 GOTO<a href="#0bda">57</a>
+<a name="5fb2"></a>2600 REM
+2630 PRINT"":PRINT""
+2632 PRINT"":PRINT"":PRINT""
+2634 PRINT"":PRINT"":PRINT""
+2636 PRINT"":PRINT""
+2638 PRINT"":PRINT""
+2640 PRINT""
+2660 GOTO<a href="#0bda">57</a>
+<a name="60e9"></a>2700 REM
+<a name="60ef"></a>2730 PRINT""SPC("":PRINT""SPC(""
+2731 PRINT""
+2732 FOR=TO:PRINT""SPC("":NEXT
+2734 PRINT""
+2735 PRINT""SPC("":PRINT""SPC(""
+2736 IF=THENRETURN
+2737 IF=THENRETURN
+2738 IF=THENRETURN
+2739 IF=THEN<a href="#622e">2742</a>
+2740 PRINT"":PRINT"":PRINT""
+2741 PRINT"":GOTO<a href="#0bda">57</a>
+<a name="622e"></a>2742 PRINT"":PRINT""
+2743 PRINT"":PRINT""
+2744 PRINT""
+2745 GOTO<a href="#0bda">57</a>
+<a name="62d7"></a>2800 PRINT"":IF=THEN<a href="#4d5b">1920</a>
+2810 PRINTSPC("":PRINTSPC("":PRINTSPC(""
+2812 PRINT"":PRINTSPC(""
+2814 PRINTSPC(""SPC("":PRINTSPC(""SPC(""
+2816 PRINTSPC(""SPC(""
+2818 PRINTSPC(""SPC("":PRINTSPC(""SPC(""
+2820 PRINT""
+2822 PRINTSPC(""SPC("":PRINTSPC(""
+2825 IF=THENGOSUB2840
+2826 IF=THENGOSUB2846
+2827 IF=THENPRINT""SPC(""
+2828 IF=THENGOSUB2852
+2829 IF=THENGOSUB2858
+2832 GOTO<a href="#0bda">57</a>
+2840 PRINT""SPC("":=""
+2841 FOR=TO:PRINT:NEXT:RETURN
+2846 PRINT"":RETURN
+2852 RETURN
+2858 PRINT"":RETURN
+<a name="6512"></a>2900 REM
+2910 PRINT""SPC("":PRINT""SPC(""
+2912 PRINT""
+2914 PRINT""SPC(""
+2916 PRINT""
+2918 PRINT""
+2920 PRINT""
+2921 PRINT""
+2922 PRINT""
+2924 PRINT""SPC(""
+2926 PRINT""SPC(""
+2928 PRINT""SPC(""
+2930 PRINT""SPC(""
+2932 PRINT"":PRINT""
+2940 GOTO<a href="#0bda">57</a>
+<a name="6759"></a>3000 REM
+3010 PRINT"":PRINT""SPC(""
+3012 PRINT""SPC(""
+3014 PRINT""SPC(""
+3016 PRINT""SPC(""
+3018 PRINT""SPC(""
+3020 PRINT""SPC(""
+3022 PRINT""SPC(""
+3024 PRINT"":PRINT""
+3026 PRINT""
+3028 PRINT""
+3029 IF=THEN<a href="#69c8">3035</a>
+3030 IF=THENPRINT""SPC(""
+3031 PRINTSPC(""
+3032 PRINTSPC("":GOTO<a href="#0bda">57</a>
+<a name="69c8"></a>3035 =""
+3036 PRINT""SPC("":FOR=TO:PRINT:NEXT
+3037 PRINTSPC("":GOTO<a href="#0bda">57</a>
+<a name="6a32"></a>3100 REM
+3110 PRINT"":PRINT""
+3112 PRINT"":PRINT"":PRINT""
+3113 PRINT""
+3114 PRINT"":PRINT""
+3116 PRINT""
+3118 PRINT""
+3120 PRINT""SPC(""
+3122 PRINT""SPC(""
+3124 PRINT""SPC(""
+3126 PRINT""
+3130 GOTO<a href="#0bda">57</a>
+<a name="6c17"></a>3200 REM
+3210 PRINT"":PRINT""
+3212 PRINT""SPC("":PRINT""SPC(""SPC(""
+3214 PRINT"":PRINT""
+3216 PRINT""
+3218 PRINT"":PRINT""SPC(""
+3220 PRINT""
+3222 PRINT""
+3224 PRINT""
+3226 PRINT""
+3230 IF=THEN<a href="#6e52">3240</a>
+3231 PRINT""SPC(""
+3232 PRINTSPC("":GOTO<a href="#0bda">57</a>
+<a name="6e52"></a>3240 GOTO<a href="#0bda">57</a>
+<a name="6e5a"></a>3300 REM
+3310 =:GOSUB<a href="#60ef">2730</a>:=
+3312 PRINT""
+3314 PRINT""SPC(""
+3320 POKE+,:POKE+,:POKE+,:POKE+,:POKE+,:POKE,
+3321 POKE+,:POKE+,:POKE+,:POKE+,
+3350 =+:GOTO<a href="#0bda">57</a>
+<a name="6f38"></a>3400 =:GOSUB<a href="#60ef">2730</a>:=
+3410 PRINT""
+3412 IF=THEN<a href="#6fcf">3415</a>
+3413 PRINT""SPC("":PRINTSPC(""
+3414 PRINTSPC(""
+<a name="6fcf"></a>3415 PRINT""
+3416 PRINTSPC(""
+3417 PRINTSPC(""
+3450 =+:GOTO<a href="#0bda">57</a>
+<a name="7051"></a>3500 REM
+3512 PRINT""SPC(""
+3514 PRINTSPC(""
+3516 =""
+3517 FOR=TO:PRINT:NEXT
+3518 PRINTSPC(""SPC(""
+3520 PRINTSPC(""
+3522 PRINT""
+3524 PRINTSPC(""SPC(""
+3526 IF=THEN<a href="#71a7">3528</a>
+3527 PRINT"":FOR=TO:PRINT:NEXT:GOTO<a href="#71cc">3540</a>
+<a name="71a7"></a>3528 PRINT"":FOR=TO:PRINT:NEXT
+<a name="71cc"></a>3540 =+:GOTO<a href="#0bda">57</a>
+<a name="71db"></a>3600 REM
+3610 PRINTSPC("":PRINTSPC("":PRINTSPC(""SPC(""
+<a name="7217"></a>3612 PRINTSPC(""SPC("":=+:IF=THEN<a href="#7250">3614</a>
+3613 GOTO<a href="#7217">3612</a>
+<a name="7250"></a>3614 PRINT""SPC("":PRINT""
+3615 PRINT""SPC("":PRINT""
+3616 PRINT"":PRINT""SPC(""
+3617 PRINT"":PRINT""
+3620 =+:=:GOTO<a href="#0bda">57</a>
+<a name="734d"></a>3700 REM
+3707 IF=THEN<a href="#73a8">3712</a>
+3710 IF=THENPRINT""
+3711 FOR=TO:PRINT"":NEXT:GOTO<a href="#73de">3714</a>
+<a name="73a8"></a>3712 PRINT"":FOR=TO:PRINT"":NEXT
+<a name="73de"></a>3714 PRINT""
+3716 PRINT""
+3718 PRINT"":PRINT""
+3720 IF=THEN=+:GOTO<a href="#0bda">57</a>
+3722 IF=THENPRINT""SPC("
+3724 PRINTSPC(""
+3726 =+:GOTO<a href="#0bda">57</a>
+<a name="7510"></a>3800 REM
+3810 PRINTSPC("":PRINTSPC(""
+3811 PRINTSPC("":PRINTSPC(""
+3812 PRINTSPC("":PRINTSPC(""
+3813 PRINT""
+3814 PRINT""
+3815 PRINT""
+3816 PRINTSPC(""
+3817 PRINTSPC(""
+3818 PRINTSPC("":PRINT""SPC("":PRINT""SPC(""
+3830 =+:GOTO<a href="#0bda">57</a>
+<a name="76f0"></a>4100 REM
+4110 PRINT"":PRINT""SPC(""
+4112 =""
+4113 FOR=TO:PRINT:NEXT
+4120 PRINT""
+4121 PRINT""SPC(""
+4122 PRINT""SPC(""
+4124 IF=THENPRINT"":GOTO<a href="#780e">4128</a>
+4126 PRINT""
+<a name="780e"></a>4128 PRINT"":PRINTSPC("":PRINTSPC(""
+4130 PRINTSPC("":PRINTSPC(""
+4132 IF=AND=THENPRINT""SPC(""
+4134 IF=THENPRINT""SPC(""
+4136 IF=THEN<a href="#78f4">4146</a>
+4140 =+:GOTO<a href="#0bda">57</a>
+<a name="78f4"></a>4146 IF=THENPRINT""SPC(""
+4147 PRINTSPC("":=+:GOTO<a href="#0bda">57</a>
+<a name="7952"></a>4200 REM
+4210 PRINT""
+4212 PRINT""
+4214 PRINT""
+4216 PRINT""
+4218 PRINT""
+4220 PRINT""
+4222 PRINT""
+4224 PRINT""
+4226 PRINT""
+4228 PRINT""
+4230 PRINT""SPC(""
+4232 PRINT""
+4234 IF=THENPRINT""SPC(""
+4240 =+:GOTO<a href="#0bda">57</a>
+<a name="7be4"></a>4250 IF=THEN<a href="#4d5b">1920</a>
+4256 PRINT""SPC(""SPC("":PRINTSPC(""
+4258 PRINTSPC("":PRINTSPC(""
+4260 PRINTSPC("":PRINTSPC(""
+4262 PRINTSPC("":PRINTSPC(""
+4264 PRINTSPC("":PRINTSPC(""
+4266 PRINTSPC("":PRINTSPC(""
+4268 PRINTSPC("":PRINTSPC(""
+4270 PRINT""
+4271 IF=THEN<a href="#7dd4">4275</a>
+4272 IF=THENPRINT""SPC(""
+<a name="7dd4"></a>4275 =+:GOTO<a href="#0bda">57</a>
+<a name="7de3"></a>4300 IF=THEN<a href="#4d5b">1920</a>
+4304 PRINTSPC(""SPC("":PRINTSPC(""SPC(""
+4306 PRINTSPC("":PRINTSPC(""
+4307 =""
+4308 FOR=TO:PRINT:NEXT
+4310 PRINTSPC(""SPC("":PRINTSPC(""SPC(""
+4312 PRINTSPC(""SPC("":PRINTSPC(""SPC(""
+4320 =+:GOTO<a href="#0bda">57</a>
+<a name="7f00"></a>4350 IF=THEN<a href="#7f30">4362</a>
+4360 PRINT"":GOTO<a href="#7f4c">4370</a>
+<a name="7f30"></a>4362 PRINT""
+<a name="7f4c"></a>4370 =+:GOTO<a href="#0bda">57</a>
+<a name="7f5b"></a>4400 POKE,:POKE,
+4410 PRINTSPC("":PRINTSPC(""
+4412 PRINTSPC(""SPC("":PRINTSPC(""SPC(""
+4414 PRINTSPC("":PRINTSPC(""SPC(""
+4416 PRINTSPC(""SPC(""
+4422 POKE+,:POKE+,:POKE,:POKE+,:POKE+,
+4424 POKE+,:POKE+,
+4426 =+:GOTO<a href="#0bda">57</a>
+<a name="8063"></a>4450 REM
+4454 PRINTSPC("":PRINTSPC(""
+4456 PRINT""
+4457 FOR=TO
+4458 PRINT"":NEXT
+4460 PRINT""
+4462 PRINT""SPC(""
+4464 PRINT""
+4465 PRINT""
+4466 PRINTSPC(""
+4468 PRINT""
+4470 PRINT""
+4472 PRINT"":FOR=TO:PRINT"":NEXT
+4475 =+:GOTO<a href="#0bda">57</a>
+<a name="8274"></a>4500 IF=THEN<a href="#4d5b">1920</a>
+4502 =:GOSUB<a href="#60ef">2730</a>:=
+4504 PRINT""SPC("":PRINT""SPC(""SPC(""
+4506 PRINT""SPC("":PRINT""SPC(""
+4507 PRINT""SPC(""SPC(""
+4508 PRINT""SPC("":PRINT""SPC(""
+4510 PRINT"":PRINT""
+4512 IF=THEN<a href="#83ed">4520</a>
+4513 PRINT""SPC(""
+4514 PRINTSPC(""
+<a name="83ed"></a>4520 =+:GOTO<a href="#0bda">57</a>
+4700 GOTO<a href="#0bf6">60</a>
+<a name="8404"></a>4900 POKE,:POKE,
+4910 PRINT"":PRINT""
+4912 PRINT"":PRINT"":PRINT""
+4914 PRINT"":PRINT"":PRINT""
+4916 PRINT"":PRINT"":PRINT""
+4918 PRINT"":PRINT""
+4920 PRINT"":PRINTSPC("":PRINTSPC("":PRINTSPC(""
+4922 PRINTSPC("":PRINTSPC("":=
+4923 GOSUB<a href="#4af9">1800</a>:GOTO<a href="#85e7">5000</a>
+4924 PRINTSPC("":PRINTSPC("":PRINTSPC(""
+4926 RETURN
+<a name="85e7"></a>5000 POKE+,:POKE+,:=:POKE+,:POKE+,:=CHR$
+5001 FOR=TO:READ:POKE+,:NEXT
+5002 FOR=TO:READ:POKE+,:NEXT
+5003 FOR=TO:READ:POKE+,:NEXT
+5004 POKE+,:FOR=TOSTEP-:POKE+,:FOR=TO:NEXT:NEXT
+5006 POKE+,:POKE+,:FOR=TOSTEP
+5007 POKE,:POKE,:POKE+,:POKE+,:POKE+,:POKE+,-
+5008 FOR=TO:NEXT
+5009 =+:IF>THEN=
+5010 NEXT:PRINT""
+5011 PRINT"":PRINT""
+5012 PRINT""
+5013 PRINT""
+5014 PRINT"":PRINT""
+5015 FOR=TO:FOR=TO:READ,:NEXT,:POKE+,
+5055 FOR=TO:READ:POKE+,:NEXT
+5060 FOR=TO:READ:POKE+,:NEXT
+5065 FOR=TO:READ:POKE+,:NEXT
+5070 PRINT"":PRINT"":=CHR$
+5071 INPUT""
+5072 IFLEFT$,=""THENGOTO998
+5080 FOR=TO:FOR=TO:READ:,=:IF=""THEN=
+5082 NEXT,:GOTO<a href="#0b0e">42</a>
+5900 DATA,,,,,,,,,,,,,,,,,,,,
+5902 DATA,,,,,,,,,,,,,,,,,,,,
+5904 DATA,,
+6000 DATA,,,,,,,,,,,,,,,,,,,,,,,,,,
+6002 DATA,,,,,,,,,,,,,,,,,
+6004 DATA,,,,,,,,,,,,,,,,,
+6006 DATA,,,,,,,,,,,,,,,,,,,,,,,
+6008 DATA,,,,,,,,,,,,,,,,,
+6010 DATA,,,,,,,,,,,,,,,,,,,,
+6012 DATA,,,,,,,,,,,,,,,,,,,,,,,,,,
+6014 DATA,,,,,,,,,,,,,,,,,
+6016 DATA,,,,,,,,,,,,,,,,,
+6040 DATA,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+6042 DATA,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+6043 DATA,,,,,,,,,,,,,,
+6100 DATA,,,,,,,,,,,,,,,,,,,,,,,,,,
+6105 DATA,,,,,,,,,,,,,,,,,
+6110 DATA,,,,,,,,,,,,,,,,,
+6120 DATA,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+6122 DATA,,,,,,,,,,,,,,,,,,,,,,,,,,
+6124 DATA,,,,,
+6130 DATA,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+6132 DATA,,,,,,,,,,,,,,,,,,,,,,,,,,
+6134 DATA,,,,,
+6200 DATA,,,,,,,,,,,,
+6205 DATA,,,,,,,,,,,,,
+6210 DATA,,,,,,,,,,,
+6215 DATA,,,,,,,,,,,
+6220 DATA,,,,,,
+6225 DATA,,,,
+6230 DATA,,,,,,,
+</div>
+</div>
+
+</body>
+
+</html>
+        </section>
+
+        
+        
+      </div>
+    </div>
+
+    
+  </body>
+
+<script>
+  rockfordpreload();
+  setInterval(rockfordtick, 40);
+</script>
+
+</html>
