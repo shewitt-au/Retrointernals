@@ -41,7 +41,7 @@ nosidebar: true
 
 
 <div class="disass_container">
-<span class="disass_tiny">built on 2025-02-25 00:43:19+11:00</span><br/>
+<span class="disass_tiny">built on 2025-03-20 02:52:46+11:00</span><br/>
 <h1>Boulder Dash Disassembly</h1>
 <a name="5000"></a><b>TitleCharData:</b><br/>
 <b>5000</b><br/>
@@ -4789,14 +4789,14 @@ nosidebar: true
 <div class="disass_code"><b>7e94</b>   85 99      STA UnpackedCaveNumber
 <b>7e96</b>   0a         ASL A
 <b>7e97</b>   aa         TAX 
-<b>7e98</b>   bd 65 7e   LDA ,X
+<b>7e98</b>   bd 65 7e   LDA <a href="#7e66">LevelSequenceAndBonusLevelStatusArray</a>-1,X
 <b>7e9b</b>   85 a6      STA IsBonusLevelFlag
 <b>7e9d</b>   18         CLC 
 <b>7e9e</b>   a9 2e      LDA #&lt;<a href="#582e">CaveAData</a>
-<b>7ea0</b>   7d 04 58   ADC ,X
+<b>7ea0</b>   7d 04 58   ADC <a href="#5806">LevelOffsetArray</a>-2,X
 <b>7ea3</b>   85 3c      STA CurrentLevelDataPtr
 <b>7ea5</b>   a9 58      LDA #&gt;<a href="#582e">CaveAData</a>
-<b>7ea7</b>   7d 05 58   ADC ,X
+<b>7ea7</b>   7d 05 58   ADC <a href="#5806">LevelOffsetArray</a>-1,X
 <b>7eaa</b>   85 3d      STA CurrentLevelDataPtr+1
 <b>7eac</b>   a0 00      LDY #$00
 </div>
@@ -5738,16 +5738,16 @@ nosidebar: true
 <b>83d3</b>   bd e9 5f   LDA <a href="#5fe8">MusicData</a>+1,X
 <b>83d6</b>   0a         ASL A
 <b>83d7</b>   a8         TAY 
-<b>83d8</b>   b9 03 83   LDA ,Y
+<b>83d8</b>   b9 03 83   LDA <a href="#8317">MusicNoteToFreqTable</a>-$14,Y
 <b>83db</b>   8d 00 d4   STA Sid_Voice1FreqLo
-<b>83de</b>   b9 04 83   LDA ,Y
+<b>83de</b>   b9 04 83   LDA <a href="#8317">MusicNoteToFreqTable</a>-$13,Y
 <b>83e1</b>   8d 01 d4   STA Sid_Voice1FreqHi
 <b>83e4</b>   bd e8 5f   LDA <a href="#5fe8">MusicData</a>,X
 <b>83e7</b>   0a         ASL A
 <b>83e8</b>   a8         TAY 
-<b>83e9</b>   b9 03 83   LDA ,Y
+<b>83e9</b>   b9 03 83   LDA <a href="#8317">MusicNoteToFreqTable</a>-$14,Y
 <b>83ec</b>   8d 07 d4   STA Sid_Voice2FreqLo
-<b>83ef</b>   b9 04 83   LDA ,Y
+<b>83ef</b>   b9 04 83   LDA <a href="#8317">MusicNoteToFreqTable</a>-$13,Y
 <b>83f2</b>   8d 08 d4   STA Sid_Voice2FreqHi
 <b>83f5</b>   ad 00 98   LDA MusicDataIndex
 <b>83f8</b>   d0 03      BNE <a href="#83fd">__MusicTickRoutine__TweakCurrentNote</a>
@@ -6653,7 +6653,7 @@ nosidebar: true
 <div class="disass_code"><b>8841</b>   a5 5d      LDA Cave
 <b>8843</b>   0a         ASL A
 <b>8844</b>   aa         TAX 
-<b>8845</b>   bd 64 7e   LDA ,X
+<b>8845</b>   bd 64 7e   LDA <a href="#7e66">LevelSequenceAndBonusLevelStatusArray</a>-2,X
 <b>8848</b>   c9 15      CMP #$15
 <b>884a</b>   d0 0a      BNE <a href="#8856">$8856</a>
 <b>884c</b>   a5 5e      LDA Level
