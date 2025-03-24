@@ -28,8 +28,8 @@
             url: /basic/basic.html#line-scrubbing
           - title: Byte Miser
             url: /basic/basic.html#byte-miser
-          - title: Line Skipping
-            url: /basic/basic.html#line-skipping
+          - title: Line Skipping (a usless trick)
+            url: /basic/basic.html#line-skipping-a-usless-trick
       - title: Games
         url: /basic/basic.html#games
         sublinks:
