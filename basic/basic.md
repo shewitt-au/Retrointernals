@@ -281,9 +281,9 @@ I came across this trick when I was having a look at a game that had been cracke
 
 The BASIC bootstrap occupies $0801-$080c, its BASIC listing is shown on the line below it. The machine code starts at $080b (2059 in decimal) which is where the machine code execution starts. The careful reader will notice that the BASIC and machine code sections overlap by two bytes (they share 'a2 00'). 'a2 00' serves as a legal terminating line-link as its high byte is zero and this also happens to encode the instruction 'LDX #$00'. I thought the instruction ordering was strange until I realised what was going on.
 
-### Line Skipping
+### Line Skipping (a usless trick)
 
-I came up with this one myself, although it's pretty obvious so I have no doubt it's been discovered many times by many different people. The motivating thought is that since a BASIC program forms a linked list of lines, what would happen if we edited a link to skip over some? Here's a BASIC program we'll test this on:
+I came up with this one myself, although it's pretty obvious so I have no doubt it's been discovered many times by many different people. There's one other problem: it's useless. When a BASIC program is loaded the line links are reconstructed, which undoes this trick. The motivating thought is that since a BASIC program forms a linked list of lines, what would happen if we edited a link to skip over some? Here's a BASIC program we'll test this on:
 
 	10 PRINT 10
 	20 PRINT 20
