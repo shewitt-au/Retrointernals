@@ -116,7 +116,7 @@ You can see the majority of the line is simply encoded in PETSCII, including the
 	0817:  00 00   ; A line-link with high byte of zero terminates the program.
 	               ; Note that this is linked to by the previous line-link.
 
-### Example - Sometimes a Cigar Is Just a Cigar
+### Example - Sometimes a cigar Is just a cigar
 
 	10 PRINT"{clear}"
 
